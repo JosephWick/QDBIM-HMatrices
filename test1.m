@@ -181,3 +181,16 @@ function c = write_compress_kvf (o, cb)
   c.kvf = [bfn '_c'];
   dc3dm.WriteKvf(c.kvf, c, true);
 end
+
+% calc_transition_width
+function alpha = calc_transition_width (width, at_p)
+% alpha = calc_transition_width(width, at_p)
+%   The transition has width 'width' in the sense that
+%       abs(diff(y(x +/- width/2))) = at_p * abs(y1 - ye).
+% So at_p should be something like 0.9.
+%   We do this calculation for the exponent p = 1 only.
+  assert(at_p > 0 && at_p < 1);
+  assert(width > 0);
+  alpha = -2/width*log(2/(1 + at_p) - 1);
+  assert(alpha > 0);
+end
