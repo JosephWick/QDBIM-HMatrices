@@ -20,6 +20,7 @@ function r = create_kvfs ()
   subplot(222); imagesc(p.x, p.y, p.a./p.b); title('a/b'); colorbar;
   subplot(223); imagesc(p.x, p.y, p.sigma); title('\sigma'); colorbar;
   subplot(224); imagesc(p.x, p.y, p.h_star); title('h^*_b'); colorbar;
+  saveas(gcf, 'figures/test1_fig1.png')
 
   r.cm = write_mesh_kvf(o, p);
   r.cb = write_build_kvf(o);
@@ -81,4 +82,100 @@ function p = make_props (o)
   p.d_c = d_c*one;
   p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma;
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
+end
+
+% make_base_fn()
+% generates a file name based on the inputted options
+function bfn = make_base_fn (o)
+  bfn = sprintf('%sdc3t_rf%1.2flf%1.2fvf%1.2fnbr%du%d', o.dir, o.rfac, ...
+                o.len_fac, o.vary_fac, o.neighborhood, o.do_uniform);
+end
+
+% write_mesh_kvf
+% creates the key-value file for dc3dm mesh
+function c = write_mesh_kvf (o, p)
+  c.mesh_write_filename = make_base_fn(o);
+  c.do_uniform = o.do_uniform;
+  % Min and max element lengths don't really matter unless they are used to
+  % bound the resolution function f. Here f is well behaved so I set the min
+  % to 0 and make sure there are at least 8 elements in each direction of the
+  % domain. (max_len is all that matters if the do_uniform option is true.)
+  c.min_len = 0;
+  if (isinf(o.max_len))
+    c.max_len = min(diff(p.x([1 end])), diff(p.y([1 end])))/8;
+  else
+    c.max_len = o.max_len;
+  end
+  % Create a tensor mesh ...
+  c.x = p.x;
+  c.y = p.y;
+  % ... on which f, the resolution function, is set. f has the same units as
+  % x and y. Make sure there are 5 o.rfac elements in each direction per h*.
+  c.f = p.h_star/(o.rfac*5);
+  c.command = 'mesh';
+  c.kvf = [make_base_fn(o) '_m'];
+  dc3dm.WriteKvf(c.kvf, c, true);
+end
+
+% write_build_kvf
+% creatse the key-value file for dc3dm build
+function c = write_build_kvf (o)
+  bfn = make_base_fn(o);
+  c.mesh_read_filename = bfn;
+  c.build_write_filename = sprintf('%s_p%d', bfn, o.problem);
+
+  % Setting depth_min to 0 makes the 0-depth boundary (N or S depending on
+  % the sign of dipdeg) have a free surface boundary condition.
+  c.depth_min = 100;
+  if (o.want_free_surface) o.depth_min = 0; end
+  switch (o.problem)
+    case 1 % subduction
+      % Positive dip makes the north boundary be at the surface and the south
+      % boundary to have the velocity BC.
+      c.dipdeg = 12;
+      % The fault is periodic along-strike.
+      c.ewpbc = 0;
+      % This is the velocity boundary condition at depth.
+      c.svbc = 2;
+    otherwise
+      error(sprintf('%d is not a valid problem number.', o.problem));
+  end
+
+  c.neighborhood = o.neighborhood;
+  c.bc_periodic_nlayers = 3;
+
+  c.command = 'build';
+  c.kvf = [bfn '_b'];
+  dc3dm.WriteKvf(c.kvf, c, true);
+end
+
+% write_compress_kvf
+% creates the key-value file for dc3dm compress
+function c = write_compress_kvf (o, cb)
+  switch (o.problem)
+    case 1
+      v = [1 2 0];
+      v = v/norm(v);
+      c.src_disl = v;
+      c.rcv_traction = c.src_disl;
+      c.component = 1;
+    otherwise
+      error(sprintf('%d is not a valid problem number.', o.problem));
+  end
+
+  bfn = make_base_fn(o);
+  c.mesh_read_filename = bfn;
+  c.build_read_filename = cb.build_write_filename;
+  c.tol = o.tol;
+  c.hm_write_filename = sprintf( ...
+    '%s_tol%1.1f', cb.build_write_filename, -log10(c.tol));
+
+  c.allow_overwrite = 1;
+  c.mu = 3e10;
+  c.nu = 0.25;
+  c.nthreads = o.nthreads;
+
+  c.command = 'compress';
+  c.kvf = [bfn '_c'];
+  dc3dm.WriteKvf(c.kvf, c, true);
 end
