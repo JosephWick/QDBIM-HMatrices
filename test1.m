@@ -1,5 +1,6 @@
 function varargout = exmb (varargin)
 
+  [varargout{1:nargout}] = feval(varargin{:});
 
 end
 
