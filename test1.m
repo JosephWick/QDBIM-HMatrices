@@ -36,8 +36,8 @@ end
 % sets up basic values for simulation
 % not entiirely sure what a lot of these do
 function o = setopts ()
-  o.rfac = 1;
-  o.len_fac = 2;
+  o.rfac = 2;
+  o.len_fac = 1; % seems to change the size of the vw region
   o.vary_fac = 2;
   o.want_free_surface = 1;
   o.tol = 1e-5;
