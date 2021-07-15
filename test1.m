@@ -37,7 +37,7 @@ end
 % not entiirely sure what a lot of these do
 function o = setopts ()
   o.rfac = 1;
-  o.len_fac = 1;
+  o.len_fac = 2;
   o.vary_fac = 2;
   o.want_free_surface = 1;
   o.tol = 1e-5;
