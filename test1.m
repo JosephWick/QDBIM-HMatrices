@@ -1,6 +1,5 @@
 function varargout = exmb (varargin)
 
-  addpath /auto/home/jmwick/EarthquakeSimulation/dc3dm-main/matlab;
 
 end
 
@@ -12,6 +11,8 @@ end
 %  - r.cb: fault build
 %  - r.cc: compressed elasticity matrix
 function r = create_kvfs ()
+  addpath /auto/home/jmwick/EarthquakeSimulation/dc3dm-main/matlab;
+
   o = setopts();
   p = make_props(o);
 
