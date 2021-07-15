@@ -182,7 +182,7 @@ function c = write_compress_kvf (o, cb)
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
-% calc_transition_width
+% calc_transition_width()
 function alpha = calc_transition_width (width, at_p)
 % alpha = calc_transition_width(width, at_p)
 %   The transition has width 'width' in the sense that
@@ -193,4 +193,18 @@ function alpha = calc_transition_width (width, at_p)
   assert(width > 0);
   alpha = -2/width*log(2/(1 + at_p) - 1);
   assert(alpha > 0);
+end
+
+% calc_sigmoid()
+function y = calc_sigmoid (x, xt, a, xs, xe, ys, ye)
+% y = calc_sigmoid(x, xt, alpha, p, xs, xe, ys, ye)
+%   xt is the transition point.
+%   ys(xs), ye(xe) are the values at reference points.
+%   alpha is the constant specifying the transition width. See
+% calc_transition_width for more.
+  assert(xe > xs);
+  fn = @(x) 1./(1 + exp(-a.*x));
+  y0s = fn(xs - xt);
+  y0e = fn(xe - xt);
+  y = ys + (ye - ys).*(fn(x - xt) - y0s)./(y0e - y0s);
 end
