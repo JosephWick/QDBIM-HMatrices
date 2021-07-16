@@ -90,7 +90,7 @@ function r = run_test ()
   r.n8.o = 0;
   r.n8.cm = write_mesh_kvf(o, r.p);
   r.n8.cb = write_build_kvf(o);
-  r.n8.cc = write_compress(o, r.n8.cb);
+  r.n8.cc = write_compress_kvf(o, r.n8.cb);
 
   clf;
   subplot(221); imagesc(r.p.x, r.p.y, r.p.a - r.p.b); title('a - b'); colorbar;
