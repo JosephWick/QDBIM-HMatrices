@@ -33,6 +33,7 @@ end
 % get_hMatrix
 % load hMatrix into memory from r.cc elasticity .kvf
 function get_hMatrix (r)
+  addpaths();
   hm_filename = r.cc.hm_write_filename;
 
   % Load the H-matrix A into memory. id is a pointer to this H-matrix. Use 4
@@ -218,4 +219,8 @@ function y = calc_sigmoid (x, xt, a, xs, xe, ys, ye)
   y0s = fn(xs - xt);
   y0e = fn(xe - xt);
   y = ys + (ye - ys).*(fn(x - xt) - y0s)./(y0e - y0s);
+end
+
+function addpaths()
+  addpath /auto/home/jmwick/EarthquakeSimulation/dc3dm-main/matlab;
 end
