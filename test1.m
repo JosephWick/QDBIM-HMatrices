@@ -38,7 +38,7 @@ end
 function o = setopts ()
   o.rfac = 2; % not sure what this does
   o.len_fac = 1; % seems to change the size of the vw region
-  o.vary_fac = 3; %impacts sigma  
+  o.vary_fac = 2; %impacts scale of sigma  
   o.want_free_surface = 1;
   o.tol = 1e-5;
   o.problem = 1;
