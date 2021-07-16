@@ -362,3 +362,12 @@ function c = CC (v)
 % Cell-centered from node-centered
   c = 0.5*(v(1:end-1) + v(2:end));
 end
+
+function h = draw_rects_r (r, varargin)
+  h = [];
+  for (i = 1:size(r, 2))
+    h1 = draw_rect(r(1,i), r(2,i), r(1,i) + r(3,i), r(2,i) + r(4,i),...
+                   varargin{:});
+    h = [h; h1(:)];
+  end
+end
