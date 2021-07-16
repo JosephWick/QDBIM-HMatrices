@@ -30,6 +30,31 @@ function r = create_kvfs ()
 
 end
 
+% analyze()
+% look at the kvfs?
+function analyze (r)
+  % Convenience routine to see the element sizes:
+  clf;
+  dc3dm.mViewBuild(r.cb); axis xy;
+
+  % Read the mesh produced by 'dc3dm build'.
+  rid = dc3dm.mRead(r.cb.build_write_filename);
+  % Get the elements.
+  rs = dc3dm.mRects(rid);
+  % Element centers:
+  [cx cy] = dc3dm.mCC(rs);
+  dc3dm.mClear(rid);
+
+% Compare these data with those in the .elem file, which is a plain text
+  % file formatted as comma separated values. This format is easy to parse,
+  % though Matlab happens to have a built-in reader for it, csvread.
+  ers = parse_elem_file(r.cb.build_write_filename);
+  % Confirm ers contains equivalent information to rs.
+  fprintf('Should be <= ~%1.1e: %1.1e %1.1e %1.1e %1.1e\n', ...
+          eps(10), relerr(cx(:), ers(1,:)'), relerr(cy(:), ers(2,:)'), ...
+          relerr(rs(3,:), ers(3,:)), relerr(rs(4,:), ers(4,:)));
+end
+
 % -------------- PRIVATE ---------------------
 
 % setopts()
@@ -38,7 +63,7 @@ end
 function o = setopts ()
   o.rfac = 2; % not sure what this does
   o.len_fac = 1; % seems to change the size of the vw region
-  o.vary_fac = 2; %impacts scale of sigma  
+  o.vary_fac = 2; %impacts scale of sigma
   o.want_free_surface = 1;
   o.tol = 1e-5;
   o.problem = 1;
