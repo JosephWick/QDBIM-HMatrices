@@ -363,6 +363,16 @@ function c = CC (v)
   c = 0.5*(v(1:end-1) + v(2:end));
 end
 
+function h = draw_rect (xlo, ylo, xhi, yhi, filled, clr, varargin)
+  if (filled)
+    h = fill([xlo xhi xhi xlo], [ylo ylo yhi yhi], clr);
+  else
+    h = line([xlo xhi; xhi xhi; xhi xlo; xlo xlo]',...
+             [ylo ylo; ylo yhi; yhi yhi; yhi ylo]');
+    set(h, 'color', clr, varargin{:});
+  end
+end
+
 function h = draw_rects_r (r, varargin)
   h = [];
   for (i = 1:size(r, 2))
