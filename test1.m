@@ -89,7 +89,7 @@ function r = run_test ()
   o.neighborhood =8;
   r.n8.o = 0;
   r.n8.cm = write_mesh_kvf(o, r.p);
-  r.n8.cb = write_build_kvf(0);
+  r.n8.cb = write_build_kvf(o);
   r.n8.cc = write_compress(o, r.n8.cb);
 
   clf;
