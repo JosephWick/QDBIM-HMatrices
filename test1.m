@@ -99,7 +99,81 @@ function r = run_test ()
   subplot(224); imagesc(r.p.x, r.p.y, r.p.h_star); title('h^*_b'); colorbar;
   saveas(gcf, 'figures/test1_fig3.png')
 
+  % AIGA - 0: approximate IG with neighborhood = 0
+  o.neightborhood = 0
+  r.n0.o = o
+  r.n0.cm = write_mesh_kvf(o, r.p);
+  r.n0.cb = write_build_kvf(o);
+  r.n0.cc = write_compress_kvf(o, r.n0.cb);
+
+
+
 end
+
+function demo_mvp_slip (r)
+%DIR Carry out typical operations for a real problem. Run
+% >> ex('demo_mvp_slip', r);
+
+  % Get element centers. (Could use the .elem file.)
+  rid = dc3dm.mRead(r.cb.build_write_filename);
+  rs = dc3dm.mRects(rid);
+  [cx cy] = dc3dm.mCC(rs);
+  md = dc3dm.mData(rs);
+
+  % Make a slip distribution. Respect the BCs.
+  slip_fn = @(x, y) cos(2*pi*(x + 0.39*diff(md.xlim))/diff(md.xlim)).* ...
+            sin(2*pi*y/diff(md.ylim)) + ...
+            0.*y/diff(md.ylim);
+  slip = slip_fn(cx, cy);
+
+  % Get boundary condition data.
+  bc = dc3dm.ReadBoundaryConditions(r.cc.hm_write_filename);
+  % Boundary values are ordered (east, north, west, south); only those for
+  % non-0 velocity-BC matter. Here I fill in all values even though only the
+  % S one is necessary.
+  bdy_vals = [slip_fn(md.xlim(2), 0), slip_fn(0, md.ylim(2)), ...
+              slip_fn(md.xlim(1), 0), slip_fn(0, md.ylim(1))];
+
+  % Compute traction.
+  id = hmmvp('init', r.cc.hm_write_filename, 4, 1);
+  traction = hmmvp('mvp', id, slip) + bc*bdy_vals(:);
+  hmmvp('cleanup', id);
+
+  % Plot. Show the raw (const interp) mesh values and two different
+  % interpolations.
+  x = CC(linspace(md.xlim(1), md.xlim(2), round(diff(md.xlim)/md.dx) + 1));
+  y = CC(linspace(md.ylim(1), md.ylim(2), round(diff(md.ylim)/md.dy) + 1));
+  [X Y] = meshgrid(x, y);
+  slip_c = dc3dm.mConstInterp(rid, slip, X, Y);
+  traction_c = 1e-6*dc3dm.mConstInterp(rid, traction, X, Y);
+  slip_1 = dc3dm.mLinterp(rid, slip, bdy_vals, X, Y);
+  traction_1 = 1e-6*dc3dm.mLinterpWExtrap(rid, traction, X, Y);
+  slip_3 = dc3dm.mCinterp(rid, slip, bdy_vals, X, Y);
+  traction_3 = 1e-6*dc3dm.mCinterpWExtrap(rid, traction, X, Y);
+
+  dc3dm.mClear(rid);
+
+  clf;
+  img = @(im) imagesc(x, y, im);
+  h(1) = subplot(321); img(slip_c); title('slip, mesh resolution');
+  h(2) = subplot(322); img(traction_c); title('traction, mesh resolution');
+  h(3) = subplot(323); img(slip_1); title('slip, linear interp');
+  h(4) = subplot(324); img(traction_1); title('traction, linear interp');
+  h(5) = subplot(325); img(slip_3); title('slip, cubic interp');
+  h(6) = subplot(326); img(traction_3); title('traction, cubic interp');
+  linkaxes(h); zoom on;
+  for (i = 1:numel(h))
+    subplot(h(i));
+    if (mod(i, 2) == 0) caxis(135*[-1 1]); else caxis([-1 1]); end
+    colorbar;
+    axis equal; axis xy; axis tight;
+    % Draw the mesh.
+    draw_rects_r(rs, 0, 'k');
+  end
+  saveas(gcf, 'figures/test1_fig4.png')
+
+end
+
 
 % -------------- PRIVATE ---------------------
 
