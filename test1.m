@@ -38,7 +38,7 @@ function r = create_kvfs ()
 end
 
 % analyze()
-function analyze r
+function analyze (r)
   addpaths();
   % see element sizes
   clf;
