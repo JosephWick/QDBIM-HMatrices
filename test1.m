@@ -13,6 +13,7 @@ end
 %  - r.cc: compressed elasticity matrix
 function r = create_kvfs ()
   addpaths();
+  path_to_dc3dm = '../dc3dm-main/bin/dc3dm'
 
   o = setopts();
   p = make_props(o);
@@ -27,6 +28,12 @@ function r = create_kvfs ()
   r.cm = write_mesh_kvf(o, p);
   r.cb = write_build_kvf(o);
   r.cc = write_compress_kvf(o, r.cb);
+
+  disp('Run these in a shell')
+  cmds = 'mbc';
+  for (i = 1:numel(cmds))
+    fprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.(['c' cmds(i)]).kvf);
+  end
 
 end
 
