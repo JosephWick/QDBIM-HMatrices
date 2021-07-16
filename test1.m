@@ -36,6 +36,7 @@ function analyze (r)
   % Convenience routine to see the element sizes:
   clf;
   dc3dm.mViewBuild(r.cb); axis xy;
+  saveas(gcf, 'figures/test1_fig2.png')
 
   % Read the mesh produced by 'dc3dm build'.
   rid = dc3dm.mRead(r.cb.build_write_filename);
