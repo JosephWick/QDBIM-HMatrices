@@ -78,6 +78,29 @@ function get_hMatrix (r)
 
 end
 
+function r = run_test ()
+  addpaths();
+
+  o = setopts();
+  o.want_free_surface = 0;
+  r.p = make_props(o);
+
+  % AIGA-8: approximate IGA with neightborhood = 8
+  o.neighborhood =8;
+  r.n8.o = 0;
+  r.n8.cm = write_mesh_kvf(o, r.p);
+  r.n8.cb = write_build_kvf(0);
+  r.n8.cc = write_compress(o, r.n8.cb);
+
+  clf;
+  subplot(221); imagesc(r.p.x, r.p.y, r.p.a - r.p.b); title('a - b'); colorbar;
+  subplot(222); imagesc(r.p.x, r.p.y, r.p.a./r.p.b); title('a/b'); colorbar;
+  subplot(223); imagesc(r.p.x, r.p.y, r.p.sigma); title('\sigma'); colorbar;
+  subplot(224); imagesc(r.p.x, r.p.y, r.p.h_star); title('h^*_b'); colorbar;
+  saveas(gcf, 'figures/test1_fig3.png')
+
+end
+
 % -------------- PRIVATE ---------------------
 
 % setopts()
