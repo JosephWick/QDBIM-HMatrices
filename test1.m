@@ -58,11 +58,11 @@ function analyze (r)
   % Compare these data with those in the .elem file, which is a plain text
   % file formatted as comma separated values. This format is easy to parse,
   % though Matlab happens to have a built-in reader for it, csvread.
-  ers = parse_elem_file(r.cb.build_write_filename);
+  %%ers = parse_elem_file(r.cb.build_write_filename);
   % Confirm ers contains equivalent information to rs.
-  fprintf('Should be <= ~%1.1e: %1.1e %1.1e %1.1e %1.1e\n', ...
-          eps(10), relerr(cx(:), ers(1,:)'), relerr(cy(:), ers(2,:)'), ...
-          relerr(rs(3,:), ers(3,:)), relerr(rs(4,:), ers(4,:)));
+  %%fprintf('Should be <= ~%1.1e: %1.1e %1.1e %1.1e %1.1e\n', ...
+  %%        eps(10), relerr(cx(:), ers(1,:)'), relerr(cy(:), ers(2,:)'), ...
+  %%        relerr(rs(3,:), ers(3,:)), relerr(rs(4,:), ers(4,:)));
 
 end
 
