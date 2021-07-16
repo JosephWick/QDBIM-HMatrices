@@ -45,10 +45,12 @@ function analyze (r)
   dc3dm.mViewBuild(r.cb); axis xy;
   saveas(gcf, 'figures/test1_fig2.png')
 
+  r.cb.build_write_filename
+
   % read mesh produced by dc3dm build
   rid = dc3dm.mRead(r.cb.build_write_filename);
   % get the elements
-  rs = dc3dm.mRects(rid)
+  rs = dc3dm.mRects(rid);
   % element centers:
   [cx cy] = dc3dm.mCC(rs);
   dc3dm.mClear(rid);
