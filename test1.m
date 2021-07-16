@@ -112,7 +112,7 @@ end
 
 function demo_mvp_slip (r)
 %DIR Carry out typical operations for a real problem. Run
-% >> ex('demo_mvp_slip', r);
+% >> test1('demo_mvp_slip', r);
 
   % Get element centers. (Could use the .elem file.)
   rid = dc3dm.mRead(r.cb.build_write_filename);
@@ -356,4 +356,9 @@ end
 
 function addpaths()
   addpath /auto/home/jmwick/EarthquakeSimulation/dc3dm-main/matlab;
+end
+
+function c = CC (v)
+% Cell-centered from node-centered
+  c = 0.5*(v(1:end-1) + v(2:end));
 end
