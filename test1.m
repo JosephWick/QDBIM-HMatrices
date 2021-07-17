@@ -95,7 +95,7 @@ function r = run_test ()
   % Run dc3dm.
   cmds = 'mbc';
   for (i = 1:numel(cmds))
-    system(sprintf('./bin/dc3dm %s.kvf\n', r.n8.(['c' cmds(i)]).kvf));
+    system(sprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.n8.(['c' cmds(i)]).kvf));
   end
 
   % AIGA-0: approximate IGA with neighborhood = 0. This is equivalent to
@@ -106,7 +106,7 @@ function r = run_test ()
   r.n0.cb = write_build_kvf(o);
   r.n0.cc = write_compress_kvf(o, r.n0.cb);
   for (i = 1:numel(cmds))
-    system(sprintf('./bin/dc3dm %s.kvf\n', r.n0.(['c' cmds(i)]).kvf));
+    system(sprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.n0.(['c' cmds(i)]).kvf));
   end
 
   % DDMu on the fine-resolution mesh.
@@ -123,7 +123,7 @@ function r = run_test ()
   r.u.cb = write_build_kvf(o);
   r.u.cc = write_compress_kvf(o, r.u.cb);
   for (i = 1:numel(cmds))
-    system(sprintf('./bin/dc3dm %s.kvf\n', r.u.(['c' cmds(i)]).kvf));
+    system(sprintf('../dc3dm-main/bin/dc3dm', r.u.(['c' cmds(i)]).kvf));
   end
 end
 
