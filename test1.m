@@ -222,6 +222,9 @@ function show_test (r)
     dc3dm.mClear(rid);
   end
   linkaxes(h);
+
+  saveas(gcf, 'figures/test1_fig5.png')
+
 end
 
 
