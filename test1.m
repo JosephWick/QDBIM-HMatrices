@@ -123,7 +123,7 @@ function r = run_test ()
   r.u.cb = write_build_kvf(o);
   r.u.cc = write_compress_kvf(o, r.u.cb);
   for (i = 1:numel(cmds))
-    system(sprintf('../dc3dm-main/bin/dc3dm', r.u.(['c' cmds(i)]).kvf));
+    system(sprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.u.(['c' cmds(i)]).kvf));
   end
 end
 
