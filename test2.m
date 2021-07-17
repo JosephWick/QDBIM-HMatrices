@@ -61,7 +61,7 @@ function p = make_props (o)
 
   dip_len = o.len_fac*1e3;
   strike_len = o.len_fac*1e3;
-  n = 1001;
+  n = 10;
 
   p.x = linspace(-0.5*strike_len, 0.5*strike_len, n);
   p.y = linspace(-0.5*dip_len, 0.5*dip_len, n);
