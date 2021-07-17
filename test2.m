@@ -94,8 +94,8 @@ function p = make_props (o)
 
   aLin = linspace(100, 0, n);
   bLin = linspace(0, 100, n);
-  [_ p.a] = meshgrid(aLin)
-  [_ p.b] = meshgrid(bLin)
+  [z p.a] = meshgrid(aLin)
+  [z p.b] = meshgrid(bLin)
 
 end
 
