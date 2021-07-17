@@ -75,7 +75,7 @@ function p = make_props (o)
 
   r = sqrt(X.^2 + Y.^2) / sidelen;
   alpha = calc_transition_width(t_width/sidelen, 0.99);
-  w_sigma = calc_sigmoid(r, 1, alpha, 0, max(r(:)), 0, 1);
+  w_sigma = calc_sigmoid(r, 1, alpha, 0, max(r(:)), 0, 1)
   w_amb = calc_sigmoid(r, 2, alpha, 0, max(r(:)), 0, 1)
 
   one = ones(size(X));
