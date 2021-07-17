@@ -91,6 +91,12 @@ function p = make_props (o)
   p.d_c = d_c*one;
   p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma;
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
+
+  aLin = linspace(100, 0, n);
+  bLin = linspace(0, 100, n);
+  p.a = meshgrid(aLin)
+  p.b = meshgrid(bLin)
+
 end
 
 % calc_transition_width()
