@@ -79,36 +79,152 @@ function get_hMatrix (r)
 end
 
 function r = run_test ()
-  addpaths();
-
+%DIR Run
+% >> r = ex('run_test');
+% This test runs dc3dm on 3 problems to illustrate its purpose.
   o = setopts();
   o.want_free_surface = 0;
   r.p = make_props(o);
 
-  % AIGA-8: approximate IGA with neightborhood = 8
-  o.neighborhood =8;
-  r.n8.o = 0;
+  % AIGA-8: approximate IGA with neighborhood = 8.
+  o.neighborhood = 8;
+  r.n8.o = o;
   r.n8.cm = write_mesh_kvf(o, r.p);
   r.n8.cb = write_build_kvf(o);
   r.n8.cc = write_compress_kvf(o, r.n8.cb);
+  % Run dc3dm.
+  cmds = 'mbc';
+  for (i = 1:numel(cmds))
+    system(sprintf('./bin/dc3dm %s.kvf\n', r.n8.(['c' cmds(i)]).kvf));
+  end
 
-  clf;
-  subplot(221); imagesc(r.p.x, r.p.y, r.p.a - r.p.b); title('a - b'); colorbar;
-  subplot(222); imagesc(r.p.x, r.p.y, r.p.a./r.p.b); title('a/b'); colorbar;
-  subplot(223); imagesc(r.p.x, r.p.y, r.p.sigma); title('\sigma'); colorbar;
-  subplot(224); imagesc(r.p.x, r.p.y, r.p.h_star); title('h^*_b'); colorbar;
-  saveas(gcf, 'figures/test1_fig3.png')
-
-  % AIGA - 0: approximate IG with neighborhood = 0
-  o.neightborhood = 0
-  r.n0.o = o
+  % AIGA-0: approximate IGA with neighborhood = 0. This is equivalent to
+  % applying the DDMu method on a nonuniform mesh.
+  o.neighborhood = 0;
+  r.n0.o = o;
   r.n0.cm = write_mesh_kvf(o, r.p);
   r.n0.cb = write_build_kvf(o);
   r.n0.cc = write_compress_kvf(o, r.n0.cb);
+  for (i = 1:numel(cmds))
+    system(sprintf('./bin/dc3dm %s.kvf\n', r.n0.(['c' cmds(i)]).kvf));
+  end
 
-
-
+  % DDMu on the fine-resolution mesh.
+  rid = dc3dm.mRead(r.n8.cb.build_write_filename);
+  rs = dc3dm.mRects(rid);
+  md = dc3dm.mData(rs);
+  dc3dm.mClear(rid);
+  o.do_uniform = 1;
+  o.neighborhood = 0;
+  % Make the element size the smallest in the nonuniform mesh.
+  o.max_len = min(diff(md.xlim)/md.dx, diff(md.ylim)/md.dy);
+  r.u.o = o;
+  r.u.cm = write_mesh_kvf(o, r.p);
+  r.u.cb = write_build_kvf(o);
+  r.u.cc = write_compress_kvf(o, r.u.cb);
+  for (i = 1:numel(cmds))
+    system(sprintf('./bin/dc3dm %s.kvf\n', r.u.(['c' cmds(i)]).kvf));
+  end
 end
+
+function show_test (r)
+%DIR Run
+% >> ex('show_test', r);
+% where r is from 'run_test'. Shows the behavior of the three methods.
+
+  % Show results.
+  flds = {'u' 'n0' 'n8'};
+  for (i = 1:3)
+    cb = r.(flds{i}).cb;
+    cc = r.(flds{i}).cc;
+
+    bc = dc3dm.ReadBoundaryConditions(cc.hm_write_filename);
+
+    % Get element centers.
+    rid = dc3dm.mRead(cb.build_write_filename);
+    rs = dc3dm.mRects(rid);
+    [cx cy] = dc3dm.mCC(rs);
+
+    if (i == 1)
+      md = dc3dm.mData(rs);
+
+      % One mesh for all three.
+      x = CC(linspace(md.xlim(1), md.xlim(2), round(diff(md.xlim)/md.dx) + 1));
+      y = CC(linspace(md.ylim(1), md.ylim(2), round(diff(md.ylim)/md.dy) + 1));
+      [X Y] = meshgrid(x, y);
+
+      img = @(im) imagesc(x, y, im);
+
+      % The slip function should go smoothly to 0 at N and S boundaries to
+      % match the boundary conditions.
+      slip_fn = @(x, y) cos(2*pi*(x + 0.1*diff(md.xlim))/diff(md.xlim)).* ...
+                exp(-40*((y + 0.05*diff(md.ylim))/diff(md.ylim)).^2);
+
+      bdy_vals = [slip_fn(md.xlim(2), 0), slip_fn(0, md.ylim(2)), ...
+                  slip_fn(md.xlim(1), 0), slip_fn(0, md.ylim(1))];
+    end
+
+    slip = slip_fn(cx, cy);
+
+    id = hmmvp('init', cc.hm_write_filename, 4, 1);
+    traction = hmmvp('mvp', id, slip) + bc*bdy_vals(:);
+    hmmvp('cleanup', id);
+
+    % Images.
+    h(i, 1) = subplot(3, 4, 4*(i-1) + 1);
+    if (i == 1)
+      slip = dc3dm.mConstInterp(rid, slip, X, Y);
+    else
+      slip = dc3dm.mCinterp(rid, slip, bdy_vals, X, Y);
+    end
+    img(slip);
+    caxis([-1 1]);
+    if (i > 1) draw_rects_r(rs, 0, 'k'); end
+    title(sprintf('slip_{%s}', flds{i}));
+
+    h(i, 2) = subplot(3, 4, 4*(i-1) + 2);
+    if (i == 1)
+      traction = dc3dm.mConstInterp(rid, traction, X, Y);
+    else
+      traction = dc3dm.mCinterpWExtrap(rid, traction, X, Y);
+    end
+    traction = 1e-6*traction;
+    img(traction);
+    caxis(166*[-1 1]);
+    title(sprintf('traction_{%s}', flds{i}));
+
+    % Record the uniform-mesh results for comparison with the other two.
+    if (i == 1)
+      slip_u = slip;
+      traction_u = traction;
+    end
+
+    h(i, 3) = subplot(3, 4, 4*(i-1) + 3);
+    img(abs(slip - slip_u));
+    title(sprintf('slip_{%s} - slip_u', flds{i}));
+    caxis(0.1*[0 1]);
+
+    % The key observation here is that where the mesh is coarse, both methods
+    % have considerable error due simply to coarsenss and interpolation
+    % error. But within the borders of the refined region, the naive method
+    % also has considerable error, whereas AIGA-8 does not.
+    h(i, 4) = subplot(3, 4, 4*(i-1) + 4);
+    img(abs(traction - traction_u));
+    title(sprintf('traction_{%s} - traction_u', flds{i}));
+    caxis(38*[0 1]);
+
+    for (j = 1:4)
+      subplot(h(i, end-4+j));
+      axis equal; axis xy; axis tight;
+      set(gca, 'xtick', [], 'ytick', []);
+    end
+
+    dc3dm.mClear(rid);
+  end
+  linkaxes(h);
+end
+
+
 
 function demo_mvp_slip (r)
 %DIR Carry out typical operations for a real problem. Run
