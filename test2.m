@@ -65,7 +65,7 @@ function p = make_props (o)
 
   p.x = linspace(-0.5*strike_len, 0.5*strike_len, n);
   p.y = linspace(-0.5*dip_len, 0.5*dip_len, n);
-  [X Y] = meshgrid(p.x, p.y);
+  [X Y] = meshgrid(p.x, p.y)
 
   %radius = 0.1*o.len_fac*dip_len; % radius of disk
   %t_width = 0.5*radius; % transition width
