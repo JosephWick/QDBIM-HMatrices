@@ -131,8 +131,8 @@ function p = my_props(o)
   sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
   p.mu = 3e10;
   p.nu = 0.25;
-  p.b=0.015*ones(size(y3));
-  p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+  p.b=0.015*one(size(y3));
+  p.a = meshgrid(1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01));
 
 end
 
