@@ -18,10 +18,10 @@ function r = create_kvfs ()
   p = make_props(o);
 
   clf;
-  %subplot(221); imagesc(p.x, p.y, p.a - p.b); title('a - b'); colorbar;
-  %subplot(222); imagesc(p.x, p.y, p.a./p.b); title('a/b'); colorbar;
-  %subplot(223); imagesc(p.x, p.y, p.sigma); title('\sigma'); colorbar;
-  %subplot(224); imagesc(p.x, p.y, p.h_star); title('h^*_b'); colorbar;
+  subplot(221); imagesc(p.x, p.y, p.a - p.b); title('a - b'); colorbar;
+  subplot(222); imagesc(p.x, p.y, p.a./p.b); title('a/b'); colorbar;
+  subplot(223); imagesc(p.x, p.y, p.sigma); title('\sigma'); colorbar;
+  subplot(224); imagesc(p.x, p.y, p.h_star); title('h^*_b'); colorbar;
   saveas(gcf, 'figures/test2_fig1.png')
 
   r.cm = write_mesh_kvf(o, p);
@@ -71,9 +71,9 @@ function p = make_props (o)
   strike_len = o.len_fac*1e3;
   n = 10;                           %num cells
 
-  x = linspace(-0.5*strike_len, 0.5*strike_len, n);
-  y = linspace(-0.5*dip_len, 0.5*dip_len, n);
-  [X Y] = meshgrid(x, y)
+  p.x = linspace(-0.5*strike_len, 0.5*strike_len, n);
+  p.y = linspace(-0.5*dip_len, 0.5*dip_len, n);
+  [X Y] = meshgrid(p.x, p.y)
 
   %radius = 0.1*o.len_fac*dip_len; % radius of disk
   %t_width = 0.5*radius; % transition width
@@ -168,6 +168,7 @@ function c = write_mesh_kvf (o, p)
   c.f = p.h_star/(o.rfac*5);
   c.command = 'mesh';
   c.kvf = [make_base_fn(o) '_m'];
+  c
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
