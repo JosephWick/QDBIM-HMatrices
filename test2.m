@@ -91,7 +91,7 @@ function p = make_props (o)
   amb_vw = -0.005; amb_vs = 0.005;
   d_c = 1e-4;
   sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
-  %p.mu = 3e10;
+  p.mu = 3e10;
   p.nu = 0.25;
   p.b = bl*(1 - w_amb) + bs*w_amb;
   %p.b=0.015*ones(size(y3));
