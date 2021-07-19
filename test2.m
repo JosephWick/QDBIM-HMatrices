@@ -200,7 +200,6 @@ function c = write_build_kvf (o)
 
   c.command = 'build';
   c.kvf = [bfn '_b'];
-  c
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
@@ -232,6 +231,7 @@ function c = write_compress_kvf (o, cb)
 
   c.command = 'compress';
   c.kvf = [bfn '_c'];
+  c
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
