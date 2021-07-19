@@ -135,6 +135,7 @@ end
 
 function bc = BC(x)
   bc = (x+0.5>=0)-(x-0.5>=0);
+end
 
 % write_mesh_kvf
 % creates the key-value file for dc3dm mesh
