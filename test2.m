@@ -15,7 +15,7 @@ function r = create_kvfs ()
   path_to_dc3dm = '../dc3dm-main/bin/dc3dm';
 
   o = setopts();
-  p = make_props(o);
+  p = my_props(o);
 
   clf;
   subplot(221); imagesc(p.x, p.y, p.a - p.b); title('a - b'); colorbar;
@@ -97,8 +97,6 @@ function p = make_props (o)
   %p.b=0.015*ones(size(y3));
   p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb;
   %p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
-
-  p.a
 
   p.d_c = d_c*one;
   p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma;
