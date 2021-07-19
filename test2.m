@@ -168,8 +168,6 @@ function c = write_mesh_kvf (o, p)
   c.f = p.h_star/(o.rfac*5);
   c.command = 'mesh';
   c.kvf = [make_base_fn(o) '_m'];
-  c
-  c.f
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
@@ -202,6 +200,7 @@ function c = write_build_kvf (o)
 
   c.command = 'build';
   c.kvf = [bfn '_b'];
+  c
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
