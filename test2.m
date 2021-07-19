@@ -132,6 +132,7 @@ function p = my_props(o)
   p.b=0.015*ones(size(y3));
   p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
 
+end
 
 % calc_transition_width()
 function alpha = calc_transition_width (width, at_p)
