@@ -99,7 +99,7 @@ function p = make_props (o)
   %p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
 
   p.d_c = d_c*one;
-  p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma;
+  p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
 
   %aLin = linspace(100, 0, n);
