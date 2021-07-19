@@ -225,3 +225,10 @@ function c = write_compress_kvf (o, cb)
   c.kvf = [bfn '_c'];
   dc3dm.WriteKvf(c.kvf, c, true);
 end
+
+% make_base_fn()
+% generates a file name based on the inputted options
+function bfn = make_base_fn (o)
+  bfn = sprintf('%sdc3t_rf%1.2flf%1.2fvf%1.2fnbr%du%d', o.dir, o.rfac, ...
+                o.len_fac, o.vary_fac, o.neighborhood, o.do_uniform);
+end
