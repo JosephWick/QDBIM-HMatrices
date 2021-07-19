@@ -103,7 +103,7 @@ function p = make_props (o)
   p.d_c = d_c*one;
   p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma;
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
-  p.h_star
+
   %aLin = linspace(100, 0, n);
   %bLin = linspace(0, 100, n);
   %[z p.a] = meshgrid(aLin)
@@ -131,13 +131,13 @@ function p = my_props(o)
   sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
   p.mu = 3e10;
   p.nu = 0.25;
-  p.b=0.015*one(size(y3));
-  p.a = meshgrid(1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01));
+  p.b=0.015*one(size(y3)); %from val's QDBIM2D
+  p.a = meshgrid(1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01)); % from val's QDBIM2D
 
   p.d_c = d_c*one; %from ex.m
 
-  p.sigma=50.0*one; %from val's QDBIM2D.m
-
+  p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma; %from ex.m
+  p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b); % from ex.m
 
 end
 
