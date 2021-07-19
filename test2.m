@@ -41,7 +41,7 @@ function get_hm(r)
 
   hm_filename = r.cc.hm_write_filename;
   id = hmmvp('init', hm_filename, 4);
-  hmmvp('getm', id)
+  m = hmmvp('getm', id)
 end
 
 % setopts()
