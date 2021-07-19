@@ -93,10 +93,10 @@ function p = make_props (o)
   sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
   p.mu = 3e10;
   p.nu = 0.25;
-  p.b = bl*(1 - w_amb) + bs*w_amb;
-  %p.b=0.015*ones(size(y3));
-  p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb;
-  %p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+  %p.b = bl*(1 - w_amb) + bs*w_amb;
+  p.b=0.015*ones(size(y3));
+  %p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb;
+  p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
 
   p.d_c = d_c*one;
   p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma;
