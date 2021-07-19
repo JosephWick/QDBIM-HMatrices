@@ -129,8 +129,15 @@ function y = calc_sigmoid (x, xt, a, xs, xe, ys, ye)
 end
 
 % ramp function
-Ramp=@(x) x.*BC(x-1/2)+HS(x-1);
+function r = Ramp(x)
+  r = x.*BC(x-1/2)+HS(x-1);
+end
 
+function bc = BC(x)
+  bc = (x+0.5>=0)-(x-0.5>=0);
+
+% write_mesh_kvf
+% creates the key-value file for dc3dm mesh
 function c = write_mesh_kvf (o, p)
   c.mesh_write_filename = make_base_fn(o);
   c.do_uniform = o.do_uniform;
