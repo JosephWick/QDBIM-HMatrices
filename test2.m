@@ -231,7 +231,7 @@ function c = write_compress_kvf (o, cb)
 
   c.command = 'compress';
   c.kvf = [bfn '_c'];
-  c
+  
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
