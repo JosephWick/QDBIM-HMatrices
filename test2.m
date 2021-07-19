@@ -181,7 +181,7 @@ function c = write_build_kvf (o)
   % Setting depth_min to 0 makes the 0-depth boundary (N or S depending on
   % the sign of dipdeg) have a free surface boundary condition.
   c.depth_min = 100;
-  if (o.want_free_surface) o.depth_min = 0; end
+  if (o.want_free_surface) c.depth_min = 0; end
   switch (o.problem)
     case 1 % subduction
       % Positive dip makes the north boundary be at the surface and the south
