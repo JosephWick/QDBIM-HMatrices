@@ -93,13 +93,13 @@ function p = make_props (o)
   sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
   p.mu = 3e10;
   p.nu = 0.25;
-  p.b = bl*(1 - w_amb) + bs*w_amb;
+  p.b = bl*(1 - w_amb) + bs*w_amb
   %p.b=0.015*ones(size(y3));
-  p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb;
+  p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb
   %p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
 
   p.d_c = d_c*one;
-  p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma
+  p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma;
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
 
   %aLin = linspace(100, 0, n);
@@ -108,6 +108,30 @@ function p = make_props (o)
   %[z p.b] = meshgrid(bLin)
 
 end
+
+function p = my_props(o)
+  Lambdaz=40e3;         % Depth extent of the frictional domain
+  M=10;                % Number of cells (400)
+  dz=Lambdaz/M;         % Cell size
+  y3=(0:M-1)'*dz;       % Top of slip patch
+  W=ones(M,1)*dz;       % Down-dip width of slip patch
+
+  len = o.len_fac*1e3;
+
+  p.x = linspace(-0.5*strike_len, 0.5*strike_len, n);
+  p.y = linspace(-0.5*dip_len, 0.5*dip_len, n);
+  [X Y] = meshgrid(p.x, p.y)
+
+  one = ones(size(X));
+  bl = 0.01; bs = 0.005;
+  amb_vw = -0.005; amb_vs = 0.005;
+  d_c = 1e-4;
+  sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
+  p.mu = 3e10;
+  p.nu = 0.25;
+  p.b=0.015*ones(size(y3));
+  p.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+
 
 % calc_transition_width()
 function alpha = calc_transition_width (width, at_p)
