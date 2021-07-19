@@ -116,7 +116,8 @@ function p = my_props(o)
   y3=(0:M-1)'*dz;       % Top of slip patch
   W=ones(M,1)*dz;       % Down-dip width of slip patch
 
-  len = o.len_fac*1e3;
+  dip_len = o.len_fac*1e3;
+  strike_len = o.len_fac*1e3;
 
   p.x = linspace(-0.5*strike_len, 0.5*strike_len, n);
   p.y = linspace(-0.5*dip_len, 0.5*dip_len, n);
