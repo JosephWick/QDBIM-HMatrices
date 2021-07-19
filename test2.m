@@ -18,10 +18,10 @@ function r = create_kvfs ()
   p = make_props(o);
 
   clf;
-  subplot(221); imagesc(p.x, p.y, p.a - p.b); title('a - b'); colorbar;
-  subplot(222); imagesc(p.x, p.y, p.a./p.b); title('a/b'); colorbar;
-  subplot(223); imagesc(p.x, p.y, p.sigma); title('\sigma'); colorbar;
-  subplot(224); imagesc(p.x, p.y, p.h_star); title('h^*_b'); colorbar;
+  %subplot(221); imagesc(p.x, p.y, p.a - p.b); title('a - b'); colorbar;
+  %subplot(222); imagesc(p.x, p.y, p.a./p.b); title('a/b'); colorbar;
+  %subplot(223); imagesc(p.x, p.y, p.sigma); title('\sigma'); colorbar;
+  %subplot(224); imagesc(p.x, p.y, p.h_star); title('h^*_b'); colorbar;
   saveas(gcf, 'figures/test2_fig1.png')
 
   r.cm = write_mesh_kvf(o, p);
