@@ -22,7 +22,7 @@ function r = create_kvfs ()
   subplot(222); imagesc(p.x, p.y, p.a./p.b); title('a/b'); colorbar;
   subplot(223); imagesc(p.x, p.y, p.sigma); title('\sigma'); colorbar;
   subplot(224); imagesc(p.x, p.y, p.h_star); title('h^*_b'); colorbar;
-  saveas(gcf, 'figures/test1_fig1.png')
+  saveas(gcf, 'figures/test2_fig1.png')
 
   r.cm = write_mesh_kvf(o, p);
   r.cb = write_build_kvf(o);
@@ -34,6 +34,14 @@ function r = create_kvfs ()
     fprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.(['c' cmds(i)]).kvf);
   end
 
+end
+
+function get_hm(r)
+  addpaths();
+
+  hm_filename = r.cc.hm_write_filename;
+  id = hmmvp('init', hm_filename, 4);
+  hmmvp('getm', id)
 end
 
 % setopts()
