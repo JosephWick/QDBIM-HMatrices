@@ -58,6 +58,7 @@ function time_MVP (r)
 
   % compare against non-hmmvp multiplication
   m = randn(n,n);
+  x = randn(n,1);
   disp('Non-HMMVP Multiplication')
   tic
   y2 = m*x;
