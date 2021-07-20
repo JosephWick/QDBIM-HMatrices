@@ -82,10 +82,11 @@ function p = make_props(o)
   p.nu = 0.25;
 
   % b will be constant, a  will be constant except for the circle
-  %p.b = bl*(1 - w_amb) + bs*w_amb;
-  p.b = 0.015*one
-  %p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb;
-  p.a = 0.01*one
+  p.b = 0.015*one;
+  p.a = 0.02*one;
+  % making circle
+  circle = X.^2 + Y.^2 <= radius.^2;
+  a = a-(circle*0.01);
 
   p.d_c = d_c*one;
   p.sigma = 50*one;
