@@ -146,7 +146,7 @@ function cb = write_build_kvf(o)
 end
 
 % write_compress_kvf
-function cc = write_compress_kvf(o, r.cb)
+function cc = write_compress_kvf(o, cb)
 
   switch (o.problem)
     case 1
