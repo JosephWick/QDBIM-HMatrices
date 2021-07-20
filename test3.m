@@ -40,7 +40,7 @@ end
 
 % timeMVP()
 % perform a test MVP operation
-function timeMVP (r)
+function time_MVP (r)
   addpaths();
 
   % load H-matrix
@@ -50,8 +50,17 @@ function timeMVP (r)
   % make a test vector and multiply
   n = hmmvp('getn', hm);
   x = randn(n, 1);
+  % time hmmvp multiplication
+  disp('HMMVP Multiplication')
   tic
   y = hmmvp('mvp', hm, x);
+  toc
+
+  % compare against non-hmmvp multiplication
+  m = randn(n,n);
+  disp('Non-HMMVP Multiplication')
+  tic
+  y2 = m*x;
   toc
 
   % clean memory
