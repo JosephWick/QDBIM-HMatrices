@@ -87,7 +87,7 @@ function p = make_props(o)
 end
 
 % write_mesh_kvf
-function cm = write_mesh_kvf(o, p)
+function c = write_mesh_kvf(o, p)
   % get a filename
   c.mesh_write_filename = make_base_fn(o);
 
@@ -113,7 +113,7 @@ function cm = write_mesh_kvf(o, p)
 end
 
 % write_build_kvf
-function cb = write_build_kvf(o)
+function c = write_build_kvf(o)
 
   bfn = make_base_fn(o);
   c.mesh_read_filename = bfn;
@@ -146,7 +146,7 @@ function cb = write_build_kvf(o)
 end
 
 % write_compress_kvf
-function cc = write_compress_kvf(o, cb)
+function c = write_compress_kvf(o, cb)
 
   switch (o.problem)
     case 1
