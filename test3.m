@@ -20,9 +20,9 @@ function r = create_kvfs ()
   o = setopts();
   p = make_props(o);
 
-  %r.cm = write_mesh_kvf(o, p);
-  %r.cb = write_build_kvf(o);
-  %r.cc = write_compress_kvf(o, r.cb);
+  r.cm = write_mesh_kvf(o, p);
+  r.cb = write_build_kvf(o);
+  r.cc = write_compress_kvf(o, r.cb);
 
   disp('Run these in a shell in  this directory')
   cmds = 'mbc';
@@ -74,7 +74,7 @@ function p = make_props(o)
   d_c = 1e-4;
   sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
 
-  w_amb = 1; % left over from sigmoid transition stuff  
+  w_amb = 1; % left over from sigmoid transition stuff
 
   p.mu = 3e10;
   p.nu = 0.25;
@@ -86,7 +86,20 @@ function p = make_props(o)
 
 end
 
+% write_mesh_kvf
+function cm = write_mesh_kvf(o, p)
 
+end
+
+% write_build_kvf
+function cb = write_build_kvf(o)
+
+end
+
+% write_compress_kvf
+function cc = write_compress_kvf(o, r.cb)
+
+end
 
 % ----------------- Helpers ------------------
 
