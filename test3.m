@@ -7,6 +7,8 @@ function varargout = t3 (varargin)
 
 end
 
+% ---------------- Public -------------
+
 % create_kvfs
 % create 3 key-value files:
 %  - r.cm: mesh file
@@ -35,6 +37,29 @@ function r = create_kvfs ()
   saveas(gcf, 'figures/test3_fig1.png')
 
 end
+
+% timeMVP()
+% perform a test MVP operation
+function timeMVP (r)
+  addpaths();
+
+  % load H-matrix
+  hm_file = r.cc.hm_write_filename;
+  hm = hmmvp('init', hm_file);
+
+  % make a test vector and multiply
+  n = hmmvp('getn', hm);
+  x = randn(n, 1);
+  tic
+  y = hmmvp('mvp', hm, x);
+  toc
+
+  % clean memory
+  hmmvp('cleanup', hm);
+
+end
+
+% ---------------------- Private but still relevant ---------------
 
 % setopts()
 % set up some options
