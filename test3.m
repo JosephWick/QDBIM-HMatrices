@@ -105,7 +105,7 @@ function c = write_mesh_kvf(o, p)
   c.x = p.x;
   c.y = p.y;
   c.f = p.h_star/(o.rfac*5);
-  c.command='mesh'
+  c.command='mesh';
   c.kvf = [make_base_fn(o) '_m'];
 
   dc3dm.WriteKvf(c.kvf, c, true);
@@ -130,12 +130,12 @@ function c = write_build_kvf(o)
       % fault is periodic along-strike
       c.ewpbc = 0;
       % this is velocity boundary condition at depth
-      c.svbc = 0
+      c.svbc = 0;
     otherwise
       error(sprintf('%d is not a valid problem number.', o.problem));
   end
 
-  c.neightborhood = o.neighborhood
+  c.neightborhood = o.neighborhood;
   c.bc_periodic_nlayers = 3;
 
   c.command = 'build';
