@@ -62,11 +62,13 @@ function p = make_props(o)
 
   dip_len = o.len_fac*1e3;
   strike_len = o.len_fac*1e3;
-  n = 10;
+  n = 1001;
 
   p.x = linspace(-0.5*strike_len, 0.5*strike_len, n);
   p.y = linspace(-0.5*dip_len, 0.5*dip_len, n);
   [X Y] = meshgrid(p.x, p.y);
+
+  radius = 0.1*o.len_fac*o.dip_len
 
   one = ones(size(X));
   bl = 0.01; bs = 0.005;
@@ -78,8 +80,13 @@ function p = make_props(o)
 
   p.mu = 3e10;
   p.nu = 0.25;
-  p.b = bl*(1 - w_amb) + bs*w_amb;
-  p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb;
+
+  % b will be constant, a  will be constant except for the circle
+  %p.b = bl*(1 - w_amb) + bs*w_amb;
+  p.b = 0.015*one
+  %p.a = p.b + amb_vw*(1 - w_amb) + amb_vs*w_amb;
+  p.a = 0.01*one
+
   p.d_c = d_c*one;
   p.sigma = 50*one;
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
