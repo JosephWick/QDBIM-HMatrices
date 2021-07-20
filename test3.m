@@ -150,11 +150,11 @@ function c = write_compress_kvf(o, cb)
 
   switch (o.problem)
     case 1
-      v = [1 2 0]
-      v = v/norm(v)
+      v = [1 2 0];
+      v = v/norm(v);
       c.src_disl = v;
       c.rcv_traction = c.src_disl;
-      c.component = 1
+      c.component = 1;
     otherwise
       error(sprintf('%d is not a valid problem number.', o.problem));
     end
@@ -173,7 +173,7 @@ function c = write_compress_kvf(o, cb)
     c.nthreads = o.nthreads;
 
     c.command = 'compress';
-    c.kvf = [kvf '_c']
+    c.kvf = [bfn '_c'];
     dcedm.WriteKvf(c.kvf, c, true);
 
 end
