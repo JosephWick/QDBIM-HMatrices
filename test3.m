@@ -74,6 +74,8 @@ function p = make_props(o)
   d_c = 1e-4;
   sigma_s = 1e6; sigma_l = o.vary_fac*sigma_s;
 
+  w_amb = 1; % left over from sigmoid transition stuff  
+
   p.mu = 3e10;
   p.nu = 0.25;
   p.b = bl*(1 - w_amb) + bs*w_amb;
