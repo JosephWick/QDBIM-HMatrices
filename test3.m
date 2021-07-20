@@ -115,7 +115,7 @@ end
 % write_build_kvf
 function cb = write_build_kvf(o)
 
-  bfn = make_base_fn)o);
+  bfn = make_base_fn(o);
   c.mesh_read_filename = bfn;
   c.build_write_filename = sprintf('%s_p%d', bfn, o.problem);
 
