@@ -335,6 +335,8 @@ function p = make_props (o)
   w_sigma = calc_sigmoid(r, 1, alpha, 0, max(r(:)), 0, 1);
   w_amb = calc_sigmoid(r, 2, alpha, 0, max(r(:)), 0, 1);
 
+  w_amb
+
   one = ones(size(X));
   bl = 0.01; bs = 0.005;
   amb_vw = -0.005; amb_vs = 0.005;
