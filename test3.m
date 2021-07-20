@@ -162,7 +162,7 @@ function c = write_compress_kvf(o, cb)
     bfn = make_base_fn(o);
     c.mesh_read_filename = bfn;
     c.build_read_filename = cb.build_write_filename;
-    c.tol = p.tol;
+    c.tol = o.tol;
 
     c.hm_write_filename = sprintf('%s_to1$1.1f, cb.build_read_filename', ...
      -log10(c.tol));
