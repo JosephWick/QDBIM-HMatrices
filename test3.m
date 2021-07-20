@@ -68,7 +68,7 @@ function p = make_props(o)
   p.y = linspace(-0.5*dip_len, 0.5*dip_len, n);
   [X Y] = meshgrid(p.x, p.y);
 
-  radius = 0.1*o.len_fac*o.dip_len
+  radius = 0.1*o.len_fac*dip_len
 
   one = ones(size(X));
   bl = 0.01; bs = 0.005;
