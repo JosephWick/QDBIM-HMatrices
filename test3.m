@@ -91,9 +91,6 @@ function p = make_props(o)
   p.sigma = 50*one;
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
 
-  p.a
-  p.b
-
 end
 
 % write_mesh_kvf
