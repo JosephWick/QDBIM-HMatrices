@@ -141,7 +141,7 @@ function c = write_build_kvf(o)
   c.command = 'build';
   c.kvf = [bfn '_b'];
 
-  dcedm.WriteKvf(c.kvf, c, true);
+  dc3dm.WriteKvf(c.kvf, c, true);
 
 end
 
