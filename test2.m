@@ -137,7 +137,7 @@ function p = my_props(o)
 
   p.d_c = d_c*one; %from ex.m
 
-  p.sigma = sigma_l*(1 - w_sigma) + sigma_s*w_sigma; %from ex.m
+  ss.sigma=50.0*one; %from vals QDBIM2D
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b); % from ex.m
 
 end
