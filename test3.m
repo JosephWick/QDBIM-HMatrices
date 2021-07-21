@@ -126,6 +126,8 @@ function p = make_props(o)
   p.d_c = d_c*one;
   p.sigma = 50*one;
   p.h_star = 1.377*p.mu/(1 - p.nu)*p.d_c./(p.sigma.*p.b);
+  % here, h_star is const (bc sigma const) and as a result the resolutoin
+  % func will also be constant
 
 end
 
@@ -148,7 +150,6 @@ function c = write_mesh_kvf(o, p)
   c.x = p.x;
   c.y = p.y;
   c.f = p.h_star/(o.rfac*5);
-  c.f
   c.command='mesh';
   c.kvf = [make_base_fn(o) '_m'];
 
