@@ -171,7 +171,7 @@ function c = write_build_kvf(o)
     case 1  % subduction, also the only option rn
       % dipdeg>0 means that north boundary is at surface and south boundary has
       % the velocity coundition below
-      c.dipdeg = 1;
+      c.dipdeg = 90;
       % fault is periodic along-strike
       c.ewpbc = 0;
       % this is velocity boundary condition at depth
