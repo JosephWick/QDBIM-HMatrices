@@ -169,7 +169,7 @@ function c = write_build_kvf(o)
   if (o.want_free_surface) c.depth_min = 0; end
   switch (o.problem)
     case 1  % subduction, also the only option rn
-      % pos means that north boundary is at surface and south boundary has
+      % dipdeg>0 means that north boundary is at surface and south boundary has
       % the velocity coundition below
       c.dipdeg = 1;
       % fault is periodic along-strike
