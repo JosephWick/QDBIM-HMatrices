@@ -78,11 +78,11 @@ end
 function o = setopts()
   o.rfac = 2; % not sure what this does
   o.len_fac = 1; % seems to change the size of the vw region
-  o.vary_fac = 2; %impacts scale of sigma
-  o.want_free_surface = 1;
+  o.vary_fac = 2; % impacts scale of sigma
+  o.want_free_surface = 1; % boolean for if one of the surface is free
   o.tol = 1e-5;
-  o.problem = 1;
-  o.do_uniform = 0;
+  o.problem = 1; % used in the write_kvf methods to define some properties
+  o.do_uniform = 0; % boolean for uniform mesh
   o.neighborhood = 8;
   o.max_len = inf;
   o.nthreads = 4;
@@ -148,6 +148,7 @@ function c = write_mesh_kvf(o, p)
   c.x = p.x;
   c.y = p.y;
   c.f = p.h_star/(o.rfac*5);
+  c.f
   c.command='mesh';
   c.kvf = [make_base_fn(o) '_m'];
 
@@ -169,7 +170,7 @@ function c = write_build_kvf(o)
     case 1  % subduction, also the only option rn
       % pos means that north boundary is at surface and south boundary has
       % the velocity coundition below
-      c.dipdeg = 0;
+      c.dipdeg = 1;
       % fault is periodic along-strike
       c.ewpbc = 0;
       % this is velocity boundary condition at depth
