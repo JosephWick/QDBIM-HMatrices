@@ -380,6 +380,11 @@ function c = write_mesh_kvf (o, p)
   % ... on which f, the resolution function, is set. f has the same units as
   % x and y. Make sure there are 5 o.rfac elements in each direction per h*.
   c.f = p.h_star/(o.rfac*5);
+
+  clf;
+  imagesc(p.x, p.y, c.f); title('resolution function f'); colorbar();
+  saveas(gcf, 'figures/test1_f.png');
+
   c.command = 'mesh';
   c.kvf = [make_base_fn(o) '_m'];
   dc3dm.WriteKvf(c.kvf, c, true);
