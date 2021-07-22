@@ -380,7 +380,7 @@ function c = write_mesh_kvf (o, p)
   c.f = p.h_star/(o.rfac*5);
 
   clf;
-  imagesc(p.x, p.y, c.f); title('resolution function f'); colorbar();
+  imagesc(p.x, p.y, c.f); title('resolution function f'); colorbar;
   saveas(gcf, 'figures/test1_resFunc.png');
 
   c.command = 'mesh';
