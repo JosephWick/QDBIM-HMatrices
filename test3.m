@@ -37,7 +37,7 @@ function r = create_kvfs ()
   saveas(gcf, 'figures/test3_fig1.png')
 
   clf;
-  imagesc(p.x, p.y, p.h_star); title('h_star'); colorbar;
+  imagesc(p.x, p.y, p.h_star); title('h*'); colorbar;
   saveas(gcf, 'figures/test3_hstar.png')
 
 end
