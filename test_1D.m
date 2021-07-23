@@ -62,8 +62,8 @@ function addpaths()
   addpath /auto/home/jmwick/EarthquakeSimulation/dc3dm-main/matlab;
 end
 
-function bfn = make_base_fn ()
-  bfn = 'test_1d';
+function bfn = make_base_fn (p)
+  bfn = sprintf('%stest_1d', p.dir);
 end
 
 function p = setup_problem()
@@ -96,7 +96,7 @@ end
 
 % write_mesh_kvf ()
 function c = write_mesh_kvf(p)
-  c.mesh_write_filename = make_base_fn;
+  c.mesh_write_filename = make_base_fn(p);
   c.do_uniform = p.do_uniform;
 
   c.min_len = 0;
@@ -108,13 +108,13 @@ function c = write_mesh_kvf(p)
   c.f = p.f;
 
   c.command = 'mesh';
-  c.kvf = [make_base_fn() '_m'];
+  c.kvf = [make_base_fn(p) '_m'];
   dc3dm.WriteKvf(c.kvf, c, true);
 end
 
 % write_build_kvf ()
 function c = write_build_kvf(p)
-  bfn = make_base_fn();
+  bfn = make_base_fn(p);
   c.mesh_read_filename = bfn;
   c.build_write_filename = sprintf('%s_p%d', bfn, p.problem);
 
@@ -138,7 +138,7 @@ function c = write_compress_kvf (p, cb)
   c.rcv_traction = c.src_disl;
   c.component = 1;
 
-  bfn = make_base_fn();
+  bfn = make_base_fn(p);
   c.mesh_read_filename = bfn;
   c.build_read_filename = cb.build_write_filename;
   c.tol = p.tol;
