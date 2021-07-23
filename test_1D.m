@@ -75,13 +75,13 @@ function p = setup_problem()
   p.max_len = inf;
   p.nthreads = 4;
   p.dir = './tmp/';
-  p.dip_len = 1000;
+  p.dip_len = 100;
 
   p.tol = 1e-5;
 
   p.problem = 0;
 
-  n = 1001;
+  n = 101;
   p.x = [-1.0 0.0 1.0];
   p.y = linspace(-0.5*p.dip_len, 0.5*p.dip_len, n);
 
