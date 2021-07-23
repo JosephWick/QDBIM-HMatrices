@@ -100,11 +100,15 @@ function m = get_whole_hm (r)
 
   hm_fname = r.cc.hm_write_filename;
   hm = hmmvp('init', hm_fname, 4);
-  m = hmmvp('getm', hm)
-  n = hmmvp('getn', hm)
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
 
   rs = (1:1:m); cs = (1:1:n);
   m = hmmvp('extract', hm, rs, cs);
+
+  clf;
+  imagesc(m); title('hm'); colorbar;
+  saveas(gcf, 'figures/test_1D_hm.png')
 
 end
 
@@ -151,7 +155,6 @@ function p = setup_problem()
   h_star = 2;
 
   p.f = (h_star*ones(n,n))/p.rfac;
-  p.f(1,1)
 
 end
 
