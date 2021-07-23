@@ -60,11 +60,12 @@ function y = mvp_test (r)
   y = hmmvp('mvp', hm, x, [], cs);
 
   % let's also extract the row of the matrix we used
-  r = hmmvp('extract', hm, (1:n), cs)
+  r = hmmvp('extract', hm, (1:n), cs);
 
   clf;
   subplot(221); plot(x); title('vector x');
-  subplot(222); plot(y); title('vector y');
+  subplot(222); plot(r); title('matrix row');
+  subplot(223); plot(y); title('vector y');
   saveas(gcf, 'figures/test_1D_mvp.png')
 
   hmmvp('cleanup', hm);
