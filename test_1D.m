@@ -57,7 +57,7 @@ function y = mvp_test (r)
   x = x + b';
 
   cs = (400:500:n);
-  y = hmmvp('mvp', hm, x, [], cs);
+  y = hmmvp('mvp', hm, x, [:], cs);
 
   % let's also extract the row of the matrix we used
   r = hmmvp('extract', hm, [], cs)
