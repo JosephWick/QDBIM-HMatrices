@@ -36,7 +36,7 @@ function r = create_kvfs ()
   disp('run these in a shell in this directory')
   cmds = 'mbc';
   for (i = 1:numel(cmds))
-    fprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.(['c' cmds(i)]).kvf);
+    fprintf('     ../dc3dm-main/bin/dc3dm %s.kvf\n', r.(['c' cmds(i)]).kvf);
   end
 end
 
@@ -114,7 +114,8 @@ function p = setup_problem()
   p.want_free_surface = 1;
   p.do_uniform = 1;
   p.neighborhood = 8;
-  p.max_len = inf;
+  p.min_len = 4
+  p.max_len = 4;
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 100;
@@ -143,7 +144,7 @@ function c = write_mesh_kvf(p)
   c.mesh_write_filename = make_base_fn(p);
   c.do_uniform = p.do_uniform;
 
-  c.min_len = 0;
+  c.min_len = p.min_len;
   c.max_len = p.max_len;
 
   c.x = p.x;
