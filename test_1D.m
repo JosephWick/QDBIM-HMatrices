@@ -56,7 +56,7 @@ function y = mvp_test (r)
   b = rectangularPulse(-10, 20, a);
   x = x + b';
 
-  cs = (400:500:n);
+  cs = (8:10:n);
   y = hmmvp('mvp', hm, x, [], cs);
 
   % let's also extract the row of the matrix we used
