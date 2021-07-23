@@ -29,6 +29,10 @@ function r = create_kvfs ()
   r.cb = write_build_kvf(p);
   r.cc = write_compress_kvf(p, r.cb);
 
+  clf;
+  imagesc(p.x, p.y, p.f); title('res function'); colorbar;
+  saveas(gcf, 'figures/test_1D_res.png')
+
   disp('run these in a shell in this directory')
   cmds = 'mbc';
   for (i = 1:numel(cmds))
