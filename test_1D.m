@@ -51,7 +51,7 @@ function y = mvp_test (r)
   x = ones(n,1);
   x = x + rectangularPulse(-10, 20, a);
 
-  y = hmmvp('mvp', hm, x);)
+  y = hmmvp('mvp', hm, x);
 
   hmmvp('cleanup', hm);
 
