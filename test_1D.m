@@ -91,22 +91,21 @@ function p = setup_problem()
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 100;
+  p.strike_len = 100;
 
   p.tol = 1e-5;
 
   p.problem = 0;
 
   n = 101;
-  p.x = [-1.0 0.0 1.0];
+  p.x = linspace(-0.5*p.strike_len, 0.5*p.strike_len, n);
   p.y = linspace(-0.5*p.dip_len, 0.5*p.dip_len, n);
 
   p.mu = 3e10;
   p.nu = 0.25;
   %vw region
-  f = rectangularPulse(0, 30, p.y);
-  f = 110-30*f ;
-  edge = 110*ones(n, 1);
-  p.f = [edge f' edge];
+  p.f = 110*zeros(n,n);
+  p.f(35:70, 35:70) = 30;
 
 end
 
