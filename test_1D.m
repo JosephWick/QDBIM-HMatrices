@@ -100,8 +100,10 @@ function m = get_whole_hm (r)
 
   hm_fname = r.cc.hm_write_filename;
   hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm)
+  n = hmmvp('getn', hm)
 
-  rs = (:); cs = (:);
+  rs = (1:1:m); cs = (1:1:n);
   m = hmmvp('extract', hm, rs, cs);
 
 end
