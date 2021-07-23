@@ -60,14 +60,15 @@ function p = setup_problem()
 
   p.problem = 0;
 
-  n = 101
-  p.x = [1.0]
+  n = 101;
+  p.x = [-1.0 0.0 1.0];
   p.y = linspace(-0.5*p.dip_len, 0.5*p.dip_len, n);
 
   p.mu = 3e10;
   p.nu = 0.25;
   %vw region
-  p.f = rectangularPulse(0, 30, p.y);
+  f = rectangularPulse(0, 30, p.y);
+  p.f = [f f f];
 
 end
 
