@@ -36,10 +36,7 @@ function r = create_kvfs ()
   end
 end
 
-function
-
 % mvp_test ()
-%
 function y = mvp_test (r)
   addpaths();
 
