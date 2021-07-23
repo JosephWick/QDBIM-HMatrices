@@ -73,6 +73,20 @@ function time_MVP (r)
 
 end
 
+% oneD_mvp ()
+function y = oneD_mvp ()
+  addpaths();
+
+  hm_file = r.cc.hm_write_filename;
+  hm = hmmvp('init', hm_file);
+
+  n = hmmvp('getn', hm)
+  x = randn(n,1);
+
+  y=0;
+
+end
+
 % ---------------------- Private but still relevant ---------------
 
 % setopts()
