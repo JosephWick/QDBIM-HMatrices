@@ -75,7 +75,7 @@ function p = setup_problem()
   p.max_len = inf;
   p.nthreads = 4;
   p.dir = './tmp/';
-  p.dip_len = 100;
+  p.dip_len = 1000;
 
   p.tol = 1e-5;
 
