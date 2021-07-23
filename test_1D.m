@@ -62,9 +62,9 @@ function y = mvp_test (r)
   %
 
   clf;
-  subplot(221); plot(x); title('vector x');
-  subplot(222); plot(r); title('matrix row');
-  subplot(223); plot(y); title('vector y');
+  %subplot(221); plot(x); title('vector x');
+  %subplot(222); plot(r); title('matrix row');
+  %subplot(223); plot(y); title('vector y');
   %saveas(gcf, 'figures/test_1D_mvp.pdf')
 
   hmmvp('cleanup', hm);
@@ -91,7 +91,7 @@ function p = setup_problem()
 
   p.rfac = 2;
   p.want_free_surface = 1;
-  p.do_uniform = 0;
+  p.do_uniform = 1;
   p.neighborhood = 8;
   p.max_len = inf;
   p.nthreads = 4;
