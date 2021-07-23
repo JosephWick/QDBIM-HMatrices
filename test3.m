@@ -154,6 +154,11 @@ function c = write_mesh_kvf(o, p)
   c.x = p.x;
   c.y = p.y;
   c.f = p.h_star/(o.rfac*5);
+
+  clf;
+  imagesc(p.x, p.y, c.f); title('resolution function f'); colorbar;
+  saveas(gcf, 'figures/test3_resFunc.png')
+
   c.command='mesh';
   c.kvf = [make_base_fn(o) '_m'];
 
