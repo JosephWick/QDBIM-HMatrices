@@ -67,7 +67,7 @@ function p = setup_problem()
   p.mu = 3e10;
   p.nu = 0.25;
   %vw region
-  p.f = rectangularPulse(0, -30, p.y);
+  p.f = rectangularPulse(0, 30, p.y);
 
 end
 
