@@ -92,6 +92,20 @@ function get_mn (r)
 
 end
 
+% get_whole_hm ()
+% returns the entire hm
+% prolly dont do this unless its pretty small
+function m = get_whole_hm (r)
+  addpaths();
+
+  hm_fname = r.cc.hm_write_filename;
+  hm = hmmvp('init', hm_fname, 4);
+
+  rs = (:); cs = (:);
+  m = hmmvp('extract', hm, rs, cs);
+
+end
+
 % ----------------------- Private -------------------------------
 
 % addpaths ()
@@ -114,8 +128,8 @@ function p = setup_problem()
   p.want_free_surface = 1;
   p.do_uniform = 1;
   p.neighborhood = 8;
-  p.min_len = 4
-  p.max_len = 4;
+  p.min_len = 0;
+  p.max_len = inf;
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 100;
