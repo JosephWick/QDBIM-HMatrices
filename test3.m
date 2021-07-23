@@ -73,36 +73,6 @@ function time_MVP (r)
 
 end
 
-% oneD_mvp ()
-function y = oneD_mvp (r)
-  addpaths();
-
-  % load hmatrix
-  hm_file = r.cc.hm_write_filename;
-  hm = hmmvp('init', hm_file);
-
-  % size
-  n = hmmvp('getn', hm)
-
-  % make vector
-  a = linspace(-500, 500, n);
-  x = ones(n,1);
-  b = rectangularPulse(-220, 180, a);
-  x = x + b';
-
-  length(x)
-
-  % subspace of matrix and multiply
-  cs = (414:1000:n);
-  y = hmmvp('mvp', hm, x, [], cs);
-
-  % plot resultant vector
-  clf;
-  plot(y);
-  saveas(gcf, 'figures/test3_oneDmvp.png')
-
-end
-
 % ---------------------- Private but still relevant ---------------
 
 % setopts()
