@@ -27,7 +27,7 @@ function r = create_kvfs ()
 
   r.cm = write_mesh_kvf(p);
   r.cb = write_build_kvf(p);
-  r.cc = write_compress_kvf(p, cb);
+  r.cc = write_compress_kvf(p, r.cb);
 
   disp('run these in a shell in this directory')
   cmds = 'mbc'
@@ -74,7 +74,7 @@ end
 % write_mesh_kvf ()
 function c = write_mesh_kvf(p)
   c.mesh_write_filename = make_base_fn;
-  c.do_uniform = p.do_uniform
+  c.do_uniform = p.do_uniform;
 
   c.min_len = 0;
   c.max_len = p.max_len;
