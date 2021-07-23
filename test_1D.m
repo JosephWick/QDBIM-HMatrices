@@ -43,8 +43,8 @@ function y = mvp_test (r)
   % first load in the h-matrix
   hm_fname = r.cc.hm_write_filename;
   hm = hmmvp('init', hm_fname, 4);
-  m = hmmvp('getm', hm);
-  n = hmmvp('getn', hm);
+  m = hmmvp('getm', hm)
+  n = hmmvp('getn', hm)
 
   % make a vector
   a = linspace(-50, 50, n);
