@@ -62,6 +62,7 @@ function y = mvp_test (r)
   clf;
   subplot(211); plot(x); title('vector x');
   subplot(212); plot(y); title('vector y');
+  saveas(gcf, 'figures/test_1D_mvp.png')
 
   hmmvp('cleanup', hm);
 
