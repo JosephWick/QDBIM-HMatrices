@@ -104,7 +104,7 @@ function p = setup_problem()
   p.mu = 3e10;
   p.nu = 0.25;
   %vw region
-  p.f = 110*zeros(n,n);
+  p.f = 110*ones(n,n);
   p.f(35:70, 35:70) = 30;
 
 end
