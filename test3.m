@@ -125,7 +125,7 @@ function p = make_props(o)
   p.a = 2*one;
   % making circle
   circle = X.^2 + Y.^2 <= radius.^2;
-  p.a = p.a-(circle*0.01);
+  p.a = p.a-(circle*10);
 
   p.d_c = d_c*one;
   p.sigma = 50*one;
