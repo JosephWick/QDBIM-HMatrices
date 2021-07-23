@@ -50,7 +50,7 @@ function y = mvp_test (r)
   m = hmmvp('getm', hm)
   n = hmmvp('getn', hm)
 
-  % make a vector
+  % make a vector to multiply by
   a = linspace(-50, 50, n);
   x = ones(n,1);
   b = rectangularPulse(-10, 20, a);
@@ -59,9 +59,12 @@ function y = mvp_test (r)
   cs = (400:500:n);
   y = hmmvp('mvp', hm, x, [], cs);
 
+  % let's also extract the row of the matrix we used
+  r = hmmvp('extract', hm, [], cs)
+
   clf;
-  subplot(211); plot(x); title('vector x');
-  subplot(212); plot(y); title('vector y');
+  subplot(221); plot(x); title('vector x');
+  subplot(222); plot(y); title('vector y');
   saveas(gcf, 'figures/test_1D_mvp.png')
 
   hmmvp('cleanup', hm);
