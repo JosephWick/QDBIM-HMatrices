@@ -93,8 +93,8 @@ function p = setup_problem()
   p.nu = 0.25;
   %vw region
   f = rectangularPulse(0, 30, p.y);
-  f = f+1;
-  edge = ones(n, 1);
+  f = 110-30*f ;
+  edge = 110*ones(n, 1);
   p.f = [edge f' edge];
 
 end
