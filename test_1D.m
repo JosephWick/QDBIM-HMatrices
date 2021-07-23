@@ -86,7 +86,7 @@ function c = write_mesh_kvf(p)
 
   c.command = 'mesh';
   c.kvf = [make_base_fn() '_m'];
-  dcedm.WriteKvf(c.kvf, c, true);
+  dc3dm.WriteKvf(c.kvf, c, true);
 end
 
 % write_build_kvf ()
