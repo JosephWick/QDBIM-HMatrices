@@ -83,7 +83,7 @@ function y = oneD_mvp (r)
   n = hmmvp('getn', hm)
   x = randn(n,1);
 
-  cs = (414, 1000:n);
+  cs = (414:1000:n);
   y = hmmvp('mvp', hm, x, [], cs);
 
 end
