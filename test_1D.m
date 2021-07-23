@@ -131,9 +131,10 @@ function p = setup_problem()
   p.mu = 3e10;
   p.nu = 0.25;
   %'finding' nucleation size
-  h_star = 2
+  h_star = 2;
 
   p.f = (h_star*ones(n,n))/p.rfac;
+  p.f(1,1)
 
 end
 
