@@ -23,16 +23,17 @@ function r = create_kvfs ()
   addpaths();
   path_to_dc3dm = '../dc3dm-main/bin/dc3dm';
 
-p = setup_problem();
+  p = setup_problem();
 
-r.cm = write_mesh_kvf(p);
-r.cb = write_build_kvf(p);
-r.cc = write_compress_kvf(p, cb);
+  r.cm = write_mesh_kvf(p);
+  r.cb = write_build_kvf(p);
+  r.cc = write_compress_kvf(p, cb);
 
-disp('run these in a shell in this directory')
-cmds = 'mbc'
-for (i = 1:numel(cmds))
-  fprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.(['c' cmds(i)]).kvf);
+  disp('run these in a shell in this directory')
+  cmds = 'mbc'
+  for (i = 1:numel(cmds))
+    fprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.(['c' cmds(i)]).kvf);
+  end
 end
 
 % ----------------------- Private -------------------------------
