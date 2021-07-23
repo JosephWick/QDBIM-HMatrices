@@ -108,7 +108,7 @@ function c = write_build_kvf(p)
 end
 
 % write_compress_kvf ()
-function write_compress_kvf (p, cb)
+function c = write_compress_kvf (p, cb)
   v = [1 2 0];
   v = v/norm(v);
   c.src_disl = v;
