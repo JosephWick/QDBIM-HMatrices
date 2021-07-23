@@ -30,7 +30,7 @@ function r = create_kvfs ()
   r.cc = write_compress_kvf(p, r.cb);
 
   disp('run these in a shell in this directory')
-  cmds = 'mbc'
+  cmds = 'mbc';
   for (i = 1:numel(cmds))
     fprintf('../dc3dm-main/bin/dc3dm %s.kvf\n', r.(['c' cmds(i)]).kvf);
   end
@@ -68,7 +68,7 @@ function p = setup_problem()
   p.nu = 0.25;
   %vw region
   f = rectangularPulse(0, 30, p.y);
-  p.f = [f f f];
+  p.f = [f' f' f'];
 
 end
 
