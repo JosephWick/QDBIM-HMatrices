@@ -74,7 +74,7 @@ function time_MVP (r)
 end
 
 % oneD_mvp ()
-function y = oneD_mvp ()
+function y = oneD_mvp (r)
   addpaths();
 
   hm_file = r.cc.hm_write_filename;
