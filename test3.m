@@ -129,7 +129,7 @@ function p = make_props(o)
 
   p.d_c = d_c*one;
   p.sigma = 50*one;
-  p.h_star = 100*((p.a - p.b)+1);
+  p.h_star = -100*((p.a - p.b)+1);
   % here, h_star is const (bc sigma const) and as a result the resolutoin
   % func will also be constant
 
