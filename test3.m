@@ -87,7 +87,8 @@ function y = oneD_mvp (r)
   % make vector
   a = linspace(-500, 500, n);
   x = ones(n,1);
-  x = x + rectangularPulse(-220, 180, a);
+  b = rectangularPulse(-220, 180, a);
+  x = x + b';
 
   length(x)
 
