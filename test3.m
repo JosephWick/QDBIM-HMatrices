@@ -99,7 +99,7 @@ function y = oneD_mvp (r)
   % plot resultant vector
   clf;
   plot(y);
-  saveas(gvf, 'figures/test3_oneDmvp.png')
+  saveas(gcf, 'figures/test3_oneDmvp.png')
 
 end
 
