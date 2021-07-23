@@ -52,7 +52,7 @@ function y = mvp_test (r)
 
   % make a vector
   a = linspace(-50, 50, n);
-  x = ones(3,1);
+  x = ones(n,1);
   x = x + rectangularPulse(-10, 20, a);
 
   y = hmmvp('mvp', hm, x);
