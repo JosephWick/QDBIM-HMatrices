@@ -57,10 +57,10 @@ function y = mvp_test (r)
   x = x + b';
 
   cs = (400:500:n);
-  y = hmmvp('mvp', hm, x, [:], cs);
+  y = hmmvp('mvp', hm, x, [], cs);
 
   % let's also extract the row of the matrix we used
-  r = hmmvp('extract', hm, [], cs)
+  r = hmmvp('extract', hm, (1:n), cs)
 
   clf;
   subplot(221); plot(x); title('vector x');
