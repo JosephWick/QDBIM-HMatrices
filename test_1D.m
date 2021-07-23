@@ -56,7 +56,6 @@ function y = mvp_test (r)
   b = rectangularPulse(-10, 20, a);
   x = x + b';
 
-  cs = (8:10:n);
   y = hmmvp('mvp', hm, x);
 
   %
@@ -70,6 +69,13 @@ function y = mvp_test (r)
   hmmvp('cleanup', hm);
 
 end
+
+% get_elem_sizes ()
+% plot the sizes of elements in the hmatrix
+function get_elem_sizes (r)
+  clf;
+  dc3dm.mViewBuild(r.cb); axis xy;
+  saveas(gcf, 'figures/test_1D_sizes.png')
 
 % ----------------------- Private -------------------------------
 
