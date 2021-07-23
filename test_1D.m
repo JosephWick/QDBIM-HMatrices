@@ -41,7 +41,7 @@ function y = mvp_test (r)
   addpaths();
 
   % first load in the h-matrix
-  hm_fname = r.cc.hm_write_filename;
+  hm_fname = r.cc.hm_write_filename
   hm = hmmvp('init', hm_fname, 4);
   m = hmmvp('getm', hm);
   n = hmmvp('getn', m);
