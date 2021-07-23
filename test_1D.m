@@ -130,9 +130,10 @@ function p = setup_problem()
 
   p.mu = 3e10;
   p.nu = 0.25;
-  %vw region
-  p.f = 110*ones(n,n);
-  p.f(35:70, 35:70) = 30;
+  %'finding' nucleation size
+  h_star = 2
+
+  p.f = (h_star*ones(n,n))/p.rfac;
 
 end
 
