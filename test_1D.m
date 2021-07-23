@@ -73,9 +73,12 @@ end
 % get_elem_sizes ()
 % plot the sizes of elements in the hmatrix
 function get_elem_sizes (r)
+
   clf;
   dc3dm.mViewBuild(r.cb); axis xy;
   saveas(gcf, 'figures/test_1D_sizes.png')
+
+end
 
 % ----------------------- Private -------------------------------
 
