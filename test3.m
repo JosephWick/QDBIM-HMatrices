@@ -89,6 +89,8 @@ function y = oneD_mvp (r)
   x = ones(n,1);
   x = x + rectangularPulse(-220, 180, a);
 
+  length(x)
+
   % subspace of matrix and multiply
   cs = (414:1000:n);
   y = hmmvp('mvp', hm, x, [], cs);
