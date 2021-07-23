@@ -56,7 +56,12 @@ function y = mvp_test (r)
   b = rectangularPulse(-10, 20, a);
   x = x + b';
 
-  y = hmmvp('mvp', hm, x);
+  cs = (400:500:n);
+  y = hmmvp('mvp', hm, x, [], cs);
+
+  clf;
+  subplot(211); plot(x); title('vector x');
+  subplot(212); plot(y); title('vector y');
 
   hmmvp('cleanup', hm);
 
