@@ -103,7 +103,7 @@ function c = write_build_kvf(p)
 
   c.command = 'build';
   c.kvf = [bfn '_b'];
-  dcedm.WriteKvf(c.kvf, c, true_;)
+  dcedm.WriteKvf(c.kvf, c, true);
 end
 
 % write_compress_kvf ()
