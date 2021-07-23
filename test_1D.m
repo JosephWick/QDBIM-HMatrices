@@ -36,6 +36,30 @@ function r = create_kvfs ()
   end
 end
 
+function
+
+% mvp_test ()
+%
+function y = mvp_test (r)
+  addpaths();
+
+  % first load in the h-matrix
+  hm_fname = r.cc.hm_write_filename;
+  hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', m);
+
+  % make a vector
+  a = linspace(-0.5*p.dip_len, 0.5*p.dip_len, n);
+  x = ones(n,1);
+  x = x + rectangularPulse(-10, 20, a);
+
+  y = hmmvp('mvp', hm, x);)
+
+  hmmvp('cleanup', hm);
+
+end
+
 % ----------------------- Private -------------------------------
 function addpaths()
   addpath /auto/home/jmwick/EarthquakeSimulation/dc3dm-main/matlab;
