@@ -121,8 +121,8 @@ function p = make_props(o)
   p.nu = 0.25;
 
   % b will be constant, a  will be constant except for the circle
-  p.b = 0.015*one;
-  p.a = 0.02*one;
+  p.b = 15*one;
+  p.a = 2*one;
   % making circle
   circle = X.^2 + Y.^2 <= radius.^2;
   p.a = p.a-(circle*0.01);
