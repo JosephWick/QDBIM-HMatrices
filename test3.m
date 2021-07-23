@@ -87,6 +87,10 @@ function y = oneD_mvp (r)
   cs = (414:1000:n);
   y = hmmvp('mvp', hm, x, [], cs);
 
+  clf;
+  plot(y);
+  saveas(gvf, 'figures/test3_oneDmvp.png')
+
 end
 
 % ---------------------- Private but still relevant ---------------
