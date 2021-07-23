@@ -47,8 +47,8 @@ function y = mvp_test (r)
   % first load in the h-matrix
   hm_fname = r.cc.hm_write_filename;
   hm = hmmvp('init', hm_fname, 4);
-  m = hmmvp('getm', hm)
-  n = hmmvp('getn', hm)
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
 
   % make a vector to multiply by
   a = linspace(-50, 50, n);
@@ -71,12 +71,24 @@ function y = mvp_test (r)
 end
 
 % get_elem_sizes ()
-% plot the sizes of elements in the hmatrix
+% plot the sizes of elements in the hmatrix (should be uniform)
 function get_elem_sizes (r)
 
   clf;
   dc3dm.mViewBuild(r.cb); axis xy;
   saveas(gcf, 'figures/test_1D_sizes.png')
+
+end
+
+% get_mn ()
+% returns m, n of the hmatrix
+function get_mn (r)
+  addpaths();
+
+  hm_fname = r.cc.hm_write_filename;
+  hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm)
+  n = hmmvp('getn', hm)
 
 end
 
