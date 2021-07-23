@@ -57,30 +57,36 @@ function y = mvp_test (r)
   x = x + b';
 
   cs = (8:10:n);
-  y = hmmvp('mvp', hm, x, [], cs);
+  y = hmmvp('mvp', hm, x);
 
-  % let's also extract the row of the matrix we used
-  r = hmmvp('extract', hm, (1:n), cs);
+  %
 
   clf;
   subplot(221); plot(x); title('vector x');
   subplot(222); plot(r); title('matrix row');
   subplot(223); plot(y); title('vector y');
-  saveas(gcf, 'figures/test_1D_mvp.pdf')
+  %saveas(gcf, 'figures/test_1D_mvp.pdf')
 
   hmmvp('cleanup', hm);
 
 end
 
 % ----------------------- Private -------------------------------
+
+% addpaths ()
+% add path to dc3dm matlab files
 function addpaths()
   addpath /auto/home/jmwick/EarthquakeSimulation/dc3dm-main/matlab;
 end
 
+% make_base_fn ()
+% creates name(s) for hm related files
 function bfn = make_base_fn (p)
   bfn = sprintf('%stest_1d', p.dir);
 end
 
+% setup_problem ()
+% sets parameters for the fault
 function p = setup_problem()
 
   p.rfac = 2;
