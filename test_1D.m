@@ -66,7 +66,7 @@ function y = mvp_test (r)
   subplot(221); plot(x); title('vector x');
   subplot(222); plot(r); title('matrix row');
   subplot(223); plot(y); title('vector y');
-  saveas(gcf, 'figures/test_1D_mvp.png')
+  saveas(gcf, 'figures/test_1D_mvp.pdf')
 
   hmmvp('cleanup', hm);
 
