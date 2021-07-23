@@ -47,7 +47,7 @@ function y = mvp_test (r)
   n = hmmvp('getn', hm);
 
   % make a vector
-  a = linspace(-0.5*p.dip_len, 0.5*p.dip_len, n);
+  a = linspace(-50, 50, n);
   x = ones(n,1);
   x = x + rectangularPulse(-10, 20, a);
 
