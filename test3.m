@@ -81,7 +81,8 @@ function y = oneD_mvp (r)
   hm = hmmvp('init', hm_file);
 
   n = hmmvp('getn', hm)
-  x = randn(n,1);
+  x = ones(n,1);
+  x = x + rectangularPulse(-10, 20, a);
 
   cs = (414:1000:n);
   y = hmmvp('mvp', hm, x, [], cs);
