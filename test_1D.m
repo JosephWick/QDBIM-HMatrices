@@ -51,9 +51,9 @@ function y = mvp_test (r)
   n = hmmvp('getn', hm);
 
   % make a vector to multiply by
-  a = zeros(n,m);
-  a(48:96,48:96) = 1;
-  x = reshape(a, [n*m, 1]);
+  a = zeros(12,12);
+  a(4:8,4:8) = 1;
+  x = reshape(a, [144, 1]);
 
   size(x)
 
