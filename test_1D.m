@@ -55,12 +55,10 @@ function y = mvp_test (r)
   x = x';
 
   y = hmmvp('mvp', hm, x);
-  y
-  %
 
   clf;
-
-  %saveas(gcf, 'figures/test_1D_mvp.pdf')
+  plot(y);
+  saveas(gcf, 'figures/test_1D_mvp.pdf')
 
   hmmvp('cleanup', hm);
 
