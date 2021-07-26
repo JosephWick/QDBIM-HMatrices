@@ -145,7 +145,7 @@ function p = setup_problem()
 
   p.problem = 0;
 
-  n = 101;
+  n = 1001;
   p.x = linspace(-0.5*p.strike_len, 0.5*p.strike_len, n);
   p.y = linspace(-0.5*p.dip_len, 0.5*p.dip_len, n);
 
