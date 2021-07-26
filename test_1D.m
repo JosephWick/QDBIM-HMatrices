@@ -51,11 +51,12 @@ function y = mvp_test (r)
   n = hmmvp('getn', hm);
 
   % make a vector to multiply by
-  a = zeros(12,12);
-  a(4:8,4:8) = 1;
-  x = reshape(a, [144, 1]);
+  %a = zeros(12,12);
+  %a(4:8,4:8) = 1;
+  %x = reshape(a, [144, 1]);
 
-  size(x)
+  x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
+  x = x';
 
   y = hmmvp('mvp', hm, x);
 
@@ -132,7 +133,7 @@ function p = setup_problem()
   p.do_uniform = 1;
   p.neighborhood = 8;
   p.min_len = 0;
-  p.max_len = 100;
+  p.max_len = inf;
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 1000;
