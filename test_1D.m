@@ -51,19 +51,15 @@ function y = mvp_test (r)
   n = hmmvp('getn', hm);
 
   % make a vector to multiply by
-  a = linspace(-50, 50, n);
-  x = ones(n,1);
-  b = rectangularPulse(-10, 20, a);
-  x = x + b';
+  x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
+  x = x';
 
   y = hmmvp('mvp', hm, x);
-
+  y
   %
 
   clf;
-  %subplot(221); plot(x); title('vector x');
-  %subplot(222); plot(r); title('matrix row');
-  %subplot(223); plot(y); title('vector y');
+
   %saveas(gcf, 'figures/test_1D_mvp.pdf')
 
   hmmvp('cleanup', hm);
