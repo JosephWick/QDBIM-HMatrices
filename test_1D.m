@@ -55,7 +55,7 @@ function y = mvp_test (r)
   a(48:96,48:96) = 1;
   x = reshape(a, [n*m, 1]);
 
-  y = hmmvp('mvp', hm, x);
+  y = hmmvp('mvp', hm, x');
 
   clf;
   plot(y);
