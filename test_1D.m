@@ -53,7 +53,7 @@ function y = mvp_test (r)
   % make a vector to multiply by
   a = zeros(n,m);
   a(48:96,48:96) = 1;
-  x = reshape(a, (n*m), 1);
+  x = reshape(a, [n*m, 1]);
 
   y = hmmvp('mvp', hm, x);
 
