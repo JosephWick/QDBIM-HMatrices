@@ -52,7 +52,7 @@ function y = mvp_test (r)
 
   % make a vector to multiply by
   x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
-  %x = x'
+  x = x';
 
   y = hmmvp('mvp', hm, x);
 
