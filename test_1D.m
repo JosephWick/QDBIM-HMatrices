@@ -58,7 +58,7 @@ function y = mvp_test (r)
 
   clf;
   plot(y);
-  saveas(gcf, 'figures/test_1D_mvp.pdf')
+  saveas(gcf, 'figures/test_1D_mvp.png')
 
   hmmvp('cleanup', hm);
 
@@ -129,7 +129,7 @@ function p = setup_problem()
   p.do_uniform = 1;
   p.neighborhood = 8;
   p.min_len = 0;
-  p.max_len = 100;
+  p.max_len = inf;
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 1000;
