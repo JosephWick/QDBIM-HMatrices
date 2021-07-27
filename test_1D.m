@@ -184,7 +184,7 @@ function c = write_build_kvf(p)
   c.mesh_read_filename = bfn;
   c.build_write_filename = sprintf('%s_p%d', bfn, p.problem);
 
-  c.depth_min = 0;
+  c.depth_min = 10;
   c.dipdeg = 90;
   c.svbc = 2;
 
