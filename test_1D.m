@@ -56,7 +56,7 @@ function y = mvp_test (r)
   [X Y] = meshgrid(x,y);
   r = X.^2 + Y.^2;
 
-  d = (1 - r.cc.nu)/r.cc.mu * sqrt(10 - r);
+  d = ((1 - r.cc.nu) / r.cc.mu) * sqrt(10 - r);
 
   %a = zeros(100,100);
   %a(45:54,45:54) = 1;
