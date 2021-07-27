@@ -61,7 +61,7 @@ function y = mvp_test (r)
   y = hmmvp('mvp', hm, x);
 
   clf;
-  plot(y(3000:4000));
+  plot(y(5000:5100));
   saveas(gcf, 'figures/test_1D_mvp-3k4k.png')
 
   hmmvp('cleanup', hm);
