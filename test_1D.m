@@ -54,9 +54,9 @@ function y = mvp_test (r)
   x = linspace(-50,50,100);
   y = linspace(-50,50,100);
   [X Y] = meshgrid(x,y);
-  r = X.^2 + Y.^2;
+  R = X.^2 + Y.^2;
 
-  d = ((1 - r.cc.nu) / r.cc.mu) * sqrt(10 - r);
+  d = ((1 - r.cc.nu) / r.cc.mu) * sqrt(10 - R);
 
   %a = zeros(100,100);
   %a(45:54,45:54) = 1;
