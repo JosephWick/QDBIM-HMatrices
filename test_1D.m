@@ -58,7 +58,7 @@ function y = mvp_test (r)
   %x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
   %x = x';
 
-  y = hmmvp('mvp', hm, x);
+  y = hmmvp('mvp', hm, x(500:600));
 
   clf;
   plot(y);
