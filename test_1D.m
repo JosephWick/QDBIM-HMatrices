@@ -64,6 +64,10 @@ function y = mvp_test (r)
   plot(y(5000:5100));
   saveas(gcf, 'figures/test_1D_mvp-5k51.png')
 
+  clf;
+  imagesc(a); colorbar;
+  saveas(gcf, 'figures/test_1D_a.png')
+
   hmmvp('cleanup', hm);
 
 end
