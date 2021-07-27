@@ -186,7 +186,7 @@ function c = write_build_kvf(p)
 
   c.depth_min = 10;
   c.dipdeg = 90;
-  c.svbc = 2;
+  c.svbc = 0;
 
   c.neighborhood = p.neighborhood;
   c.bc_periodic_nlayers = 3;
