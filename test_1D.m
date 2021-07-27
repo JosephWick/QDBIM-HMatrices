@@ -61,7 +61,7 @@ function y = mvp_test (r)
   y = hmmvp('mvp', hm, x);
 
   clf;
-  plot(y(500:600));
+  plot(y);
   saveas(gcf, 'figures/test_1D_mvp.pdf')
 
   hmmvp('cleanup', hm);
