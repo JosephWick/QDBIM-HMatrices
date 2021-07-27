@@ -58,10 +58,10 @@ function y = mvp_test (r)
   %x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
   %x = x';
 
-  y = hmmvp('mvp', hm, x(500:600));
+  y = hmmvp('mvp', hm, x);
 
   clf;
-  plot(y);
+  plot(y(500:600));
   saveas(gcf, 'figures/test_1D_mvp.png')
 
   hmmvp('cleanup', hm);
