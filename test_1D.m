@@ -52,7 +52,7 @@ function y = mvp_test (r)
 
   % make a vector to multiply by
   a = zeros(100,100);
-  a(40:49,40:49) = 1;
+  a(45:54,45:54) = 1;
   x = reshape(a, [10000, 1]);
 
   %x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
