@@ -133,7 +133,7 @@ end
 function p = setup_problem()
 
   p.rfac = 2;
-  p.want_free_surface = 1;
+  p.want_free_surface = 0;
   p.do_uniform = 1;
   p.neighborhood = 8;
   p.min_len = 0;
