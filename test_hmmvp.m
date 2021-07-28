@@ -48,7 +48,7 @@ function y = test_mvp(r)
 
   % let's get the whole hm to plot it
   rs = (1:1:m); cs = (1:1:n);
-  m = hmmvp('extract', hm, rs, cs);
+  fullM = hmmvp('extract', hm, rs, cs);
 
   % let's do the vector multiplication
   % make a vector to multiply by
@@ -65,7 +65,7 @@ function y = test_mvp(r)
   y = hmmvp('mvp', hm, x);
 
   clf;
-  subplot(221); imagesc(m); title('h-matrix'); colorbar;
+  subplot(221); imagesc(fullM); title('h-matrix'); colorbar;
   subplot(222); imagesc(d); title('slip'); colorbar;
   subplot(223); imagesc(reshape(y, [10,10])); title('output'); colorbar;
   subplot(224); plot(y(50:60)); title('row');
