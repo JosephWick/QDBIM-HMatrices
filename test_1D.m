@@ -54,7 +54,7 @@ function y = mvp_test (r)
   x = linspace(-50,50,100);
   y = linspace(-50,50,100);
   [X Y] = meshgrid(x,y);
-  a = m/10;
+  a = 10;
   R = (X.^2 + Y.^2)/a;
 
   d = ((1 - r.cc.nu) / r.cc.mu) * real(sqrt(a - R));
