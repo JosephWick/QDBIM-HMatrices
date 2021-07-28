@@ -17,7 +17,7 @@ n = 100;
 x = linspace(-1, 1, n);
 y = linspace(-1, 1, n);
 S_xy = zeros(n, n);
-U_xy = zeros(n,n);
+
 for i = 1:n
   for j = 1:n
     [sucess, u, grad_u] = DC3Dwrapper(alpha, [x(i), y(j), -obs_depth], ...
@@ -27,7 +27,6 @@ for i = 1:n
                                       [1.0, 0.0, 0.0]);
 
     S_xy(i,j) = ( grad_u(1,2) + grad_u(2,1) ) * mu;
-    %U_xy(i,j) = grad
 
   end
 end
