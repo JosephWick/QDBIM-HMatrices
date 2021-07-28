@@ -156,6 +156,8 @@ end
 function get_hm (b)
   hm_fname = b.c.write_hmat_filename;
   hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
 
   rs = (1:1:m); cs = (1:1:n);
   hm = hmmvp('extract', hm, rs, cs);
