@@ -206,7 +206,7 @@ end
 
 % write_compress_kvf ()
 function c = write_compress_kvf (p, cb)
-  v = [1 2 0];
+  v = [1 0 0];
   v = v/norm(v);
   c.src_disl = v;
   c.rcv_traction = c.src_disl;
