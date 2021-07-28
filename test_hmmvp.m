@@ -23,7 +23,7 @@ function r = build()
   c.allow_overwrite = 1;
 
   n = 10;
-  x = linspace(-1,1,n);
+  x = linspace(-10,10,n);
   [X Y] = ndgrid(x,x);
   c.X = [X(:)'; Y(:)'; zeros(1,n^2)];
 
