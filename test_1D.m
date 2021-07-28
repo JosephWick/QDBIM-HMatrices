@@ -72,7 +72,7 @@ function y = mvp_test (r)
   clf;
   subplot(221); imagesc(d); title('slip'); colorbar;
   subplot(222); imagesc(reshape(y, [100,100])); title('output'); colorbar;
-  subplot(223); plot(y(5000:5200)); title('row');
+  subplot(223); plot(y(5000:5100)); title('row');
   saveas(gcf, 'figures/test_1D_mvp.png')
 
   %clear memory
