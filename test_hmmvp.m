@@ -29,8 +29,8 @@ function r = build()
 
   kvf('Write', c.kvf, c, 1);
 
-  disp('run this in a shell')
-  fprintf('../hmmvp-main/bin/hmmvpbuild_omp ./tmp/hmmvpTest.kvf')
+  disp('run this in a shell: \n')
+  fprintf('    ../hmmvp-main/bin/hmmvpbuild_omp ./tmp/hmmvpTest.kvf \n')
 
   r = c;
 
