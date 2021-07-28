@@ -33,4 +33,4 @@ end
 
 clf;
 imagesc(S_xy); title('okada_wrapper'); colorbar;
-saveas('figures/test_ow.png');
+saveas(gcf, 'figures/test_ow.png');
