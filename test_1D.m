@@ -54,7 +54,7 @@ function y = mvp_test (r)
   x = linspace(-50,50,100);
   y = linspace(-50,50,100);
   [X Y] = meshgrid(x,y);
-  a = 10
+  a = 10;
   R = (X.^2 + Y.^2)/10;
 
   d = ((1 - r.cc.nu) / r.cc.mu) * real(sqrt(10 - R));
@@ -145,7 +145,7 @@ function p = setup_problem()
   p.do_uniform = 1;
   p.neighborhood = 8;
   p.min_len = 0;
-  p.max_len = 10;
+  p.max_len = 1;
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 1000;
