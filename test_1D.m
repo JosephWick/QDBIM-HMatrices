@@ -51,10 +51,10 @@ function y = mvp_test (r)
   n = hmmvp('getn', hm);
 
   % make a vector to multiply by
-  x = linspace(-50,50,200);
-  y = linspace(-50,50,200);
+  x = linspace(-50,50,100);
+  y = linspace(-50,50,100);
   [X Y] = meshgrid(x,y);
-  a = 20;
+  a = 10;
   R = (X.^2 + Y.^2)/a;
 
   d = ((1 - r.cc.nu) / r.cc.mu) * real(sqrt(a - R));
@@ -62,7 +62,7 @@ function y = mvp_test (r)
   %a = zeros(100,100);
   %a(45:54,45:54) = 1;
 
-  x = reshape(d, [40000, 1]);
+  x = reshape(d, [10000, 1]);
 
   %x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
   %x = x';
