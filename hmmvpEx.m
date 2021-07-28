@@ -151,6 +151,20 @@ function b = recompress (b)
   write_shell_cmds(b.cr.kvf);
 end
 
+% get_hm()
+% get and plot the full hm
+function get_hm (b)
+  hm_fname = b.c.write_hmat_filename;
+  hm = hmmvp('init', hm_fname, 4);
+
+  rs = (1:1:m); cs = (1:1:n);
+  hm = hmmvp('extract', hm, rs, cs);
+
+  imagesc(hm); colorbar;
+  saveas(gcf, 'figures/hmmvpEx_hm.png')
+
+end
+
 % ------------------------------------------------------------------------------
 % Private.
 
@@ -238,8 +252,7 @@ function c = write_kvf (p)
 end
 
 function write_shell_cmds (kvf)
-  fprintf('./bin/hmmvpbuild_s %s\n', kvf);
-  fprintf('./bin/hmmvpbuild_omp %s\n', kvf);
+  fprintf('../hmmvp-main/bin/hmmvpbuild_omp %s\n', kvf);
   fprintf('mpirun -n 4 ./bin/hmmvpbuild %s\n', kvf);
 end
 
