@@ -47,8 +47,8 @@ function y = mvp_test (r)
   % first load in the h-matrix
   hm_fname = r.cc.hm_write_filename;
   hm = hmmvp('init', hm_fname, 4);
-  m = hmmvp('getm', hm)
-  n = hmmvp('getn', hm)
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
 
   % make a vector to multiply by
   x = linspace(-50,50,100);
@@ -71,7 +71,7 @@ function y = mvp_test (r)
 
   clf;
   subplot(221); imagesc(d); title('slip'); colorbar;
-  subplot(222); imagesc(reshape(y, [100,100])); title('output');
+  subplot(222); imagesc(reshape(y, [100,100])); title('output'); colorbar;
   subplot(223); plot(y(5000:5100)); title('row');
   saveas(gcf, 'figures/test_1D_mvp.png')
 
