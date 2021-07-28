@@ -44,6 +44,8 @@ function y = test_mvp(r)
   m = hmmvp('getm', hm)
   n = hmmvp('getn', hm)
 
+  y=0;
+
 end
 
 % ------------------------- Private ----------------------------
