@@ -51,8 +51,8 @@ function y = mvp_test (r)
   n = hmmvp('getn', hm)
 
   % make a vector to multiply by
-  x = linspace(-50,50,m);
-  y = linspace(-50,50,n);
+  x = linspace(-50,50,100);
+  y = linspace(-50,50,100);
   [X Y] = meshgrid(x,y);
   a = m/10;
   R = (X.^2 + Y.^2)/a;
@@ -62,7 +62,7 @@ function y = mvp_test (r)
   %a = zeros(100,100);
   %a(45:54,45:54) = 1;
 
-  x = reshape(d, [m*n, 1]);
+  x = reshape(d, [10000, 1]);
 
   %x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
   %x = x';
