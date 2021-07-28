@@ -13,7 +13,7 @@ function r = build()
   addpaths()
 
   c.command = 'compress';
-  c.write_hmat_filename = 'hmmvpTest';
+  c.write_hmat_filename = './tmp/hmmvpTest';
   c.kvf = [c.write_hmat_filename '.kvf'];
   c.greens_fn = 'inverse-r';
   c.err_method = 'mrem-fro';
@@ -28,6 +28,9 @@ function r = build()
   c.X = [X(:)'; Y(:)'; zeros(1,n^2)];
 
   kvf('Write', c.kvf, c, 1);
+
+  disp('run this in a shell')
+  fprintf('../hmmvp-main/bin/hmmvpbuild_omp ./tmp/hmmvpTest.kvf')
 
 end
 
