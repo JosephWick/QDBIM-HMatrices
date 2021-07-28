@@ -18,11 +18,11 @@ x = linspace(-1, 1, n);
 y = linspace(-1, 1, n);
 S_xy = zeros(n, n);
 U_xy = zeros(n,n);
-for i = 1:100
-  for j = 1:100
+for i = 1:n
+  for j = 1:n
     [sucess, u, grad_u] = DC3Dwrapper(alpha, [x(i), y(j), -obs_depth], ...
                                       source_depth, dip, ...
-                                      [-0.7, 0.7], ...
+                                      [-0.5, 0.7], ...
                                       [-0.7, 0.7], ...
                                       [1.0, 0.0, 0.0]);
 
@@ -33,5 +33,5 @@ for i = 1:100
 end
 
 clf;
-imagesc(S_xy); title('okada wrapper'); colorbar;
+imagesc(x, y, S_xy); title('okada wrapper'); colorbar;
 saveas(gcf, 'figures/test_ow.png');
