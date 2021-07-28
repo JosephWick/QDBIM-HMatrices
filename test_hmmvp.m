@@ -66,7 +66,7 @@ function y = test_mvp(r)
   subplot(221); imagesc(m); title('h-matrix'); colorbar;
   subplot(222); imagesc(d); title('slip'); colorbar;
   subplot(223); imagesc(reshape(y, [10,10])); title('output'); colorbar;
-  subplot(224); plot(y(500:510)); title('row');
+  subplot(224); plot(y(50:60)); title('row');
   saveas(gcf, 'figures/test_hmmvp.png')
 
 end
