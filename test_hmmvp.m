@@ -19,7 +19,7 @@ function r = build()
   c.err_method = 'mrem-fro';
   c.tol = 1.0e-3;
   c.order = 3;
-  c.delta = 1.0e-4
+  c.delta = 1.0e-4;
   c.allow_overwrite = 1;
 
   n = 100;
@@ -31,6 +31,8 @@ function r = build()
 
   disp('run this in a shell')
   fprintf('../hmmvp-main/bin/hmmvpbuild_omp ./tmp/hmmvpTest.kvf')
+
+  r = c;
 
 end
 
