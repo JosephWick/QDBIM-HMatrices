@@ -69,13 +69,12 @@ function y = mvp_test (r)
   y = hmmvp('mvp', hm, x);
 
   clf;
-  plot(y(5000:5100));
-  saveas(gcf, 'figures/test_1D_mvp-5k51.png')
+  subplot(221); imagesc(d); title('slip'); colorbar;
+  subplot(222); imagesc(reshape(y, [100,100])); title('output');
+  subplot(223); plot(y(5000:5100)); title('row');
+  saveas(gcf, 'figures/test_1D_mvp.png')
 
-  clf;
-  imagesc(a); colorbar;
-  saveas(gcf, 'figures/test_1D_a.png')
-
+  %clear memory 
   hmmvp('cleanup', hm);
 
 end
