@@ -14,8 +14,8 @@ dip = 90;
 
 n = 100;
 
-x = linspace(-0.5*n, 0.5*n, n);
-y = linspace(-0.5*n, 0.5*n, n);
+x = linspace(-1, 1, n);
+y = linspace(-1, 1, n);
 S_xy = zeros(n, n);
 U_xy = zeros(n,n);
 for i = 1:100
