@@ -22,6 +22,8 @@ function r = build()
   c.delta = 1.0e-4;
   c.allow_overwrite = 1;
 
+  c.eta = 3;
+
   n = 10;
   x = linspace(-10,10,n);
   [X Y] = ndgrid(x,x);
