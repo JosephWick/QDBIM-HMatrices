@@ -62,7 +62,7 @@ function y = mvp_test (r)
   %a = zeros(100,100);
   %a(45:54,45:54) = 1;
 
-  x = reshape(d, [10000, 1]);
+  x = reshape(d, [m*n, 1]);
 
   %x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
   %x = x';
@@ -71,7 +71,7 @@ function y = mvp_test (r)
 
   clf;
   subplot(221); imagesc(d); title('slip'); colorbar;
-  subplot(222); imagesc(reshape(y, [100,100])); title('output');
+  subplot(222); imagesc(reshape(y, [m,n])); title('output');
   subplot(223); plot(y(5000:5100)); title('row');
   saveas(gcf, 'figures/test_1D_mvp.png')
 
@@ -145,7 +145,7 @@ function p = setup_problem()
   p.do_uniform = 1;
   p.neighborhood = 8;
   p.min_len = 0;
-  p.max_len = 1;
+  p.max_len = 10;
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 1000;
