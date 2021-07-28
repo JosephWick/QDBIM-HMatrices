@@ -54,9 +54,10 @@ function y = mvp_test (r)
   x = linspace(-50,50,100);
   y = linspace(-50,50,100);
   [X Y] = meshgrid(x,y);
-  R = X.^2 + Y.^2;
+  a = 10
+  R = (X.^2 + Y.^2)/10;
 
-  d = ((1 - r.cc.nu) / r.cc.mu) * sqrt(10 - R);
+  d = ((1 - r.cc.nu) / r.cc.mu) * real(sqrt(10 - R));
 
   %a = zeros(100,100);
   %a(45:54,45:54) = 1;
@@ -74,7 +75,7 @@ function y = mvp_test (r)
   subplot(223); plot(y(5000:5100)); title('row');
   saveas(gcf, 'figures/test_1D_mvp.png')
 
-  %clear memory 
+  %clear memory
   hmmvp('cleanup', hm);
 
 end
