@@ -10,7 +10,7 @@ end
 
 % create h-matrix
 function r = build()
-  addpaths()
+  addpaths();
 
   c.command = 'compress';
   c.write_hmat_filename = './tmp/hmmvpTest';
@@ -29,13 +29,22 @@ function r = build()
 
   kvf('Write', c.kvf, c, 1);
 
-  disp('run this in a shell: \n')
+  disp('run this in a shell:')
   fprintf('    ../hmmvp-main/bin/hmmvpbuild_omp ./tmp/hmmvpTest.kvf \n')
 
   r = c;
 
 end
 
+function y = test_mvp(r)
+  addpaths();
+
+  hm_fname = r.c.write_hmat_filename;
+  hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm)
+  n = hmmvp('getn', hm)
+
+end
 
 % ------------------------- Private ----------------------------
 
