@@ -22,7 +22,7 @@ function r = build()
   c.delta = 1.0e-4;
   c.allow_overwrite = 1;
 
-  n = 100;
+  n = 10;
   x = linspace(-1,1,n);
   [X Y] = ndgrid(x,x);
   c.X = [X(:)'; Y(:)'; zeros(1,n^2)];
@@ -41,8 +41,8 @@ function y = test_mvp(r)
 
   hm_fname = r.c.write_hmat_filename;
   hm = hmmvp('init', hm_fname, 4);
-  m = hmmvp('getm', hm)
-  n = hmmvp('getn', hm)
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
 
   % let's get the whole hm to plot it
   rs = (1:1:m); cs = (1:1:n);
