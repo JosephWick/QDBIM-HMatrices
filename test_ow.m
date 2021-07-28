@@ -4,7 +4,7 @@ addpath('../okada_wrapper')
 
 source_depth = 3.0;
 obs_depth = 3.0;
-dislocation = (1.0, 0.0, 0.0);
+dislocation = [1.0, 0.0, 0.0];
 
 mu = 30e9;
 nu = 0.25;
