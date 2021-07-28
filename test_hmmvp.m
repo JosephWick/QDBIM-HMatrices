@@ -44,7 +44,29 @@ function y = test_mvp(r)
   m = hmmvp('getm', hm)
   n = hmmvp('getn', hm)
 
-  y=0;
+  % let's get the whole hm to plot it
+  rs = (1:1:m); cs = (1:1:n);
+  m = hmmvp('extract', hm, rs, cs);
+
+  % let's do the vector multiplication
+  % make a vector to multiply by
+  x = linspace(-50,50,100);
+  y = linspace(-50,50,100);
+  [X Y] = meshgrid(x,y);
+  a = 10;
+  R = (X.^2 + Y.^2)/a;
+
+  d = real(sqrt(a - R));
+
+  x = reshape(d, [10000, 1]);
+
+  y = hmmvp('mvp', hm, x);
+
+  clf;
+  subplot(221); imagesc(d); title('slip'); colorbar;
+  subplot(222); imagesc(reshape(y, [100,100])); title('output'); colorbar;
+  subplot(223); plot(y(5000:5100)); title('row');
+  saveas(gcf, 'figures/test_hmmvp.png')
 
 end
 
