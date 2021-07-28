@@ -32,7 +32,7 @@ function r = build()
   disp('run this in a shell:')
   fprintf('    ../hmmvp-main/bin/hmmvpbuild_omp ./tmp/hmmvpTest.kvf \n')
 
-  r = c;
+  r.c = c;
 
 end
 
