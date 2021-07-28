@@ -51,8 +51,8 @@ function y = mvp_test (r)
   n = hmmvp('getn', hm);
 
   % make a vector to multiply by
-  x = linspace(-50,50,100);
-  y = linspace(-50,50,100);
+  x = linspace(-50,50,200);
+  y = linspace(-50,50,200);
   [X Y] = meshgrid(x,y);
   a = 10;
   R = (X.^2 + Y.^2)/a;
@@ -62,7 +62,7 @@ function y = mvp_test (r)
   %a = zeros(100,100);
   %a(45:54,45:54) = 1;
 
-  x = reshape(d, [10000, 1]);
+  x = reshape(d, [20000, 1]);
 
   %x = [0,0,0,0, 0,1,1,0, 0,1,1,0, 0,0,0,0];
   %x = x';
@@ -71,8 +71,8 @@ function y = mvp_test (r)
 
   clf;
   subplot(221); imagesc(d); title('slip'); colorbar;
-  subplot(222); imagesc(reshape(y, [100,100])); title('output'); colorbar;
-  subplot(223); plot(y(5000:5100)); title('row');
+  subplot(222); imagesc(reshape(y, [200,200])); title('output'); colorbar;
+  subplot(223); plot(y(5000:5200)); title('row');
   saveas(gcf, 'figures/test_1D_mvp.png')
 
   %clear memory
@@ -145,7 +145,7 @@ function p = setup_problem()
   p.do_uniform = 1;
   p.neighborhood = 8;
   p.min_len = 0;
-  p.max_len = 10;
+  p.max_len = 5;
   p.nthreads = 4;
   p.dir = './tmp/';
   p.dip_len = 1000;
