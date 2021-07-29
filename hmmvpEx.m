@@ -247,7 +247,7 @@ function c = write_kvf (p)
   c.command = 'compress';
   c.write_hmat_filename = bfn;
   c.kvf = [bfn '.kvf'];
-  c.greens_fn = 'test-gf';
+  c.greens_fn = 'dc3d';
   c = transfer_fields(c, p, {'err_method' 'tol' 'eta' 'X' 'order' 'delta'});
   c.allow_overwrite = 1;
   kvf('Write', c.kvf, c, 1);
