@@ -24,6 +24,7 @@ function r = build()
 
   c.mu = 1;
   c.nu = 1;
+  c.dz = 1;
 
   c.eta = 3;
 
