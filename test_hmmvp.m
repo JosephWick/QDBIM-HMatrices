@@ -22,6 +22,9 @@ function r = build()
   c.delta = 1.0e-4;
   c.allow_overwrite = 1;
 
+  c.mu = 1;
+  c.nu = 1;
+
   c.eta = 3;
 
   n = 10;
