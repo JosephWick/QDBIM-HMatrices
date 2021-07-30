@@ -47,6 +47,8 @@ function plot_hm(r)
 
   hm_fname = r.c.write_hmat_filename;
   hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
   rs = (1:1:m); cs = (1:1:n);
   fullM = hmmvp('extract', hm, rs, cs);
 
