@@ -38,6 +38,20 @@ function r = build()
 
 end
 
+function plot_hm(r)
+  addpaths();
+
+  hm_fname = r.c.write_hmat_filename;
+  hm = hmmvp('init', hm_fname, 4);
+  rs = (1:1:m); cs = (1:1:n);
+  fullM = hmmvp('extract', hm, rs, cs);
+
+  clf;
+  imagesc(fullM); title('h-matrix'); colorbar;
+  saveas(gcf, 'figures/test_hmmvp_fullHM.png')
+
+end
+
 function y = test_mvp(r)
   addpaths();
 
