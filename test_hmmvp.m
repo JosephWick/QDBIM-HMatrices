@@ -30,8 +30,7 @@ function r = build()
 
   n = 10;
   x = linspace(-10,10,n);
-  [X Y] = ndgrid(x,x);
-  c.X = [X(:)'; Y(:)'; zeros(1,n^2)];
+  c.X = [x; zeros(1,n); zeros(1,n)];
 
   kvf('Write', c.kvf, c, 1);
 
