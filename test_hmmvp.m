@@ -95,5 +95,5 @@ end
 % ------------------------- Private ----------------------------
 
 function addpaths()
-  addpath('../hmmvp-main/matlab');
+  addpath('../hmmvp-okada/matlab');
 end
