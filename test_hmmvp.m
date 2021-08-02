@@ -29,7 +29,7 @@ function r = build()
   c.eta = 3;
 
   n = 10;
-  x = linspace(-10,10,n);
+  x = [linspace(-10,10,n), zeros(1,n), zeros(1,n)];
   c.X = [x; zeros(1,n); zeros(1,n)];
 
   kvf('Write', c.kvf, c, 1);
