@@ -250,6 +250,10 @@ function c = write_kvf (p)
   c.greens_fn = 'okada';
   c = transfer_fields(c, p, {'err_method' 'tol' 'eta' 'X' 'order' 'delta'});
   c.allow_overwrite = 1;
+
+  c.mu = 1;
+  c.nu = 1;
+
   kvf('Write', c.kvf, c, 1);
 end
 
