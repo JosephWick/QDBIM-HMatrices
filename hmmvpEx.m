@@ -253,6 +253,7 @@ function c = write_kvf (p)
 
   c.mu = 1;
   c.nu = 1;
+  c.dz = 1;
 
   kvf('Write', c.kvf, c, 1);
 end
