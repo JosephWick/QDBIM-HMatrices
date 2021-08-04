@@ -42,7 +42,7 @@ function r = build()
 
   c.eta = 3;
 
-  x = linspace(0,c.W,n);
+  x = linspace(-0.5*c.W,0.5*c.W,n);
   y = zeros(1,n);
   c.X = [x; y; zeros(1,n)];
 
