@@ -27,7 +27,7 @@ function r = build()
   c.halfspace = 1;
 
   len = 100;
-  n = 100;
+  n = 10;
 
   c.mu = 30e9;
   c.nu = 0.25;
