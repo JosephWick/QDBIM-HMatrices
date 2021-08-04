@@ -26,11 +26,14 @@ function r = build()
 
   c.halfspace = 1;
 
+  len = 100;
+  n = 10;
+
   c.mu = 30e9;
   c.nu = 0.25;
-  c.dz = 1.0;
-  c.W = 100.0;
-  c.L = 100.0;
+  c.W = len;
+  c.L = len;
+  c.dz = len/n;
   c.dip = 90;
 
   c.d1 = 1;
@@ -39,7 +42,6 @@ function r = build()
 
   c.eta = 3;
 
-  n = 10;
   x = linspace(0,c.W,n);
   y = linspace(0,c.L,n);
   c.X = [x; y; zeros(1,n)];
