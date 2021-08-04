@@ -31,6 +31,10 @@ function r = build()
   c.L = 100.0;
   c.dip = 90;
 
+  c.d1 = 1;
+  c.d2 = 0;
+  c.d3 = 0;
+
   c.eta = 3;
 
   n = 10;
