@@ -21,7 +21,8 @@ function r = build()
   c.err_method = 'mrem-fro';
   c.tol = 1.0e-3;
   c.order = 3;
-  c.delta = 1.0e-4;
+  c.delta = 1;
+  c.deltaDiv = 1000;
   c.allow_overwrite = 1;
 
   c.mu = 1.0;
