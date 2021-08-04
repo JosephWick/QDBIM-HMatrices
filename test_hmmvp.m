@@ -24,8 +24,8 @@ function r = build()
   c.delta = 1.0e-4;
   c.allow_overwrite = 1;
 
-  c.mu = 1.0;
-  c.nu = 1.0;
+  c.mu = 30e9;
+  c.nu = 0.25;
   c.dz = 10.0;
   c.W = 100.0;
   c.L = 100.0;
