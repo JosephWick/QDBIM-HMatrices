@@ -28,7 +28,7 @@ function r = build()
 
   c.mu = 30e9;
   c.nu = 0.25;
-  c.dz = 10.0;
+  c.dz = 1.0;
   c.W = 100.0;
   c.L = 100.0;
   c.dip = 90;
