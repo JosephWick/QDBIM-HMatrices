@@ -43,7 +43,7 @@ function r = build()
   c.eta = 3;
 
   x = linspace(0,c.W,n);
-  y = linspace(0,c.L,n);
+  y = zeros(1,n);
   c.X = [x; y; zeros(1,n)];
 
   kvf('Write', c.kvf, c, 1);
