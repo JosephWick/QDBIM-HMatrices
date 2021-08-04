@@ -26,8 +26,8 @@ function r = build()
 
   c.halfspace = 1;
 
-  len = 100;
-  n = 10;
+  len = 40000;
+  n = 400;
 
   c.mu = 30e9;
   c.nu = 0.25;
@@ -42,8 +42,8 @@ function r = build()
 
   c.eta = 3;
 
-  x = linspace(0,-len,n);
-  y = zeros(1,n);
+  x = zeros(1,n);
+  y = linspace(0,-len,n);
   c.X = [x; y; zeros(1,n)];
 
   kvf('Write', c.kvf, c, 1);
