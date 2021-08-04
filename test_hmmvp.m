@@ -42,8 +42,8 @@ function r = build()
 
   c.eta = 3;
 
-  x = zeros(1,n);
-  y = linspace(0,-len,n);
+  x = linspace(0,-len,n);
+  y = zeros(1,n);
   c.X = [x; y; zeros(1,n)];
 
   kvf('Write', c.kvf, c, 1);
