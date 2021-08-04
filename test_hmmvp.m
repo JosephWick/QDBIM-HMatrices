@@ -29,6 +29,7 @@ function r = build()
   c.dz = 10.0;
   c.W = 100.0;
   c.L = 100.0;
+  c.dip = 90;
 
   c.eta = 3;
 
