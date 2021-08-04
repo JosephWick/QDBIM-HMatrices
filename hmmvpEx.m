@@ -247,7 +247,7 @@ function c = write_kvf (p)
   c.command = 'compress';
   c.write_hmat_filename = bfn;
   c.kvf = [bfn '.kvf'];
-  c.greens_fn = 'okada';
+  c.greens_fn = 'inverse-r';
   c = transfer_fields(c, p, {'err_method' 'tol' 'eta' 'X' 'order' 'delta'});
   c.allow_overwrite = 1;
 
