@@ -26,13 +26,13 @@ function r = build()
 
   c.halfspace = 1;
 
-  len = 40000;
-  n = 400;
+  len = 1000;
+  n = 10;
 
   c.mu = 30e9;
   c.nu = 0.25;
   c.W = len;
-  c.L = 1;
+  c.L = 0;
   c.dz = len/n;
   c.dip = 90;
 
