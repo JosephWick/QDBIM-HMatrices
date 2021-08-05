@@ -44,7 +44,8 @@ function r = build()
 
   x = zeros(1,n);
   y = linspace(0,-len,n);
-  c.X = [x; y; zeros(1,n)];
+  z = zeros(1,n);
+  c.X = [x; y; z];
 
   kvf('Write', c.kvf, c, 1);
 
