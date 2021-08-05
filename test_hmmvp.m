@@ -32,7 +32,7 @@ function r = build()
   c.mu = 30e9;
   c.nu = 0.25;
   c.W = len;
-  c.L = 0;
+  c.L = 1.0;
   c.dz = len/n;
   c.dip = 90;
 
