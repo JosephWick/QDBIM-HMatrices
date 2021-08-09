@@ -135,6 +135,7 @@ function benchmark(r)
   rho = 2670;
   Vs = 3464;
   G = rho*Vs^2/1e6;
+  y3=(0:M-1)'*r.c.dz;
 
   K=zeros(m,m);
   for k=1:m
