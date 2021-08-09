@@ -9,6 +9,7 @@ end
 
 % --------------------- Public -----------------------------
 
+% sets up hmatrix
 function r = build()
   addpaths();
 
@@ -17,6 +18,33 @@ function r = build()
   c.n = 400;
   c.dz = c.lambdaZ/c.n;
   c.tol = 1.0e-3;
+
+  y3 = (0:c.n-1)'*dz;
+  W = ones(c.n,1)*dz;
+
+  % reference friction coefficient
+  ss.fo = 0.6*ones(size(y3));
+
+  % Dieterich-Ruina RS frictional params (vw friction)
+  ss.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+  ss.b = 0.015*ones(size(y3));
+
+  % effective normal stress (MPa)
+  ss.sigma=50.0*ones(size(y3));
+
+  % characteristic weakening distance (m)
+  ss.L=8e-3*ones(size(y3));
+
+  % plate rate (m/s)
+  ss.Vpl=1e-9*ones(size(y3));
+
+  % reference slip rate (m/s)
+  ss.Vo=1e-6*ones(size(y3));
+
+  % Radiation damping coefficient
+  ss.eta = G./(2*Vs);
+
+  c.ss = ss;
 
   % housekeeping
   c.command = 'compress';
@@ -39,6 +67,26 @@ function r = build()
 
 end
 
+% runs numerical solution
+function solve(r)
+
+  r.ss.dgf = 4;
+
+  Y0 = zeros(r.n*r.ss.dgf,1);
+  Y0(1:r.ss.dgf:end) = zeros(r.n,1);
+  Y0(2:r.ss.dgf:end) = max(r.ss.a).*r.ss.sigma.*asinh(r.ss.Vpl./r.ss.Vo/2.*exp((r.ss.fo+r.ss.b.*log(r.ss.Vo./r.ss.Vpl))./max(r.ss.a))) + r.ss.eta.*r.ss.Vpl;
+  Y0(3:r.ss.dgf:end)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgf:end)-r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
+  Y0(4:r.ss.dgf:end)=log(r.ss.Vpl./r.ss.Vo);
+
+  yp=@(t,y) DieterichRuinaRegAging(t,y,r);
+
+  tic
+  options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
+  [t,Y]=ode45(yp,[0 500*3.15e7],Y0,options);
+  disp('Done solving');
+  toc
+
+end
 
 % -------------------- Private -----------------------------
 
@@ -48,4 +96,19 @@ end
 
 function f=  getFname(p)
   f = sprintf('./tmp/QDBIM_tol%f_lz%d_n%d', p.tol, p.lambdaZ, p.n);
+end
+
+% boxcar function
+function bc = BC(x)
+  bc = (x=0.5>=0)-(x-0.5>=0);
+end
+
+% Heaviside function
+function hs = HS(x)
+  hs = 0+x>=0;
+end
+
+% ramp funciton
+function r = Ramp(x)
+  r = x.*BC(x-1/2)+HS(x-1);
 end
