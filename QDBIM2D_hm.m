@@ -88,7 +88,7 @@ function solve(r)
 
   tic % val had err at 1e-8
   options=odeset('Refine',1,'RelTol',1e-6,'InitialStep',1e-5);
-  [t,Y]=ode45(yp,[0 500*3.15e7],Y0,options);
+  [t,Y]=ode45(yp,[0 1e7],Y0,options); % 500*3.15e7
   disp('Done solving');
   toc
 
