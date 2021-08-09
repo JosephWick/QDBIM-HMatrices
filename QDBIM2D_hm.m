@@ -84,7 +84,7 @@ function solve(r)
   Y0(3:r.ss.dgf:end)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgf:end)-r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
   Y0(4:r.ss.dgf:end)=log(r.ss.Vpl./r.ss.Vo);
 
-  yp=@(t,y) DieterichRuinaRegAging(t,y,r);
+  %yp=@(t,y) DieterichRuinaRegAging(t,y,r);
 
   tic % val had err at 1e-8
   options=odeset('Refine',1,'RelTol',1e-6,'InitialStep',1e-5);
