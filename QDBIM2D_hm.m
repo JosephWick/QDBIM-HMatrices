@@ -113,6 +113,7 @@ end
 function benchmark(r)
   addpaths();
 
+  % do hmmvp
   hm_fname = r.c.write_hmat_filename;
   hm = hmmvp('init', hm_fname, 4);
   m = hmmvp('getm', hm);
@@ -120,13 +121,35 @@ function benchmark(r)
   x = zeros(m,1);
   x(150:250)=1;
 
+  disp('hm mvp:');
   tic
-  y = hmmvp('mvp', hm, x);
+  y_hm = hmmvp('mvp', hm, x);
   toc
 
+  % check against sparse matrix
+  s12h=@(x2,x3,y2,y3,W, G) G*( ...
+    -(x3-y3)./((x2-y2).^2+(x3-y3).^2)+(x3+y3)./((x2-y2).^2+(x3+y3).^2) ...
+    +(x3-y3-W)./((x2-y2).^2+(x3-y3-W).^2)-(x3+y3+W)./((x2-y2).^2+(x3+y3+W).^2) ...
+    )/2/pi;
+
+  rho = 2670;
+  Vs = 3464;
+  G = rho*Vs^2/1e6;
+
+  K=zeros(m,m);
+  for k=1:m
+    K(:,k)=s12h(0,y3+dz/2,0,y3(k),W(k), G);
+
+  disp('dense mvp:');
+  tic
+  y_d = K*x;
+  toc
+
+  % figure
   clf;
-  plot(y); title('benchmark mvp result');
-  saveas('figures/qdbim2dhm_benchmark.png')
+  subplot(211); plot(y_hm); title('hm mvp');
+  subplot(212); plot(y_d); title('dense mvp');
+  saveas(gcf, 'figures/qdbim2dhm_benchmark.png')
 
 end
 
