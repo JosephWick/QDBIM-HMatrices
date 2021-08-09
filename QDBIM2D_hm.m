@@ -117,7 +117,7 @@ function benchmark(r)
   hm = hmmvp('init', hm_fname, 4);
   m = hmmvp('getm', hm);
 
-  x = zeros(1,m);
+  x = zeros(m,1);
   x(150:250)=1;
 
   tic
