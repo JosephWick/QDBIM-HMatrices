@@ -43,7 +43,7 @@ function r = build()
 
   rho = 2670;
   Vs = 3464;
-  G = rho*vs^2/1e6;
+  G = rho*Vs^2/1e6;
 
   % Radiation damping coefficient
   ss.eta = G./(2*Vs);
