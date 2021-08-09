@@ -59,9 +59,9 @@ function r = build()
 
   c.greens_fn = 'okadaS12';
 
-  x = zeros(1,n);
+  x = zeros(1,c.n);
   y = linspace(0, -c.lambdaZ, c.n);
-  z = zeros(1,n);
+  z = zeros(1,c.n);
 
   disp('run this in a shell:')
   cmd = ['     ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf '\n'];
