@@ -100,7 +100,8 @@ end
 
 % boxcar function
 function bc = BC(x)
-  bc = (x=0.5>=0)-(x-0.5>=0);
+  boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
+  bc = boxc(x);
 end
 
 % Heaviside function
