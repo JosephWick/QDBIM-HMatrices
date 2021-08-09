@@ -87,7 +87,7 @@ function solve(r)
   yp=@(t,y) DieterichRuinaRegAging(t,y,r);
 
   tic % val had err at 1e-8
-  options=odeset('Refine',1,'RelTol',1e-7,'InitialStep',1e-5);
+  options=odeset('Refine',1,'RelTol',1e-6,'InitialStep',1e-5);
   [t,Y]=ode45(yp,[0 500*3.15e7],Y0,options);
   disp('Done solving');
   toc
