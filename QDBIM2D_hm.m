@@ -63,8 +63,10 @@ function r = build()
   y = linspace(0, -c.lambdaZ, c.n);
   z = zeros(1,c.n);
 
+  kvf('Write', c.kvf, c, 1);
+
   disp('run this in a shell:')
-  cmd = ['     ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf '\n'];
+  cmd = ['     ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
 
   r.c = c;
