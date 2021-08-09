@@ -23,30 +23,30 @@ function r = build()
   W = ones(c.n,1)*c.dz;
 
   % reference friction coefficient
-  c.ss.fo = 0.6*ones(size(y3));
+  ss.fo = 0.6*ones(size(y3));
 
   % Dieterich-Ruina RS frictional params (vw friction)
-  c.ss.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
-  c.ss.b = 0.015*ones(size(y3));
+  ss.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+  ss.b = 0.015*ones(size(y3));
 
   % effective normal stress (MPa)
-  c.ss.sigma=50.0*ones(size(y3));
+  ss.sigma=50.0*ones(size(y3));
 
   % characteristic weakening distance (m)
-  c.ss.L=8e-3*ones(size(y3));
+  ss.L=8e-3*ones(size(y3));
 
   % plate rate (m/s)
-  c.ss.Vpl=1e-9*ones(size(y3));
+  ss.Vpl=1e-9*ones(size(y3));
 
   % reference slip rate (m/s)
-  c.ss.Vo=1e-6*ones(size(y3));
+  ss.Vo=1e-6*ones(size(y3));
 
   rho = 2670;
   Vs = 3464;
   G = rho*Vs^2/1e6;
 
   % Radiation damping coefficient
-  c.ss.eta = G./(2*Vs);
+  ss.eta = G./(2*Vs);
 
   % housekeeping
   c.command = 'compress';
@@ -69,6 +69,7 @@ function r = build()
   disp(cmd)
 
   r.c = c;
+  r.ss = ss;
 
 end
 
