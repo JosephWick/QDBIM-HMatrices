@@ -78,7 +78,7 @@ dth = (r.ss.Vo.*exp(-th)-V)./r.ss.L;
 yp(3:r.ss.dgf:end)=dth;
 
 % Slip Velocity
-K = hmmvp('init', r.c.kvf, 4);
+K = hmmvp('init', r.c.write_hmat_filename, 4);
 
 func = hmmvp('mvp', K, (V-r.ss.Vpl));
 f1=2*r.ss.Vo./V.*exp(-(r.ss.fo+r.ss.b.*th)./r.ss.a);
