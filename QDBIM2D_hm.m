@@ -139,7 +139,7 @@ function benchmark(r)
 
   K=zeros(m,m);
   for k=1:m
-    K(:,k)=s12h(0,y3+dz/2,0,y3(k),W(k), G);
+    K(:,k)=s12h(0,y3+r.c.dz/2,0,y3(k),W(k), G);
   end
 
   disp('dense mvp:');
