@@ -19,8 +19,8 @@ function r = build()
   c.dz = c.lambdaZ/c.n;
   c.tol = 1.0e-3;
 
-  y3 = (0:c.n-1)'*dz;
-  W = ones(c.n,1)*dz;
+  y3 = (0:c.n-1)'*c.dz;
+  W = ones(c.n,1)*c.dz;
 
   % reference friction coefficient
   ss.fo = 0.6*ones(size(y3));
