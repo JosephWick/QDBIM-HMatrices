@@ -65,7 +65,7 @@ function [yp] = DieterichRuinaRegAging(~,y,r)
 th=y(3:r.ss.dgf:end);
 
 % Slip rate
-V = ss.Vo.* exp(y(4:r.ss.dgf:end));
+V = r.ss.Vo.* exp(y(4:r.ss.dgf:end));
 
 % Initialize Time Derivative
 yp=zeros(size(y));
