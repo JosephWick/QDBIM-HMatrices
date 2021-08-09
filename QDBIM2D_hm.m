@@ -110,6 +110,25 @@ function plot_hm(r)
 
 end
 
+function benchmark(r)
+  addpaths();
+
+  hm_fname = r.c.write_hmat_filename;
+  hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm);
+
+  x = zeros(1,m);
+  x(150:250)=1;
+
+  tic
+  y = hmmvp('mvp', hm, x);
+  toc
+
+  clf;
+  plot(y); title('benchmark mvp result');
+  saveas('figures/qdbim2dhm_benchmark.png')
+
+end
 
 % -------------------- Private -----------------------------
 
