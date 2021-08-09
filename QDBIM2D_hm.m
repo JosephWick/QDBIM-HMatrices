@@ -54,7 +54,7 @@ function r = build()
   c.command = 'compress';
   c.write_hmat_filename = getFname(c);
   c.kvf = [c.write_hmat_filename '.kvf'];
-  c.err_method  = 'mrem_fro';
+  c.err_method  = 'mrem-fro';
   c.allow_overwrite = 1;
 
   c.greens_fn = 'okadaS12';
