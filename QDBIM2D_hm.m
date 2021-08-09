@@ -84,7 +84,7 @@ function solve(r)
   Y0(3:r.ss.dgf:end)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgf:end)-r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
   Y0(4:r.ss.dgf:end)=log(r.ss.Vpl./r.ss.Vo);
 
-  %yp=@(t,y) DieterichRuinaRegAging(t,y,r);
+  yp=@(t,y) DieterichRuinaRegAging(t,y,r);
 
   tic % val had err at 1e-8
   options=odeset('Refine',1,'RelTol',1e-6,'InitialStep',1e-5);
@@ -127,6 +127,11 @@ function benchmark(r)
   toc
 
   % check against sparse matrix
+  s12h=@(x2,x3,y2,y3,W, G) G*( ...
+    -(x3-y3)./((x2-y2).^2+(x3-y3).^2)+(x3+y3)./((x2-y2).^2+(x3+y3).^2) ...
+    +(x3-y3-W)./((x2-y2).^2+(x3-y3-W).^2)-(x3+y3+W)./((x2-y2).^2+(x3+y3+W).^2) ...
+    )/2/pi;
+
   rho = 2670;
   Vs = 3464;
   G = rho*Vs^2/1e6;
@@ -134,6 +139,7 @@ function benchmark(r)
   K=zeros(m,m);
   for k=1:m
     K(:,k)=s12h(0,y3+dz/2,0,y3(k),W(k), G);
+  end
 
   disp('dense mvp:');
   tic
@@ -160,7 +166,7 @@ end
 
 % boxcar function
 function bc = BC(x)
-  %boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
+  boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
   bc = boxc(x);
 end
 
@@ -172,11 +178,4 @@ end
 % ramp funciton
 function r = Ramp(x)
   r = x.*BC(x-1/2)+HS(x-1);
-end
-
-function s = s12h(x2,x3,y2,y3,W, G)
-  s = G*( ...
-    -(x3-y3)./((x2-y2).^2+(x3-y3).^2)+(x3+y3)./((x2-y2).^2+(x3+y3).^2) ...
-    +(x3-y3-W)./((x2-y2).^2+(x3-y3-W).^2)-(x3+y3+W)./((x2-y2).^2+(x3+y3+W).^2) ...
-    )/2/pi;
 end
