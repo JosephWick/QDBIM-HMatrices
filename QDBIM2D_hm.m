@@ -58,7 +58,7 @@ function r = build()
   c.greens_fn = 'okadaS12';
 
   x = zeros(1,c.n);
-  y = linspace(0, -c.lambdaZ, c.n);
+  y = linspace(0, c.lambdaZ, c.n);
   z = zeros(1,c.n);
   c.X = [x; y; z];
 
