@@ -147,6 +147,10 @@ function benchmark(r)
   y_d = K*x;
   toc
 
+  residual = (y_d - y_hm)./(y_d)
+  disp('max % err:')
+  disp(max(residual))
+
   % figure
   clf;
   subplot(211); plot(y_hm); title('hm mvp');
