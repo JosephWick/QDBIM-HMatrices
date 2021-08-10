@@ -17,7 +17,7 @@ function r = build()
   c.lambdaZ=40e3;
   c.n = 400;
   c.dz = c.lambdaZ/c.n;
-  c.tol = 1.0e-3;
+  c.tol = 1.0e-1;
 
   y3 = (0:c.n-1)'*c.dz;
   W = ones(c.n,1)*c.dz;
