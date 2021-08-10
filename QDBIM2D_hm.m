@@ -147,7 +147,7 @@ function benchmark(r)
   y_d = K*x;
   toc
 
-  residual = (y_d - y_hm)./(y_d)
+  residual = (y_d - y_hm)./(y_d);
   disp('max % err:')
   disp(max(residual))
 
