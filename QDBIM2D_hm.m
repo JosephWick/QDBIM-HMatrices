@@ -15,9 +15,9 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 400;
+  c.n = 10;
   c.dz = c.lambdaZ/c.n;
-  c.tol = 1.0e-1;
+  c.tol = 1.0e-3;
 
   y3 = (0:c.n-1)'*c.dz;
   W = ones(c.n,1)*c.dz;
