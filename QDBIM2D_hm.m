@@ -119,7 +119,9 @@ function benchmark(r)
   m = hmmvp('getm', hm);
 
   x = zeros(m,1);
-  x(150:250)=1;
+  start = int8((m/2)-(m/4));
+  fin = int8((m/2)+(m/4));
+  x(start:fin)=1;
 
   disp('hm mvp:');
   tic
