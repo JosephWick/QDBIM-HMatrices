@@ -90,7 +90,7 @@ function y = benchmark(r)
   s = ((m/2)-(m/4));
   f = ((m/2)+(m/4));
   d(s:f, s:f) = 1;
-  x = reshape(d, [m*n,1]);
+  x = reshape(d, [1,m*n]);
 
   y = hmmvp('mvp', hm, x);
   y = reshape(y, [m,n]);
