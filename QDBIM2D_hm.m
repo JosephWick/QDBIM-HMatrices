@@ -115,7 +115,7 @@ function benchmark(r)
 
   % do hmmvp
   hm_fname = r.c.write_hmat_filename;
-  hm = hmmvp('init', hm_fname, 4);
+  hm = hmmvp('init', hm_fname, 8);
   m = hmmvp('getm', hm);
 
   x = zeros(m,1);
@@ -150,15 +150,15 @@ function benchmark(r)
   y_d=1;
   toc
 
-  residual = (y_d - y_hm)./(y_d);
-  disp('max % err:')
-  disp(max(residual))
+  %residual = (y_d - y_hm)./(y_d);
+  %disp('max % err:')
+  %disp(max(residual))
 
   % figure
   clf;
-  subplot(211); plot(y_hm); title('hm mvp');
-  subplot(212); plot(y_d); title('dense mvp');
-  saveas(gcf, 'figures/qdbim2dhm_benchmark.png')
+  %subplot(211); plot(y_hm); title('hm mvp');
+  %subplot(212); plot(y_d); title('dense mvp');
+  %saveas(gcf, 'figures/qdbim2dhm_benchmark.png')
 
 end
 
