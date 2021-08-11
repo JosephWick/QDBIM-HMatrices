@@ -146,8 +146,7 @@ function benchmark(r)
 
   disp('dense mvp:');
   tic
-  %y_d = K*x;
-  y_d=1;
+  y_d = K*x;
   toc
 
   residual = (y_d - y_hm);
