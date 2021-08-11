@@ -15,7 +15,7 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 100000;
+  c.n = 500;
   c.dz = c.lambdaZ/c.n;
   c.tol = 1.0e-3;
 
@@ -115,7 +115,7 @@ function benchmark(r)
 
   % do hmmvp
   hm_fname = r.c.write_hmat_filename;
-  hm = hmmvp('init', hm_fname, 16);
+  hm = hmmvp('init', hm_fname, 32);
   m = hmmvp('getm', hm);
 
   x = zeros(m,1);
