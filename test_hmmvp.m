@@ -87,8 +87,8 @@ function y = benchmark(r)
   % let's do the vector multiplication
   % make a vector to multiply by
   d = zeros(m,n);
-  s = int8((m/2)-(m/4));
-  f = int8((m/2)+(m/4));
+  s = ((m/2)-(m/4));
+  f = ((m/2)+(m/4));
   d(s:f, s:f) = 1;
   x = reshape(d, [m*n,1]);
 
