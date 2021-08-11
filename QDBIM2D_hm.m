@@ -15,7 +15,7 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 50000;
+  c.n = 100000;
   c.dz = c.lambdaZ/c.n;
   c.tol = 1.0e-3;
 
@@ -146,7 +146,8 @@ function benchmark(r)
 
   disp('dense mvp:');
   tic
-  y_d = K*x;
+  %y_d = K*x;
+  y_d=1;
   toc
 
   residual = (y_d - y_hm)./(y_d);
