@@ -93,14 +93,12 @@ function y = benchmark(r)
   x = d;
 
   y = hmmvp('mvp', hm, x);
-  y = reshape(y, [m,n]);
-  row = y(int8(m/2));
 
   clf;
   subplot(221); imagesc(fullM); title('h-matrix'); colorbar;
   subplot(222); imagesc(d); title('slip'); colorbar;
   subplot(223); imagesc(y); title('output'); colorbar;
-  subplot(224); plot(row); title('row');
+  subplot(224); plot(y); title('row');
   saveas(gcf, 'figures/test_hmmvp.png')
 
 end
