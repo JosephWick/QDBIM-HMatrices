@@ -15,7 +15,7 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 400;
+  c.n = 500;
   c.dz = c.lambdaZ/c.n;
   c.tol = 1.0e-3;
 
@@ -98,7 +98,7 @@ function plot_hm(r)
   addpaths();
 
   hm_fname = r.c.write_hmat_filename;
-  hm = hmmvp('init', hm_fname, 4);
+  hm = hmmvp('init', hm_fname, 1);
   m = hmmvp('getm', hm);
   n = hmmvp('getn', hm);
   rs = (1:1:m); cs = (1:1:n);
