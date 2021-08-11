@@ -86,11 +86,11 @@ function y = benchmark(r)
 
   % let's do the vector multiplication
   % make a vector to multiply by
-  d = zeros(m,n);
+  d = zeros(m,1);
   s = ((m/2)-(m/4));
   f = ((m/2)+(m/4));
-  d(s:f, s:f) = 1;
-  x = reshape(d, [1,m*n]);
+  d(s:f) = 1;
+  x = d;
 
   y = hmmvp('mvp', hm, x);
   y = reshape(y, [m,n]);
