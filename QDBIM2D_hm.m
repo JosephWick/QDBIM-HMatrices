@@ -15,7 +15,7 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 100000;
+  c.n = 500;
   c.dz = c.lambdaZ/c.n;
   c.tol = 1.0e-3;
 
