@@ -72,7 +72,7 @@ function plot_hm(r)
 
 end
 
-function y = test_mvp(r)
+function y = benchmark(r)
   addpaths();
 
   hm_fname = r.c.write_hmat_filename;
@@ -86,23 +86,21 @@ function y = test_mvp(r)
 
   % let's do the vector multiplication
   % make a vector to multiply by
-  x = linspace(-50,50,10);
-  y = linspace(-50,50,10);
-  [X Y] = meshgrid(x,y);
-  a = 10;
-  R = (X.^2 + Y.^2)/a;
-
-  d = real(sqrt(a - R));
-
-  x = reshape(d, [100, 1]);
+  d = zeros(m,n);
+  s = int8((m/2)-(m/4));
+  f = int8((m/2)+(m/4));
+  x(s:f, s:f) = 1;
+  x = reshape(d, [m*n,1]);
 
   y = hmmvp('mvp', hm, x);
+  y = reshape(y, [m,n]);
+  row = y(int8(m/2));
 
   clf;
   subplot(221); imagesc(fullM); title('h-matrix'); colorbar;
   subplot(222); imagesc(d); title('slip'); colorbar;
-  subplot(223); imagesc(reshape(y, [10,10])); title('output'); colorbar;
-  subplot(224); plot(y(50:60)); title('row');
+  subplot(223); imagesc(y); title('output'); colorbar;
+  subplot(224); plot(row); title('row');
   saveas(gcf, 'figures/test_hmmvp.png')
 
 end
