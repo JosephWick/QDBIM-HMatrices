@@ -15,7 +15,7 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 1000;
+  c.n = 500;
   c.dz = c.lambdaZ/c.n;
   c.tol = 1.0e-3;
 
@@ -62,7 +62,7 @@ function r = build()
   z = zeros(1,c.n);
   c.X = [x; y; z];
 
-  kvf('Write', c.kvf, c, 1);
+  kvf('Write', c.kvf, c, 4);
 
   disp('run this in a shell:')
   cmd = ['     ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -115,7 +115,7 @@ function benchmark(r)
 
   % do hmmvp
   hm_fname = r.c.write_hmat_filename;
-  hm = hmmvp('init', hm_fname, 4);
+  hm = hmmvp('init', hm_fname, 1);
   m = hmmvp('getm', hm);
 
   x = zeros(m,1);
