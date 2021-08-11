@@ -15,9 +15,9 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 100000;
+  c.n = 500;
   c.dz = c.lambdaZ/c.n;
-  c.tol = 1.0e-3;
+  c.tol = 1.0e-2;
 
   y3 = (0:c.n-1)'*c.dz;
   W = ones(c.n,1)*c.dz;
@@ -150,9 +150,9 @@ function benchmark(r)
   y_d=1;
   toc
 
-  %residual = (y_d - y_hm)./(y_d);
-  %disp('max % err:')
-  %disp(max(residual))
+  residual = (y_d - y_hm);
+  disp('max err:')
+  disp(max(residual))
 
   % figure
   clf;
