@@ -117,6 +117,7 @@ function benchmark(r)
   hm_fname = r.c.write_hmat_filename;
   hm = hmmvp('init', hm_fname, 32);
   m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
 
   x = zeros(m,1);
   start = int8((m/2)-(m/4));
@@ -149,9 +150,11 @@ function benchmark(r)
   y_d = K*x;
   toc
 
-  residual = (y_d - y_hm);
-  disp('max err:')
-  disp(max(residual))
+  %err metric.
+  frobHm = hmmvp('fronorm2', hm);
+  frobD = norm(K, 'fro')
+
+  err = (frobHm - frobD) / frobD ;
 
   % figure
   clf;
