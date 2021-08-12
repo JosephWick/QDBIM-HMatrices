@@ -152,9 +152,11 @@ function benchmark(r)
 
   %err metric.
   frobHm = hmmvp('fronorm2', hm);
-  frobD = norm(K, 'fro')
+  frobD = norm(K, 'fro');
 
   err = (frobHm - frobD) / frobD ;
+  disp('err:')
+  disp(err)
 
   % figure
   clf;
