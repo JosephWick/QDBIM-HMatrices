@@ -151,8 +151,8 @@ function benchmark(r)
   toc
 
   %err metric.
-  frobHm = hmmvp('fronorm2', hm);
-  frobD = norm(K, 'fro');
+  frobHm = hmmvp('fronorm2', hm)
+  frobD = norm(K, 'fro')
 
   err = (frobHm - frobD) / frobD ;
   disp('err:')
