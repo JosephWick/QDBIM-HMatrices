@@ -17,7 +17,7 @@ function r = build()
   c.lambdaZ=40e3;
   c.n = 500;
   c.dz = c.lambdaZ/c.n;
-  c.tol = 1.0e-3;
+  c.tol = 1.0e-2;
 
   y3 = (0:c.n-1)'*c.dz;
   W = ones(c.n,1)*c.dz;
@@ -124,10 +124,10 @@ function benchmark(r)
   fin = int8((m/2)+(m/4));
   x(start:fin)=1;
 
-  disp('hm mvp:');
-  tic
-  y_hm = hmmvp('mvp', hm, x);
-  toc
+  %disp('hm mvp:');
+  %tic
+  %y_hm = hmmvp('mvp', hm, x);
+  %toc
 
   % check against sparse matrix
   s12h=@(x2,x3,y2,y3,W, G) G*( ...
@@ -145,10 +145,10 @@ function benchmark(r)
     K(:,k)=s12h(0,y3+r.c.dz/2,0,y3(k),r.c.dz, G);
   end
 
-  disp('dense mvp:');
-  tic
-  y_d = K*x;
-  toc
+  %disp('dense mvp:');
+  %tic
+  %y_d = K*x;
+  %toc
 
   %err metric.
   frobHm = hmmvp('fronorm2', hm)
