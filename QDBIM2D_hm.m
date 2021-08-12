@@ -154,7 +154,7 @@ function benchmark(r)
   frobHm = hmmvp('fronorm2', hm)
   frobD = norm(K, 'fro')
 
-  err = (frobHm - frobD) / frobD ;
+  err = (frobHm - frobD) / frobHm ;
   disp('err:')
   disp(err)
 
