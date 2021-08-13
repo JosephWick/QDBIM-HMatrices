@@ -154,7 +154,7 @@ function benchmark(r)
   rs = (1:1:m); cs = (1:1:n);
   fullhm = hmmvp('extract', hm, rs, cs);
   frobD = norm(K-fullhm, 'fro');
-  frobK = norm(k, 'fro');
+  frobK = norm(K, 'fro');
 
   r.c.tol
   r.c.n
