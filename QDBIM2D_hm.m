@@ -153,7 +153,8 @@ function benchmark(r)
   %err metric.
   rs = (1:1:m); cs = (1:1:n);
   fullhm = hmmvp('extract', hm, rs, cs);
-  frobD = norm(K-fullhm, 'fro');
+  diff = K-fullhm;
+  frobD = norm(diff, 'fro');
   frobK = norm(K, 'fro');
 
   r.c.tol
