@@ -15,9 +15,9 @@ function r = build()
 
   % properties
   c.lambdaZ=40e3;
-  c.n = 50000;
+  c.n = 500;
   c.dz = c.lambdaZ/c.n;
-  c.tol = 1.0e-4;
+  c.tol = 1.0e-2;
 
   y3 = (0:c.n-1)'*c.dz;
   W = ones(c.n,1)*c.dz;
@@ -151,12 +151,14 @@ function benchmark(r)
   %toc
 
   %err metric.
-  frobHm = hmmvp('fronorm2', hm);
-  frobD = norm(K, 'fro');
+  rs = (1:1:m); cs = (1:1:n);
+  fullhm = hmmvp('extract', hm, rs, cs);
+  frobD = norm(K-fullhm, 'fro');
+  frobK = norm(k, 'fro');
 
   r.c.tol
   r.c.n
-  err = (frobHm - frobD) / frobHm ;
+  err = frobD / frobK ;
   disp('err:')
   disp(err)
 
