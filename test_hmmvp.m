@@ -24,6 +24,11 @@ function r = build()
   c.delta = 1.0e-4;
   c.allow_overwrite = 1;
 
+  rho = 2670;
+  Vs = 3464;
+  G = rho*Vs^2/1e6;
+  c.G = G;
+
   c.halfspace = 1;
 
   len = 40000;
