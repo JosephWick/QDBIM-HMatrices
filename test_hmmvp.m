@@ -48,7 +48,7 @@ function r = build()
   c.eta = 3;
 
   x = zeros(1,n);
-  y = linspace(0,len,n);
+  y = linspace(dz,len,n);
   z = zeros(1,n);
   c.X = [x; y; z];
 
