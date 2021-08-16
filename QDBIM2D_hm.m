@@ -44,6 +44,7 @@ function r = build()
   rho = 2670;
   Vs = 3464;
   G = rho*Vs^2/1e6;
+  c.G = G;
 
   % Radiation damping coefficient
   ss.eta = G./(2*Vs);
@@ -58,7 +59,7 @@ function r = build()
   c.greens_fn = 'okadaS12';
 
   x = zeros(1,c.n);
-  y = linspace(0, c.lambdaZ, c.n);
+  y = linspace(dz, c.lambdaZ, c.n);
   z = zeros(1,c.n);
   c.X = [x; y; z];
 
@@ -177,7 +178,7 @@ function addpaths()
   addpath('../hmmvp-okada/matlab');
 end
 
-function f=  getFname(p)
+function f = getFname(p)
   f = sprintf('./tmp/QDBIM_tol%f_lz%d_n%d', p.tol, p.lambdaZ, p.n);
 end
 
