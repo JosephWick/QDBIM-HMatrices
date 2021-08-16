@@ -17,7 +17,7 @@ function r = build()
 
   % fault mesh
   y3=0e3;
-  y2 = -25e3;
+  y2 = 25e3;
 
   % Brittle-Ductile transition depth
   transDepth = 35e3;
@@ -35,6 +35,14 @@ function r = build()
   ss.Nx = 50;
   ss.Nz = 50;
   eps = 1e-12;
+
+  % shear zone grid
+  % edges along x3
+  ss.polesz = Transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*Transition;
+
+  % Geometry
+  x = zeros(1,ss.M);
+  y = linspace
 
   % hmmvp args
   c.command= 'compress';
