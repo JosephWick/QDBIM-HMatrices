@@ -19,11 +19,15 @@ function r = build()
   y3=0e3;
   y2 = 25e3;
 
+  meshwidth = 50e3;
   % Brittle-Ductile transition depth
   transDepth = 35e3;
   % number of elements
-  ss.M = 120;
-  dz = transDepth/r.c.N;
+  dz = 100;
+  M = meshwidth*transDepth/dz;
+  Mdepth = transDepth/dz;
+  Mwidth = meshwidth/dz;
+
 
   fpoles = y3+(0:ss.M)'*dz;
   % tops of fault patches
@@ -42,7 +46,9 @@ function r = build()
 
   % Geometry
   x = zeros(1,ss.M);
-  y = linspace
+  y = linspace(dz, meshwidth, Mwidth);
+  z = linspace(dz, transDepth,Mdepth);
+  c.X = [x;y;z];
 
   % hmmvp args
   c.command= 'compress';
