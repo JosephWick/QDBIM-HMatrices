@@ -52,13 +52,13 @@ function b = build()
   %s12
   c.write_hmat_filename = './tmp/tk_s12';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  c.greens_fn = 'OkadaS12';
+  c.greens_fn = 'okadaS12';
   kvf('Write', c.kvf, c, 4);
 
   %s13
   c.write_hmat_filename = './tmp/tk_s13';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  c.greens_fn = 'OkadaS13';
+  c.greens_fn = 'okadaS13';
   kvf('Write', c.kvf, c, 4);
 
   %shear1212
