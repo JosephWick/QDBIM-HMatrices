@@ -83,6 +83,14 @@ function b = build()
   c.greens_fn = 'shear1313';
   kvf('Write', c.kvf, c, 4);
 
+  disp('run these shell commands:')
+  fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_s12.kvf \n')
+  fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_s13.kvf \n')
+  fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1212.kvf \n')
+  fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1213.kvf \n')
+  fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1312.kvf \n')
+  fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1313.kvf \n')
+
 
 end
 
