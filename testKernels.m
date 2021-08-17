@@ -69,13 +69,13 @@ function b = build()
 
   %shear1213
   c.write_hmat_filename = './tmp/tk_shear1213';
-  c.kvf = [c.write_hmat_filename 'kvf'];
+  c.kvf = [c.write_hmat_filename '.kvf'];
   c.greens_fn = 'shear1213';
   kvf('Write', c.kvf, c, 4);
 
   %shear1312
   c.write_hmat_filename = './tmp/tk_shear1312';
-  c.kvf = [c.write_hmat_filename 'kvf'];
+  c.kvf = [c.write_hmat_filename '.kvf'];
   c.greens_fn = 'shear1312';
   kvf('Write', c.kvf, c, 4);
 
