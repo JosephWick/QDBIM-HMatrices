@@ -21,6 +21,8 @@ end
 % builds kvf's for all of the kernels
 function b = build()
 
+  addpaths();
+
   % general fields
   c.command = 'compress';
   c.err_method = 'mrem-fro';
