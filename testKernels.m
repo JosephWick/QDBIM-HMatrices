@@ -93,12 +93,47 @@ function b = build()
   fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1312.kvf \n')
   fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1313.kvf \n')
 
+  b=c
 
 end
 
+function test(b)
+  addpaths();
+
+  %s12
+  hm_fname = './tmp/tk_s12';
+  hm = hmmvp('init', hm_fname, 4);
+  m = hmmvp('getm', hm);
+  n = hmmvp('getn', hm);
+  rs = (1:1:m); cs = (1:1:n);
+  fullM = hmmvp('extract', hm, rs, cs);
+
+  for idx = 1:5
+    i = randi([1,n], 1,1);
+    j = randi([1,n], 1,1);
+
+    hmVal = fullM(i,j);
+
+
+    x2 = b.X; x3
+
+  end
+
+
+end
 
 % ---------------- Private -------------------------
 
 function addpaths()
   addpath('../hmmvp-okada/matlab');
+end
+
+function s = s12h(x2, x3, y2, y3, Wf)
+  s12=@(x2,x3,y2,y3,Wf) G*( ...
+    -(x3-y3)./((x2-y2).^2+(x3-y3).^2)+(x3+y3)./((x2-y2).^2+(x3+y3).^2) ...
+    +(x3-y3-Wf)./((x2-y2).^2+(x3-y3-Wf).^2)-(x3+y3+Wf)./((x2-y2).^2+(x3+y3+Wf).^2) ...
+    )/2/pi;
+
+  s = s12(x2, x3, y2, y3, Wf);
+
 end
