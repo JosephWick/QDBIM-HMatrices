@@ -132,6 +132,10 @@ function addpaths()
 end
 
 function s = s12h(x2, x3, y2, y3, Wf)
+  rho = 2670;
+  Vs = 3464;
+  G = rho*Vs^2/1e6;
+
   s12=@(x2,x3,y2,y3,Wf) G*( ...
     -(x3-y3)./((x2-y2).^2+(x3-y3).^2)+(x3+y3)./((x2-y2).^2+(x3+y3).^2) ...
     +(x3-y3-Wf)./((x2-y2).^2+(x3-y3-Wf).^2)-(x3+y3+Wf)./((x2-y2).^2+(x3+y3+Wf).^2) ...
