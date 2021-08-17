@@ -108,15 +108,18 @@ function test(b)
   rs = (1:1:m); cs = (1:1:n);
   fullM = hmmvp('extract', hm, rs, cs);
 
+  disp('S12:')
   for idx = 1:5
     i = randi([1,n], 1,1);
     j = randi([1,n], 1,1);
 
     hmVal = fullM(i,j);
 
-
-    x2 = b.X; x3
-
+    x2 = b.X(3*i-1); x3 = b.X(3*i);
+    y2 = b.X(3*j-1); y3 = b.X(3*j);
+    wf = 100;
+    dVal = s12h(x2, x3, y2, y3, wf);
+    fprintf('hm: %f, d: %f\n', hmVal, dVal)
   end
 
 
