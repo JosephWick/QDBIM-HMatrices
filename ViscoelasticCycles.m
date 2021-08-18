@@ -156,7 +156,7 @@ function r = build()
   fz = linspace(c.dz,lambdaZ,fn);
   bx = [fx sx];                   %together
   by = [fy Ys(:)'];
-  bz = [fz Zx(:)'];
+  bz = [fz Zs(:)'];
   c.X = [bx;by;bz];
   % write
   kvf('Write', c.kvf, c, 4);
