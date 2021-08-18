@@ -42,9 +42,9 @@ function b = build()
   c.dz = 100;
   n = c.L/c.dz;
 
-  x = zeros(1,n);
+  x = zeros(1,n*n);
   y = linspace(c.dz, c.L, n);
-  z = linspace(c.dz, c.W, n*n);
+  z = linspace(c.dz, c.W, n);
   [X Y] = ndgrid(x,y);
   c.X = [X(:)';Y(:)';z];
 
