@@ -13,48 +13,58 @@ end
 function r = build()
   addpaths();
 
-  % properties
-
   % fault mesh
-  y3=0e3;
-  y2 = 25e3;
+  lambdaZ = 40e3; %(m)
 
-  meshwidth = 50e3;
-  % Brittle-Ductile transition depth
-  transDepth = 35e3;
-  % number of elements
+  % visco mesh
+  transition = 35e3;
+  vL = 25e3;
+  vW = 15e3;
+
   dz = 100;
-  M = meshwidth*transDepth/dz;
-  Mdepth = transDepth/dz;
-  Mwidth = meshwidth/dz;
+  % fault has 400 elems
+  % visco is 250x150
 
+  % set up kvf general propts
+  c.lambdaZ = lambdaZ;
+  c.dz = dz;
+  c.tol = 1e-3;
+  c.G = 30e3;
+  c.command = 'compress';
+  c.allow_overwrite = 1;
+  c.err_method = 'mrem-fro';
 
-  fpoles = y3+(0:ss.M)'*dz;
-  % tops of fault patches
-  ss.y3f = fpoles(1:end-1);
-  % width of fault patches
-  Wf = ones(ss.M,1)*dz;
+  % s12 kernel for fault-fault interaction; 1D
+  c.greens_fn = 'okadaS12';
+  c.write_hmat_filename = './tmp/VC_ff-s12';
+  c.kvf = [c.write_hmat_filename '.kvf'];
 
-  % shear zone mesh
-  ss.Nx = 50;
-  ss.Nz = 50;
-  eps = 1e-12;
+  c.W = lambdaZ;
+  c.L = 0;
 
-  % shear zone grid
-  % edges along x3
-  ss.polesz = Transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*Transition;
-
-  % Geometry
-  x = zeros(1,ss.M);
-  y = linspace(dz, meshwidth, Mwidth);
-  z = linspace(dz, transDepth,Mdepth);
+  n = lambdaZ/dz;
+  x = zeros(1,n);
+  y = zeros(1,n);
+  z = linspace(c.dz,lambdaZ,n);
   c.X = [x;y;z];
 
-  % hmmvp args
-  c.command= 'compress';
-  c.err_method = 'mrem-fro';
-  c.allow_overwrite = 1;
+  kvf('Write', c.kvf, c, 4);
+  disp('run this in a shell:')
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
 
+  % shear 1212 kernel for shear-shear interaction
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/VC_ff-shear1212';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+
+  n = vL/dz;
+  m = vW/dz;
+  x = zeros(1,n);
+  y = linspace(c.dz,vL,n);
+  z = linspace(c.dz,vW,m);
+  [Y Z] = ndgrid(y,z);
+  c.X = [x;Y(:)';Z(:)'];
 
 end
 
