@@ -148,7 +148,7 @@ function r = build()
   % - shear 1212 kernel for shear-fault interaction -
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/VC_sf-shear1212';
-  c.kvf = [write_hmat_filename '.kvf'];
+  c.kvf = [c.write_hmat_filename '.kvf'];
   % update geometry - need to adjust fault locs to be receiver
   fn = lambdaZ/dz;                %fault
   fx = zeros(1,fn);
