@@ -125,8 +125,8 @@ function r = build()
   sz = linspace(c.dz,vW,sm);
   [Ys Zs] = ndgrid(sy,sz);
   bx = [fx sx];                   %together
-  by = [fy Ys];
-  bz = [fz Zx];
+  by = [fy Ys(:)'];
+  bz = [fz Zx(:)'];
   c.X = [bx;by;bz];
   % write
   kvf('Write', c.kvf, c, 4);
