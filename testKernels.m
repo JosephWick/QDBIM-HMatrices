@@ -45,7 +45,8 @@ function b = build()
   x = zeros(1,n);
   y = linspace(c.dz, c.L, n);
   z = linspace(c.dz, c.W, n);
-  c.X = [x;y;z];
+  [X Y] = ndgrid(x,y);
+  c.X = [X;Y;z];
 
   % per kernel now
 
@@ -115,10 +116,8 @@ function test(b)
 
     hmVal = fullM(i,j);
 
-    x2 = b.X(3*i-1); x3 = b.X(3*i);
-    y2 = b.X(3*j-1); y3 = b.X(3*j);
-    wf = 100;
-    dVal = s12h(x2, x3, y2, y3, wf);
+
+
     fprintf('hm: %f, d: %f\n', hmVal, dVal)
   end
 
