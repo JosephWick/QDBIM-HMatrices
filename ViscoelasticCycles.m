@@ -167,7 +167,7 @@ function r = build()
   % - shear 1313 kernel for shear-fault interaction -
   c.greens_fn = 'shear1313';
   c.write_hmat_filename = './tmp/Vc_sf-shear1313';
-  c.kvf = [write_hmat_filename '.kvf'];
+  c.kvf = [c.write_hmat_filename '.kvf'];
   % geometry is same as sf1212
   % write
   kvf('Write', c.kvf, c, 4);
