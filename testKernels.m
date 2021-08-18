@@ -45,8 +45,8 @@ function b = build()
   x = zeros(1,n*n);
   y = linspace(c.dz, c.L, n);
   z = linspace(c.dz, c.W, n);
-  [X Y] = ndgrid(x,y);
-  c.X = [X(:)';Y(:)';z];
+  [Y Z] = ndgrid(y,z);
+  c.X = [x;Y(:)';Z(:)'];
 
   % per kernel now
 
