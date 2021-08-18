@@ -126,7 +126,7 @@ function r = build()
   [Ys Zs] = ndgrid(sy,sz);
   bx = [fx sx];                   %together
   by = [fy Ys(:)'];
-  bz = [fz Zx(:)'];
+  bz = [fz Zs(:)'];
   c.X = [bx;by;bz];
   % write
   kvf('Write', c.kvf, c, 4);
