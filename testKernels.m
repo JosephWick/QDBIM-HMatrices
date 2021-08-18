@@ -44,7 +44,7 @@ function b = build()
 
   x = zeros(1,n);
   y = linspace(c.dz, c.L, n);
-  z = linspace(c.dz, c.W, n);
+  z = linspace(c.dz, c.W, n*n);
   [X Y] = ndgrid(x,y);
   c.X = [X(:)';Y(:)';z];
 
