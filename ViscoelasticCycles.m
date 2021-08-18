@@ -77,7 +77,7 @@ function r = build()
   c.X = [x;Y(:)';Z(:)'];
 
   kvf('Write', c.kvf, c, 4);
-  cmd = ['    ...hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1212 = c.write_hmat_filename;
 
@@ -96,7 +96,7 @@ function r = build()
   c.write_hmat_filename = './tmp/VC_ss-shear1312';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 4);
-  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1312 = c.write_hmat_filename;
 
@@ -105,7 +105,7 @@ function r = build()
   c.write_hmat_filename = './tmp/VC_ss-shear1313';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 4);
-  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1313 = c.write_hmat_filename;
 
@@ -130,7 +130,7 @@ function r = build()
   c.X = [bx;by;bz];
   % write
   kvf('Write', c.kvf, c, 4);
-  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.fs1212 = c.write_hmat_filename;
 
@@ -141,7 +141,7 @@ function r = build()
   % geometry is same as fs1212
   % %write
   kvf('Write', c.kvf, c, 4);
-  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.fs1213 = c.write_hmat_filename;
 
@@ -160,7 +160,7 @@ function r = build()
   c.X = [bx;by;bz];
   % write
   kvf('Write', c.kvf, c, 4);
-  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.sf1212 = c.write_hmat_filename;
 
@@ -171,7 +171,7 @@ function r = build()
   % geometry is same as sf1212
   % write
   kvf('Write', c.kvf, c, 4);
-  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.sf1313 = c.write_hmat_filename;
 
