@@ -37,8 +37,8 @@ function b = build()
 
   c.mu = 30e9;
   c.nu = 0.25;
-  c.W = 10000;
-  c.L = 10000;
+  c.W = 1000;
+  c.L = 1000;
   c.dz = 100;
   n = c.L/c.dz;
 
