@@ -46,7 +46,7 @@ function b = build()
   y = linspace(c.dz, c.L, n);
   z = linspace(c.dz, c.W, n);
   [X Y] = ndgrid(x,y);
-  c.X = [X;Y;z];
+  c.X = [X(:)';Y(:)';z];
 
   % per kernel now
 
@@ -94,7 +94,7 @@ function b = build()
   fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1312.kvf \n')
   fprintf('   ../hmmvp-okada/bin/hmmvpbuild_omp ./tmp/tk_shear1313.kvf \n')
 
-  b=c
+  b=c;
 
 end
 
