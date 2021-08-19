@@ -210,6 +210,9 @@ end
 function solve(r)
   addpaths();
 
+  % rigidity (MPa)
+  G=30e3;
+
   % - frictional parameters -
 
   % Confining pressure (MPa) and Temperature (K)
