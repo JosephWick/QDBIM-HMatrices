@@ -211,7 +211,7 @@ function solve(r)
   % - frictional parameters -
 
   % Confining pressure (MPa) and Temperature (K)
-  k = k  = 3.138; % thermal conductivity (W/m/K)
+  k = 3.138; % thermal conductivity (W/m/K)
   Cp = 1171 ; % specific heat (J/kg/K)
   Rm = 3330 ; % mantle density (kg/m^3)
 
