@@ -298,19 +298,19 @@ function solve(r)
   Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.x2c)*length(r.ss.x3c)*r.ss.dgfS,1);
 
   % Fault patches
-  Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.y3f));
-  Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_W;
-  Y0(3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
+  Y0(1:r.ss.dgfF:r.ss.M*ss.dgfF)=zeros(size(r.ss.y3f));
+  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength_W;
+  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.V_plate);
 
   % Shear zones
-  Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
-  Y0(ss.M*ss.dgfF+2:ss.dgfS:end)=s130;
-  Y0(ss.M*ss.dgfF+3:ss.dgfS:end)=e120;
-  Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
+  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=s120;
+  Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfS:end)=s130;
+  Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)=e120;
+  Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=e130;
 
   % initialize the function handle with
   % set constitutive parameters
-  yp=@(t,y) odeViscoelastic(t,y,ss);
+  yp=@(t,y) odeViscoelastic(t,y,r.ss);
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
