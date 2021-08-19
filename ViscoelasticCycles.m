@@ -299,7 +299,7 @@ function solve(r)
 
   % Fault patches
   Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.y3f));
-  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength_W;
+  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength;
   Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.V_plate);
 
   % Shear zones
