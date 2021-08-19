@@ -28,6 +28,7 @@ function r = build()
   vW = 15e3;
 
   dz = 100;
+  r.ss.dz = 100;
   % fault has 400 elems
   % visco is 250x150
 
@@ -216,7 +217,7 @@ function solve(r)
   Rm = 3330 ; % mantle density (kg/m^3)
 
   Pconf       = Rm*9.8*r.ss.x3c/1e6;  % Shear zones
-  Pconf_fault = Rm*9.8*(r.ss.y3f+dz); % Faults
+  Pconf_fault = Rm*9.8*(r.ss.y3f+r.ss.dz); % Faults
 
   Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
   Age_plate = 2e15; % seconds
