@@ -34,7 +34,7 @@ function r = build()
   % visco is 250x150
 
   % set up kvf general propts
-  c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ
+  c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
   c.dz = dz;
   c.tol = 1e-3;
   c.G = 30e3;
@@ -222,11 +222,11 @@ function solve(r)
 
   Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
   Age_plate = 2e15; % seconds
-  ss.Tprof  = 300+1380*erf(r.ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
+  r.ss.Tprof  = 300+1380*erf(r.ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
 
   % default friction properties (velocity-weakening friction)
   % effective confining pressure (MPa)
-  ss.sigmab = 1000;
+  r.ss.sigmab = 1000;
 
   % frictional parameters
   r.ss.a = 1e-3*ones(size(r.ss.y3f));
@@ -249,8 +249,8 @@ function solve(r)
   r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4*ones(1,length(r.ss.a(bottom:end)));
 
   % - Rheology -
-  r.ss.e12p_plate = 0.0 %1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
-  r.ss.e13p_plate = 0.0     %zeros(length(ss.x2c)*length(ss.x3c),1);
+  r.ss.e12p_plate = 0.0; %1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
+  r.ss.e13p_plate = 0.0;     %zeros(length(ss.x2c)*length(ss.x3c),1);
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
   r.ss.Adif = 1e6*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
