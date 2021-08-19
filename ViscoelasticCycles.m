@@ -298,7 +298,7 @@ function solve(r)
   Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.x2c)*length(r.ss.x3c)*r.ss.dgfS,1);
 
   % Fault patches
-  Y0(1:r.ss.dgfF:r.ss.M*ss.dgfF)=zeros(size(r.ss.y3f));
+  Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.y3f));
   Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength_W;
   Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.V_plate);
 
