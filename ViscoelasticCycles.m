@@ -28,7 +28,7 @@ function r = build()
   vW = 15e3;
 
   dz = 100;
-  r.ss.dz = 100;
+  ss.dz = 100;
   % fault has 400 elems
   % visco is 250x150
 
