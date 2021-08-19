@@ -26,6 +26,7 @@ function r = build()
   transition = 35e3;
   vL = 25e3;
   vW = 15e3;
+  ss.transition = transition;
 
   dz = 100;
   ss.dz = 100;
