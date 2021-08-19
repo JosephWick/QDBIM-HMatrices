@@ -94,8 +94,8 @@ function r = build()
 
   ss.polesxc=(2*y2/1e3:(2*y2)/(26e3):2*y2/1e3)'*1e3;
   edges= floor(ss.Nx-length(ss.polesxc)+1)/2;
-  ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition);
-  ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition;
+  ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*transition);
+  ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*transition;
   ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
 
   % center of shear zone (x2)
