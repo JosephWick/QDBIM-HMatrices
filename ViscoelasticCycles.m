@@ -156,6 +156,7 @@ function r = build()
   by = [fy Ys(:)'];
   bz = [fz Zs(:)'];
   c.X = [bx;by;bz];
+  disp(size(c.X))
   % write
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
