@@ -57,6 +57,8 @@ V = (2.*ss.Vs.*ss.a.*ss.sigmab./G).*...
      Lambert_W(G*ss.Vo./(2*ss.Vs.*ss.a.*ss.sigmab).*...
      exp((tauF-ss.mu0.*ss.sigmab-ss.sigmab.*ss.b.*th)./(ss.sigmab.*ss.a)));
 
+length(V)
+
 % Shear stress in zones of distributed deformation
 tau12=Y(ss.M*ss.dgfF+1:ss.dgfS:end);
 tau13=Y(ss.M*ss.dgfF+2:ss.dgfS:end);
