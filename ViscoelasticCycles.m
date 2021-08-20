@@ -198,7 +198,7 @@ function r = build()
   c.write_hmat_filename = './tmp/VC_sf-s12';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % update geometry - need to adjust fault locs to be receiver
-  fz = linspace(c.dz,lambdaZ,fn);
+  fy = zeros(1,fn) + 15000 + 0.5*dz;
   by = [fy Ys(:)'];
   c.X = [bx;by;bz];
   % write
