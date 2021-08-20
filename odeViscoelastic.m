@@ -43,7 +43,7 @@ G=30e3; % MPa
 % greater than ss.M
 gM = (ss.M+1:1:ss.M*ss.Nx*ss.Nz);
 % less than or equal to ss.M
-lM = (1:1:ss.M)
+lM = (1:1:ss.M);
 
 
 % Shear stress on faults
