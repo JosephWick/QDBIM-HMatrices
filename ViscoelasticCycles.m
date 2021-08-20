@@ -198,13 +198,8 @@ function r = build()
   c.write_hmat_filename = './tmp/VC_sf-s12';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % update geometry - need to adjust fault locs to be receiver
-  fn = lambdaZ/dz;                %fault
-  fx = zeros(1,fn);
-  fy = zeros(1,fn) + 15000 + 0.5*dz;
   fz = linspace(c.dz,lambdaZ,fn);
-  bx = [fx sx];                   %together
   by = [fy Ys(:)'];
-  bz = [fz Zs(:)'];
   c.X = [bx;by;bz];
   % write
   kvf('Write', c.kvf, c, 4);
@@ -216,7 +211,7 @@ function r = build()
   c.greens_fn = 'okadaS13';
   c.write_hmat_filename = './tmp/Vc_sf-s13';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  % geometry is same as sf1212
+  % geometry is same as sf12
   % write
   kvf('Write', c.kvf, c, 4);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
