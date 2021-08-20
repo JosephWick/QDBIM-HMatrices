@@ -39,6 +39,13 @@ function [Yp]= odeViscoelastic(~,Y,ss)
 
 G=30e3; % MPa
 
+% slices for kernels
+% greater than ss.M
+gM = (ss.M+1:1:ss.M*ss.Nx*ss.Nz);
+% less than or equal to ss.M
+lM = (1:1:ss.M)
+
+
 % Shear stress on faults
 tauF = Y(2:ss.dgfF:ss.M*ss.dgfF);
 
@@ -71,8 +78,8 @@ Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % Shear stress rate on fault due to fault and shear zones
 Yp(2:ss.dgfF:ss.M*ss.dgfF)=  hmmvp('mvp', hm.s12, (V-ss.V_plate)) + ...
-                             hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate)) + ...
-                             hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate));
+                             hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate), gM, lM) + ...
+                             hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate), gM, lM);
 
 % Rate of state
 Yp(3:ss.dgfF:ss.M*ss.dgfF)=(ss.Vo.*exp(-th)-V)./ss.L;
@@ -84,11 +91,11 @@ Yp(3:ss.dgfF:ss.M*ss.dgfF)=(ss.Vo.*exp(-th)-V)./ss.L;
 % Stress rate due to shear zones and fault slip velocity
 Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end) =  hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate)) + ...
                                         hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate)) + ...
-                                        hmmvp('mvp', hm.sf12, (V-ss.V_plate));
+                                        hmmvp('mvp', hm.sf12, (V-ss.V_plate), lM, gM);
 
 Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate)) + ...
                                        hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate)) + ...
-                                       hmmvp('mvp', hm.sf13, (V_W-ss.V_plate));
+                                       hmmvp('mvp', hm.sf13, (V_W-ss.V_plate), lM, gM);
 
 % Strain rate
 Yp(2*ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
