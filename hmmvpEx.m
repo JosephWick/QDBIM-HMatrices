@@ -177,7 +177,7 @@ function p = make_problem (p)
                 {'tol' 1e-5};    % Error tolerance on approx to B
                 {'err_method' 'mrem-fro'};
                 {'eta' 3};
-                {'geom' 'edgecube'};
+                {'geom' 'line'};
                 {'N' 1000};      % B will be approximately NxN
                 {'order' 3};     % Order of the singularity
                 {'delta' 1e-4};  % For Plummer softening
@@ -286,6 +286,7 @@ function analyze_errors (p, c, ttl)
                  'compression %1.2fx'],...
                 ttl, relerr(G_true, G), c.tol, max(ewre(:)), cf));
   set(gca, 'xtick', [], 'ytick', []);
+  saveas(gcf, 'figures/hmmvpEx_err.png');
 end
 
 function cf = calc_cf (hmfn)
