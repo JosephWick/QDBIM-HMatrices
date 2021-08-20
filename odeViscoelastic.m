@@ -55,7 +55,7 @@ th   = Y(3:ss.dgfF:ss.M*ss.dgfF);
 % Slip velocities
 V = (2.*ss.Vs.*ss.a.*ss.sigmab./G).*...
      Lambert_W(G*ss.Vo./(2*ss.Vs.*ss.a.*ss.sigmab).*...
-     exp((tauF-ss.mu0.*ss.sigmab-ss.sigmab.*ss.b.*th_W)./(ss.sigmab.*ss.a)));
+     exp((tauF-ss.mu0.*ss.sigmab-ss.sigmab.*ss.b.*th)./(ss.sigmab.*ss.a)));
 
 % Shear stress in zones of distributed deformation
 tau12=Y(2*ss.M*ss.dgfF+1:ss.dgfS:end);
@@ -95,7 +95,7 @@ Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end) =  hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_pl
 
 Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate)) + ...
                                        hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate)) + ...
-                                       hmmvp('mvp', hm.sf13, (V_W-ss.V_plate), lM, gM);
+                                       hmmvp('mvp', hm.sf13, (V-ss.V_plate), lM, gM);
 
 % Strain rate
 Yp(2*ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
