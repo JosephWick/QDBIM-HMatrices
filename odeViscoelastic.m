@@ -41,7 +41,7 @@ G=30e3; % MPa
 
 % slices for kernels
 % greater than ss.M
-gM = (ss.M+1:1:ss.M*ss.Nx*ss.Nz);
+gM = (ss.M+1:1:ss.Nx*ss.Nz+ss.M);
 % less than or equal to ss.M
 lM = (1:1:ss.M);
 
