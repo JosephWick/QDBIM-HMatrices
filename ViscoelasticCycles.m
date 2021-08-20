@@ -16,8 +16,8 @@ function r = build()
   % we'll have 9 kernels:
   % - 1 for fault-fault interaction (s12)
   % - 4 for shear-shear interaction (1212, 1213, 1312, 1313)
-  % - 2 for fault-shear interaction (1212, 1213)
-  % - 2 for shear-fault interaction (1212, 1213)
+  % - 4 for fault-shear interaction (1212, 1213, 1312, 1313))
+  % - 2 for shear-fault interaction (s12, s13)
 
   % fault mesh
   lambdaZ = 40e3; %(m)
@@ -103,7 +103,7 @@ function r = build()
   % center of shear zone (x2)
   ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
 
-  kvf('Write', c.kvf, c, 4);
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1212 = c.write_hmat_filename;
@@ -113,7 +113,7 @@ function r = build()
   c.write_hmat_filename = './tmp/VC_ss-shear1213';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geometry is the same for all shear-shear interactions
-  kvf('Write', c.kvf, c, 4);
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1213 = c.write_hmat_filename;
@@ -122,7 +122,7 @@ function r = build()
   c.greens_fn = 'shear1312';
   c.write_hmat_filename = './tmp/VC_ss-shear1312';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  kvf('Write', c.kvf, c, 4);
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1312 = c.write_hmat_filename;
@@ -131,7 +131,7 @@ function r = build()
   c.greens_fn = 'shear1313';
   c.write_hmat_filename = './tmp/VC_ss-shear1313';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  kvf('Write', c.kvf, c, 4);
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1313 = c.write_hmat_filename;
@@ -156,7 +156,7 @@ function r = build()
   bz = [fz Zs(:)'];
   c.X = [bx;by;bz];
   % write
-  kvf('Write', c.kvf, c, 4);
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.fs1212 = c.write_hmat_filename;
@@ -166,15 +166,36 @@ function r = build()
   c.write_hmat_filename = './tmp/VC_fs-shear1213';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geometry is same as fs1212
-  % %write
-  kvf('Write', c.kvf, c, 4);
+  % write
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.fs1213 = c.write_hmat_filename;
 
-  % - shear 1212 kernel for shear-fault interaction -
-  c.greens_fn = 'shear1212';
-  c.write_hmat_filename = './tmp/VC_sf-shear1212';
+  % - shear 1312 kernel for fault-shear interaction -
+  c.greens_fn = 'shear1312'
+  c.write_hmat_filename = './tmp/VC_fs1312';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  % geoemtry is same as fs1212
+  % write
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.fs1312 = c.write_hmat_filename;
+
+  % - shear 1313 kernel for fault-shear interaction -
+  c.greens_fn = 'shear1313';
+  c.write_hmat_filename = './tmp/vc_fs1313';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  % geometry is same as fs1212
+  % write
+  kvf('Write', c.kvf, c, 32);
+  disp(cmd)
+  r.fs1313 = c.write_hmat_filename;
+
+  % - s12 kernel for shear-fault interaction -
+  c.greens_fn = 'okadaS12';
+  c.write_hmat_filename = './tmp/VC_sf-s12';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % update geometry - need to adjust fault locs to be receiver
   fn = lambdaZ/dz;                %fault
@@ -191,9 +212,9 @@ function r = build()
   disp(cmd)
   r.sf1212 = c.write_hmat_filename;
 
-  % - shear 1313 kernel for shear-fault interaction -
-  c.greens_fn = 'shear1313';
-  c.write_hmat_filename = './tmp/Vc_sf-shear1313';
+  % - s13 kernel for shear-fault interaction -
+  c.greens_fn = 'okadaS13';
+  c.write_hmat_filename = './tmp/Vc_sf-s13';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geometry is same as sf1212
   % write
@@ -309,15 +330,17 @@ function solve(r)
   Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=e130;
 
   % get the h-matrices
-  hm.s12    = hmmvp('init', r.s12,  32);
+  hm.s12    = hmmvp('init', r.s12,    32);
   hm.ss1212 = hmmvp('init', r.ss1212, 32);
   hm.ss1213 = hmmvp('init', r.ss1213, 32);
   hm.ss1312 = hmmvp('init', r.ss1312, 32);
   hm.ss1313 = hmmvp('init', r.ss1313, 32);
   hm.fs1212 = hmmvp('init', r.fs1212, 32);
   hm.fs1213 = hmmvp('init', r.fs1213, 32);
-  hm.sf1212 = hmmvp('init', r.sf1212, 32);
-  hm.sf1313 = hmmvp('init', r.sf1313, 32);
+  hm.fs1312 = hmmvp('init', r.fs1312, 32);
+  hm.fs1313 = hmmvp('init', r.fs1313, 32);
+  hm.sf12   = hmmvp('init', r.sf12,   32);
+  hm.sf13   = hmmvp('init', r.sf13,   32);
 
   % initialize the function handle with
   % set constitutive parameters
