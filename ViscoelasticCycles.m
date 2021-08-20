@@ -184,7 +184,7 @@ function r = build()
   kvf('Write', c.kvf, c, 4);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
-  r.sf1212 = c.write_hmat_filename;
+  r.sf12 = c.write_hmat_filename;
 
   % - s13 kernel for shear-fault interaction -
   c.greens_fn = 'okadaS13';
@@ -195,7 +195,7 @@ function r = build()
   kvf('Write', c.kvf, c, 4);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
-  r.sf1313 = c.write_hmat_filename;
+  r.sf13 = c.write_hmat_filename;
 
   r.ss = ss;
 
