@@ -82,7 +82,7 @@ disp('b')
 disp(size(V-ss.V_plate))
 disp(hmmvp('getm', hm.s12))
 
-t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
+%t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
 disp('b1')
 t2 = hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate), gM, lM);
 disp('b2')
