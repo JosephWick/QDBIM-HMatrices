@@ -58,8 +58,8 @@ V = (2.*ss.Vs.*ss.a.*ss.sigmab./G).*...
      exp((tauF-ss.mu0.*ss.sigmab-ss.sigmab.*ss.b.*th)./(ss.sigmab.*ss.a)));
 
 % Shear stress in zones of distributed deformation
-tau12=Y(2*ss.M*ss.dgfF+1:ss.dgfS:end);
-tau13=Y(2*ss.M*ss.dgfF+2:ss.dgfS:end);
+tau12=Y(ss.M*ss.dgfF+1:ss.dgfS:end);
+tau13=Y(ss.M*ss.dgfF+2:ss.dgfS:end);
 tau=sqrt(tau12.^2+tau13.^2);
 
 % Dislocation strain rate
