@@ -60,6 +60,7 @@ function r = build()
   ss.y2 = y2;
   % tops of fault patches
   ss.y3f = z - dz;
+  ss.y3f = ss.y3f';
   % width of fault patches
   ss.Wf = ones(n,1)*dz;
   ss.M = n;
