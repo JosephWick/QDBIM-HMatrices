@@ -1,4 +1,4 @@
-function [Yp]= odeViscoelastic(~,Y,ss)
+function [Yp]= odeViscoelastic(~,Y,ss, hm)
 % function OdefunViscoelastic describes the evolution of the ordinary
 % differential equation y' = f(t,y), where the state vector y is
 %
