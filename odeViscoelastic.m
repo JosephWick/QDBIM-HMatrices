@@ -57,8 +57,6 @@ V = (2.*ss.Vs.*ss.a.*ss.sigmab./G).*...
      Lambert_W(G*ss.Vo./(2*ss.Vs.*ss.a.*ss.sigmab).*...
      exp((tauF-ss.mu0.*ss.sigmab-ss.sigmab.*ss.b.*th)./(ss.sigmab.*ss.a)));
 
-disp(size(V))
-
 % Shear stress in zones of distributed deformation
 tau12=Y(ss.M*ss.dgfF+1:ss.dgfS:end);
 tau13=Y(ss.M*ss.dgfF+2:ss.dgfS:end);
@@ -76,7 +74,7 @@ Yp=zeros(size(Y));
 %                     West Fault                      %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % Slip velocity
-disp(size(Yp(1:ss.dgfF:ss.M*ss.dgfF)))
+disp('a')
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % Shear stress rate on fault due to fault and shear zones
