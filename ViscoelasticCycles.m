@@ -308,9 +308,20 @@ function solve(r)
   Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)=e120;
   Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=e130;
 
+  % get the h-matrices
+  hm.s12    = hmmvp('init', r.s12,  32);
+  hm.ss1212 = hmmvp('init', r.ss1212, 32);
+  hm.ss1213 = hmmvp('init', r.ss1213, 32);
+  hm.ss1312 = hmmvp('init', r.ss1312, 32);
+  hm.ss1313 = hmmvp('init', r.ss1313, 32);
+  hm.fs1212 = hmmvp('init', r.fs1212, 32);
+  hm.fs1213 = hmmvp('init', r.fs1213, 32);
+  hm.sf1212 = hmmvp('init', r.sf1212, 32);
+  hm.sf1313 = hmmvp('init', r.sf1313, 32);
+
   % initialize the function handle with
   % set constitutive parameters
-  yp=@(t,y) odeViscoelastic(t,y,r.ss);
+  yp=@(t,y) odeViscoelastic(t,y,r.ss, hm);
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
