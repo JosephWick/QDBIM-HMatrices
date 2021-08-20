@@ -173,7 +173,7 @@ function r = build()
   r.fs1213 = c.write_hmat_filename;
 
   % - shear 1312 kernel for fault-shear interaction -
-  c.greens_fn = 'shear1312'
+  c.greens_fn = 'shear1312';
   c.write_hmat_filename = './tmp/VC_fs1312';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geoemtry is same as fs1212
