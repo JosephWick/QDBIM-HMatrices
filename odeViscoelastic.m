@@ -80,7 +80,7 @@ disp('b')
 % Shear stress rate on fault due to fault and shear zones
 vector = e12p-ss.e12p_plate;
 dummy = zeros(ss.M,1);
-X = [dummy; vector];
+X = [vector; dummy];
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
@@ -98,9 +98,12 @@ disp('d')
 %                     Shear Zones                     %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % Stress rate due to shear zones and fault slip velocity
+t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate))
+t2 = hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate))
+t3 = hmmvp('mvp', hm.sf12, (V-ss.V_plate), lM, gM)
 Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end)=hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate))+...
                                      hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate))+...
-                                     hmmvp('mvp', hm.sf12, (V-ss.V_plate), lM, gM);
+                                     hmmvp('mvp', hm.sf12, (V-ss.V_plate), gM, lM);
 
 Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate))+...
                                        hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate))+...
