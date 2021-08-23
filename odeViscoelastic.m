@@ -119,7 +119,7 @@ disp(size(vector))
 m = hmmvp('getm', hm.sf13);
 %disp(size(hmmvp('extract', hm.sf13, (1:1:m), (1:1:m))))
 t3 = hmmvp('mvp', hm.sf13, X, lM, gM);
-Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(1:ss.Nx*ss.Nz);
+Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(1:ss.Nx*ss.Nz);
 %Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate))+...
 %                                       hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate))+...
 %                                       hmmvp('mvp', hm.sf13, (V-ss.V_plate), lM, gM);
