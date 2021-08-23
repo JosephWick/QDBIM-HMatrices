@@ -83,7 +83,7 @@ rs=(1:1:m); cs=(1:1:m);
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
 disp(size(t1))
 
-vector = e12p-ss.e12p_plate;
+vector = e12p-ss.e12p_plate
 dummy = zeros(400,1);
 X = [dummy; vector];
 disp('b1')
