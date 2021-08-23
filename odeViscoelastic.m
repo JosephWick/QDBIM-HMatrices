@@ -79,9 +79,12 @@ Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 disp('b')
 % Shear stress rate on fault due to fault and shear zones
 
+vector = e12p-ss.e12p_plate;
+dummy = zeros(ss.M,1);
+X = [dummy; vector];
 Yp(2:ss.dgfF:ss.M*ss.dgfF)=  hmmvp('mvp', hm.s12, (V-ss.V_plate)) + ...
-                             hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate), gM, lM)+...
-                             hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate), gM, lM);
+                             hmmvp('mvp', hm.fs1212, X, gM, lM)+...
+                             hmmvp('mvp', hm.fs1312, X, gM, lM);
 
 disp('c')
 % Rate of state
