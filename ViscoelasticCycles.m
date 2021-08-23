@@ -305,7 +305,7 @@ function solve(r)
   Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=e130;
 
   % get the h-matrices
-  hm.s12    = hmmvp('init', r.s12,    32);
+  hm.s12    = hmmvp('init', r.s12,     4);
   hm.ss1212 = hmmvp('init', r.ss1212, 32);
   hm.ss1213 = hmmvp('init', r.ss1213, 32);
   hm.ss1312 = hmmvp('init', r.ss1312, 32);
