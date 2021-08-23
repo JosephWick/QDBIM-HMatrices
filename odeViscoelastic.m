@@ -86,9 +86,9 @@ disp('b')
 disp('b1')
 disp(hmmvp('getn', hm.fs1212))
 disp(size(e12p-ss.e12p_plate))
-t2 = hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate), gM, lM);
+t2 = hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate), lM, gM);
 disp('b2')
-t3 = hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate), gM, lM);
+t3 = hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate), lM, gM);
 disp('b3')
 
 %Yp(2:ss.dgfF:ss.M*ss.dgfF)=  hmmvp('mvp', hm.s12, (V-ss.V_plate)) + ...
