@@ -125,8 +125,8 @@ Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(1:ss.Nx*ss.Nz);
 %                                       hmmvp('mvp', hm.sf13, (V-ss.V_plate), lM, gM);
 
 % Strain rate
-Yp(2*ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
-Yp(2*ss.M*ss.dgfF+4 : ss.dgfS : end) = e13p;
+Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
+Yp(ss.M*ss.dgfF+4 : ss.dgfS : end) = e13p;
 
 
 end
