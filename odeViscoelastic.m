@@ -101,12 +101,12 @@ disp('d')
 t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
 t2 = hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate));
 vector = V-ss.V_plate;
-disp(size(vector))
+%disp(size(vector))
 m = hmmvp('getm', hm.sf12);
-disp(size(hmmvp('extract', hm.sf12, (1:1:m), (1:1:m) )))
+%disp(size(hmmvp('extract', hm.sf12, (1:1:m), (1:1:m) )))
 dummy = zeros(ss.M,1);
 X = [vector; dummy];
-t3 = hmmvp('mvp', hm.sf12, X, lM, gM);
+t3 = hmmvp('mvp', hm.sf12, X, gM, lM);
 %Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end)=hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate))+...
 %                                     hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate))+...
 %                                     hmmvp('mvp', hm.sf12, (V-ss.V_plate), lM, gM);
