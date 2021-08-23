@@ -93,6 +93,10 @@ disp('b2')
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
 disp(size(t3))
 disp('b3')
+
+plot(t2);
+saveas(gcf, 'figures/mvpAdv.png')
+
 aaaaa
 
 vector = e12p-ss.e12p_plate;
