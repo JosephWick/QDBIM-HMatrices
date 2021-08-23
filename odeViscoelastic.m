@@ -104,7 +104,7 @@ vector = V-ss.V_plate;
 %disp(size(vector))
 m = hmmvp('getm', hm.sf12);
 %disp(size(hmmvp('extract', hm.sf12, (1:1:m), (1:1:m) )))
-dummy = zeros(ss.M,1);
+dummy = zeros(ss.Nx*ss.Nz,1);
 X = [vector; dummy];
 t3 = hmmvp('mvp', hm.sf12, X, gM, lM);
 %Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end)=hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate))+...
