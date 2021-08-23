@@ -83,8 +83,8 @@ m = hmmvp('getm', hm.s12);
 rs=(1:1:m); cs=(1:1:m);
 disp(size(V-ss.V_plate))
 disp(size(hmmvp('extract', hm.s12, rs, cs)))
-%t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
-t1 = hmmvp('mvp', hm.s12, ones(400,1));
+t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
+%t1 = hmmvp('mvp', hm.s12, ones(400,1));
 
 vector = e12p-ss.e12p_plate;
 dummy = zeros(400,1);
