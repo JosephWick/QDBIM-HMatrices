@@ -83,10 +83,13 @@ disp('b')
 %disp(hmmvp('getm', hm.s12))
 
 %t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
+vector = e12p-ss.e12p_plate;
+dummy = zeros(400,1);
+X = [dummy; vector];
 disp('b1')
 disp(size(hmmvp('extract', hm.fs1212, lM, gM)))
-disp(size(e12p-ss.e12p_plate))
-t2 = hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate)', lM, gM);
+disp(size(X))
+t2 = hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate), lM, gM);
 disp('b2')
 t3 = hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate), lM, gM);
 disp('b3')
