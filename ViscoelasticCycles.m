@@ -248,8 +248,8 @@ function solve(r)
   r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4*ones(length(r.ss.a(bottom:end)),1);
 
   % - Rheology -
-  r.ss.e12p_plate = 1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
-  r.ss.e13p_plate = zeros(length(ss.x2c)*length(ss.x3c),1);
+  r.ss.e12p_plate = 1e-14; %1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
+  r.ss.e13p_plate = 0.0; %zeros(length(ss.x2c)*length(ss.x3c),1);
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
   r.ss.Adif = 1e6*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
