@@ -91,9 +91,9 @@ disp(size(hmmvp('extract', hm.fs1212, lM, gM)))
 disp(size(X))
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 disp('b2')
-t3 = hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate), lM, gM);
+t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
 disp('b3')
-
+aaaaa
 %Yp(2:ss.dgfF:ss.M*ss.dgfF)=  hmmvp('mvp', hm.s12, (V-ss.V_plate)) + ...
 %                             hmmvp('mvp', hm.fs1212, (e12p-ss.e12p_plate), gM, lM)+...
 %                             hmmvp('mvp', hm.fs1312, (e13p-ss.e13p_plate), gM, lM);
