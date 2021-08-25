@@ -349,18 +349,18 @@ function solve(r)
   % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
   figure(1);clf;set(gcf,'name','Time Evolution')
   f1=subplot(5,1,1);cla;
-  pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V_W')), shading flat
+  pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V_W')), shading flat
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V_W))) max(max(log10(V_W)))]);
+  caxis([min(min(log10(V))) max(max(log10(V)))]);
   colormap(f1,parula);
   title(h,'Slip Rate West (m/s)')
   xlabel('Time (yr)')
   ylabel('Depth (km)');
 
   f2=subplot(5,1,2);cla;
-  pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V_E')), shading flat
+  %pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V_E')), shading flat
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
