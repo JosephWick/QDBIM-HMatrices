@@ -349,7 +349,7 @@ function solve(r)
   % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
   figure(1);clf;set(gcf,'name','Time Evolution')
   f1=subplot(5,1,1);cla;
-  pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V_W')), shading flat
+  pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
@@ -364,7 +364,7 @@ function solve(r)
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V_W))) max(max(log10(V_W)))]);
+  caxis([min(min(log10(V))) max(max(log10(V)))]);
   colormap(f2,parula);
   title(h,'Slip Rate East (m/s)')
   xlabel('Time (yr)')
@@ -382,14 +382,13 @@ function solve(r)
   ylabel('Depth (km)');
 
   subplot(5,1,4);cla;
-  plot(t(1:end-1)/3.15e7,log10(VWmax),t(1:end-1)/3.15e7,log10(VEmax))
+  plot(t(1:end-1)/3.15e7,log10(Vmax))
   xlabel('Time (Yr)')
   ylabel('Velocity (m/s) log10')
   title('Maximum slip rates on faults')
 
   subplot(5,1,5);cla;
-  plot(t(1:end-1)/3.15e7,log10(V_W(:,floor((topW+bottomW)/2))),...
-       t(1:end-1)/3.15e7,log10(V_E(:,floor((topE+bottomE)/2))))
+  plot(t(1:end-1)/3.15e7,log10(V(:,floor((top+bottom)/2))))
   xlabel('Time (Yr)')
   ylabel('Velocity (m/s) log10')
   title('Time series at center of seismogenic zones')
