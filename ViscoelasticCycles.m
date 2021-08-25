@@ -331,18 +331,16 @@ function solve(r)
 
   % - figures -
   % Strain rate at center
-  Ep=sqrt(Yp(:,2*ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS*length(ss.x2c):end)'.^2 +...
-        Yp(:,2*ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS*length(ss.x2c):end)'.^2);
+  Ep=sqrt(Yp(:,2*r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS*length(r.ss.x2c):end)'.^2 +...
+        Yp(:,2*r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+4:r.ss.dgfS*length(r.ss.x2c):end)'.^2);
 
   % Velocity
-  V=Yp(:,1:ss.dgfF:ss.M*ss.dgfF);
+  V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
 
   % Maximum Velocity
-  VWmax=zeros(length(t)-1,1);
-  VEmax=zeros(length(t)-1,1);
+  Vmax=zeros(length(t)-1,1);
   for ts=1:length(t)-1
-      VWmax(ts)=max(V_W(ts,:));
-      VEmax(ts)=max(V_E(ts,:));
+      Vmax(ts)=max(V(ts,:));
   end
 
   %%
