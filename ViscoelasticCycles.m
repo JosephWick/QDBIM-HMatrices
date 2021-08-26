@@ -432,7 +432,7 @@ function solve(r)
   ylabel('Velocity (m/s) log10')
   title('Time series at center of seismogenic zones')
 
-  saveas(f1, 'figurs/VC_f1.png')
+  saveas(f1, 'figures/VC_f1.png')
   saveas(f2, 'figures/VC_f2.png')
   saveas(f3, 'figures/VC_f3.png')
 
