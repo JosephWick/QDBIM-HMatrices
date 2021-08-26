@@ -374,7 +374,7 @@ function solve(r)
   %pcolor(t(1:end-1)/3.15e7,r.ss.x3c/1e3,log10(Ep)), shading flat
   set(gca,'YDir','reverse');
 
-  caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
+  %caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
   h1=colorbar('Location','NorthOutside');
   colormap(f3,hot);
   title(h1,'Strain Rate (1/s)')
