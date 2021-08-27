@@ -203,7 +203,7 @@ function r = build()
 end
 
 % runs numerical solution
-function Y = solve(r)
+function out = solve(r)
   addpaths();
 
   % rigidity (MPa)
@@ -358,6 +358,9 @@ function Y = solve(r)
   title(h,'Slip Rate West (m/s)')
   xlabel('Time (yr)')
   ylabel('Depth (km)');
+
+  out.t = t;
+  out.V = V;
 
   f2=subplot(5,1,2);cla;
   pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V')), shading flat
