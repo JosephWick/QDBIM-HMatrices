@@ -23,9 +23,9 @@ function r = build()
   lambdaZ = 40e3; %(m)
 
   % visco mesh
-  transition = 35e3;
-  vL = 25e3;
-  vW = 15e3;
+  transition = 40e3;
+  vL = 200e3;
+  vW = 200e3;
   ss.transition = transition;
 
   dz = 100;
@@ -52,11 +52,11 @@ function r = build()
 
   n = lambdaZ/dz;
   x = zeros(1,n);
-  y = zeros(1,n) + 15000;
+  y = zeros(1,n) + 100e3;
   z = linspace(c.dz,lambdaZ,n);
   c.X = [x;y;z];
 
-  y2 = 15000;
+  y2 = 100e3;
   ss.y2 = y2;
   % tops of fault patches
   ss.y3f = z - dz;
@@ -83,7 +83,7 @@ function r = build()
   m = vW/dz;
   x = zeros(1,n*m);
   y = linspace(c.dz,vL,n);
-  z = linspace(c.dz,vW,m);
+  z = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   [Y Z] = ndgrid(y,z);
   c.X = [x;Y(:)';Z(:)'];
 
