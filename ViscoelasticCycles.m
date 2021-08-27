@@ -360,7 +360,7 @@ function Y = solve(r)
   ylabel('Depth (km)');
 
   f2=subplot(5,1,2);cla;
-  %pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V_E')), shading flat
+  pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
