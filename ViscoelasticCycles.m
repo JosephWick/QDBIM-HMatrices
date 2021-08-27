@@ -414,7 +414,7 @@ function out = solve(r)
   out.E = Ep;
 
   f3=subplot(5,1,3);cla;
-  pcolor(1:length(t)-1,r.ss.x3c/1e3,log10(Ep(1:end-1,:)')), shading flat
+  pcolor(1:length(t)-1, r.ss.x3c/1e3(1:end-1), log10(Ep)), shading flat
   set(gca,'YDir','reverse');
 
   %caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
