@@ -228,8 +228,8 @@ function out = solve(r)
   r.ss.sigmab = 1000;
 
   % frictional parameters
-  r.ss.a = 1e-3; %1e-3*ones(size(r.ss.y3f));
-  r.ss.b = 1e-4; %r.ss.a+2.1e-4*ones(size(r.ss.y3f));
+  r.ss.a = 1e-3*ones(size(r.ss.y3f));
+  r.ss.b = 1e-4*ones(size(r.ss.y3f)); %r.ss.a+2.1e-4*ones(size(r.ss.y3f));
 
   r.ss.mu0 = 0.2*ones(size(r.ss.y3f));
   % characteristic weakening distance (m)
