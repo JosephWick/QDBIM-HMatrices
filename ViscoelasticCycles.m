@@ -399,7 +399,7 @@ function out = solve(r)
   f1=figure(2);clf;set(gcf,'name','Time Step Evolution')
 
   subplot(5,1,1);cla;
-  pcolor(1:length(t)-1,r.ss.y3f/1e3,log10(V')), shading flat
+  pcolor(1:length(t)-1,r.ss.y3f/1e3,log10(V)), shading flat
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
