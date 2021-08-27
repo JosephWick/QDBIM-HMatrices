@@ -321,7 +321,7 @@ function Y = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e5],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e1],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
@@ -360,7 +360,7 @@ function Y = solve(r)
   ylabel('Depth (km)');
 
   f2=subplot(5,1,2);cla;
-  pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V')), shading flat
+  pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
