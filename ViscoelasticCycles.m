@@ -203,7 +203,7 @@ function r = build()
 end
 
 % runs numerical solution
-function Y0 = solve(r)
+function Y = solve(r)
   addpaths();
 
   % rigidity (MPa)
