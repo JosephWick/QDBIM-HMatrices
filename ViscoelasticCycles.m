@@ -410,7 +410,7 @@ function Y = solve(r)
   ylabel('Depth (km)');
 
   f3=subplot(5,1,3);cla;
-  %pcolor(1:length(t)-1,r.ss.x3c/1e3,log10(Ep)), shading flat
+  pcolor(1:length(t)-1,r.ss.x3c/1e3,log10(Ep)), shading flat
   set(gca,'YDir','reverse');
 
   %caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
