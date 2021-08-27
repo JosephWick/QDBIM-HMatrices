@@ -79,11 +79,11 @@ function r = build()
   c.transition=transition;
   c.L = vL;
   c.W = vW;
-  n = vL/dz;
-  m = vW/dz;
+  n = vL/dz/2;
+  m = vW/dz/2;
   x = zeros(1,n*m);
   y = linspace(c.dz,vL,n);
-  z = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
+  z = transition+tan((0:m)'*pi/(2.2*(m+eps)))*transition;
   [Y Z] = ndgrid(y,z);
   c.X = [x;Y(:)';Z(:)'];
 
