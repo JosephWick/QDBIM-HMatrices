@@ -411,9 +411,10 @@ function out = solve(r)
 
   out.t = t;
   out.V = V;
+  out.E = Ep;
 
   f3=subplot(5,1,3);cla;
-  pcolor(1:length(t)-1,r.ss.y3f/1e3,log10(Ep)), shading flat %x3c was orig there not y3f
+  pcolor(1:length(t)-1,r.ss.x3c/1e3,log10(Ep)), shading flat
   set(gca,'YDir','reverse');
 
   %caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
