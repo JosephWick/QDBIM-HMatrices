@@ -9,8 +9,169 @@ end
 % --------------------- Public ---------------------------
 
 % set up h-matrices
-% there will be 11 kernels
+% there will be 9 kernels
 function r = build()
+  addpaths();
+
+  % we'll have 9 kernels:
+  % - 1 for fault-fault interaction (s12)
+  % - 4 for shear-shear interaction (1212, 1213, 1312, 1313)
+  % - 4 for fault-shear interaction (1212, 1213, 1312, 1313))
+  % - 2 for shear-fault interaction (s12, s13)
+
+  % problem specifications
+  % 200km long (L), 200km deep (W)
+  % transition depth is 40 km
+  % fault goes 40km deep
+
+  % x1 (x) is in/out of page
+  % x2 (y) is left/right of page
+  % x3 (z) is up/down
+
+  % ---     general params      ---
+  probL = 200e3;
+  probW = 200e3;
+  lambdaZ = 40e3; % fault depth
+  transition = 40e3; %where shear zone starts
+
+  % fault mesh
+  ss.M = 400;
+  ss.dz = lambdaZ/ss.M;
+  % fault patch edges (top left)
+  faultX = zeros(ss.M,1);
+  faultY = ones(ss.M,1)*probL/2;
+  faultZ = linspace(0,lambdaZ-ss.dz, ss.M);
+  %tops of fault patches
+  ss.y3f = faultZ;
+  % fault patch centers
+  faultX_c = faultX;
+  faultY_c = faultY;
+  faultZ_c = faultZ+ss.dz/2;
+
+  % shear mesh
+  eps = 1e-12;
+  shearYsize = 100;
+  ss.Ny = probL/shearYsize;
+  ss.Nz = ss.Ny;
+  shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
+  % shear patch edges
+  shearX = zeros(ss.Nz*ss.Ny,1);
+  shearYhat = linspace(0,probL-shearYsize, ss.Ny);
+  [shearZ shearY] = ndgrid(shearYhat, shearZhat);
+  shearY = shearY(:);
+  shearZ = shearZ(:);
+  % shear patch centers
+  shearX_c = shearX;
+  shearY_chat = shearYhat+shearYsize/2;
+  shearZ_chat = zeros(len(shearZhat),1);
+  for idx=1:len(shearZhat-1):
+    shearZ_c(i) = (shearZhat(i+1) - shearZhat(i))/2;
+  end
+  shearZ_c(len(shearZ_c)) = shearZ_c(len(shearZ_c)-1);
+  [shearZ_c shearY_c] = ndgrid(shearY_chat, shearZ_chat);
+
+
+  ss.polesz = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
+  % center of shear zone (x3)
+  ss.x3c=(ss.polesz(2:end)+ss.polesz(1:end-1))/2;
+  W=ss.polesz(2:end)-ss.polesz(1:end-1);
+  ss.polesxc=(2*y2/1e3:(2*y2)/(26e3):2*y2/1e3)'*1e3;
+  edges= floor(ss.Nx-length(ss.polesxc)+1)/2;
+  ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*transition);
+  ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*transition;
+  ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
+  % center of shear zone (x2)
+  ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
+
+  % combo mesh
+  comboX = [faultX shearX];
+  comboY = [faultY shearY];
+  comboZ = [faultZ shearZ];
+
+  comboX_c = [faultX_c shearX_c];
+  comboY_c = [faultY_c shearY_c];
+  comboZ_c = [faultZ_c shearZ_c];
+
+  % ---       kvf params      ---
+  c.command = 'compress';
+  c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
+  c.dz = dz;
+  c.tol = 1e-3;
+  c.G = 30e3;
+  c.command = 'compress';
+  c.allow_overwrite = 1;
+  c.err_method = 'mrem-fro';
+
+  % ---       s12 kernel for fault-fault interaction      ---
+  c.greens_fn = 'okadaS12';
+  c.write_hmat_filename = './tmp/VC_ff-s12';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+
+  c.W = lambdaZ;
+  c.L = 0;
+  ss.Wf = 0;
+  c.X = [faultX; faultY; faultZ];
+
+  kvf('Write', c.kvf, c, 4);
+  disp('run these in a shell:')
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.s12 = c.write_hmat_filename;
+
+  % ---       shear1212 kernel for shear-shear interaction ---
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/VC_ss-shear1212';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+
+  c.transition = transition;
+  c.L = probL;
+  c.W = probW;
+  c.Y = [shearX; shearY; shearZ];
+  c.X = [shearX_c; shearY_c; shearZ_c];
+
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1212 = c.write_hmat_filename;
+
+  % ---       Shear 1213 kernel for shear-shear interaction ---
+  c.greens_fn = 'shear1213';
+  c.write_hmat_filename = './tmp/VC_ss-shear1213';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  % geometry is the same for all shear-shear interaction
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1213 = c.write_hmat_filename;
+
+  % ---     Shear 1312 kernel for shear-shear interaction
+  c.greens_fn = 'shear1312';
+  c.write_hmat_filename = './tmp/VC_ss-shear1312';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf]
+  disp(cmd)
+  r.ss1312 = c.write_hmat_filename;
+
+  % ---     shear 1313 kernel for shear-shear interaction
+  c.greens_fn = 'shear1313';
+  c.write_hmat_filename = './tmp/VC_ss-shear1313';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1313 = c.write_hmat_filename;
+
+  % ---     shear 1212 kernels for fault-shear interaction -
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/VC_fs-shear1212';
+
+
+end
+
+% set up h-matrices
+% there will be 11 kernels
+function r = buildOld()
   addpaths();
 
   % we'll have 9 kernels:
@@ -81,9 +242,9 @@ function r = build()
   c.W = vW;
   n = vL/dz/2;
   m = vW/dz/2;
+  z = transition+tan((0:m)'*pi/(2.2*(m+eps)))*transition;
   x = zeros(1,n*m);
   y = linspace(c.dz,vL,n);
-  z = transition+tan((0:m)'*pi/(2.2*(m+eps)))*transition;
   [Y Z] = ndgrid(y,z);
   c.X = [x;Y(:)';Z(:)'];
 
