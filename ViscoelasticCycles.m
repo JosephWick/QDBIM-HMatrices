@@ -63,7 +63,7 @@ function r = build()
   % shear patch centers
   shearX_c = shearX;
   shearY_chat = shearYhat+shearYsize/2;
-  shearZ_chat = zeros(len(shearZhat),1);
+  shearZ_chat = zeros(length(shearZhat),1);
   for idx=(1:len(shearZhat-1))
     shearZ_c(i) = (shearZhat(i+1) - shearZhat(i))/2;
   end
