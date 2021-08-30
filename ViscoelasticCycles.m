@@ -86,6 +86,8 @@ function r = build()
   ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
 
   % combo mesh
+  disp(size(faultX))
+  disp(size(shearX))
   comboX = [faultX shearX];
   comboY = [faultY shearY];
   comboZ = [faultZ shearZ];
