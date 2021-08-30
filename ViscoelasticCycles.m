@@ -96,6 +96,7 @@ function r = build()
   comboY_c = [faultY_c shearY_c];
   comboZ_c = [faultZ_c shearZ_c];
 
+  c.eta=3;
   % ---       kvf params      ---
   c.command = 'compress';
   c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
