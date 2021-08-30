@@ -88,8 +88,6 @@ function r = build()
   ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
 
   % combo mesh
-  disp(size(faultY_c))
-  disp(size(shearY_c))
   comboX = [faultX shearX];
   comboY = [faultY shearY];
   comboZ = [faultZ shearZ];
@@ -101,7 +99,7 @@ function r = build()
   % ---       kvf params      ---
   c.command = 'compress';
   c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
-  c.dz = dz;
+  c.dz = ss.dz;
   c.tol = 1e-3;
   c.G = 30e3;
   c.command = 'compress';
