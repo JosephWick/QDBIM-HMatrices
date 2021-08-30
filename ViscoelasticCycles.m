@@ -134,7 +134,7 @@ function r = build()
   c.Y = [shearX; shearY; shearZ];
   c.X = [shearX_c; shearY_c; shearZ_c];
 
-  kvf('Write', c.kvf, c, 32);
+  kvf('Write', c.kvf, c, 16);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1212 = c.write_hmat_filename;
