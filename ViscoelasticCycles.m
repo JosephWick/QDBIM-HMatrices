@@ -119,6 +119,8 @@ function r = build()
   c.write_hmat_filename = './tmp/VC_ff-s12';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
+  c.write_hd_filename = './tmp/VC_ff-s12-hd';
+
   c.W = lambdaZ;
   c.L = 0;
   ss.Wf = 0;
