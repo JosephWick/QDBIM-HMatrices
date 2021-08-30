@@ -64,7 +64,7 @@ function r = build()
   shearX_c = shearX;
   shearY_chat = shearYhat+shearYsize/2;
   shearZ_chat = zeros(length(shearZhat),1);
-  for idx=(1:length(shearZhat-1))
+  for idx=(1:length(shearZhat)-1)
     shearZ_c(idx) = (shearZhat(idx+1) - shearZhat(idx))/2;
   end
   shearZ_c(len(shearZ_c)) = shearZ_c(len(shearZ_c)-1);
