@@ -139,7 +139,7 @@ function r = build()
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1212 = c.write_hmat_filename;
-  b.c=c;
+  r.c=c;
   % ---       Shear 1213 kernel for shear-shear interaction ---
   c.greens_fn = 'shear1213';
   c.write_hmat_filename = './tmp/VC_ss-shear1213';
