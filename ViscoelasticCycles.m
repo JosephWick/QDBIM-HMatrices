@@ -292,7 +292,7 @@ function r = buildOld()
   y = linspace(c.dz,vL,n);
   [Y Z] = ndgrid(y,z);
   c.X = [x;Y(:)';Z(:)'];
-
+  c.Y = c.X;
   % shear mesh
   ss.Nx = n;
   ss.Nz = m;
