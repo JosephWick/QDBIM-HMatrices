@@ -237,7 +237,7 @@ function r = buildOld()
   % fault has 400 elems
   % visco is 250x150
 
-  c.eta=3;
+  %c.eta=3;
   % set up kvf general propts
   c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
   c.dz = dz;
@@ -314,7 +314,7 @@ function r = buildOld()
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1212 = c.write_hmat_filename;
-
+  r.c=c;
   % - shear 1213 kernel for shear-shear interaction -
   c.greens_fn = 'shear1213';
   c.write_hmat_filename = './tmp/VC_ss-shear1213';
