@@ -135,6 +135,10 @@ function r = build()
   c.Y = [shearX; shearY; shearZ];
   c.X = [shearX_c; shearY_c; shearZ_c];
 
+  clf;
+  image(c.X); colorbar;
+  saveas(gcf, 'figures/VCX.png')
+
   kvf('Write', c.kvf, c, 16);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
