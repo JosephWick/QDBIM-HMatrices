@@ -69,10 +69,6 @@ function r = build()
     shearZ_chat(idx) = (shearZhat(idx+1) - shearZhat(idx))/2;
   end
   shearZ_chat(length(shearZ_chat)) = shearZ_chat(length(shearZ_chat)-1);
-
-  disp(size(shearZ_chat))
-  disp(size(shearZhat))
-
   shearZ_chat = shearZ_chat + shearZhat';
   [shearZ_ct shearY_c] = ndgrid(shearY_chat, shearZ_chat);
   shearZ_c = shearZ_ct(:)';
@@ -117,9 +113,8 @@ function r = build()
   % ---       s12 kernel for fault-fault interaction      ---
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/VC_ff-s12';
-  c.kvf = [c.write_hmat_filename '.kvf'];
-
   c.write_hd_filename = './tmp/VC_ff-s12-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
 
   c.W = lambdaZ;
   c.L = 0;
@@ -136,6 +131,7 @@ function r = build()
   % ---       shear1212 kernel for shear-shear interaction ---
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/VC_ss-shear1212';
+  c.write_hd_filename = './tmp/VC_ss-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
   c.transition = transition;
@@ -156,6 +152,7 @@ function r = build()
   % ---       Shear 1213 kernel for shear-shear interaction ---
   c.greens_fn = 'shear1213';
   c.write_hmat_filename = './tmp/VC_ss-shear1213';
+  c.write_hd_filename = './tmp/VC_ss-shear1213-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geometry is the same for all shear-shear interaction
   kvf('Write', c.kvf, c, 32);
@@ -166,6 +163,7 @@ function r = build()
   % ---     Shear 1312 kernel for shear-shear interaction ---
   c.greens_fn = 'shear1312';
   c.write_hmat_filename = './tmp/VC_ss-shear1312';
+  c.write_hd_filename = './tmp/VC_ss-shear1312-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -175,6 +173,7 @@ function r = build()
   % ---     shear 1313 kernel for shear-shear interaction ---
   c.greens_fn = 'shear1313';
   c.write_hmat_filename = './tmp/VC_ss-shear1313';
+  c.write_hd_filename = './tmp/VC_ss-shear1313-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -184,6 +183,7 @@ function r = build()
   % ---     shear 1212 kernels for fault-shear interaction ---
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/VC_fs-shear1212';
+  c.write_hd_filename = './tmp/VC_fs-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
   c.X = [comboX_c; comboY_c; comboZ_c];
@@ -197,6 +197,7 @@ function r = build()
   % ---       shear 1312 kernel for fault-shear interaction ---
   c.greens_fn = 'shear1312';
   c.write_hmat_filename = './tmp/VC_fs-shear1312';
+  c.write_hd_filename = './tmp/VC_fs-shear1312-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -206,6 +207,7 @@ function r = build()
   % ---       s12 kernel for shear-fault interaction ---
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/VC_sf-12';
+  c.write_hd_filename = './tmp/VC_sf-s12-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -215,6 +217,7 @@ function r = build()
   % ---     s13 kernel for shear-fault interaction ---
   c.greens_fn = 'okadaS13';
   c.write_hmat_filename = './tmp/VC_sf-s13';
+  c.write_hd_filename = './tmp/VC_sf-s13-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
