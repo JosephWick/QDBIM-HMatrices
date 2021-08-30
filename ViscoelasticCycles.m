@@ -131,6 +131,9 @@ function r = build()
   c.transition = transition;
   c.L = probL;
   c.W = probW;
+  disp(size(shearX))
+  disp(size(shearY))
+  disp(size(shearZ))
   c.Y = [shearX; shearY; shearZ];
   c.X = [shearX_c; shearY_c; shearZ_c];
 
