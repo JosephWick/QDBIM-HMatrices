@@ -55,11 +55,11 @@ function r = build()
   ss.Nz = ss.Ny;
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   % shear patch edges
-  shearX = zeros(1,ss.Nz*ss.Ny);
   shearYhat = linspace(0,probL-shearYsize, ss.Ny);
   [shearZ shearY] = ndgrid(shearYhat, shearZhat);
   shearY = shearY(:)';
   shearZ = shearZ(:)';
+  shearX = zeros(1,length(shearY));
   % shear patch centers
   shearX_c = shearX;
   shearY_chat = shearYhat+shearYsize/2;
