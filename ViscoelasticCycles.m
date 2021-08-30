@@ -58,7 +58,7 @@ function r = build()
   shearYhat = linspace(0,probL-shearYsize, ss.Ny);
   [shearZ shearY] = ndgrid(shearYhat, shearZhat);
   shearY = shearY';
-  shearY = shearY(:);
+  shearY = shearY(:)';
   shearZ = shearZ(:)';
   shearX = zeros(1,length(shearY));
   % shear patch centers
