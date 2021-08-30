@@ -236,6 +236,7 @@ function r = buildOld()
   % fault has 400 elems
   % visco is 250x150
 
+  c.eta=3;
   % set up kvf general propts
   c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
   c.dz = dz;
