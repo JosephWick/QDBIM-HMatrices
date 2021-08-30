@@ -69,6 +69,8 @@ function r = build()
   end
   shearZ_c(length(shearZ_c)) = shearZ_c(length(shearZ_c)-1);
   [shearZ_c shearY_c] = ndgrid(shearY_chat, shearZ_chat);
+  shearZ_c = shearZ_c(:)';
+  shearY_c = shearY_c(:)';
 
   y2 = probL/2;
   ss.Nx = length(shearX);
