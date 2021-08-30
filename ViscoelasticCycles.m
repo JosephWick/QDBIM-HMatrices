@@ -136,7 +136,7 @@ function r = build()
   c.X = [shearX_c; shearY_c; shearZ_c];
 
   clf;
-  image(c.X); colorbar;
+  imagesc(c.X); colorbar;
   saveas(gcf, 'figures/VCX.png')
 
   kvf('Write', c.kvf, c, 16);
