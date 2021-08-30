@@ -66,9 +66,10 @@ function r = build()
   shearY_chat = shearYhat+shearYsize/2;
   shearZ_chat = zeros(1,length(shearZhat));
   for idx=(1:length(shearZhat)-1)
-    shearZ_c(idx) = (shearZhat(idx+1) - shearZhat(idx))/2;
+    shearZ_chat(idx) = (shearZhat(idx+1) - shearZhat(idx))/2;
   end
-  shearZ_c(length(shearZ_c)) = shearZ_c(length(shearZ_c)-1);
+  shearZ_chat(length(shearZ_chat)) = shearZ_chat(length(shearZ_c)-1);
+  shearZ_chat = shearZ_chat + shearZhat;
   [shearZ_c shearY_c] = ndgrid(shearY_chat, shearZ_chat);
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c';
