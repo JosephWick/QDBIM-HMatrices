@@ -134,6 +134,7 @@ function r = build()
   disp(size(shearX))
   disp(size(shearY))
   disp(size(shearZ))
+  disp(size(shearZhat))
   c.Y = [shearX; shearY; shearZ];
   c.X = [shearX_c; shearY_c; shearZ_c];
 
