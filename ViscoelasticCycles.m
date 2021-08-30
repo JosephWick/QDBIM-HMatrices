@@ -38,8 +38,8 @@ function r = build()
   ss.M = 400;
   ss.dz = lambdaZ/ss.M;
   % fault patch edges (top left)
-  faultX = zeros(ss.M,1);
-  faultY = ones(ss.M,1)*probL/2;
+  faultX = zeros(1,ss.M);
+  faultY = ones(1,ss.M)*probL/2;
   faultZ = linspace(0,lambdaZ-ss.dz, ss.M);
   %tops of fault patches
   ss.y3f = faultZ;
@@ -55,7 +55,7 @@ function r = build()
   ss.Nz = ss.Ny;
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   % shear patch edges
-  shearX = zeros(ss.Nz*ss.Ny,1);
+  shearX = zeros(1,ss.Nz*ss.Ny);
   shearYhat = linspace(0,probL-shearYsize, ss.Ny);
   [shearZ shearY] = ndgrid(shearYhat, shearZhat);
   shearY = shearY(:);
@@ -63,7 +63,7 @@ function r = build()
   % shear patch centers
   shearX_c = shearX;
   shearY_chat = shearYhat+shearYsize/2;
-  shearZ_chat = zeros(length(shearZhat),1);
+  shearZ_chat = zeros(1,length(shearZhat));
   for idx=(1:length(shearZhat)-1)
     shearZ_c(idx) = (shearZhat(idx+1) - shearZhat(idx))/2;
   end
