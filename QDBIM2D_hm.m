@@ -52,6 +52,7 @@ function r = build()
   % housekeeping
   c.command = 'compress';
   c.write_hmat_filename = getFname(c);
+  c.write_hd_filename = c.write_hmat_filename;
   c.kvf = [c.write_hmat_filename '.kvf'];
   c.err_method  = 'mrem-fro';
   c.allow_overwrite = 1;
