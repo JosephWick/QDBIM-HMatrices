@@ -337,7 +337,7 @@ function r = buildOld()
   r.c=c;
   % - shear 1213 kernel for shear-shear interaction -
   c.greens_fn = 'shear1213';
-  c.write_hmat_filename = './tmp/VC_ss-shear1213';
+  c.write_hmat_filename = ['./tmp/VC_ss-shear1213_n' probL/1000];
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geometry is the same for all shear-shear interactions
   kvf('Write', c.kvf, c, 32);
@@ -347,7 +347,7 @@ function r = buildOld()
 
   % - shear 1312 kernel for shear-shear interaction -
   c.greens_fn = 'shear1312';
-  c.write_hmat_filename = './tmp/VC_ss-shear1312';
+  c.write_hmat_filename = ['./tmp/VC_ss-shear1312_n' probL/1000];
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -356,7 +356,7 @@ function r = buildOld()
 
   % - shear 1313 kernel for shear-shear interaction -
   c.greens_fn = 'shear1313';
-  c.write_hmat_filename = './tmp/VC_ss-shear1313';
+  c.write_hmat_filename = ['./tmp/VC_ss-shear1313_n' probL/1000];
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -365,7 +365,7 @@ function r = buildOld()
 
   % - shear 1212 kernel for fault-shear interaction -
   c.greens_fn = 'shear1212';
-  c.write_hmat_filename = './tmp/VC_fs-shear1212';
+  c.write_hmat_filename = ['./tmp/VC_fs-shear1212_n' probL/1000];
   c.kvf = [c.write_hmat_filename '.kvf'];
   % update geometry
   fn = lambdaZ/dz;                %fault
@@ -390,7 +390,7 @@ function r = buildOld()
 
   % - shear 1312 kernel for fault-shear interaction -
   c.greens_fn = 'shear1312';
-  c.write_hmat_filename = './tmp/VC_fs1312';
+  c.write_hmat_filename = ['./tmp/VC_fs1312_n' probL/1000];
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geoemtry is same as fs1212
   % write
@@ -401,7 +401,7 @@ function r = buildOld()
 
   % - s12 kernel for shear-fault interaction -
   c.greens_fn = 'okadaS12';
-  c.write_hmat_filename = './tmp/VC_sf-s12';
+  c.write_hmat_filename = ['./tmp/VC_sf-s12' probL/1000];
   c.kvf = [c.write_hmat_filename '.kvf'];
   % update geometry - need to adjust fault locs to be receiver
   fy = zeros(1,fn) + 15000 + 0.5*dz;
@@ -415,7 +415,7 @@ function r = buildOld()
 
   % - s13 kernel for shear-fault interaction -
   c.greens_fn = 'okadaS13';
-  c.write_hmat_filename = './tmp/VC_sf-s13';
+  c.write_hmat_filename = ['./tmp/VC_sf-s13' probL/1000];
   c.kvf = [c.write_hmat_filename '.kvf'];
   % geometry is same as sf12
   % write
