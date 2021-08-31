@@ -37,11 +37,9 @@ function b = build()
 
   % grid and flatten
   shearZhat(end)=[]; shearYhat(end)=[];
-  shearZhat
-  [shearZ shearY] = ndgrid(shearYhat, shearZhat);
+  [shearZ shearY] = ndgrid(shearZhat, shearYhat);
   shearY = shearY(:)';
   shearZ = shearZ(:)';
-  shearX = zeros(1,length(shearY));
 
   [shearZ_c shearY_c] = ndgrid(shearY_chat, shearZ_chat);
   shearZ_c = shearZ_c(:)';
