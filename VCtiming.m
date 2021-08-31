@@ -10,10 +10,10 @@ end
 function b = build()
   addpaths();
 
-  probL = 200e3;
-  probW = 200e3;
+  probL = 50e3;
+  probW = 50e3;
 
-  N = 10;
+  N = 100;
   size = probL/N;
 
   transition = 50e3;
