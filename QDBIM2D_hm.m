@@ -175,9 +175,9 @@ function benchmark(r)
 
   % figure
   clf;
-  %subplot(211); plot(y_hm); title('hm mvp');
-  %subplot(212); plot(y_d); title('dense mvp');
-  %saveas(gcf, 'figures/qdbim2dhm_benchmark.png')
+  subplot(211); plot(y_hm); title('hm mvp');
+  subplot(212); plot(y_d); title('dense mvp');
+  saveas(gcf, 'figures/qdbim2dhm_benchmark.png')
 
 end
 
