@@ -16,7 +16,7 @@ function b = build()
   % 10, 20, 40, 80, 160
 
   transition = 40e3; %where shear zone starts
-  shearYsize = 10000;
+  shearYsize = 5000;
 
   % grid edges
   ss.Ny = probL/shearYsize;
