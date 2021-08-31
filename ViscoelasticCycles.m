@@ -312,7 +312,7 @@ function r = buildOld()
   z = linspace(c.dz,vW,m);
   x = zeros(1,n*m);
   y = linspace(c.dz,vL,n);
-  [Y Z] = ndgrid(y,z);
+  [Z Y] = ndgrid(y,z);
   c.X = [x;Y(:)';Z(:)'];
   c.Y = c.X;
   % shear mesh
@@ -379,7 +379,7 @@ function r = buildOld()
   sx = zeros(1,sn*sm);
   sy = linspace(c.dz,vL,sn);
   sz = linspace(c.dz,vW,sm);
-  [Ys Zs] = ndgrid(sy,sz);
+  [Zs Ys] = ndgrid(sy,sz);
   bx = [fx sx];                   %together
   by = [fy Ys(:)'];
   bz = [fz Zs(:)'];
@@ -472,8 +472,8 @@ function out = solve(r)
   % Velocity-strengthening at edges
   top    = floor(5e3/(r.ss.lambdaZ/r.ss.M));
   bottom = ceil(15e3/(r.ss.lambdaZ/r.ss.M));
-  r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4*ones(top,1);
-  r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4*ones(length(r.ss.a(bottom:end)),1);
+  %r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4*ones(top,1);
+  %r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4*ones(length(r.ss.a(bottom:end)),1);
 
   % - Rheology -
   r.ss.e12p_plate = 1e-14; %1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
