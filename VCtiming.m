@@ -24,7 +24,7 @@ function b = build()
   nc = (-ss.Nz/2:ss.Nz/2);
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3 / 1e3 ;
-  shearX = zeros(1,ss.Ny*ss.Nx);
+  shearX = zeros(1,ss.Ny*ss.Nz);
 
   % shear patch centers
   shearX_c = shearX;
