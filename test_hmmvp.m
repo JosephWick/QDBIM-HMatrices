@@ -15,7 +15,7 @@ function r = build()
   c.command = 'compress';
   c.write_hmat_filename = './tmp/hmmvpTest';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  c.greens_fn = 'okadaS13';
+  c.greens_fn = 'test';
   %c.greens_fn = 'inverse-r';
   %c.greens_fn = 'test';
   c.err_method = 'mrem-fro';
@@ -32,7 +32,7 @@ function r = build()
   c.halfspace = 1;
 
   len = 40000;
-  n = 400;
+  n = 400000;
 
   c.mu = 30e9;
   c.nu = 0.25;
