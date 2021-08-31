@@ -67,7 +67,7 @@ function b = build()
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
 
-  b.N = N;
+  b.N = ss.Ny;
   b.hm = c.write_hmat_filename;
 
 end
