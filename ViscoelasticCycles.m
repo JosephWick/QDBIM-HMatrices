@@ -58,6 +58,7 @@ function r = build()
   % shear patch edges
   ss.Ny = probL/shearYsize;
   ss.Nz = ss.Ny;
+  ss.Nx = ss.Ny;
   nc = (-ss.Nz/2:ss.Nz/2);
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
