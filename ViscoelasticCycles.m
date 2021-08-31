@@ -120,7 +120,7 @@ function r = build()
   % ---       s12 kernel for fault-fault interaction      ---
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = ['./tmp/VC_ff-s12_' tag];
-  c.write_hd_filename = './tmp/VC_ff-s12-hd_n';
+  c.write_hd_filename = './tmp/VC_ff-s12-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
   c.W = lambdaZ;
