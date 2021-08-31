@@ -28,7 +28,7 @@ function b = build()
   shearZ = shearZ(:)';
 
   % grid centers
-  shearX_c = shearX + size/2;
+  shearX_c = shearX;
   shearY_c = shearY + size/2;
   shearZ_c = shearZ + size/2;
 
