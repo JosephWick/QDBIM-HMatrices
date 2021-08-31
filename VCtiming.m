@@ -13,7 +13,7 @@ function b = build()
   probL = 50e3;
   probW = 50e3;
 
-  N = 100;
+  N = 317;
   size = probL/N;
 
   transition = 50e3;
@@ -48,8 +48,8 @@ function b = build()
   c.W = probW;
 
   c.greens_fn = 'shear1212';
-  c.write_hmat_filename = './tmp/VCT';
-  c.write_hd_filename = './tmp/VCT-hd';
+  c.write_hmat_filename = './tmp/VCT_m8';
+  c.write_hd_filename = './tmp/VCT-hd_m8';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 4);
 
