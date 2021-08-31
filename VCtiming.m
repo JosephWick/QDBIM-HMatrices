@@ -51,7 +51,7 @@ function b = build()
   c.write_hmat_filename = './tmp/VCT';
   c.write_hd_filename = './tmp/VCT-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  kvf('Write', c.kvf, c, 32);
+  kvf('Write', c.kvf, c, 16);
 
   disp('run this in a shell: ')
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
