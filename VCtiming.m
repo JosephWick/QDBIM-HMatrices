@@ -14,13 +14,14 @@ function b = build()
   probW = 200e3;
 
   N = 1000;
-
   size = probL/N;
+
+  transition = 50e3;
 
   % grid edges
   shearX = zeros(1,N*N);
   shearYhat = linspace(0, probL-size, N);
-  shearZhat = linspace(0, probW-size, N);
+  shearZhat = linspace(0, probW-size, N)+transition;
 
   [shearZ shearY] = ndgrid(shearYhat, shearZhat);
   shearY = shearY';
@@ -34,6 +35,8 @@ function b = build()
 
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.Y = [shearX; shearY; shearZ];
+
+  c.transition = transition;
 
   c.dz = size;
   c.tol = 1e-5;
