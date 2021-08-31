@@ -29,8 +29,8 @@ function r = build()
   % x3 (z) is up/down
 
   % ---     general params      ---
-  probL = 200e3;
-  probW = 200e3;
+  probL = 50e3;
+  probW = 50e3;
   lambdaZ = 40e3; % fault depth
   transition = 40e3; %where shear zone starts
 
@@ -223,7 +223,7 @@ function r = build()
 
   % ---     s13 kernel for shear-fault interaction ---
   c.greens_fn = 'okadaS13';
-  c.write_hmat_filename = ['./tmp/VC_sf-s13-' tag];
+  c.write_hmat_filename = ['./tmp/VC_sf-s13_' tag];
   c.write_hd_filename = './tmp/VC_sf-s13-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
