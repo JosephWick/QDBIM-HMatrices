@@ -149,7 +149,7 @@ function r = build()
   imagesc(c.X); colorbar;
   saveas(gcf, 'figures/VCX.png')
 
-  kvf('Write', c.kvf, c, 16);
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1212 = c.write_hmat_filename;

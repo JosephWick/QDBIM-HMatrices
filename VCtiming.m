@@ -7,6 +7,54 @@ end
 % ------------------------- Public ----------------------------------
 
 % time single MVP action using hmmvp and with dense matrices
+function build()
+  addpaths();
+
+  probL = 200e3;
+  probW = 200e3;
+
+  N = 10;
+
+  size = probL/N;
+
+  % grid edges
+  shearX = zeros(N*N);
+  shearYhat = linspace(0, probL-size, N);
+  shearZhat = linspace(0, probW-size, N);
+
+  [shearZ shearY] = ndgrid(shearYhat, shearZhat);
+  shearY = shearY';
+  shearY = shearY(:)';
+  shearZ = shearZ(:)';
+
+  % grid centers
+  shearX_c = shearX + size/2;
+  shearY_c = shearY + size/2;
+  shearZ_c = shearZ + size/2;
+
+  c.X = [shearX_c; shearY_c; shearZ_c];
+  c.Y = [shearX; shearY; shearZ];
+
+  c.command = 'compress';
+  c.dz = size;
+  c.tol = 1e-5;
+  c.G = 30e3;
+  c.command = 'compress';
+  c.allow_overwrite = 1;
+  c.err_method = 'mrem-fro';
+
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/VCT';
+  c.write_hd_filename = './tmp/VCT-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+
+  disp('run this in a shell: ')
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+
+end
+
 function time(b)
   addpaths();
 
