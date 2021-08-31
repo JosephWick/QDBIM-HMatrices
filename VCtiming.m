@@ -13,7 +13,7 @@ function b = build()
   probL = 200e3;
   probW = 200e3;
 
-  N = 100;
+  N = 317;
   size = probL/N;
 
   transition = 50e3;
