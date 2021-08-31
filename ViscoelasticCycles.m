@@ -109,7 +109,7 @@ function r = build()
   c.command = 'compress';
   c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
   c.dz = ss.dz;
-  c.tol = 1e-3;
+  c.tol = 1e-10;
   c.G = 30e3;
   c.command = 'compress';
   c.allow_overwrite = 1;
