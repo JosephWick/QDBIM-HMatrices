@@ -30,7 +30,7 @@ function b = build()
   shearX_c = shearX;
   shearY_chat = zeros(1,ss.Ny);
   shearZ_chat = zeros(1,ss.Nz);
-  for idx=(1:length(shearZhat))
+  for idx=(1:length(shearZhat)-1)
     shearZ_chat(idx) = shearZhat(idx) + (shearZhat(idx+1) - shearZhat(idx))/2;
     shearY_chat(idx) = shearYhat(idx) + (shearYhat(idx+1) - shearYhat(idx))/2;
   end
