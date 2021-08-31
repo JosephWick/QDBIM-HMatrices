@@ -13,7 +13,7 @@ function b = build()
   probL = 200e3;
   probW = 200e3;
 
-  N = 1000;
+  N = 10;
 
   size = probL/N;
 
@@ -35,7 +35,6 @@ function b = build()
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.Y = [shearX; shearY; shearZ];
 
-  c.command = 'compress';
   c.dz = size;
   c.tol = 1e-5;
   c.G = 30e3;
@@ -45,8 +44,6 @@ function b = build()
 
   c.L = probL;
   c.W = probW;
-
-  c.eta=3;
 
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/VCT';
