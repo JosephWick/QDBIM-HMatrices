@@ -36,7 +36,7 @@ function r = build()
 
   shearYsize = 100;
 
-  tag = probL/1000;
+  tag = string(probL/1000);
 
   % fault mesh
   ss.M = 400;
