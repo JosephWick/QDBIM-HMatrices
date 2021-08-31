@@ -13,7 +13,7 @@ function b = build()
   probL = 200e3;
   probW = 200e3;
 
-  N = 10000;
+  N = 10;
 
   size = probL/N;
 
@@ -45,6 +45,8 @@ function b = build()
 
   c.L = probL;
   c.W = probW;
+
+  c.eta=3;
 
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/VCT';
