@@ -46,7 +46,7 @@ function b = build()
   c.L = probL;
   c.W = probW;
 
-  c.greens_fn = 'okadaS12';
+  c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/VCT';
   c.write_hd_filename = './tmp/VCT-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
