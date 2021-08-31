@@ -13,7 +13,7 @@ function b = build()
   probL = 200e3;
   probW = 200e3;
 
-  N = 1000;
+  N = 10000;
 
   size = probL/N;
 
