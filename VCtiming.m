@@ -46,6 +46,8 @@ function b = build()
   c.L = probL;
   c.W = probW;
 
+  c.eta=3;
+
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/VCT';
   c.write_hd_filename = './tmp/VCT-hd';
