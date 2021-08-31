@@ -29,8 +29,8 @@ function r = build()
   % x3 (z) is up/down
 
   % ---     general params      ---
-  probL = 100e3;
-  probW = 100e3;
+  probL = 50e3;
+  probW = 50e3;
   lambdaZ = 40e3; % fault depth
   transition = 40e3; %where shear zone starts
 
