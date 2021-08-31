@@ -79,9 +79,9 @@ function r = build()
   ss.Nx = length(shearX);
   ss.Nz = length(shearZ);
 
-  disp(ss.Nx);
-  disp(ss.Ny);
-  disp(ss.Nz);
+  disp(length(shearX));
+  disp(length(shearY));
+  disp(length(shearZ));
 
   ss.polesz = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   % center of shear zone (x3)
