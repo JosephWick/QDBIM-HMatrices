@@ -60,7 +60,7 @@ function r = build()
 
   x = zeros(1,n);
   y = zeros(1,n);
-  z = linspace(c.dz,length,n);
+  z = linspace(0,c.lambdaZ-c.dz,n);
   c.X = [x; y; z];
 
   kvf('Write', c.kvf, c, 4);
