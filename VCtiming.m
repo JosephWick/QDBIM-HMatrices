@@ -65,13 +65,13 @@ end
 function m = time(b)
   addpaths();
 
-  % make vector (boxcar slip)
-
-  X = zeros(b.N,1);
-  X(0.1*b.N:0.9*b.N) = 1.0;
-
   %load hm
   fs1212 = hmmvp('init', b.hm);
+
+  % make vector (boxcar slip)
+  n = hmmvp('getn', fs1212);
+  X = zeros(n,1);
+  X(0.1*n:0.9*n) = 1.0;
 
   % hmmvp mvp
   disp('hmmvp:')
