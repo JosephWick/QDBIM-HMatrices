@@ -60,28 +60,32 @@ function r = build()
   ss.Nz = ss.Ny;
   nc = (-ss.Nz/2:ss.Nz/2);
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
-  shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3 / 1e3
-  shearZhat(end)=[]; shearYhat(end)=[];
-  [shearZ shearY] = ndgrid(shearYhat, shearZhat);
-  shearY = shearY(:)';
-  shearZ = shearZ(:)';
-  shearX = zeros(1,length(shearY));
+  shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
+  shearX = zeros(1,ss.Ny*ss.Nz);
+
   % shear patch centers
   shearX_c = shearX;
-  shearY_chat = shearYhat+shearYsize/2;
-  shearZ_chat = zeros(1,length(shearZhat));
+  shearY_chat = zeros(1,ss.Ny);
+  shearZ_chat = zeros(1,ss.Nz);
   for idx=(1:length(shearZhat)-1)
-    shearZ_chat(idx) = (shearZhat(idx+1) - shearZhat(idx))/2;
+    shearZ_chat(idx) = shearZhat(idx) + (shearZhat(idx+1) - shearZhat(idx))/2;
+    shearY_chat(idx) = shearYhat(idx) + (shearYhat(idx+1) - shearYhat(idx))/2;
   end
-  shearZ_chat(length(shearZ_chat)) = shearZ_chat(length(shearZ_chat)-1);
-  shearZ_chat = shearZ_chat + shearZhat';
-  [shearZ_ct shearY_c] = ndgrid(shearY_chat, shearZ_chat);
-  shearZ_c = shearZ_ct(:)';
+
+  % grid and flatten
+  shearZhat(end)=[]; shearYhat(end)=[];
+  [shearZ shearY] = ndgrid(shearZhat, shearYhat);
+  shearY = shearY(:)';
+  shearZ = shearZ(:)';
+
+  [shearZ_c shearY_c] = ndgrid(shearZ_chat, shearY_chat);
+  shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
 
-  y2 = probL/2;
-  ss.Nx = length(shearX);
-  ss.Nz = length(shearZ);
+  c.X = [shearX_c; shearY_c; shearZ_c];
+  c.Y = [shearX; shearY; shearZ];
+
+  y2 = 0;
 
   disp(length(shearX));
   disp(length(shearYhat));
