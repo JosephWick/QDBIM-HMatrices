@@ -134,10 +134,10 @@ function benchmark(r)
   fin = int8((m/2)+(m/4));
   x(start:fin)=1;
 
-  %disp('hm mvp:');
-  %tic
-  %y_hm = hmmvp('mvp', hm, x);
-  %toc
+  disp('hm mvp:');
+  tic
+  y_hm = hmmvp('mvp', hm, x);
+  toc
 
   % check against sparse matrix
   s12h=@(x2,x3,y2,y3,W, G) G*( ...
@@ -155,10 +155,10 @@ function benchmark(r)
     K(:,k)=s12h(0,y3+r.c.dz/2,0,y3(k),r.c.dz, G);
   end
 
-  %disp('dense mvp:');
-  %tic
-  %y_d = K*x;
-  %toc
+  disp('dense mvp:');
+  tic
+  y_d = K*x;
+  toc
 
   %err metric.
   rs = (1:1:m); cs = (1:1:n);
