@@ -48,8 +48,8 @@ function b = build()
   c.W = probW;
 
   c.greens_fn = 'shear1212';
-  c.write_hmat_filename = './tmp/VCT';
-  c.write_hd_filename = './tmp/VCT-hd';
+  c.write_hmat_filename = './tmp/VCT_8';
+  c.write_hd_filename = './tmp/VCT-hd_8';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
 
