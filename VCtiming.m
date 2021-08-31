@@ -86,8 +86,7 @@ function m = time(b)
   pd = fs1212_d*X;
   toc
 
-  m.hm = fs1212;
-  m.d = fs1212_d;
+  m. = fs1212;
 
 end
 
