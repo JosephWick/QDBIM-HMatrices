@@ -21,7 +21,7 @@ function b = build()
   % grid edges
   ss.Ny = probL/shearYsize;
   ss.Nz = ss.Ny;
-  nc = (-Nz/2:Nz/2)
+  nc = (-ss.Nz/2:ss.Nz/2)
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3 / 1e3
   shearZhat(end)=[]; shearYhat(end)=[];
@@ -58,8 +58,8 @@ function b = build()
   c.W = probW;
 
   c.greens_fn = 'shear1212';
-  c.write_hmat_filename = './tmp/VCT_m6';
-  c.write_hd_filename = './tmp/VCT-hd_m6';
+  c.write_hmat_filename = './tmp/VCT_6';
+  c.write_hd_filename = './tmp/VCT-hd_6';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 4);
 
