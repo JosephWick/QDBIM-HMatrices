@@ -34,6 +34,8 @@ function r = build()
   lambdaZ = 40e3; % fault depth
   transition = 40e3; %where shear zone starts
 
+  shearYsize = 100;
+
   % fault mesh
   ss.M = 400;
   ss.dz = lambdaZ/ss.M;
@@ -50,7 +52,7 @@ function r = build()
 
   % shear mesh
   eps = 1e-12;
-  shearYsize = 100;
+
   ss.Ny = probL/shearYsize;
   ss.Nz = ss.Ny;
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
