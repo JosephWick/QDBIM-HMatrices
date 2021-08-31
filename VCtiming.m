@@ -18,7 +18,7 @@ function b = build()
   size = probL/N;
 
   % grid edges
-  shearX = zeros(N*N,1);
+  shearX = zeros(1,N*N);
   shearYhat = linspace(0, probL-size, N);
   shearZhat = linspace(0, probW-size, N);
 
