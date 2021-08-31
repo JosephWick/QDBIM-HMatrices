@@ -480,8 +480,8 @@ function out = solve(r)
   r.ss.e13p_plate = 0.0; %zeros(length(ss.x2c)*length(ss.x3c),1);
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
-  r.ss.Adif = 1e6*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
-  r.ss.Adis = 90 *ones(length(r.ss.x3c)*length(r.ss.x2c),1);
+  %r.ss.Adif = 1e6*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
+  %r.ss.Adis = 90 *ones(length(r.ss.x3c)*length(r.ss.x2c),1);
   % Power-Law Exponent
   r.ss.n = 3.5*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
   % Activation Energy Wet Oliving (J/mol)
@@ -503,8 +503,8 @@ function out = solve(r)
   Te0 = repmat(r.ss.Tprof',length(r.ss.x2c),1);
   Te0 = reshape(Te0,[length(r.ss.x2c)*length(r.ss.x3c),1]);
   % Coefficients for dislocation and diffusion creep
-  r.ss.Const_dis = r.ss.Adis.*exp(-(r.ss.Qdis+r.ss.P.*r.ss.Voldis)./(8.314.*Te0)).*r.ss.COH.^(r.ss.R);
-  r.ss.Const_diff=r.ss.Adif.*exp(-(r.ss.Qdif+r.ss.P.*r.ss.Voldif)./(8.314.*Te0)).*r.ss.COH.^(r.ss.R).*r.ss.d.^(-r.ss.pexp);
+  %r.ss.Const_dis = r.ss.Adis.*exp(-(r.ss.Qdis+r.ss.P.*r.ss.Voldis)./(8.314.*Te0)).*r.ss.COH.^(r.ss.R);
+  %r.ss.Const_diff=r.ss.Adif.*exp(-(r.ss.Qdif+r.ss.P.*r.ss.Voldif)./(8.314.*Te0)).*r.ss.COH.^(r.ss.R).*r.ss.d.^(-r.ss.pexp);
   % Strengh profile
   s120 = (r.ss.e12p_plate./r.ss.Const_dis).^(1./r.ss.n);
   s130 = zeros(size(s120));
