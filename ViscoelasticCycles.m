@@ -59,7 +59,6 @@ function r = build()
   % shear patch edges
   shearYhat = linspace(0,probL-shearYsize, ss.Ny);
   [shearZ shearY] = ndgrid(shearYhat, shearZhat);
-  shearY = shearY';
   shearY = shearY(:)';
   shearZ = shearZ(:)';
   shearX = zeros(1,length(shearY));
@@ -74,7 +73,6 @@ function r = build()
   shearZ_chat = shearZ_chat + shearZhat';
   [shearZ_ct shearY_c] = ndgrid(shearY_chat, shearZ_chat);
   shearZ_c = shearZ_ct(:)';
-  shearY_c = shearY_c';
   shearY_c = shearY_c(:)';
 
   y2 = probL/2;

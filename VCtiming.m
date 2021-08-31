@@ -24,7 +24,6 @@ function b = build()
   shearZhat = linspace(0, probW-size, N)+transition;
 
   [shearZ shearY] = ndgrid(shearYhat, shearZhat);
-  shearY = shearY';
   shearY = shearY(:)';
   shearZ = shearZ(:)';
 
