@@ -13,7 +13,7 @@ function b = build()
   probL = 200e3;
   probW = 200e3;
 
-  N = 100;
+  N = 10;
   size = probL/N;
 
   transition = 50e3;
@@ -38,7 +38,7 @@ function b = build()
   c.transition = transition;
 
   c.dz = size;
-  c.tol = 1e-6;
+  c.tol = 1e-8;
   c.G = 30e3;
   c.command = 'compress';
   c.allow_overwrite = 1;
