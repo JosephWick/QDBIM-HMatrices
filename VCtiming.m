@@ -70,10 +70,13 @@ function m = time(b)
   X = zeros(b.N,1);
   X(0.1*b.N:0.9*b.N) = 1.0;
 
+  %load hm
+  fs1212 = hmmvp('init', b.hm);
+
   % hmmvp mvp
   disp('hmmvp:')
   tic
-  p = hmmvp('mvp', b.hm, X);
+  p = hmmvp('mvp', fs1212, X);
   toc
 
   % dense mvp
