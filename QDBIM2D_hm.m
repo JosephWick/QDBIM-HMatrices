@@ -58,9 +58,14 @@ function r = build()
 
   c.greens_fn = 'okadaS12';
 
+  % edges
   x = zeros(1,n);
   y = zeros(1,n);
   z = linspace(0,c.lambdaZ-c.dz,n);
+  c.Y = [x; y; z];
+
+  % centers
+  z_c = z+ (dz/2);
   c.X = [x; y; z];
 
   kvf('Write', c.kvf, c, 4);
