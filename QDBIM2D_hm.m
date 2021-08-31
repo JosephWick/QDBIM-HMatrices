@@ -65,7 +65,7 @@ function r = build()
   c.Y = [x; y; z];
 
   % centers
-  z_c = z+ (dz/2);
+  z_c = z+ (c.dz/2);
   c.X = [x; y; z];
 
   kvf('Write', c.kvf, c, 4);
