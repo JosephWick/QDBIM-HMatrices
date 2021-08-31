@@ -7,7 +7,7 @@ end
 % ------------------------- Public ----------------------------------
 
 % time single MVP action using hmmvp and with dense matrices
-function build()
+function b = build()
   addpaths();
 
   probL = 200e3;
@@ -53,38 +53,33 @@ function build()
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
 
+  b.N = N;
+  b.hm = c.write_hmat_filename;
+
 end
 
-function time(b)
+function m = time(b)
   addpaths();
 
-  % Slip velocities
-  V = (2.*b.ss.Vs.*b.ss.a.*b.ss.sigmab./G).*...
-       Lambert_W(G*b.ss.Vo./(2*b.ss.Vs.*b.ss.a.*b.ss.sigmab).* ...
-       exp((tauF-b.ss.mu0.*b.ss.sigmab-b.ss.sigmab.*b.ss.b.*th)./ ...
-       (b.ss.sigmab.*b.ss.a)));
+  % make vector (boxcar slip)
 
-  % slices for kernels
-  % greater than ss.M
-  gM = (b.ss.M+1:1: (b.ss.Nx*ss.Nz)+b.ss.M);
-  % less than or equal to ss.M
-  lM = (1:1:b.ss.M);
-
-  fs1212 = hmmvp('init', b.fs1212, 32);
-  m = hmmvp('getm', fs1212);)
-  X = rand(m,1);
+  X = zeros(b.N,1);
+  X(0.1*N:0.9:N) = 1.0;
 
   % hmmvp mvp
   disp('hmmvp:')
   tic
-  p = hmmvp('mvp', fs1212, X, lM, gM);
+  p = hmmvp('mvp', fs1212, X);
   toc
 
   % dense mvp
+  disp('dense:')
   fs1212_d = hmmvp('extract', b.fs1212, (1:1:m), (1:1:m));
   tic
-  pd = fs1212_d(lm,gm)*X(lm);
+  pd = fs1212_d*X;
+  toc
 
+  m = fs1212_d;
 
 end
 
