@@ -38,7 +38,7 @@ function b = build()
   c.transition = transition;
 
   c.dz = size;
-  c.tol = 1e-8;
+  c.tol = 1e-6;
   c.G = 30e3;
   c.command = 'compress';
   c.allow_overwrite = 1;
@@ -48,8 +48,8 @@ function b = build()
   c.W = probW;
 
   c.greens_fn = 'shear1212';
-  c.write_hmat_filename = './tmp/VCT_8';
-  c.write_hd_filename = './tmp/VCT-hd_8';
+  c.write_hmat_filename = './tmp/VCT';
+  c.write_hd_filename = './tmp/VCT-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
 
