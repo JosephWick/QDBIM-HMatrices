@@ -93,13 +93,13 @@ function m = time(b)
   toc
 
   % dense mvp
-  disp('dense:')
-  fs1212_d = hmmvp('extract', fs1212, (1:1:n), (1:1:n));
-  tic
-  pd = fs1212_d*X;
-  toc
+  %disp('dense:')
+  %fs1212_d = hmmvp('extract', fs1212, (1:1:n), (1:1:n));
+  %tic
+  %pd = fs1212_d*X;
+  %toc
 
-  m = fs1212_d;
+  m = 1%fs1212_d;
 
 end
 
