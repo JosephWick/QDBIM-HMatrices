@@ -79,7 +79,7 @@ function m = time(b)
   addpaths();
 
   %load hm
-  fs1212 = hmmvp('init', b.hm, 16);
+  fs1212 = hmmvp('init', b.hm, 1);
 
   % make vector (boxcar slip)
   n = hmmvp('getn', fs1212);
