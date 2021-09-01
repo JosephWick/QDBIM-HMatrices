@@ -93,7 +93,9 @@ function r = build()
   disp(length(shearYhat));
   disp(length(shearZhat));
 
+  disp('polesz size')
   ss.polesz = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
+  disp(size(ss.polesz))
   % center of shear zone (x3)
   ss.x3c=(ss.polesz(2:end)+ss.polesz(1:end-1))/2;
   W=ss.polesz(2:end)-ss.polesz(1:end-1);
