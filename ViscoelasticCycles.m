@@ -86,8 +86,7 @@ function r = build()
   c.Y = [shearX; shearY; shearZ];
 
   y2 = probL/2;
-  ss.Nx = length(shearX);
-  ss.Nz = length(shearZ);
+  ss.Nx = ss.Nz;
 
   disp(length(shearX));
   disp(length(shearYhat));
