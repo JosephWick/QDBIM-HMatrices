@@ -380,11 +380,11 @@ function out = solve(r)
   % make movie
   clf;
   fig = figure;
-  fname = 'figures/test.gif';
+  fname = 'figures/strain.gif';
   for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
-    imagesc(oneEsq)
+    imagesc(oneEsq); colorbar;
     title(idx)
     drawnow
     frame = getframe(fig);
@@ -402,6 +402,26 @@ function out = solve(r)
   % Velocity
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
 
+  % velocity movie
+  clf;
+  fig = figure;
+  fname='figures/faultV.gif';
+  for idx = 1:size(V,1)
+    oneV = V(idx,:)';
+    imagesc(oneV); colorbar;
+    title(idx)
+    drawnow
+    frame = getframe(fig);
+    im{idx} = frame2im(frame);
+
+    [A, map] = rgb2ind(im{idx}, 256);
+    if idx==1
+      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+    else
+      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+    end
+  end
+  
   % Maximum Velocity
   Vmax=zeros(length(t)-1,1);
   for ts=1:length(t)-1
