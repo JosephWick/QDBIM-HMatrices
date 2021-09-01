@@ -392,6 +392,7 @@ function out = solve(r)
   pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
+  disp(size( [min(min(log10(V))) max(max(log10(V)))] ))
   h=colorbar('Location','NorthOutside');
   caxis([min(min(log10(V))) max(max(log10(V)))]);
   colormap(f1,parula);
