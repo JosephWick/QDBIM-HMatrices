@@ -13,10 +13,10 @@ function b = build()
   probL = 200e3;
   probW = 200e3;
 
-  % 10, 20, 40, 80, 160, 320
+  % 20, 40, 80, 160, 320
 
   transition = 40e3; %where shear zone starts
-  shearYsize = 625;
+  shearYsize =  10000;
 
   % grid edges
   ss.Ny = probL/shearYsize;
@@ -51,7 +51,7 @@ function b = build()
   c.transition = transition;
 
   c.dz = shearYsize;
-  c.tol = 1e-6;
+  c.tol = 1e-8;
   c.G = 30e3;
   c.command = 'compress';
   c.allow_overwrite = 1;
@@ -61,8 +61,8 @@ function b = build()
   c.W = probW;
 
   c.greens_fn = 'shear1212';
-  c.write_hmat_filename = './tmp/VCT_6';
-  c.write_hd_filename = './tmp/VCT-hd_6';
+  c.write_hmat_filename = './tmp/VCT_8';
+  c.write_hd_filename = './tmp/VCT-hd_8';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 4);
 
