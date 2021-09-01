@@ -394,7 +394,7 @@ function out = solve(r)
 
   disp( ( [min(min(log10(V))) max(max(log10(V)))] ))
   h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V))) max(max(log10(V)))+0.1]);
+  caxis([min(min(log10(V))) max(max(log10(V)))+1]);
   colormap(f1,parula);
   title(h,'Slip Rate West (m/s)')
   xlabel('Time (yr)')
