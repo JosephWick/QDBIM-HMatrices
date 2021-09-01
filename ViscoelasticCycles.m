@@ -269,7 +269,7 @@ function out = solve(r)
 
   % frictional parameters
   r.ss.a = 1e-3*ones(size(r.ss.y3f));
-  r.ss.b = 1e-4*ones(size(r.ss.y3f)); %r.ss.a+2.1e-4*ones(size(r.ss.y3f));
+  r.ss.b = r.ss.a+2.1e-4*ones(size(r.ss.y3f));
 
   r.ss.mu0 = 0.2*ones(size(r.ss.y3f));
   % characteristic weakening distance (m)
@@ -284,8 +284,8 @@ function out = solve(r)
   % Velocity-strengthening at edges
   top    = floor(5e3/(r.ss.lambdaZ/r.ss.M));
   bottom = ceil(15e3/(r.ss.lambdaZ/r.ss.M));
-  %r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4*ones(top,1);
-  %r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4*ones(length(r.ss.a(bottom:end)),1);
+  r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4*ones(top,1);
+  r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4*ones(length(r.ss.a(bottom:end)),1);
 
   % - Rheology -
   r.ss.e12p_plate = 1e-14; %1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
@@ -361,7 +361,7 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e7],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e6],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
@@ -421,7 +421,7 @@ function out = solve(r)
       imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
     end
   end
-  
+
   % Maximum Velocity
   Vmax=zeros(length(t)-1,1);
   for ts=1:length(t)-1
