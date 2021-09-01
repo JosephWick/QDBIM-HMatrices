@@ -84,6 +84,8 @@ vector = e12p-ss.e12p_plate;
 dummy = zeros(ss.M,1);
 X = [vector; dummy];
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate)');
+disp(hmmvp('getm', hm.fs1212))
+disp(size(X))
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
 Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1 + t2(1:ss.M) + t3(1:ss.M);
