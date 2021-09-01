@@ -332,7 +332,7 @@ function out = solve(r)
   r.ss.dgfS=4;
   %% Initialize State Vector
   Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.x2c)*length(r.ss.x3c)*r.ss.dgfS,1);
-  disp(size(Y0))
+
   % Fault patches
   Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.y3f));
   Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength;
@@ -368,15 +368,14 @@ function out = solve(r)
   for k=1:length(t)-1
     Yp(k,:)=(Y(k+1,:)-Y(k,:))/(t(k+1)-t(k));
   end
-  disp(size(Yp));
-  arse;
 
   % - figures -
   % Strain rate at center
   Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS*length(r.ss.x2c):end)'.^2 +...
         Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+4:r.ss.dgfS*length(r.ss.x2c):end)'.^2);
 
-  Epall = sqrt( Yp(:,r.ss.M*r.ss.dfgF) );
+  Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
+                Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
 
   % Velocity
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
@@ -456,6 +455,7 @@ function out = solve(r)
   out.t = t;
   out.V = V;
   out.E = Ep;
+  out.Eall = Epall;
 
   f3=subplot(5,1,3);cla;
   pcolor(1:length(t)-1, r.ss.x3c(1:end)/1e3, log10(Ep)), shading flat
