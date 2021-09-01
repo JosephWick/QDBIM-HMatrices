@@ -454,10 +454,10 @@ function out = solve(r)
   out.E = Ep;
 
   f3=subplot(5,1,3);cla;
-  disp(length(t))
-  disp(size(r.ss.x3c(1:end-1)/1e3))
+  disp(length(t)-1)
+  disp(size(r.ss.x3c(1:end)/1e3))
   disp(size(log10(Ep)))
-  pcolor(1:length(t), r.ss.x3c(1:end-1)/1e3, log10(Ep)), shading flat
+  pcolor(1:length(t)-1, r.ss.x3c(1:end)/1e3, log10(Ep)), shading flat
   set(gca,'YDir','reverse');
 
   %caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
