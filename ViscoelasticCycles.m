@@ -361,7 +361,7 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e6],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e7],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
@@ -377,48 +377,51 @@ function out = solve(r)
   Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
                 Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
 
-  % make movie
-  clf;
-  fig = figure;
-  fname = 'figures/strain.gif';
-  for idx = 1:size(Epall, 2)
-    oneE = Epall(:,idx);
-    oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
-    imagesc(oneEsq); colorbar;
-    title(idx)
-    drawnow
-    frame = getframe(fig);
-    im{idx} = frame2im(frame);
-
-    [A,map] = rgb2ind(im{idx},256);
-    if idx==1
-      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
-    else
-      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
-    end
-
-  end
-
   % Velocity
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
 
-  % velocity movie
-  clf;
-  fig = figure;
-  fname='figures/faultV.gif';
-  for idx = 1:size(V,1)
-    oneV = V(idx,:)';
-    imagesc(oneV); colorbar;
-    title(idx)
-    drawnow
-    frame = getframe(fig);
-    im{idx} = frame2im(frame);
+  % make movie
+  movie=true;
+  if movie
+    clf;
+    fig = figure;
+    fname = 'figures/strain.gif';
+    for idx = 1:size(Epall, 2)
+      oneE = Epall(:,idx);
+      oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
+      imagesc(oneEsq); colorbar;
+      title(idx)
+      drawnow
+      frame = getframe(fig);
+      im{idx} = frame2im(frame);
 
-    [A, map] = rgb2ind(im{idx}, 256);
-    if idx==1
-      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
-    else
-      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+      [A,map] = rgb2ind(im{idx},256);
+      if idx==1
+        imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+      else
+        imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+      end
+
+    end
+
+    % velocity movie
+    clf;
+    fig = figure;
+    fname='figures/faultV.gif';
+    for idx = 1:size(V,1)
+      oneV = V(idx,:)';
+      imagesc(oneV); colorbar;
+      title(idx)
+      drawnow
+      frame = getframe(fig);
+      im{idx} = frame2im(frame);
+
+      [A, map] = rgb2ind(im{idx}, 256);
+      if idx==1
+        imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+      else
+        imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+      end
     end
   end
 
