@@ -371,8 +371,8 @@ function out = solve(r)
 
   % - figures -
   % Strain rate at center
-  Ep=sqrt(Yp(:,2*r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS*length(r.ss.x2c):end)'.^2 +...
-        Yp(:,2*r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+4:r.ss.dgfS*length(r.ss.x2c):end)'.^2);
+  Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS*length(r.ss.x2c):end)'.^2 +...
+        Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+4:r.ss.dgfS*length(r.ss.x2c):end)'.^2);
 
   % Velocity
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
