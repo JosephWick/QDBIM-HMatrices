@@ -443,7 +443,7 @@ function out = solve(r)
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V))) max(max(log10(V)))]);
+  caxis([min(min(log10(V))) max(max(log10(V)))+0.1]);
   colormap(f1,parula);
   title(h,'Slip Rate West (m/s)')
   xlabel('Time Steps')
