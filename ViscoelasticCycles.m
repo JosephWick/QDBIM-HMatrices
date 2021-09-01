@@ -361,7 +361,7 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e10],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e4],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
@@ -376,6 +376,27 @@ function out = solve(r)
 
   Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
                 Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
+
+  % make movie
+  clf;
+  fig = figure;
+  fname = 'test.gif';
+  for idx:size(Epall, 2)
+    oneE = Epall(:,idx);
+    oneEsq = reshape(ss.Ny, ss.Nz);
+    imagesc(oneEsq)
+    drawnow
+    frame = getframe(fig);
+    im{idx} = frame2im(frame);
+
+    [A,map] = rgb2ind(im{idx},256);
+    if idx==1
+      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',1);
+    else
+      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',1);
+    end
+
+  end
 
   % Velocity
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
