@@ -55,14 +55,6 @@ th = Y(3:ss.dgfF:ss.M*ss.dgfF);
 th = th';
 
 % Slip velocities
-disp(size(ss.Vs))
-disp(size(ss.a))
-disp(size(ss.Vo))
-disp(size(ss.Vs))
-disp(size(tauF))
-disp(size(ss.mu0))
-disp(size(ss.b))
-disp(size(th))
 V = (2.*ss.Vs.*ss.a.*ss.sigmab./G).*...
      Lambert_W(G*ss.Vo./(2*ss.Vs.*ss.a.*ss.sigmab).*...
      exp((tauF-ss.mu0.*ss.sigmab-ss.sigmab.*ss.b.*th)./(ss.sigmab.*ss.a)));
@@ -84,14 +76,14 @@ Yp=zeros(size(Y));
 %                        Fault                        %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % Slip velocity
-disp(size(Yp(1:ss.dgfF:ss.M*ss.dgfF)))
-disp(size(V))
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % Shear stress rate on fault due to fault and shear zones
 vector = e12p-ss.e12p_plate;
 dummy = zeros(ss.M,1);
 X = [vector; dummy];
+disp(hmmvp('getm', hm.s12))
+disp(size((V-ss.V_plate)))
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate));
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
