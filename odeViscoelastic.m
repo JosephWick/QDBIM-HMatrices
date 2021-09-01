@@ -48,19 +48,12 @@ lM = (1:1:ss.M);
 
 % Shear stress on faults
 tauF = Y(2:ss.dgfF:ss.M*ss.dgfF);
+tauF = tauF';
 
 % State variables
 th   = Y(3:ss.dgfF:ss.M*ss.dgfF);
 
 % Slip velocities
-disp(size(ss.Vs))
-disp(size(ss.a))
-disp(size(ss.Vo))
-disp(size(ss.Vs))
-disp(size(tauF))
-disp(size(ss.mu0))
-disp(size(ss.b))
-disp(size(th))
 V = (2.*ss.Vs.*ss.a.*ss.sigmab./G).*...
      Lambert_W(G*ss.Vo./(2*ss.Vs.*ss.a.*ss.sigmab).*...
      exp((tauF-ss.mu0.*ss.sigmab-ss.sigmab.*ss.b.*th)./(ss.sigmab.*ss.a)));
