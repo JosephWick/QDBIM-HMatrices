@@ -41,7 +41,8 @@ G=30e3; % MPa
 
 % slices for kernels
 % greater than ss.M
-gM = (ss.M+1:1: (ss.Nx*ss.Nz)+ss.M);
+em = hmmvp('getm', hm.ss1212);
+gM = (ss.M+1:1: em);
 % less than or equal to ss.M
 lM = (1:1:ss.M);
 
@@ -82,8 +83,6 @@ Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 vector = e12p-ss.e12p_plate;
 dummy = zeros(ss.M,1);
 X = [vector; dummy];
-disp(hmmvp('getm', hm.s12))
-disp(size((V-ss.V_plate)))
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate)');
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
