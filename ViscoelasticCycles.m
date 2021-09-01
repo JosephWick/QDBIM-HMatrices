@@ -392,9 +392,8 @@ function out = solve(r)
   pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
-  disp( ( [min(min(log10(V))) max(max(log10(V)))] ))
   h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V))) max(max(log10(V)))+1]);
+  caxis([min(min(log10(V))) max(max(log10(V)))+0.1]);
   colormap(f1,parula);
   title(h,'Slip Rate West (m/s)')
   xlabel('Time (yr)')
@@ -405,7 +404,7 @@ function out = solve(r)
   set(gca,'YDir','reverse');
 
   h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V))) max(max(log10(V)))]);
+  caxis([min(min(log10(V))) max(max(log10(V)))+0.1]);
   colormap(f2,parula);
   title(h,'Slip Rate East (m/s)')
   xlabel('Time (yr)')
