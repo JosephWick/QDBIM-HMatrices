@@ -74,9 +74,10 @@ Yp=zeros(size(Y));
 %                        Fault                        %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % Slip velocity
-%disp('a')
+disp(size(Yp(1:ss.dgfF:ss.M*ss.dgfF)))
+disp(size(V))
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
-%disp('b')
+
 % Shear stress rate on fault due to fault and shear zones
 vector = e12p-ss.e12p_plate;
 dummy = zeros(ss.M,1);
