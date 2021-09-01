@@ -383,7 +383,7 @@ function out = solve(r)
   fname = 'test.gif';
   for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
-    oneEsq = reshape(r.ss.Ny, r.ss.Nz);
+    oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
     imagesc(oneEsq)
     drawnow
     frame = getframe(fig);
