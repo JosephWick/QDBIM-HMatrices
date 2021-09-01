@@ -361,18 +361,22 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e10],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e4],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
   for k=1:length(t)-1
     Yp(k,:)=(Y(k+1,:)-Y(k,:))/(t(k+1)-t(k));
   end
+  disp(size(Yp));
+  arse;
 
   % - figures -
   % Strain rate at center
   Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS*length(r.ss.x2c):end)'.^2 +...
         Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+4:r.ss.dgfS*length(r.ss.x2c):end)'.^2);
+
+  Epall = sqrt( Yp(:,r.ss.M*r.ss.dfgF) );
 
   % Velocity
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
