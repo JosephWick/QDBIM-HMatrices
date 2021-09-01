@@ -381,7 +381,7 @@ function out = solve(r)
   clf;
   fig = figure;
   fname = 'test.gif';
-  for idx:size(Epall, 2)
+  for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(ss.Ny, ss.Nz);
     imagesc(oneEsq)
