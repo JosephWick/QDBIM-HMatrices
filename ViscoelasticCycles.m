@@ -361,7 +361,7 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e10],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e5],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
@@ -391,9 +391,9 @@ function out = solve(r)
 
     [A,map] = rgb2ind(im{idx},256);
     if idx==1
-      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',1);
+      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
     else
-      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',1);
+      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
     end
 
   end
