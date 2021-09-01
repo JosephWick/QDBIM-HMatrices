@@ -51,7 +51,8 @@ tauF = Y(2:ss.dgfF:ss.M*ss.dgfF);
 tauF = tauF';
 
 % State variables
-th   = Y(3:ss.dgfF:ss.M*ss.dgfF);
+th = Y(3:ss.dgfF:ss.M*ss.dgfF);
+th = th';
 
 % Slip velocities
 disp(size(ss.Vs))
