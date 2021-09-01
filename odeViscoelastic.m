@@ -81,13 +81,9 @@ Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % Shear stress rate on fault due to fault and shear zones
 vector = e12p-ss.e12p_plate;
-disp(size(e12p))
-disp(size(ss.e12p_plate))
 dummy = zeros(ss.M,1);
 X = [vector; dummy];
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate)');
-disp(hmmvp('getm', hm.fs1212))
-disp(size(X))
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
 Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1 + t2(1:ss.M) + t3(1:ss.M);
@@ -95,10 +91,8 @@ Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1 + t2(1:ss.M) + t3(1:ss.M);
 %                             hmmvp('mvp', hm.fs1212, X, lM, gM)+...
 %                             hmmvp('mvp', hm.fs1312, X, lM, gM);
 
-%disp('c')
 % Rate of state
 Yp(3:ss.dgfF:ss.M*ss.dgfF)=(ss.Vo.*exp(-th)-V)./ss.L;
-%disp('d')
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                     Shear Zones                     %
@@ -121,9 +115,7 @@ t2 = hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate));
 vector = V-ss.V_plate;
 dummy = zeros(ss.Nx*ss.Nz,1);
 X = [vector; dummy];
-%disp(size(vector))
 m = hmmvp('getm', hm.sf13);
-%disp(size(hmmvp('extract', hm.sf13, (1:1:m), (1:1:m))))
 t3 = hmmvp('mvp', hm.sf13, X, lM, gM);
 Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(1:ss.Nx*ss.Nz);
 %Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate))+...
