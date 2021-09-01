@@ -99,7 +99,7 @@ function m = time(b)
   %pd = fs1212_d*X;
   %toc
 
-  m = 1%fs1212_d;
+  m = 1;%fs1212_d;
 
 end
 
