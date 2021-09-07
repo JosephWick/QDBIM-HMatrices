@@ -163,7 +163,6 @@ function get_hm (b)
   hm = hmmvp('extract', hm, rs, cs);
 
   imagesc(hm); colorbar;
-  colormap(hot);
   saveas(gcf, 'figures/hmmvpEx_hm.png')
 
 end
@@ -279,6 +278,7 @@ function analyze_errors (p, c, ttl)
   hmmvp('cleanup', id);
 
   ewre = abs((G_true - G)./G_true);
+  colormap(hot);
   imagesc(log10(ewre)); colorbar;
   cf = n^2/nnz;
   title(sprintf(['%s: image is log_{10} EWRE\n',...
