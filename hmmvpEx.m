@@ -278,7 +278,7 @@ function analyze_errors (p, c, ttl)
   hmmvp('cleanup', id);
 
   ewre = abs((G_true - G)./G_true);
-  colormap(hot);
+  colormap(turbo);
   imagesc(log10(ewre)); colorbar;
   cf = n^2/nnz;
   title(sprintf(['%s: image is log_{10} EWRE\n',...
