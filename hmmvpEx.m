@@ -163,6 +163,7 @@ function get_hm (b)
   hm = hmmvp('extract', hm, rs, cs);
 
   imagesc(hm); colorbar;
+  colormap(hot);
   saveas(gcf, 'figures/hmmvpEx_hm.png')
 
 end
