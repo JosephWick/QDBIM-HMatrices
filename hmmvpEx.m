@@ -278,7 +278,8 @@ function analyze_errors (p, c, ttl)
   hmmvp('cleanup', id);
 
   ewre = abs((G_true - G)./G_true);
-  colormap('red-yellow-blue');
+  mycolormap = customcolormap([0,0.5,1], [0.468 0.0625 0.0625; 0.789 0.320 0.320; 1 0.75 0.75]);
+  colormap(mycolormap);
   imagesc(log10(ewre)); colorbar;
   cf = n^2/nnz;
   title(sprintf(['%s: image is log_{10} EWRE\n',...
