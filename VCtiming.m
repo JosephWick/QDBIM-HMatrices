@@ -103,6 +103,21 @@ function m = time(b)
 
 end
 
+function greensFn(b)
+  addpaths();
+
+  % load hm
+  hm = hmmvp('init', b, 16);
+
+  % extract a row
+  n = hmmvp('getn', hm);)
+  row = hmmvp('extract', 200, 1, 1:n);
+
+  plot(row);
+  saveas(gcf, 'figures/greensFnRow.png')
+
+end
+
 % ----------------------- Private ----------------------------------
 function addpaths()
   addpath('../hmmvp-okada/matlab')
