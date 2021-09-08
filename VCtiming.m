@@ -103,11 +103,11 @@ function m = time(b)
 
 end
 
-function greensFn(b)
+function greensFn(id)
   addpaths();
 
   % load hm
-  hm = hmmvp('init', b, 16);
+  hm = hmmvp('init', id, 16);
 
   % extract a row
   n = hmmvp('getn', hm);
