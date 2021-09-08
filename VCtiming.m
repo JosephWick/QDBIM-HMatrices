@@ -111,7 +111,7 @@ function greensFn(id)
 
   % extract a row
   n = hmmvp('getn', hm);
-  row = hmmvp('extract', 200, 1, 1:n);
+  row = hmmvp('extract', hm, 200, 1, 1:n);
 
   plot(row);
   saveas(gcf, 'figures/greensFnRow.png')
