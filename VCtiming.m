@@ -113,6 +113,7 @@ function greensFn(id)
   n = hmmvp('getn', hm);
   row = hmmvp('extract', hm, 200, 1:n);
 
+  clf;
   plot(row);
   saveas(gcf, 'figures/greensFnRow.png')
 
