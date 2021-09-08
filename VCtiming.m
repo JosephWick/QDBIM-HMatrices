@@ -114,7 +114,7 @@ function greensFn(id)
   row = hmmvp('extract', hm, 200, 1:n);
 
   clf;
-  plot(log10(row));
+  plot((row));
   saveas(gcf, 'figures/greensFnRow.png')
 
   writematrix(row, 'HMrow.csv')
