@@ -31,10 +31,11 @@ function r = build()
   % ---     general params      ---
   probL = 200e3;
   probW = 200e3;
-  lambdaZ = 40e3; % fault depth
+  lambdaZ = 35e3; % fault depth
   transition = 40e3; %where shear zone starts
 
-  shearYsize = 4000;
+  ss.Ny = 50; %num elems for shear mesh
+  ss.Nz = 50;
 
   tag = string(probL/1000);
 
@@ -56,8 +57,6 @@ function r = build()
   eps = 1e-12;
 
   % shear patch edges
-  ss.Ny = probL/shearYsize;
-  ss.Nz = ss.Ny;
   nc = (-ss.Nz/2:ss.Nz/2);
   shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
