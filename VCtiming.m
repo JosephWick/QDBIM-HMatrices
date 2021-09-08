@@ -110,7 +110,7 @@ function greensFn(b)
   hm = hmmvp('init', b, 16);
 
   % extract a row
-  n = hmmvp('getn', hm);)
+  n = hmmvp('getn', hm);
   row = hmmvp('extract', 200, 1, 1:n);
 
   plot(row);
