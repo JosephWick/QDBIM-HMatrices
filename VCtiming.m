@@ -87,17 +87,17 @@ function m = time(b)
   X(0.1*n:0.9*n) = 1.0;
 
   % hmmvp mvp
-  disp('hmmvp:')
-  tic
-  p = hmmvp('mvp', fs1212, X);
-  toc
-
-  % dense mvp
-  %disp('dense:')
-  %fs1212_d = hmmvp('extract', fs1212, (1:1:n), (1:1:n));
+  %disp('hmmvp:')
   %tic
-  %pd = fs1212_d*X;
+  %p = hmmvp('mvp', fs1212, X);
   %toc
+
+   dense mvp
+  disp('dense:')
+  fs1212_d = hmmvp('extract', fs1212, (1:1:n), (1:1:n));
+  tic
+  pd = fs1212_d*X;
+  toc
 
   m = 1;%fs1212_d;
 
