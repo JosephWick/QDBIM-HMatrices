@@ -59,7 +59,7 @@ function b = build()
   c.L = probL;
   c.W = probW;
 
-  c.greens_fn = 'shear1212';
+  c.greens_fn = 'shear1313';
   c.write_hmat_filename = './tmp/VCT_8';
   c.write_hd_filename = './tmp/VCT-hd_8';
   c.kvf = [c.write_hmat_filename '.kvf'];
@@ -99,6 +99,13 @@ function m = time(b)
   toc
 
   m = fs1212_d;
+
+end
+
+function r = row(b)
+  addpaths();
+
+  fs12
 
 end
 
