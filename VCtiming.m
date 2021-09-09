@@ -92,8 +92,9 @@ function m = time(b)
   toc
 
   % dense mvp
-  disp('dense:')
+  disp('loading dense matrix...')
   fs1212_d = hmmvp('extract', fs1212, (1:1:n), (1:1:n));
+  disp('dense mvp:')
   tic
   pd = fs1212_d*X;
   toc
