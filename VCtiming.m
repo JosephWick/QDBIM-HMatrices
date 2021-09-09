@@ -98,6 +98,12 @@ function m = time(b)
   tic
   pd = fs1212_d*X;
   toc
+  tic
+  pd = fs1212_d*X;
+  toc
+  tic
+  pd = fs1212_d*X;
+  toc
 
   m = fs1212_d;
 
