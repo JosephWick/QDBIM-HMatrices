@@ -13,10 +13,9 @@ function b = build()
   probL = 200e3;
   probW = 200e3;
 
-  % 20, 40, 80, 160, 320
-
   transition = 40e3; %where shear zone starts
-  shearYsize = 5000; %10000, 5000, 2500, 1250, 625
+  shearYsize = 5000; % 10000, 5000, 2500, 1250, 625
+                     % 20,    40,   80,   160,  320
 
   % grid edges
   ss.Ny = probL/shearYsize;
@@ -87,10 +86,10 @@ function m = time(b)
   X(0.1*n:0.9*n) = 1.0;
 
   % hmmvp mvp
-  %disp('hmmvp:')
-  %tic
-  %p = hmmvp('mvp', fs1212, X);
-  %toc
+  disp('hmmvp:')
+  tic
+  p = hmmvp('mvp', fs1212, X);
+  toc
 
   % dense mvp
   disp('dense:')
