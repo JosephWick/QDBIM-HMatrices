@@ -14,7 +14,7 @@ function b = build()
   probW = 200e3;
 
   transition = 40e3; %where shear zone starts
-  shearYsize = 2500; % 10000, 5000, 2500, 1250, 625
+  shearYsize = 625; % 10000, 5000, 2500, 1250, 625
                      % 20,    40,   80,   160,  320
 
   % grid edges
@@ -50,7 +50,7 @@ function b = build()
   c.transition = transition;
 
   c.dz = shearYsize;
-  c.tol = 1e-6;
+  c.tol = 1e-8;
   c.G = 30e3;
   c.command = 'compress';
   c.allow_overwrite = 1;
