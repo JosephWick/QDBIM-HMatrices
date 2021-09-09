@@ -111,8 +111,8 @@ function r = row(b)
   X = zeros(n,1);
   X(floor(n/2)) = 1;
 
-  r = hmmvp('mvp', fs1313, X);
-
+  %r = hmmvp('mvp', fs1313, X);
+  r = hmmvp('extract', fs1313, 1:n, 40);
 end
 
 function greensFn(id)
