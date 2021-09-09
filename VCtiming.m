@@ -112,7 +112,7 @@ function r = row(b)
   X(floor(n/2)) = 1;
 
   %r = hmmvp('mvp', fs1313, X);
-  r = hmmvp('extract', fs1313, 1:n, 40);
+  r = hmmvp('extract', fs1313, 40, 1:n);
 end
 
 function greensFn(id)
