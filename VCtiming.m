@@ -105,7 +105,13 @@ end
 function r = row(b)
   addpaths();
 
-  fs12
+  fs1313 = hmmvp('init', b.hm, 16);
+
+  n = hmmvp('getn', fs1313);
+  X = zeros(n,1);
+  X(floor(n/2)) = 1;
+
+  p = hmmvp('mvp', fs1313, X);
 
 end
 
