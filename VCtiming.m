@@ -111,7 +111,7 @@ function r = row(b)
   X = zeros(n,1);
   X(floor(n/2)) = 1;
 
-  p = hmmvp('mvp', fs1313, X);
+  r = hmmvp('mvp', fs1313, X);
 
 end
 
