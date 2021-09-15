@@ -400,6 +400,7 @@ function out = solve(r)
     end
 
     % velocity movie
+  if movie
     clf;
     fig = figure;
     fname='figures/faultV.gif';
