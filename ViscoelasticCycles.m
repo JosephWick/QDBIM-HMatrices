@@ -279,8 +279,8 @@ function out = solve(r)
   % Velocity-strengthening at edges
   top    = floor(5e3/(r.ss.lambdaZ/r.ss.M));
   bottom = ceil(15e3/(r.ss.lambdaZ/r.ss.M));
-  r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4;
-  r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4;
+  %r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4;
+  %r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4;
 
   % - Rheology -
   r.ss.e12p_plate = 1e-14; %1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
