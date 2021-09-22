@@ -353,10 +353,11 @@ function out = solve(r)
   % initialize the function handle with
   % set constitutive parameters
   yp=@(t,y) odeViscoelastic(t,y,r.ss, hm);
+  disp('solving...')
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e10],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e7],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
