@@ -522,6 +522,7 @@ function out = solve(r)
   saveas(f2, 'figures/VC_f2.png')
   saveas(f3, 'figures/VC_f3.png')
 
+  clf;
   f4 = subplot(2,1,1); cla;
   imagesc(Ep);
 
