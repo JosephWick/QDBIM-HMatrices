@@ -524,7 +524,7 @@ function out = solve(r)
 
   clf;
   f4 = subplot(2,1,1);
-  imagesc(V);
+  imagesc(V');
   f4 = subplot(2,1,2); cla;
   imagesc(Ep);
 
