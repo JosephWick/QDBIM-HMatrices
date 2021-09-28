@@ -518,12 +518,13 @@ function out = solve(r)
   ylabel('Velocity (m/s) log10')
   title('Time series at center of seismogenic zones')
 
-  f4 = subplot(2,1,1); cla;
-  imagesc(Ep);
-
   saveas(f1, 'figures/VC_f1.png')
   saveas(f2, 'figures/VC_f2.png')
   saveas(f3, 'figures/VC_f3.png')
+
+  f4 = subplot(2,1,1); cla;
+  imagesc(Ep);
+
   saveas(f4, 'figures/VC_f4.png')
 
 end
