@@ -432,7 +432,7 @@ function out = solve(r)
   %                    Function of Time                   %
   % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
   figure(1);clf;set(gcf,'name','Time Evolution')
-  f1=subplot(5,1,1);cla;
+  f1=subplot(4,1,1);cla;
   pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
@@ -443,7 +443,7 @@ function out = solve(r)
   xlabel('Time (yr)')
   ylabel('Depth (km)');
 
-  f2=subplot(5,1,2);cla;
+  f2=subplot(4,1,2);cla;
   pcolor(t(1:end-1)/3.15e7,r.ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
@@ -454,10 +454,6 @@ function out = solve(r)
   xlabel('Time (yr)')
   ylabel('Depth (km)');
 
-  f3=subplot(5,1,3);cla;
-  %pcolor(t(1:end-1)/3.15e7,r.ss.x3c/1e3,log10(Ep)), shading flat
-  set(gca,'YDir','reverse');
-
   %caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
   h1=colorbar('Location','NorthOutside');
   colormap(f3,hot);
@@ -465,13 +461,13 @@ function out = solve(r)
   xlabel('Time (Yr)')
   ylabel('Depth (km)');
 
-  subplot(5,1,4);cla;
+  subplot(4,1,3);cla;
   plot(t(1:end-1)/3.15e7,log10(Vmax))
   xlabel('Time (Yr)')
   ylabel('Velocity (m/s) log10')
   title('Maximum slip rates on faults')
 
-  subplot(5,1,5);cla;
+  subplot(4,1,4);cla;
   plot(t(1:end-1)/3.15e7,log10(V(:,floor((top+bottom)/2))))
   xlabel('Time (Yr)')
   ylabel('Velocity (m/s) log10')
@@ -482,7 +478,7 @@ function out = solve(r)
   % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
   f1=figure(2);clf;set(gcf,'name','Time Step Evolution')
 
-  subplot(5,1,1);cla;
+  subplot(4,1,1);cla;
   pcolor(1:length(t)-1,r.ss.y3f/1e3,log10(V')), shading flat
   set(gca,'YDir','reverse');
 
@@ -498,7 +494,7 @@ function out = solve(r)
   out.E = Ep;
   out.Eall = Epall;
 
-  f3=subplot(5,1,3);cla;
+  f3=subplot(4,1,2);cla;
   pcolor(1:length(t)-1, r.ss.x3c(1:end)/1e3, log10(Ep)), shading flat
   set(gca,'YDir','reverse');
 
@@ -509,13 +505,13 @@ function out = solve(r)
   xlabel('Time Steps')
   ylabel('Depth (km)');
 
-  subplot(5,1,4);cla;
+  subplot(4,1,3);cla;
   plot(1:length(t)-1,log10(Vmax))
   xlabel('Time Steps')
   ylabel('Velocity (m/s) log10')
   title('Maximum slip rates on faults')
 
-  subplot(5,1,5);cla;
+  subplot(4,1,4);cla;
   plot(1:length(t)-1,log10(V(:,floor((top+bottom)/2))))
   xlabel('Time Steps')
   ylabel('Velocity (m/s) log10')
