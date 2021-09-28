@@ -370,6 +370,7 @@ function out = solve(r)
   Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS*length(r.ss.x2c):end)'.^2 +...
         Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+4:r.ss.dgfS*length(r.ss.x2c):end)'.^2);
 
+  % strain rate over whole ductile area
   Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
                 Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
 
@@ -517,9 +518,13 @@ function out = solve(r)
   ylabel('Velocity (m/s) log10')
   title('Time series at center of seismogenic zones')
 
+  f4 = subplot(2,1,1); cla;
+  imagesc(Ep);
+
   saveas(f1, 'figures/VC_f1.png')
   saveas(f2, 'figures/VC_f2.png')
   saveas(f3, 'figures/VC_f3.png')
+  saveas(f4, 'figures/VC_f4.png')
 
 end
 
