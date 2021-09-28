@@ -456,7 +456,7 @@ function out = solve(r)
 
   %caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
   h1=colorbar('Location','NorthOutside');
-  colormap(f3,hot);
+  colormap(f2,hot);
   title(h1,'Strain Rate (1/s)')
   xlabel('Time (Yr)')
   ylabel('Depth (km)');
