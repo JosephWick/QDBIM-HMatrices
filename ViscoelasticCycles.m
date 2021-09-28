@@ -525,8 +525,14 @@ function out = solve(r)
   clf;
   f4 = subplot(2,1,1);
   imagesc(V');
+  title('Slip Rate of Fault')
+  ylabel('Block')
+  xlabel('Time Steps')
   f4 = subplot(2,1,2); cla;
   imagesc(Ep);
+  title('Strain Rate of Center of Ductile Region')
+  xlabel('Time Steps')
+  ylabel('Block')
 
   saveas(f4, 'figures/VC_f4.png')
 
