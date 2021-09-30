@@ -357,7 +357,7 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1e10],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e7],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
@@ -524,12 +524,12 @@ function out = solve(r)
 
   clf;
   f4 = subplot(2,1,1);
-  imagesc(V');
+  imagesc(V'); colorbar;
   title('Slip Rate of Fault')
   ylabel('Block')
   xlabel('Time Steps')
   f4 = subplot(2,1,2); cla;
-  imagesc(Ep);
+  imagesc(Ep); colorbar;
   title('Strain Rate of Center of Ductile Region')
   xlabel('Time Steps')
   ylabel('Block')
