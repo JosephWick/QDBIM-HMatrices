@@ -113,7 +113,7 @@ function r = build()
   c.command = 'compress';
   c.lambdaZ = lambdaZ; ss.lambdaZ = lambdaZ;
   c.dz = ss.dz;
-  c.tol = 1e-14;
+  c.tol = 1e-15;
   c.G = 30e3;
   c.command = 'compress';
   c.allow_overwrite = 1;
@@ -358,7 +358,7 @@ function out = solve(r)
   disp('solving...')
   tic
   % Solve the system
-  options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
+  options=odeset('Refine',1,'RelTol',3e-6,'InitialStep',1e-3,'MaxStep',3e6); %tol 1e-7
   [t,Y]=ode45(yp,[0 1e10],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
