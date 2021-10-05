@@ -35,7 +35,7 @@ function r = build()
   transition = 40e3; %where shear zone starts
 
   ss.Ny = 51; %num elems for shear mesh
-  ss.Nz = 50;
+  ss.Nz = 51;
 
   tag = string(probL/1000);
 
