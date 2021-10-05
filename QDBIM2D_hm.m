@@ -28,13 +28,14 @@ function r = build()
   % frictional parameters
   % a is 'direct effect' - strength parameter
   % b is 'evolution effect' - weakening parameter
-  ss.a = 1e-3*ones(size(y3));
-  ss.b = ss.a + 2.1e-4*ones(size(y3)); % make + for with vw region
-  % Velocity-strengthening at edges
-  top    = floor(5e3/(c.lambdaZ/c.n));
-  bottom = ceil(15e3/(c.lambdaZ/c.n));
-  ss.b(1:top)      = ss.a(1:top)-2.1e-4;
-  ss.b(bottom:end) = ss.a(bottom:end)-2.1e-4;
+
+  % all vs
+  %ss.a = 1e-3*ones(size(y3));
+  %ss.b = ss.a - 2.1e-4*ones(size(y3)); % make + for with vw region
+
+  % with vw
+  ss.a=1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+  ss.b=0.015*ones(size(y3));
 
   % effective normal stress (MPa)
   ss.sigma=50.0*ones(size(y3));
@@ -48,7 +49,9 @@ function r = build()
   % reference slip rate (m/s)
   ss.Vo=1e-6*ones(size(y3));
 
-  G = 30e3;
+  rho = 2670;
+  Vs = 3464;
+  G = rho*Vs^2/1e6;
   c.G = G;
 
   % Radiation damping coefficient
