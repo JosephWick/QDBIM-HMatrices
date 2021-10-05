@@ -108,7 +108,7 @@ function solve(r)
   V = Y(:,4:r.ss.dgf:end)';
   disp(size(Y));
   disp(size(V));
-  disp(std(V));
+  disp(mean(std(V)));
 
   clf;
   imagesc(V); colorbar;
