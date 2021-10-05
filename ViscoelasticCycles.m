@@ -115,7 +115,6 @@ function r = build()
   c.dz = ss.dz;
   c.tol = 1e-16;
   c.G = 30e3;
-  c.command = 'compress';
   c.allow_overwrite = 1;
   c.err_method = 'mrem-fro';
 
