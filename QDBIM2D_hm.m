@@ -25,9 +25,11 @@ function r = build()
   % reference friction coefficient
   ss.fo = 0.6*ones(size(y3));
 
-  % Dieterich-Ruina RS frictional params (vw friction)
-  ss.a = 1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
-  ss.b = 0.015*ones(size(y3));
+  % frictional parameters
+  % a is 'direct effect' - strength parameter
+  % b is 'evolution effect' - weakening parameter
+  ss.a = 1e-3*ones(size(r.ss.y3f));
+  ss.b = ss.a - 2.1e-4*ones(size(r.ss.y3f)); % make + for with vw region
 
   % effective normal stress (MPa)
   ss.sigma=50.0*ones(size(y3));
