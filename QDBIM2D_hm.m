@@ -48,9 +48,7 @@ function r = build()
   % reference slip rate (m/s)
   ss.Vo=1e-6*ones(size(y3));
 
-  rho = 2670;
-  Vs = 3464;
-  G = rho*Vs^2/1e6;
+  G = 30e3;
   c.G = G;
 
   % Radiation damping coefficient
