@@ -31,8 +31,8 @@ function r = build()
   ss.a = 1e-3*ones(size(y3));
   ss.b = ss.a + 2.1e-4*ones(size(y3)); % make + for with vw region
   % Velocity-strengthening at edges
-  top    = floor(5e3/(ss.lambdaZ/ss.M));
-  bottom = ceil(15e3/(ss.lambdaZ/ss.M));
+  top    = floor(5e3/(c.lambdaZ/ss.M));
+  bottom = ceil(15e3/(c.lambdaZ/ss.M));
   ss.b(1:top)      = ss.a(1:top)-2.1e-4;
   ss.b(bottom:end) = ss.a(bottom:end)-2.1e-4;
 
