@@ -103,7 +103,7 @@ function solve(r)
   toc
 
   % figures
-  V = y(4:r.ss.dgf:end);
+  V = Y(4:r.ss.dgf:end);
 
   clf;
   imagesc(V); colorbar;
