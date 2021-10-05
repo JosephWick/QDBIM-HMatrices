@@ -103,7 +103,7 @@ function solve(r)
   toc
 
   % figures
-  V = Y(4:r.ss.dgf:end,:);
+  V = Y(:,4:r.ss.dgf:end);
   disp(size(Y))
   disp(size(V))
 
