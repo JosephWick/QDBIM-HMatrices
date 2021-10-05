@@ -28,8 +28,8 @@ function r = build()
   % frictional parameters
   % a is 'direct effect' - strength parameter
   % b is 'evolution effect' - weakening parameter
-  ss.a = 1e-3*ones(size(r.ss.y3f));
-  ss.b = ss.a - 2.1e-4*ones(size(r.ss.y3f)); % make + for with vw region
+  ss.a = 1e-3*ones(size(y3));
+  ss.b = ss.a - 2.1e-4*ones(size(y3)); % make + for with vw region
 
   % effective normal stress (MPa)
   ss.sigma=50.0*ones(size(y3));
