@@ -238,8 +238,8 @@ function r = build()
   clf;
   scatter(comboY_c, -1*comboZ_c, 1);
   hold on;
-  scatter(comboY, -1*comboZ, 0.25, 'red');
-  scatter(-1*comboY, -1*comboZ, 0.25, 'red')
+  plot(comboY, -1*comboZ, 0.25, 'red');
+  plot(-1*comboY, -1*comboZ, 0.25, 'red')
   hold off;
   saveas(gcf, 'figures/VC_mesh.png');
 
