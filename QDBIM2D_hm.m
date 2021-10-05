@@ -102,6 +102,16 @@ function solve(r)
   disp('Done solving');
   toc
 
+  % figures
+  V = y(4:r.ss.dgf:end);
+
+  clf;
+  imagesc(V); colorbar;
+  title('QDBIM2D slip velocity')
+  xlabel('time steps')
+  ylabel('depth')
+  saveas(gcf, 'figures/QDBIM2D_v.png')
+
 end
 
 function plot_hm(r)
