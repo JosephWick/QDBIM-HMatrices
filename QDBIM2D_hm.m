@@ -29,7 +29,12 @@ function r = build()
   % a is 'direct effect' - strength parameter
   % b is 'evolution effect' - weakening parameter
   ss.a = 1e-3*ones(size(y3));
-  ss.b = ss.a - 2.1e-4*ones(size(y3)); % make + for with vw region
+  ss.b = ss.a + 2.1e-4*ones(size(y3)); % make + for with vw region
+  % Velocity-strengthening at edges
+  top    = floor(5e3/(r.ss.lambdaZ/r.ss.M));
+  bottom = ceil(15e3/(r.ss.lambdaZ/r.ss.M));
+  r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4;
+  r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4;
 
   % effective normal stress (MPa)
   ss.sigma=50.0*ones(size(y3));
