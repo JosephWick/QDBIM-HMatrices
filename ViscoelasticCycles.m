@@ -234,6 +234,11 @@ function r = build()
 
   r.ss = ss;
 
+  % plot mesh
+  clf;
+  scatter(comboY_c, comboZ_c);
+  saveas(gcf, 'figures/VC_mesh.png');
+
 end
 
 % runs numerical solution
