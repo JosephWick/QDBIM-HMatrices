@@ -236,7 +236,7 @@ function r = build()
 
   % plot mesh
   clf;
-  scatter(comboY_c, -1*comboZ_c, marker='.');
+  scatter(comboY_c, -1*comboZ_c, 2);
   saveas(gcf, 'figures/VC_mesh.png');
 
 end
