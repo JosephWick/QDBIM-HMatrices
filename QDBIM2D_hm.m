@@ -106,9 +106,9 @@ function solve(r)
 
   % figures
   V = Y(:,4:r.ss.dgf:end)';
-  disp(size(Y))
-  disp(size(V))
-  disp(std(V))
+  disp(size(Y));
+  disp(size(V));
+  disp(std(V));
 
   clf;
   imagesc(V); colorbar;
