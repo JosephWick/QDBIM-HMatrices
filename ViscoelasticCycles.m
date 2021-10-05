@@ -236,10 +236,10 @@ function r = build()
 
   % plot mesh
   clf;
-  scatter(comboY_c, -1*comboZ_c, 1);
+  scatter(faultY_c, -1*faultZ_c, 1);
   hold on;
-  scatter(comboY, -1*comboZ, 0.25, 'red');
-  scatter(-1*comboY, -1*comboZ, 0.25, 'red')
+  scatter(faultY, -1*faultZ, 0.25, 'red');
+  scatter(-1*faultY, -1*faultZ, 0.25, 'red')
   hold off;
   saveas(gcf, 'figures/VC_mesh.png');
 
