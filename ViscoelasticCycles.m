@@ -367,7 +367,7 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-5,'InitialStep',1e-3,'MaxStep',3e6); %tol 1e-7
-  [t,Y]=ode45(yp,[0 t=1.204486e8.],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 s1.204486e8.],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
