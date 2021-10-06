@@ -86,7 +86,7 @@ X = [vector; dummy];
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate)');
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
-%Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1 + t2(1:ss.M) + t3(1:ss.M);
+Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1; %+ t2(1:ss.M) + t3(1:ss.M);
 %Yp(2:ss.dgfF:ss.M*ss.dgfF) = hmmvp('mvp', hm.s12, (V-ss.V_plate)) + ...
 %                             hmmvp('mvp', hm.fs1212, X, lM, gM)+...
 %                             hmmvp('mvp', hm.fs1312, X, lM, gM);
@@ -104,7 +104,7 @@ vector = (V-ss.V_plate)';
 dummy = zeros(ss.Nx*ss.Nz,1);
 X = [vector; dummy];
 t3 = hmmvp('mvp', hm.sf12, X, gM, lM);
-Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2; %+ t3(1:ss.Nx*ss.Nz);
+%Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3(1:ss.Nx*ss.Nz);
 %Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end)=hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate))+...
 %                                     hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate))+...
 %                                     hmmvp('mvp', hm.sf12, (V-ss.V_plate), lM, gM);
@@ -117,7 +117,7 @@ dummy = zeros(ss.Nx*ss.Nz,1);
 X = [vector; dummy];
 m = hmmvp('getm', hm.sf13);
 t3 = hmmvp('mvp', hm.sf13, X, lM, gM);
-Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2; %+ t3(1:ss.Nx*ss.Nz);
+%Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(1:ss.Nx*ss.Nz);
 %Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate))+...
 %                                       hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate))+...
 %                                       hmmvp('mvp', hm.sf13, (V-ss.V_plate), lM, gM);
