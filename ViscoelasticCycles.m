@@ -34,8 +34,8 @@ function r = build()
   lambdaZ = 35e3; % fault depth
   transition = 40e3; %where shear zone starts
 
-  ss.Ny = 51; %num elems for shear mesh
-  ss.Nz = 51;
+  ss.Ny = 50; %num elems for shear mesh
+  ss.Nz = 50;
 
   tag = string(probL/1000);
 
