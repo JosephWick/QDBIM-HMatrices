@@ -274,7 +274,7 @@ function out = solve(r)
   % a is 'direct effect' - strength parameter
   % b is 'evolution effect' - weakening parameter
   r.ss.a = 1e-3*ones(size(r.ss.y3f));
-  r.ss.b = r.ss.a+2.1e-4*ones(size(r.ss.y3f)); % make + for with vw region
+  r.ss.b = r.ss.a - 2.1e-4*ones(size(r.ss.y3f)); % make + for with vw region
 
   r.ss.mu0 = 0.2*ones(size(r.ss.y3f));
   % characteristic weakening distance (m)
@@ -367,7 +367,7 @@ function out = solve(r)
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-5,'InitialStep',1e-3,'MaxStep',3e6); %tol 1e-7
-  [t,Y]=ode45(yp,[0 1e9],Y0,options); %1e10
+  [t,Y]=ode45(yp,[0 1e10],Y0,options); %1e10
   toc
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
