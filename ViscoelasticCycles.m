@@ -34,8 +34,8 @@ function r = build()
   lambdaZ = 35e3; % fault depth
   transition = 40e3; %where shear zone starts
 
-  ss.Ny = 50; %num elems for shear mesh
-  ss.Nz = 50;
+  ss.Ny = 51; %num elems for shear mesh
+  ss.Nz = 51;
 
   tag = string(probL/1000);
 
@@ -67,8 +67,8 @@ function r = build()
   shearY_chat = zeros(1,ss.Ny);
   shearZ_chat = zeros(1,ss.Nz);
   for idx=(1:length(shearZhat)-1)
-    shearZ_chat(idx) = shearZhat(idx) + (shearZhat(idx+1) - shearZhat(idx))/2;
-    shearY_chat(idx) = shearYhat(idx) + (shearYhat(idx+1) - shearYhat(idx))/2;
+    shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
+    shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
   end
 
   % grid and flatten
