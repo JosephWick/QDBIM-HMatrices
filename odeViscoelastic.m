@@ -83,7 +83,7 @@ Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 vector = e12p-ss.e12p_plate;
 dummy = zeros(ss.M,1);
 X = [vector; dummy];
-disp(len(vector), len(dummy), len(X))
+disp(size(vector), size(dummy), size(X))
 t1 = hmmvp('mvp', hm.s12, (V-ss.V_plate)');
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
