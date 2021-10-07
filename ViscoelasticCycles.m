@@ -97,7 +97,7 @@ function r = build()
   ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*transition;
   ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
   % center of shear zone (x2)
-  ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
+  ss.x2c=shearY_c;
 
   % combo mesh
   comboX = [faultX shearX];
