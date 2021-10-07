@@ -337,7 +337,8 @@ function out = solve(r)
   r.ss.dgfS=4;
   %% Initialize State Vector
   Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.x2c)*length(r.ss.x3c)*r.ss.dgfS,1);
-  disp(size(Y0))
+  disp(size(r.ss.x3c))
+  disp(size(r.ss.x2c))
 
   % Fault patches
   Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.y3f));
