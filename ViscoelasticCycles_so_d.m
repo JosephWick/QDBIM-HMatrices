@@ -15,6 +15,8 @@
 
 % ---     Kernels & functions      ---
 
+G = 30e3;
+
 % Boxcar function
 boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
 
