@@ -128,10 +128,10 @@ c.eta=3;
 
 % ---       Stress Kernels from Shear Zones       ---
 
-ss.k1212 = zeros(length(shearY_c)*length(shearZ_c));
-ss.k1213 = zeros(length(shearY_c)*length(shearZ_c));
-ss.k1312 = zeros(length(shearY_c)*length(shearZ_c));
-ss.k1313 = zeros(length(shearY_c)*length(shearZ_c));
+ss.k1212 = zeros(length(shearY_chat)*length(shearZ_chat));
+ss.k1213 = zeros(length(shearY_chat)*length(shearZ_chat));
+ss.k1312 = zeros(length(shearY_chat)*length(shearZ_chat));
+ss.k1313 = zeros(length(shearY_chat)*length(shearZ_chat));
 
 % fields from shear zones
 for ky=1:length(shearY_c)
