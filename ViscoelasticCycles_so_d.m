@@ -134,8 +134,8 @@ ss.k1312 = zeros(length(shearY_c)*length(shearZ_c));
 ss.k1313 = zeros(length(shearY_c)*length(shearZ_c));
 
 % fields from shear zones
-for ky=1:length(shearY_c):
-  for kz=1:length(shearZ_c):
+for ky=1:length(shearY_c)
+  for kz=1:length(shearZ_c)
     ss.k1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky), shearZ_c);
     ss.k1213(:,(kz-1)*ss.Ny+ky) = s1213(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky), shearZ_c);
     ss.k1312(:,(kz-1)*ss.Ny+ky) = s1312(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky), shearZ_c);
