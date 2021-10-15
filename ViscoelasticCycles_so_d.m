@@ -256,19 +256,6 @@ s130 = zeros(size(s120));
 e120 = zeros(size(s120));
 e130 = zeros(size(s120));
 
-% Plot strength profiles
-figure(1);clf;
-subplot(2,1,1);
-plot(ss.y3f/1e3,ss.strength_E,ss.y3f/1e3,ss.strength_W)
-xlabel('Depth (km)')
-ylabel('Strength (MPa)');
-subplot(2,1,2);
-plot(ss.x3c/1e3,log10(s120(1:length(ss.x2c):end)))
-xlim([ss.x3c(1)/1e3,ss.x3c(end)/1e3]);
-xlabel('Depth (km)')
-ylabel('Strength (MPa) log10');
-
-
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                       %
 %         N U M E R I C A L   S O L U T I O N           %
