@@ -148,6 +148,7 @@ for ky=1:length(shearY_chat)
 end
 
 ss.x3c = shearZ_chat;
+ss.x2c = shearY_chat;
 
 % ---     Rheology      ---
 % Confining pressure (MPa) and Temperature (K)
@@ -167,26 +168,26 @@ ss.Tprof  = 300+1380*erf(ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
 ss.sigmab = 1000;
 
 % frictional parameters
-ss.aW = 1e-3*ones(size(ss.y3f));
-ss.bW = ss.aW+2.1e-4*ones(size(ss.y3f));
+ss.aW = 1e-3;
+ss.bW = ss.aW+2.1e-4;
 
-ss.aE = 1e-3*ones(size(ss.y3f));
-ss.bE = ss.aE+2.1e-4*ones(size(ss.y3f));
+ss.aE = 1e-3);
+ss.bE = ss.aE;
 
 % static friction coefficient
-ss.mu0 = 0.2*ones(size(ss.y3f));
+ss.mu0 = 0.2;
 
 % characteristic weakening distance (m)
-ss.L = 0.012*ones(size(ss.y3f));
+ss.L = 0.012;
 
 % plate velocity (m/s)
-ss.V_plate = 1e-9*ones(size(ss.y3f));
+ss.V_plate = 1e-9;
 
 % reference slip rate (m/s)
-ss.Vo = 1e-6*ones(size(ss.y3f));
+ss.Vo = 1e-6;
 
 % shear wave speed (m/s)
-ss.Vs = 3e3*ones(size(ss.y3f));
+ss.Vs = 3e3;
 
 % Velocity-strengthening at edges
 % West fault: 5-15km velocity-weakening
