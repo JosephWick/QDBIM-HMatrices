@@ -300,8 +300,8 @@ for k=1:length(t)-1
 end
 
 % strain rate over whole ductile area
-Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
-              Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
+Epall = sqrt( Yp(:,r.ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
+              Yp(:,r.ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
 
 clf;
 fig = figure;
@@ -321,4 +321,4 @@ for idx = 1:size(Epall, 2)
   else
     imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
   end
-end 
+end
