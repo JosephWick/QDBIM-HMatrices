@@ -290,7 +290,7 @@ yp=@(t,y) odeViscoelastic_so_d(t,y,ss);
 tic
 % Solve the system
 options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-[t,Y]=ode45(yp,[0 1e4],Y0,options);
+[t,Y]=ode45(yp,[0 1e8],Y0,options);
 toc
 %%
 % Compute the instantaneous derivative
@@ -305,7 +305,7 @@ Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
 
 clf;
 fig = figure;
-fname = 'figures/strain.gif';
+fname = 'figures/strain_D.gif';
 for idx = 1:size(Epall, 2)
   oneE = Epall(:,idx);
   oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
