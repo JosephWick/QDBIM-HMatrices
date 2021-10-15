@@ -317,8 +317,8 @@ for idx = 1:size(Epall, 2)
 
   [A,map] = rgb2ind(im{idx},256);
   if idx==1
-    imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+    imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.01);
   else
-    imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+    imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.01);
   end
 end
