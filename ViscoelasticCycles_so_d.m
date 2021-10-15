@@ -192,16 +192,16 @@ ss.Vs = 3e3;
 
 % Velocity-strengthening at edges
 % West fault: 5-15km velocity-weakening
-topW    = floor(5e3/(Transition/ss.M));
-bottomW = ceil(15e3/(Transition/ss.M));
-ss.bW(1:topW)      = ss.aW(1:topW)-2.1e-4*ones(topW,1);
-ss.bW(bottomW:end) = ss.aW(bottomW:end)-2.1e-4*ones(length(ss.aW(bottomW:end)),1);
+%topW    = floor(5e3/(Transition/ss.M));
+%bottomW = ceil(15e3/(Transition/ss.M));
+%ss.bW(1:topW)      = ss.aW(1:topW)-2.1e-4*ones(topW,1);
+%ss.bW(bottomW:end) = ss.aW(bottomW:end)-2.1e-4*ones(length(ss.aW(bottomW:end)),1);
 
 % East fault: 3-20km velocity-weakening
-topE    = floor(3e3/(Transition/ss.M));
-bottomE = ceil(20e3/(Transition/ss.M));
-ss.bE(1:topE)      = ss.aE(1:topE)-2.1e-4*ones(topE,1);
-ss.bE(bottomE:end) = ss.aE(bottomE:end)-2.1e-4*ones(length(ss.aE(bottomE:end)),1);
+%topE    = floor(3e3/(Transition/ss.M));
+%bottomE = ceil(20e3/(Transition/ss.M));
+%ss.bE(1:topE)      = ss.aE(1:topE)-2.1e-4*ones(topE,1);
+%ss.bE(bottomE:end) = ss.aE(bottomE:end)-2.1e-4*ones(length(ss.aE(bottomE:end)),1);
 
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                      %
