@@ -298,3 +298,26 @@ Yp=zeros(length(t)-1,size(Y,2));
 for k=1:length(t)-1
     Yp(k,:)=(Y(k+1,:)-Y(k,:))/(t(k+1)-t(k));
 end
+
+% strain rate over whole ductile area
+Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
+              Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
+
+clf;
+fig = figure;
+fname = 'figures/strain.gif';
+for idx = 1:size(Epall, 2)
+  oneE = Epall(:,idx);
+  oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
+  imagesc(oneEsq); colorbar;
+  title(idx)
+  drawnow
+  frame = getframe(fig);
+  im{idx} = frame2im(frame);
+
+  [A,map] = rgb2ind(im{idx},256);
+  if idx==1
+    imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+  else
+    imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+end
