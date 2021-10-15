@@ -89,6 +89,7 @@ probL = 200e3;
 probW = 200e3;
 lambdaZ = 35e3; %fault depth
 transition = 40e3; %where shear zone starts
+Transition = transition;
 
 ss.Ny = 51; % num elems for the shear mesh
 ss.Nz = 51;
