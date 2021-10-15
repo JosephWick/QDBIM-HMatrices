@@ -308,7 +308,7 @@ fig = figure;
 fname = 'figures/strain.gif';
 for idx = 1:size(Epall, 2)
   oneE = Epall(:,idx);
-  oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
+  oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
   imagesc(oneEsq); colorbar;
   title(idx)
   drawnow
