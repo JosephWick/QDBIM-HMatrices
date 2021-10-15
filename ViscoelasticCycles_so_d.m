@@ -131,12 +131,16 @@ L(length(L)+1) = L(1);
 W(length(W)+1) = W(1);
 c.eta=3;
 
+disp('mesh created')
+
 % ---       Stress Kernels from Shear Zones       ---
 
 ss.k1212 = zeros(length(shearY_chat)*length(shearZ_chat));
 ss.k1213 = zeros(length(shearY_chat)*length(shearZ_chat));
 ss.k1312 = zeros(length(shearY_chat)*length(shearZ_chat));
 ss.k1313 = zeros(length(shearY_chat)*length(shearZ_chat));
+
+disp('begining kernels')
 
 % fields from shear zones
 for ky=1:length(shearY_chat)
@@ -150,6 +154,8 @@ end
 
 ss.x3c = shearZ_chat;
 ss.x2c = shearY_chat;
+
+disp('kernels created')
 
 % ---     Rheology      ---
 % Confining pressure (MPa) and Temperature (K)
@@ -284,6 +290,8 @@ Y0(2*ss.M*ss.dgfF+2:ss.dgfS:end)=s130;
 Y0(2*ss.M*ss.dgfF+3:ss.dgfS:end)=e120;
 Y0(2*ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 
+disp('beginning solution')
+
 % initialize the function handle with
 % set constitutive parameters
 yp=@(t,y) odeViscoelastic_so_d(t,y,ss);
@@ -292,6 +300,9 @@ tic
 options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
 [t,Y]=ode45(yp,[0 1e10],Y0,options);
 toc
+
+disp('solved')
+
 %%
 % Compute the instantaneous derivative
 Yp=zeros(length(t)-1,size(Y,2));
