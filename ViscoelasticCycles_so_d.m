@@ -265,6 +265,7 @@ e130 = zeros(size(s120));
 % state parameters
 ss.dgfF=3;
 ss.dgfS=4;
+ss.M=0;
 %% Initialize State Vector
 Y0=zeros(ss.M*ss.dgfF+ss.M*ss.dgfF+length(ss.x2c)*length(ss.x3c)*ss.dgfS,1);
 
