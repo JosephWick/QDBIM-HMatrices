@@ -270,11 +270,11 @@ ss.M=0;
 Y0=zeros(ss.M*ss.dgfF+ss.M*ss.dgfF+length(ss.x2c)*length(ss.x3c)*ss.dgfS,1);
 
 % Fault patches
-Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.y3f));
+Y0(1:ss.dgfF:ss.M*ss.dgfF)=0;
 Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_W;
 Y0(3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
 
-Y0(ss.M*ss.dgfF+1:ss.dgfF:2*ss.M*ss.dgfF)=zeros(size(ss.y3f));
+Y0(ss.M*ss.dgfF+1:ss.dgfF:2*ss.M*ss.dgfF)=0;
 Y0(ss.M*ss.dgfF+2:ss.dgfF:2*ss.M*ss.dgfF)=ss.strength_E;
 Y0(ss.M*ss.dgfF+3:ss.dgfF:2*ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
 
