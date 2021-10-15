@@ -126,6 +126,8 @@ c.Y = [shearX; shearY; shearZ];
 
 L = shearYhat(2:end) - shearYhat(1:end-1);
 W = shearZhat(2:end) - shearZhat(1:end-1);
+L(length(L)+1) = L(1);
+W(length(W)+1) = W(1);
 c.eta=3;
 
 % ---       Stress Kernels from Shear Zones       ---
