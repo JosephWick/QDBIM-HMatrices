@@ -320,4 +320,5 @@ for idx = 1:size(Epall, 2)
     imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
   else
     imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
-end
+  end
+end 
