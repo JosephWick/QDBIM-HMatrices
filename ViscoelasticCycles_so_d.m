@@ -171,7 +171,7 @@ ss.sigmab = 1000;
 ss.aW = 1e-3;
 ss.bW = ss.aW+2.1e-4;
 
-ss.aE = 1e-3);
+ss.aE = 1e-3;
 ss.bE = ss.aE;
 
 % static friction coefficient
