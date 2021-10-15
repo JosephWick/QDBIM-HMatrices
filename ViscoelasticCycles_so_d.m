@@ -147,6 +147,8 @@ for ky=1:length(shearY_chat)
   end
 end
 
+ss.x3c = shearZ_chat;
+
 % ---     Rheology      ---
 % Confining pressure (MPa) and Temperature (K)
 k  = 3.138; % thermal conductivity (W/m/K)
