@@ -10,8 +10,8 @@
 % x2 (y) is left/right of page
 % x3 (z) is up/down
 
-% val's x2c is like my shearY_chat
-% whereas xx2c is grid of centers
+% val's x2c is like my shearY_chat (50x1)
+% whereas xx2c is grid of centers (50x50)
 
 % ---     Kernels & functions      ---
 
@@ -136,8 +136,8 @@ ss.k1312 = zeros(length(shearY_chat)*length(shearZ_chat));
 ss.k1313 = zeros(length(shearY_chat)*length(shearZ_chat));
 
 % fields from shear zones
-for ky=1:length(shearY_c)
-  for kz=1:length(shearZ_c)
+for ky=1:length(shearY_chat)
+  for kz=1:length(shearZ_chat)
     ss.k1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
     ss.k1213(:,(kz-1)*ss.Ny+ky) = s1213(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
     ss.k1312(:,(kz-1)*ss.Ny+ky) = s1312(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
