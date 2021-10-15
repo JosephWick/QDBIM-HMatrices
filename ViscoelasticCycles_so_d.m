@@ -300,8 +300,8 @@ for k=1:length(t)-1
 end
 
 % strain rate over whole ductile area
-Epall = sqrt( Yp(:,r.ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
-              Yp(:,r.ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
+Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
+              Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
 
 clf;
 fig = figure;
