@@ -25,13 +25,13 @@ function hm = load(r)
 end
 
 % compShearKerns()
-% - builds dense kernels and compares them (subtraction) to hm 
+% - builds dense kernels and compares them (subtraction) to hm
 function compShearKerns(hm, r)
 
-  ss.k1212 = zeros(length(shearY_chat)*length(shearZ_chat));
-  ss.k1213 = zeros(length(shearY_chat)*length(shearZ_chat));
-  ss.k1312 = zeros(length(shearY_chat)*length(shearZ_chat));
-  ss.k1313 = zeros(length(shearY_chat)*length(shearZ_chat));
+  ss.k1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+  ss.k1213 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+  ss.k1312 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+  ss.k1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
 
   disp('begining kernels')
 
@@ -45,6 +45,36 @@ function compShearKerns(hm, r)
     end
   end
   disp('kernels created')
+
+  m = hmmvp('getm', hm.s1212);
+  n = hmmvp('getn', hm.s1212);
+
+  rs = (1:1:m); cs = (1:1:n);
+  s1212HM = hmmvp('extract', hm.s1212, rs, cs);
+  s1213HM = hmmvp('extract', hm.s1213, rs, cs);
+  s1312HM = hmmvp('extract', hm.s1312, rs, cs);
+  s1313HM = hmmvp('extract', hm.s1313, rs, cs);
+
+  s1212Diff = s1212HM - ss.k1212;
+  s1213Diff = s1213HM - ss.k1213;
+  s1312Diff = s1312HM - ss.k1312;
+  s1313Diff = s1313HM - ss.k1313;
+
+  clf;
+  imagesc(s1212Diff); colorbar;
+  saveas(gcf, 'figures/diff_s1212')
+
+  clf;
+  imagesc(s1213Diff); colorbar;
+  saveas(gcf, 'figures/diff_s1213')
+
+  clf;
+  imagesc(s1312Diff); colorbar;
+  saveas(gcf, 'figures/diff_s1312');
+
+  clf;
+  imagesc(s1313Diff); colorbar;
+  saveas(gcf, 'figures/diff_s1313')
 
 end
 
