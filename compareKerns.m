@@ -30,20 +30,20 @@ function compShearKerns(hm, r)
   addpaths();
   G = 3e30;
 
-  ss.k1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
-  ss.k1213 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
-  ss.k1312 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
-  ss.k1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+  r.ss.k1212 = zeros(length(r.ss.shearY_chat)*length(r.ss.shearZ_chat));
+  r.ss.k1213 = zeros(length(r.ss.shearY_chat)*length(r.ss.shearZ_chat));
+  r.ss.k1312 = zeros(length(r.ss.shearY_chat)*length(r.ss.shearZ_chat));
+  r.ss.k1313 = zeros(length(r.ss.shearY_chat)*length(r.ss.shearZ_chat));
 
   disp('begining kernels')
 
   % fields from shear zones
   for ky=1:length(shearY_chat)
     for kz=1:length(shearZ_chat)
-      ss.k1212(:,(kz-1)*ss.Ny+ky) = s1212(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      ss.k1213(:,(kz-1)*ss.Ny+ky) = s1213(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      ss.k1312(:,(kz-1)*ss.Ny+ky) = s1312(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      ss.k1313(:,(kz-1)*ss.Ny+ky) = s1313(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1212(:,(kz-1)*r.ss.Ny+ky) = s1212(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1213(:,(kz-1)*r.ss.Ny+ky) = s1213(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1312(:,(kz-1)*r.ss.Ny+ky) = s1312(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1313(:,(kz-1)*r.ss.Ny+ky) = s1313(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
     end
   end
   disp('kernels created')
@@ -62,10 +62,10 @@ function compShearKerns(hm, r)
   disp('hms extracted')
   disp('begin subtraction')
 
-  s1212Diff = s1212HM - ss.k1212;
-  s1213Diff = s1213HM - ss.k1213;
-  s1312Diff = s1312HM - ss.k1312;
-  s1313Diff = s1313HM - ss.k1313;
+  s1212Diff = s1212HM - r.ss.k1212;
+  s1213Diff = s1213HM - r.ss.k1213;
+  s1312Diff = s1312HM - r.ss.k1312;
+  s1313Diff = s1313HM - r.ss.k1313;
 
   disp('subtraction complete')
   disp('begin figurse')
