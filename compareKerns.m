@@ -38,8 +38,8 @@ function compShearKerns(hm, r)
   disp('begining kernels')
 
   % fields from shear zones
-  for ky=1:length(shearY_chat)
-    for kz=1:length(shearZ_chat)
+  for ky=1:length(r.ss.shearY_chat)
+    for kz=1:length(r.ss.shearZ_chat)
       r.ss.k1212(:,(kz-1)*r.ss.Ny+ky) = s1212(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
       r.ss.k1213(:,(kz-1)*r.ss.Ny+ky) = s1213(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
       r.ss.k1312(:,(kz-1)*r.ss.Ny+ky) = s1312(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
