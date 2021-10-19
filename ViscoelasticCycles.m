@@ -395,7 +395,7 @@ function out = solve(r)
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
 
   % make movie
-  movie=true;
+  movie=false;
   if movie
     clf;
     fig = figure;
