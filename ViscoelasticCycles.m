@@ -232,6 +232,10 @@ function r = build()
   disp(cmd);
   r.sf13 = c.write_hmat_filename;
 
+  ss.shearYhat = shearYhat;
+  ss.shearZhat = shearZhat;
+  ss.shearZ_C = shearZ_c;
+  ss.transition = transition;
   r.ss = ss;
 
   % plot mesh
