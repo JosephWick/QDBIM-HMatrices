@@ -134,3 +134,7 @@ function k = s1313(G, D,L,W,x2,x3)
     -atan((x2+L/2)./(x3+D+W))+atan((x2-L/2)./(x3+D+W)))...
     - 2*G*boxc(x2/L).*boxc((x3-(2*D+W)/2)/W);
 end
+
+function bc = boxc(x) 
+  bc = (x+0.5>=0)-(x-0.5>=0);
+end
