@@ -91,8 +91,8 @@ lambdaZ = 35e3; %fault depth
 transition = 40e3; %where shear zone starts
 Transition = transition;
 
-ss.Ny = 101; % num elems for the shear mesh
-ss.Nz = 101;
+ss.Ny = 51; % num elems for the shear mesh
+ss.Nz = 51;
 
 % shear mesh
 eps = 1e-12;
