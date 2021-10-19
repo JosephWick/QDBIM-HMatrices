@@ -27,6 +27,8 @@ end
 % compShearKerns()
 % - builds dense kernels and compares them (subtraction) to hm
 function compShearKerns(hm, r)
+  addpaths();
+  G = 3e30;
 
   ss.k1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
   ss.k1213 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
@@ -38,10 +40,10 @@ function compShearKerns(hm, r)
   % fields from shear zones
   for ky=1:length(shearY_chat)
     for kz=1:length(shearZ_chat)
-      ss.k1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      ss.k1213(:,(kz-1)*ss.Ny+ky) = s1213(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      ss.k1312(:,(kz-1)*ss.Ny+ky) = s1312(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      ss.k1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      ss.k1212(:,(kz-1)*ss.Ny+ky) = s1212(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      ss.k1213(:,(kz-1)*ss.Ny+ky) = s1213(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      ss.k1312(:,(kz-1)*ss.Ny+ky) = s1312(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      ss.k1313(:,(kz-1)*ss.Ny+ky) = s1313(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
     end
   end
   disp('kernels created')
@@ -111,15 +113,17 @@ function k = s1212(G, D,L,W,x2,x3)
     - 2*G*boxc(x2/L).*boxc((x3-(2*D+W)/2)/W);
 end
 
-function k = s1213(G, D,L,W,x2,x3) G/(2*pi)*( ...
-    k = log((x2-L/2).^2+(x3-D-W).^2) - log((x2+L/2).^2+(x3-D-W).^2) ...
+function k = s1213(G, D,L,W,x2,x3)
+    k = G/(2*pi)*( ...
+    log((x2-L/2).^2+(x3-D-W).^2) - log((x2+L/2).^2+(x3-D-W).^2) ...
     -log((x2-L/2).^2+(x3+D+W).^2) + log((x2+L/2).^2+(x3+D+W).^2) ...
     -log((x2-L/2).^2+(x3-D).^2) + log((x2+L/2).^2+(x3-D).^2) ...
     +log((x2-L/2).^2+(x3+D).^2) - log((x2+L/2).^2+(x3+D).^2));
 end
 
-function k = s1313(G, D,L,W,x2,x3) G/pi*( ...
-    k = atan((x2+L/2)./(x3-D))  -atan((x2-L/2)./(x3-D)) ...
+function k = s1313(G, D,L,W,x2,x3)
+    k = G/pi*( ...
+    atan((x2+L/2)./(x3-D))  -atan((x2-L/2)./(x3-D)) ...
     -atan((x2+L/2)./(x3-D-W))+atan((x2-L/2)./(x3-D-W)) ...
     +atan((x2+L/2)./(x3+D))  -atan((x2-L/2)./(x3+D)) ...
     -atan((x2+L/2)./(x3+D+W))+atan((x2-L/2)./(x3+D+W)))...
