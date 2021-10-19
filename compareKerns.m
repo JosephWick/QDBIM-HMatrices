@@ -40,10 +40,10 @@ function compShearKerns(hm, r)
   % fields from shear zones
   for ky=1:length(r.ss.shearY_chat)
     for kz=1:length(r.ss.shearZ_chat)
-      r.ss.k1212(:,(kz-1)*r.ss.Ny+ky) = s1212(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      r.ss.k1213(:,(kz-1)*r.ss.Ny+ky) = s1213(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      r.ss.k1312(:,(kz-1)*r.ss.Ny+ky) = s1312(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
-      r.ss.k1313(:,(kz-1)*r.ss.Ny+ky) = s1313(G, shearZ_c(kz)+transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1212(:,(kz-1)*r.ss.Ny+ky) = s1212(G, r.ss.shearZ_c(kz)+r.ss.transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1213(:,(kz-1)*r.ss.Ny+ky) = s1213(G, r.ss.shearZ_c(kz)+r.ss.transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1312(:,(kz-1)*r.ss.Ny+ky) = s1312(G, r.ss.shearZ_c(kz)+r.ss.transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
+      r.ss.k1313(:,(kz-1)*r.ss.Ny+ky) = s1313(G, r.ss.shearZ_c(kz)+r.ss.transition, L(ky), W(kz), shearY_c'-shearYhat(ky)', shearZ_c');
     end
   end
   disp('kernels created')
