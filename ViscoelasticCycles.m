@@ -235,6 +235,7 @@ function r = build()
   ss.shearYhat = shearYhat;
   ss.shearZhat = shearZhat;
   ss.shearZ_c = shearZ_c;
+  ss.shearY_c = shearY_c;
   ss.shearY_chat = shearY_chat;
   ss.shearZ_chat = shearZ_chat;
   ss.transition = transition;
