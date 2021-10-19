@@ -37,6 +37,11 @@ function compShearKerns(hm, r)
 
   disp('begining kernels')
 
+  L = r.ss.shearYhat(2:end) - r.ss.shearYhat(1:end-1);
+  W = r.ss.shearZhat(2:end) - r.ss.shearZhat(1:end-1);
+  L(length(L)+1) = L(1);
+  W(length(W)+1) = W(1);
+
   % fields from shear zones
   for ky=1:length(r.ss.shearY_chat)
     for kz=1:length(r.ss.shearZ_chat)
