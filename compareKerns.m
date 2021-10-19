@@ -89,7 +89,7 @@ function compShearKerns(hm, r)
 
   clf;
   imagesc(s1313Diff); colorbar;
-  saveas(gcf, 'figures/diff_s1313,png')
+  saveas(gcf, 'figures/diff_s1313.png')
 
   disp('figures created')
 
