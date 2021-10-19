@@ -73,23 +73,23 @@ function compShearKerns(hm, r)
   s1313Diff = s1313HM - r.ss.k1313;
 
   disp('subtraction complete')
-  disp('begin figurse')
+  disp('begin figures')
 
   clf;
   imagesc(s1212Diff); colorbar;
-  saveas(gcf, 'figures/diff_s1212')
+  saveas(gcf, 'figures/diff_s1212.png')
 
   clf;
   imagesc(s1213Diff); colorbar;
-  saveas(gcf, 'figures/diff_s1213')
+  saveas(gcf, 'figures/diff_s1213.png')
 
   clf;
   imagesc(s1312Diff); colorbar;
-  saveas(gcf, 'figures/diff_s1312');
+  saveas(gcf, 'figures/diff_s1312.png');
 
   clf;
   imagesc(s1313Diff); colorbar;
-  saveas(gcf, 'figures/diff_s1313')
+  saveas(gcf, 'figures/diff_s1313,png')
 
   disp('figures created')
 
