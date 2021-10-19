@@ -53,16 +53,16 @@ function compShearKerns(hm, r)
   end
   disp('kernels created')
 
-  m = hmmvp('getm', hm.s1212);
-  n = hmmvp('getn', hm.s1212);
+  m = hmmvp('getm', hm.ss1212);
+  n = hmmvp('getn', hm.ss1212);
 
   disp('beginning extraction')
 
   rs = (1:1:m); cs = (1:1:n);
-  s1212HM = hmmvp('extract', hm.s1212, rs, cs);
-  s1213HM = hmmvp('extract', hm.s1213, rs, cs);
-  s1312HM = hmmvp('extract', hm.s1312, rs, cs);
-  s1313HM = hmmvp('extract', hm.s1313, rs, cs);
+  s1212HM = hmmvp('extract', hm.ss1212, rs, cs);
+  s1213HM = hmmvp('extract', hm.ss1213, rs, cs);
+  s1312HM = hmmvp('extract', hm.ss1312, rs, cs);
+  s1313HM = hmmvp('extract', hm.ss1313, rs, cs);
 
   disp('hms extracted')
   disp('begin subtraction')
@@ -135,6 +135,6 @@ function k = s1313(G, D,L,W,x2,x3)
     - 2*G*boxc(x2/L).*boxc((x3-(2*D+W)/2)/W);
 end
 
-function bc = boxc(x) 
+function bc = boxc(x)
   bc = (x+0.5>=0)-(x-0.5>=0);
 end
