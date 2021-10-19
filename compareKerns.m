@@ -49,16 +49,24 @@ function compShearKerns(hm, r)
   m = hmmvp('getm', hm.s1212);
   n = hmmvp('getn', hm.s1212);
 
+  disp('beginning extraction')
+
   rs = (1:1:m); cs = (1:1:n);
   s1212HM = hmmvp('extract', hm.s1212, rs, cs);
   s1213HM = hmmvp('extract', hm.s1213, rs, cs);
   s1312HM = hmmvp('extract', hm.s1312, rs, cs);
   s1313HM = hmmvp('extract', hm.s1313, rs, cs);
 
+  disp('hms extracted')
+  disp('begin subtraction')
+
   s1212Diff = s1212HM - ss.k1212;
   s1213Diff = s1213HM - ss.k1213;
   s1312Diff = s1312HM - ss.k1312;
   s1313Diff = s1313HM - ss.k1313;
+
+  disp('subtraction complete')
+  disp('begin figurse')
 
   clf;
   imagesc(s1212Diff); colorbar;
@@ -75,6 +83,8 @@ function compShearKerns(hm, r)
   clf;
   imagesc(s1313Diff); colorbar;
   saveas(gcf, 'figures/diff_s1313')
+
+  disp('figures created')
 
 end
 
