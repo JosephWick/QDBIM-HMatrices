@@ -28,7 +28,7 @@ end
 % - builds dense kernels and compares them (subtraction) to hm
 function compShearKerns(hm, r)
   addpaths();
-  G = 3e30;
+  G = 30e3;
 
   r.ss.k1212 = zeros(length(r.ss.shearY_chat)*length(r.ss.shearZ_chat));
   r.ss.k1213 = zeros(length(r.ss.shearY_chat)*length(r.ss.shearZ_chat));
