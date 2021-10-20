@@ -394,9 +394,23 @@ function out = solve(r)
   % Velocity
   V=Yp(:,1:r.ss.dgfF:r.ss.M*r.ss.dgfF);
 
+  clf;
+  f4 = subplot(2,1,1);
+  imagesc(V'); colorbar;
+  title('Slip Rate of Fault')
+  ylabel('Block')
+  xlabel('Time Steps')
+  f4 = subplot(2,1,2); cla;
+  imagesc(Ep); colorbar;
+  title('Strain Rate of Center of Ductile Region')
+  xlabel('Time Steps')
+  ylabel('Block')
+
+  saveas(f4, 'figures/VC_f4.png')
+
   % make movie
-  movie=false;
-  if movie
+  Smovie=true;
+  if Smovie
     clf;
     fig = figure;
     fname = 'figures/strain.gif';
@@ -417,7 +431,12 @@ function out = solve(r)
       end
 
     end
+  disp('shear movie done')
+  end
 
+
+  Fmovie=true;
+  if Fmovie
     % velocity movie
     clf;
     fig = figure;
@@ -437,6 +456,7 @@ function out = solve(r)
         imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
       end
     end
+  disp('fault movie done')
   end
 
   % Maximum Velocity
@@ -538,20 +558,6 @@ function out = solve(r)
   saveas(f1, 'figures/VC_f1.png')
   saveas(f2, 'figures/VC_f2.png')
   saveas(f3, 'figures/VC_f3.png')
-
-  clf;
-  f4 = subplot(2,1,1);
-  imagesc(V'); colorbar;
-  title('Slip Rate of Fault')
-  ylabel('Block')
-  xlabel('Time Steps')
-  f4 = subplot(2,1,2); cla;
-  imagesc(Ep); colorbar;
-  title('Strain Rate of Center of Ductile Region')
-  xlabel('Time Steps')
-  ylabel('Block')
-
-  saveas(f4, 'figures/VC_f4.png')
 
 end
 
