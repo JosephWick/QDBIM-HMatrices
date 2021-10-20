@@ -396,12 +396,12 @@ function out = solve(r)
 
   clf;
   f4 = subplot(2,1,1);
-  imagesc(V'); colorbar;
+  imagesc(log10(V')); colorbar;
   title('Slip Rate of Fault')
   ylabel('Block')
   xlabel('Time Steps')
   f4 = subplot(2,1,2); cla;
-  imagesc(Ep); colorbar;
+  imagesc(log10(Ep)); colorbar;
   title('Strain Rate of Center of Ductile Region')
   xlabel('Time Steps')
   ylabel('Block')
@@ -409,7 +409,7 @@ function out = solve(r)
   saveas(f4, 'figures/VC_f4.png')
 
   % make movie
-  Smovie=true;
+  Smovie=false;
   if Smovie
     clf;
     fig = figure;
@@ -435,7 +435,7 @@ function out = solve(r)
   end
 
 
-  Fmovie=true;
+  Fmovie=false;
   if Fmovie
     % velocity movie
     clf;
