@@ -413,7 +413,7 @@ function out = solve(r)
   for idx=1:size(Epall,2)
     stds(idx) = std(Epall(:,idx));
   end
-  disp(max(stds(:)));
+  disp(max(stds(:)))
 
   % make movie
   Smovie=true;
