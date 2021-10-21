@@ -412,11 +412,11 @@ function out = solve(r)
   stds = zeros(size(Epall, 2));
   for idx=1:size(Epall,2)
     stds(idx) = std(Epall(:,idx));
-  end 
+  end
   disp(max(stds))
 
   % make movie
-  Smovie=false;
+  Smovie=true;
   if Smovie
     clf;
     fig = figure;
@@ -442,7 +442,7 @@ function out = solve(r)
   end
 
 
-  Fmovie=false;
+  Fmovie=true;
   if Fmovie
     % velocity movie
     clf;
