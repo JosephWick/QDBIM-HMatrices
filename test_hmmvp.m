@@ -31,8 +31,8 @@ function r = build()
 
   c.halfspace = 1;
 
-  len = 40000;
-  n = 400000;
+  len = 400;
+  n = 400;
 
   c.mu = 30e9;
   c.nu = 0.25;
