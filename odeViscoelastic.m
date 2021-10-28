@@ -65,7 +65,7 @@ tau13=Y(ss.M*ss.dgfF+2:ss.dgfS:end);
 tau=sqrt(tau12.^2+tau13.^2);
 
 % Dislocation strain rate
-Aeff = ss.Const_dis%.* (tau).^(ss.n-1);
+Aeff = ss.Const_dis;%.* (tau).^(ss.n-1);
 e12p = tau12 .* Aeff;
 e13p = tau13 .* Aeff;
 
