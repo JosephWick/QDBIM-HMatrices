@@ -48,7 +48,7 @@ function r = build()
   faultZ = linspace(0,lambdaZ-ss.dz, ss.M);
   %tops of fault patches
   ss.y3f = faultZ;
-  size(ss.y3f)
+  disp(size(ss.y3f))
   % fault patch centers
   faultX_c = faultX;
   faultY_c = faultY;
