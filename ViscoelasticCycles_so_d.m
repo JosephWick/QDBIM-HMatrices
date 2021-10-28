@@ -298,7 +298,7 @@ yp=@(t,y) odeViscoelastic_so_d(t,y,ss);
 tic
 % Solve the system
 options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-[t,Y]=ode45(yp,[0 1e10],Y0,options);
+[t,Y]=ode45(yp,[0 1e12],Y0,options);
 toc
 
 disp('solved')
