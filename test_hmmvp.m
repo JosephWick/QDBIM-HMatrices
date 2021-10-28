@@ -49,7 +49,7 @@ function r = build()
 
   x = zeros(1,n);
   y = zeros(1,n);
-  z = [zeros(1,n/2), ones(1,n/2)];
+  z = linspace(-1*c.dz,-1*len,n);
   c.X = [x; y; z];
 
   kvf('Write', c.kvf, c, 1);
