@@ -104,7 +104,7 @@ dummy = zeros(ss.Nx*ss.Nz,1);
 X = [vector; dummy];
 t3 = hmmvp('mvp', hm.sf12, X, gM, lM);
 Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3(ss.M+1:end);
-%Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3(1:ss.Nx*ss.Nz); %uncomment for disconnect
+%Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3(1:ss.Nx*ss.Nz); %unc for disconn
 %Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end)=hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate))+...
 %                                     hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate))+...
 %                                     hmmvp('mvp', hm.sf12, (V-ss.V_plate), lM, gM);
@@ -118,10 +118,10 @@ X = [vector; dummy];
 m = hmmvp('getm', hm.sf13);
 t3 = hmmvp('mvp', hm.sf13, X, gM, lM);
 Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(ss.M+1:end);
-%Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2; %+ t3(1:ss.Nx*ss.Nz); % uncomment for disconnect
-%Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end) = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate))+...
-%                                       hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate))+...
-%                                       hmmvp('mvp', hm.sf13, (V-ss.V_plate), lM, gM);
+%Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2; %+ t3(1:ss.Nx*ss.Nz); %unc for disconn
+%Yp(2*ss.M*ss.dgfF+2 : ss.dgfS : end)=hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate))+...
+%                                     hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate))+...
+%                                     hmmvp('mvp', hm.sf13, (V-ss.V_plate), lM, gM);
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
