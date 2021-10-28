@@ -49,11 +49,9 @@ lM = (1:1:ss.M);
 
 % Shear stress on faults
 tauF = Y(2:ss.dgfF:ss.M*ss.dgfF);
-tauF = tauF';
 
 % State variables
 th = Y(3:ss.dgfF:ss.M*ss.dgfF);
-th = th';
 
 % Slip velocities
 V = (2.*ss.Vs.*ss.a.*ss.sigmab./G).*...
