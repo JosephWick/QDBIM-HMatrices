@@ -341,8 +341,8 @@ function out = solve(r)
   % - Numerical Solution -
 
   % state parameters
-  r.ss.dgfF=3;
-  r.ss.dgfS=4;
+  r.ss.dgfF=3; % s, tau, log(theta Vo / L)
+  r.ss.dgfS=4; % s12, s13, e12, e13
   %% Initialize State Vector
   Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.x2c)*length(r.ss.x3c)*r.ss.dgfS,1);
 
@@ -417,7 +417,7 @@ function out = solve(r)
   disp(max(stds(:)))
 
   % make movie
-  Smovie=false;
+  Smovie=true;
   if Smovie
     clf;
     fig = figure;
