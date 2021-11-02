@@ -409,6 +409,11 @@ function out = solve(r)
 
   saveas(f4, 'figures/VC_f4.png')
 
+  clf;
+  imagesc(ss.a - ss.b); colorbar;
+  title('a minus b')
+  saveas(gcf, 'figures/AminusB.png')
+
   %print std dev of epall
   stds = zeros(size(Epall, 2));
   for idx=1:size(Epall,2)
