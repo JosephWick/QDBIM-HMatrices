@@ -423,7 +423,7 @@ function out = solve(r)
   disp(max(stds(:)))
 
   % make movie
-  Smovie=false;
+  Smovie=true;
   if Smovie
     clf;
     fig = figure;
