@@ -410,7 +410,7 @@ function out = solve(r)
   saveas(f4, 'figures/VC_f4.png')
 
   clf;
-  imagesc(ss.a - ss.b); colorbar;
+  imagesc(r.ss.a - r.ss.b); colorbar;
   title('a minus b')
   saveas(gcf, 'figures/AminusB.png')
 
