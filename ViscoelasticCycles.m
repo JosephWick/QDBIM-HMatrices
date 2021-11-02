@@ -303,11 +303,11 @@ function out = solve(r)
 
   % - Rheology -
   r.ss.e12p_plate = 1e-14*ones(length(r.ss.x2c)*length(r.ss.x3c),1);
-  r.ss.e13p_plate = 0.0; %zeros(length(ss.x2c)*length(ss.x3c),1);
+  r.ss.e13p_plate = zeros(length(ss.x2c)*length(ss.x3c),1);
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
   r.ss.Adif = 1e6*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
-  r.ss.Adis = 90 *ones(length(r.ss.x3c)*length(r.ss.x2c),1);
+  r.ss.Adis =  90*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
   % Power-Law Exponent
   r.ss.n = 3.5*ones(length(r.ss.x3c)*length(r.ss.x2c),1);
   % Activation Energy Wet Oliving (J/mol)
@@ -423,7 +423,7 @@ function out = solve(r)
   disp(max(stds(:)))
 
   % make movie
-  Smovie=true;
+  Smovie=false;
   if Smovie
     clf;
     fig = figure;
