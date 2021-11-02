@@ -46,7 +46,6 @@ gM = (ss.M+1:1: em);
 % less than or equal to ss.M
 lM = (1:1:ss.M);
 
-
 % Shear stress on faults
 tauF = Y(2:ss.dgfF:ss.M*ss.dgfF);
 
