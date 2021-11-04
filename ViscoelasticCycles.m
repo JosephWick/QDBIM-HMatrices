@@ -442,7 +442,7 @@ function out = solve(r)
   end
 
 
-  Fmovie=true;
+  Fmovie=false;
   if Fmovie
     % velocity movie
     clf;
