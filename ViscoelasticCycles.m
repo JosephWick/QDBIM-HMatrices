@@ -91,13 +91,6 @@ function r = build()
   ss.polesz = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
   % center of shear zone (x3)
   ss.x3c = shearZ_chat;
-  %ss.x3c=(ss.polesz(2:end)+ss.polesz(1:end-1))/2;
-  %W=ss.polesz(2:end)-ss.polesz(1:end-1);
-  %ss.polesxc=(2*y2/1e3:(2*y2)/(26e3):2*y2/1e3)'*1e3;
-  %edges= floor(ss.Nx-length(ss.polesxc)+1)/2;
-  %ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*transition);
-  %ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*transition;
-  %ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
   % center of shear zone (x2)
   ss.x2c=shearY_chat;
 
