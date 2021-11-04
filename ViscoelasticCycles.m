@@ -416,7 +416,7 @@ function out = solve(r)
   disp(max(stds(:)))
 
   % make movie
-  Smovie=false;
+  Smovie=true;
   if Smovie
     clf;
     fig = figure;
@@ -442,7 +442,7 @@ function out = solve(r)
   end
 
 
-  Fmovie=false;
+  Fmovie=true;
   if Fmovie
     % velocity movie
     clf;
