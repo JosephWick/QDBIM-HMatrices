@@ -151,7 +151,7 @@ function y = solve(r)
   hm.s12 = hmmvp('init', r.s12, 4);
 
   % initialize the function handle with set constitutive parameters
-  yp=@(t,y) DieterichRuinaRegAging_BP1v(t,y,b.ss, hm);
+  yp=@(t,y) DieterichRuinaRegAging_BP1v(t,y,r.ss, hm);
 
   % ODE45 Settings
   % Initial step of 1e-5 seconds
@@ -164,10 +164,10 @@ function y = solve(r)
   toc
 
   % ---       Figures        ---
-  y.V = b.ss.Vo.*exp(Y(:,4:b.ss.dgf:end)'); % Slip rate (m/s)
-  y.tau = Y(:,2:b.ss.dgf:end);            % Shear stress (MPa)
+  y.V = b.ss.Vo.*exp(Y(:,4:r.ss.dgf:end)'); % Slip rate (m/s)
+  y.tau = Y(:,2:r.ss.dgf:end);            % Shear stress (MPa)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
-  y.Vcenter = V(floor(b.ss.M/2),:);          % Slip rate at center of VW region
+  y.Vcenter = V(floor(r.ss.M/2),:);          % Slip rate at center of VW region
   for ti = 1:length(t)
     y.Vmax(ti) = max(V(:,ti));
   end
