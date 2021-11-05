@@ -177,6 +177,6 @@ function bc = BC(x)
 end
 
 % ramp function
-function rmp = ramp(x)
+function rmp = Ramp(x)
   rmp = x.*BC(x-1/2)+HS(x-1);
 end
