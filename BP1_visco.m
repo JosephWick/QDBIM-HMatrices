@@ -174,7 +174,7 @@ function y = solve(r)
   end
 
   clf;
-  imagesc(y.V); colorbar;
+  imagesc(log10(y.V)); colorbar;
   title('Slip Rate')
   xlabel('time steps')
   ylabel('fault mesh block')
