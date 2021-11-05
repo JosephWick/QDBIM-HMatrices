@@ -64,7 +64,7 @@ function r = build()
   c.Y = [faultX; faultY; faultZ];
   c.X = [faultX_c; faultY_c; faultZ_c];
 
-  kvf('Write', c.kvf, 4);
+  kvf('Write', c.kvf, c, 4);
   disp('run these in a shell:')
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
