@@ -136,10 +136,10 @@ function y = solve(b)
   % yp = f(t,y)
   % Y = [slip; stress; state variable; log10(slip rate / ref slip rate)]
   % Degrees of Freedom
-  r.ss.dgf=4;
+  b.ss.dgf=4;
 
   % initial conditions (starts at steady state w zero slip)
-  Y0=zeros(b.ss.M*r.ss.dgf,1);
+  Y0=zeros(b.ss.M*b.ss.dgf,1);
   Y0(1:b.ss.dgf:end)=zeros(b.ss.M,1);
   Y0(2:b.ss.dgf:end)=max(b.ss.a).*b.ss.sigma.*asinh(b.ss.Vpl./b.ss.Vo/2.* ...
     exp((b.ss.fo+b.ss.b.*log(b.ss.Vo./b.ss.Vpl))./max(b.ss.a))) + b.ss.eta.*b.ss.Vpl;
