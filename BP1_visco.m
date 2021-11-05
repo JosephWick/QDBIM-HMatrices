@@ -74,10 +74,10 @@ function r = build()
 
   % ---       fault properties      ---
   % reference friction coefficient
-  ss.fo=0.6*ones(size(y3));
+  ss.fo=0.6*ones(size(r.ss.fpTops));
 
   % Dieterich-Ruina R+S frictional parameters (velocity-weakening friction)
-  ss.a=1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+  ss.a=1e-2+Ramp((r.ss.fpTops-15e3)/3e3)*(0.025-0.01);
   ss.b=0.015*ones(size(y3));
 
   % effective normal stress (MPa)
