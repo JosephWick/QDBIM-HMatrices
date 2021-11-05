@@ -170,7 +170,7 @@ function y = solve(r)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
   y.Vcenter = y.V(floor(r.ss.M/2),:);          % Slip rate at center of VW region
   for ti = 1:length(t)
-    y.Vmax(ti) = max(V(:,ti));
+    y.Vmax(ti) = max(y.V(:,ti));
   end
 
 end
