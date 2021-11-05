@@ -139,8 +139,8 @@ function y = solve(b)
   r.ss.dgf=4;
 
   % initial conditions (starts at steady state w zero slip)
-  Y0=zeros(M*r.ss.dgf,1);
-  Y0(1:b.ss.dgf:end)=zeros(M,1);
+  Y0=zeros(b.ss.M*r.ss.dgf,1);
+  Y0(1:b.ss.dgf:end)=zeros(b.ss.M,1);
   Y0(2:b.ss.dgf:end)=max(b.ss.a).*b.ss.sigma.*asinh(b.ss.Vpl./b.ss.Vo/2.* ...
     exp((b.ss.fo+b.ss.b.*log(b.ss.Vo./b.ss.Vpl))./max(b.ss.a))) + b.ss.eta.*b.ss.Vpl;
   Y0(3:b.ss.dgf:end)=b.ss.a./b.ss.b.*log(2*b.ss.Vo./b.ss.Vpl.*sinh((Y0(2:b.ss.dgf:end)-...
@@ -164,7 +164,7 @@ function y = solve(b)
   y.V = b.ss.Vo.*exp(Y(:,4:b.ss.dgf:end)'); % Slip rate (m/s)
   y.tau = Y(:,2:b.ss.dgf:end);            % Shear stress (MPa)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
-  y.Vcenter = V(floor(M/2),:);          % Slip rate at center of VW region
+  y.Vcenter = V(floor(b.ss.M/2),:);          % Slip rate at center of VW region
   for ti = 1:length(t)
     y.Vmax(ti) = max(V(:,ti));
   end
