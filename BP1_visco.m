@@ -173,6 +173,13 @@ function y = solve(r)
     y.Vmax(ti) = max(y.V(:,ti));
   end
 
+  clf;
+  imagesc(y.V); colorbar;
+  title('Slip Rate')
+  xlabel('time steps')
+  ylabel('fault mesh block')
+  saveas(gcf, 'figures/BP1v_slip.png')
+
 end
 
 % ---------------------------- Private ---------------------------
