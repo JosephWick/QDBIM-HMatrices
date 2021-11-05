@@ -73,6 +73,8 @@ function r = build()
   % TODO: other kernels
 
   % ---       fault properties      ---
+  G = 30e3;
+
   % reference friction coefficient
   ss.fo=0.6*ones(size(ss.fpTops));
 
