@@ -28,7 +28,7 @@ function r = build()
 
   ss.lambdaZ = 40e3; % fault depth extent
   ss.M = 400; %number of fault cells
-  ss.dz = lamdaZ/ss.M;
+  ss.dz = ss.lamdaZ/ss.M;
 
   % FAULT
   % fault patch edges (top left)
