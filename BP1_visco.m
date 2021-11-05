@@ -34,7 +34,7 @@ function r = build()
   % fault patch edges (top left)
   faultX = zeros(1,ss.M);
   faultY = zeros(1,ss.M);
-  faultZ = linspace(0, lamdaZ-ss.dz, ss.M);
+  faultZ = linspace(0, ss.lambdaZ-ss.dz, ss.M);
   % tops of fault patches
   ss.fpTops = faultZ';
 
