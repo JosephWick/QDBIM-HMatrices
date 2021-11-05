@@ -78,19 +78,19 @@ function r = build()
 
   % Dieterich-Ruina R+S frictional parameters (velocity-weakening friction)
   ss.a=1e-2+Ramp((r.ss.fpTops-15e3)/3e3)*(0.025-0.01);
-  ss.b=0.015*ones(size(y3));
+  ss.b=0.015*ones(size(r.ss.fpTops));
 
   % effective normal stress (MPa)
-  ss.sigma=50.0*ones(size(y3));
+  ss.sigma=50.0*ones(size(r.ss.fpTops));
 
   % characteristic weakening distance (m)
-  ss.Drs=8e-3*ones(size(y3));
+  ss.Drs=8e-3*ones(size(r.ss.fpTops));
 
   % plate rate (m/s)
-  ss.Vpl=1e-9*ones(size(y3));
+  ss.Vpl=1e-9*ones(size(r.ss.fpTops));
 
   % reference slip rate (m/s)
-  ss.Vo=1e-6*ones(size(y3));
+  ss.Vo=1e-6*ones(size(r.ss.fpTops));
 
   % Radiation damping coefficient
   ss.eta = G./(2*Vs);
@@ -106,12 +106,12 @@ function r = build()
   coh = min(9/32*pi*G*ss.Drs(VWp)./ss.b(VWp)./ss.sigma(VWp));
 
   % Estimate of recurrence time ( T ~ 5(b-a)*sigma / G * R/Vpl )
-  Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(y3(VWp(end))-y3(VWp(1)))./ ...
+  Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(r.ss.fpTops(VWp(end))-r.ss.fpTops(VWp(1)))./ ...
   (G*mean(ss.Vpl(VWp)));
 
   % Print information about discretization
   fprintf('Grid size = %.2f (m)\n', dz);
-  fprintf('VW zone = %.2f (km)\n', (y3(VWp(end))-y3(VWp(1)))/1e3);
+  fprintf('VW zone = %.2f (km)\n', (r.ss.fpTops(VWp(end))-r.ss.fpTops(VWp(1)))/1e3);
   fprintf('Critical nucleation size = %.2f (m)\n',hstar);
   fprintf('QS Cohesive zone = %.2f (m)\n',coh);
   fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
@@ -132,12 +132,12 @@ function y = solve(b)
 
   % initial conditions (starts at steady state w zero slip)
   Y0=zeros(M*r.ss.dgf,1);
-  Y0(1:r.ss.dgf:end)=zeros(M,1);
-  Y0(2:r.ss.dgf:end)=max(r.ss.a).*r.ss.sigma.*asinh(r.ss.Vpl./r.ss.Vo/2.* ...
-    exp((r.ss.fo+r.ss.b.*log(r.ss.Vo./r.ss.Vpl))./max(r.ss.a))) + r.ss.eta.*r.ss.Vpl;
-  Y0(3:r.ss.dgf:end)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgf:end)-...
-    r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
-  Y0(4:r.ss.dgf:end)=log(r.ss.Vpl./r.ss.Vo);
+  Y0(1:b.ss.dgf:end)=zeros(M,1);
+  Y0(2:b.ss.dgf:end)=max(b.ss.a).*b.ss.sigma.*asinh(b.ss.Vpl./b.ss.Vo/2.* ...
+    exp((b.ss.fo+b.ss.b.*log(b.ss.Vo./b.ss.Vpl))./max(b.ss.a))) + b.ss.eta.*b.ss.Vpl;
+  Y0(3:b.ss.dgf:end)=b.ss.a./b.ss.b.*log(2*b.ss.Vo./b.ss.Vpl.*sinh((Y0(2:b.ss.dgf:end)-...
+    b.ss.eta.*b.ss.Vpl)./b.ss.a./b.ss.sigma))-b.ss.fo./b.ss.b;
+  Y0(4:b.ss.dgf:end)=log(b.ss.Vpl./b.ss.Vo);
 
   % initialize the function handle with set constitutive parameters
   yp=@(t,y) DieterichRuinaRegAging(t,y,ss);
@@ -153,8 +153,8 @@ function y = solve(b)
   toc
 
   % ---       Figures        ---
-  y.V = ss.Vo.*exp(Y(:,4:ss.dgf:end)'); % Slip rate (m/s)
-  y.tau = Y(:,2:ss.dgf:end);            % Shear stress (MPa)
+  y.V = b.ss.Vo.*exp(Y(:,4:b.ss.dgf:end)'); % Slip rate (m/s)
+  y.tau = Y(:,2:b.ss.dgf:end);            % Shear stress (MPa)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
   y.Vcenter = V(floor(M/2),:);          % Slip rate at center of VW region
   for ti = 1:length(t)
