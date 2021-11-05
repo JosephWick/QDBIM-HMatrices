@@ -1,4 +1,4 @@
-function [yp] = DieterichRuinaRegAging_BP1v(~,y,ss)
+function [yp] = DieterichRuinaRegAging_BP1v(~,y,ss,hm)
 % This file describes the evolution of the ordinary
 % differential equation y' = f(t,y), where the state
 % vector y is
