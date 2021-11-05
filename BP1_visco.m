@@ -128,7 +128,7 @@ function r = build()
 
 end
 
-function y = solve(b)
+function y = solve(r)
   addpaths();
 
   % Use ode45 (Runge-Kutta 4th / 5th order accurate integration) to
@@ -136,19 +136,22 @@ function y = solve(b)
   % yp = f(t,y)
   % Y = [slip; stress; state variable; log10(slip rate / ref slip rate)]
   % Degrees of Freedom
-  b.ss.dgf=4;
+  r.ss.dgf=4;
 
   % initial conditions (starts at steady state w zero slip)
-  Y0=zeros(b.ss.M*b.ss.dgf,1);
-  Y0(1:b.ss.dgf:end)=zeros(b.ss.M,1);
-  Y0(2:b.ss.dgf:end)=max(b.ss.a).*b.ss.sigma.*asinh(b.ss.Vpl./b.ss.Vo/2.* ...
-    exp((b.ss.fo+b.ss.b.*log(b.ss.Vo./b.ss.Vpl))./max(b.ss.a))) + b.ss.eta.*b.ss.Vpl;
-  Y0(3:b.ss.dgf:end)=b.ss.a./b.ss.b.*log(2*b.ss.Vo./b.ss.Vpl.*sinh((Y0(2:b.ss.dgf:end)-...
-    b.ss.eta.*b.ss.Vpl)./b.ss.a./b.ss.sigma))-b.ss.fo./b.ss.b;
-  Y0(4:b.ss.dgf:end)=log(b.ss.Vpl./b.ss.Vo);
+  Y0=zeros(r.ss.M*r.ss.dgf,1);
+  Y0(1:r.ss.dgf:end)=zeros(r.ss.M,1);
+  Y0(2:r.ss.dgf:end)=max(r.ss.a).*r.ss.sigma.*asinh(r.ss.Vpl./r.ss.Vo/2.* ...
+    exp((r.ss.fo+r.ss.r.*log(r.ss.Vo./r.ss.Vpl))./max(r.ss.a))) + r.ss.eta.*r.ss.Vpl;
+  Y0(3:r.ss.dgf:end)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgf:end)-...
+    r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
+  Y0(4:r.ss.dgf:end)=log(r.ss.Vpl./r.ss.Vo);
+
+  % load HM kernels
+  hm.s12 = hmmvp('init', r.s12, 4);
 
   % initialize the function handle with set constitutive parameters
-  yp=@(t,y) DieterichRuinaRegAging(t,y,ss);
+  yp=@(t,y) DieterichRuinaRegAging_BP1v(t,y,b.ss, hm);
 
   % ODE45 Settings
   % Initial step of 1e-5 seconds
