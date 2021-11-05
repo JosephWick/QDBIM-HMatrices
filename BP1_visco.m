@@ -49,7 +49,7 @@ function r = build()
   % KERNELS
   % ---       kvf params        ---
   c.command = 'compress';
-  c.lamdaZ = ss.lamdaZ;
+  c.lambdaZ = ss.lambdaZ;
   c.tol = 1e-8;
   c.G = 30e3;
   c.allow_overwrite = 1;
