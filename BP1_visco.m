@@ -175,3 +175,8 @@ function bc = BC(x)
   boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
   bc = boxc(x);
 end
+
+% ramp function
+function rmp = ramp(x)
+  rmp = x.*BC(x-1/2)+HS(x-1);
+end
