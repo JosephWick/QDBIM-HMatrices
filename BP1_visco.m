@@ -157,6 +157,7 @@ function y = solve(r)
   % Initial step of 1e-5 seconds
   % Relative tolerance of 3e-8
   % [0 3e10] = simulate 3e10 seconds, 3.15e7 seconds / year
+  disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
   [t,Y]=ode45(yp,[0 500*3.15e7],Y0,options);
@@ -164,7 +165,7 @@ function y = solve(r)
   toc
 
   % ---       Figures        ---
-  y.V = b.ss.Vo.*exp(Y(:,4:r.ss.dgf:end)'); % Slip rate (m/s)
+  y.V = r.ss.Vo.*exp(Y(:,4:r.ss.dgf:end)'); % Slip rate (m/s)
   y.tau = Y(:,2:r.ss.dgf:end);            % Shear stress (MPa)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
   y.Vcenter = V(floor(r.ss.M/2),:);          % Slip rate at center of VW region
