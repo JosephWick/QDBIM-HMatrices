@@ -72,27 +72,25 @@ function r = build()
 
   % TODO: other kernels
 
-  r.ss = ss;
-
   % ---       fault properties      ---
   % reference friction coefficient
-  ss.fo=0.6*ones(size(r.ss.fpTops));
+  ss.fo=0.6*ones(size(ss.fpTops));
 
   % Dieterich-Ruina R+S frictional parameters (velocity-weakening friction)
-  ss.a=1e-2+Ramp((r.ss.fpTops-15e3)/3e3)*(0.025-0.01);
-  ss.b=0.015*ones(size(r.ss.fpTops));
+  ss.a=1e-2+Ramp((ss.fpTops-15e3)/3e3)*(0.025-0.01);
+  ss.b=0.015*ones(size(ss.fpTops));
 
   % effective normal stress (MPa)
-  ss.sigma=50.0*ones(size(r.ss.fpTops));
+  ss.sigma=50.0*ones(size(ss.fpTops));
 
   % characteristic weakening distance (m)
-  ss.Drs=8e-3*ones(size(r.ss.fpTops));
+  ss.Drs=8e-3*ones(size(ss.fpTops));
 
   % plate rate (m/s)
-  ss.Vpl=1e-9*ones(size(r.ss.fpTops));
+  ss.Vpl=1e-9*ones(size(ss.fpTops));
 
   % reference slip rate (m/s)
-  ss.Vo=1e-6*ones(size(r.ss.fpTops));
+  ss.Vo=1e-6*ones(size(ss.fpTops));
 
   % Radiation damping coefficient
   ss.eta = G./(2*Vs);
@@ -117,6 +115,8 @@ function r = build()
   fprintf('Critical nucleation size = %.2f (m)\n',hstar);
   fprintf('QS Cohesive zone = %.2f (m)\n',coh);
   fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
+
+  r.ss = ss;
 
 end
 
