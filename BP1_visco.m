@@ -72,6 +72,8 @@ function r = build()
 
   % TODO: other kernels
 
+  r.ss = ss;
+
   % ---       fault properties      ---
   % reference friction coefficient
   ss.fo=0.6*ones(size(r.ss.fpTops));
@@ -115,8 +117,6 @@ function r = build()
   fprintf('Critical nucleation size = %.2f (m)\n',hstar);
   fprintf('QS Cohesive zone = %.2f (m)\n',coh);
   fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
-
-  r.ss = ss;
 
 end
 
