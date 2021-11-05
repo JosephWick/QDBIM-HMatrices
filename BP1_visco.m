@@ -180,3 +180,7 @@ end
 function rmp = Ramp(x)
   rmp = x.*BC(x-1/2)+HS(x-1);
 end
+
+function h = HS(x)
+  h = 0+x>=0;
+end
