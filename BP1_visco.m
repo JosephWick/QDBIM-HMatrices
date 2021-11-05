@@ -114,8 +114,8 @@ function r = build()
   coh = min(9/32*pi*G*ss.Drs(VWp)./ss.b(VWp)./ss.sigma(VWp));
 
   % Estimate of recurrence time ( T ~ 5(b-a)*sigma / G * R/Vpl )
-  Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(r.ss.fpTops(VWp(end))-r.ss.fpTops(VWp(1)))./ ...
-  (G*mean(ss.Vpl(VWp)));
+  Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(ss.fpTops(VWp(end))...
+    -ss.fpTops(VWp(1)))./(G*mean(ss.Vpl(VWp)));
 
   % Print information about discretization
   fprintf('Grid size = %.2f (m)\n', dz);
