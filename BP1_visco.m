@@ -73,7 +73,13 @@ function r = build()
   % TODO: other kernels
 
   % ---       fault properties      ---
-  G = 30e3;
+
+  % density (kg/m^3)
+  rho = 2670;
+  % shear wave speed (m/s)
+  Vs = 3464;
+  % shear modulus (MPa)
+  G = rho*Vs^2/1e6;
 
   % reference friction coefficient
   ss.fo=0.6*ones(size(ss.fpTops));
