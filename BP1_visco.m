@@ -118,8 +118,8 @@ function r = build()
     -ss.fpTops(VWp(1)))./(G*mean(ss.Vpl(VWp)));
 
   % Print information about discretization
-  fprintf('Grid size = %.2f (m)\n', dz);
-  fprintf('VW zone = %.2f (km)\n', (r.ss.fpTops(VWp(end))-r.ss.fpTops(VWp(1)))/1e3);
+  fprintf('Grid size = %.2f (m)\n', ss.dz);
+  fprintf('VW zone = %.2f (km)\n', (ss.fpTops(VWp(end))-ss.fpTops(VWp(1)))/1e3);
   fprintf('Critical nucleation size = %.2f (m)\n',hstar);
   fprintf('QS Cohesive zone = %.2f (m)\n',coh);
   fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
