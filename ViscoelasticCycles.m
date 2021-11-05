@@ -289,7 +289,7 @@ function out = solve(r)
   r.ss.Vs = 3e3*ones(size(r.ss.y3f));
 
   % Velocity-strengthening at edges
-  top    = floor(5e3/(r.ss.lambdaZ/r.ss.M));
+  top    = floor(0e3/(r.ss.lambdaZ/r.ss.M));
   bottom = ceil(15e3/(r.ss.lambdaZ/r.ss.M));
   r.ss.b(1:top)      = r.ss.a(1:top)-2.1e-4;
   r.ss.b(bottom:end) = r.ss.a(bottom:end)-2.1e-4;
@@ -416,7 +416,7 @@ function out = solve(r)
   disp(max(stds(:)))
 
   % make movie
-  Smovie=true;
+  Smovie=false;
   if Smovie
     clf;
     fig = figure;
@@ -442,7 +442,7 @@ function out = solve(r)
   end
 
 
-  Fmovie=true;
+  Fmovie=false;
   if Fmovie
     % velocity movie
     clf;
