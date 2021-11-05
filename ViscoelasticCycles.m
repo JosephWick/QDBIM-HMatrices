@@ -209,7 +209,7 @@ function r = build()
 
   % ---       s12 kernel for shear-fault interaction ---
   c.greens_fn = 'okadaS12';
-  c.write_hmat_filename = './tmp/VC_sf-12_200';
+  c.write_hmat_filename = './tmp/VC_sf-s12_200';
   c.write_hd_filename = './tmp/VC_sf-s12-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
