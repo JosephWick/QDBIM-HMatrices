@@ -60,11 +60,11 @@ function r = build()
 
   % shear patch centers
   shearX_c = shearX;
-  ss.sheary_chat = zeros(1,ss.Ny);
+  ss.shearY_chat = zeros(1,ss.Ny);
   shearZ_chat = zeros(1,ss.Nz);
   for idx=(1:length(shearZhat)-1)
     shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
-    ss.sheary_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
+    ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
   end
 
   % grid and flatten
@@ -73,7 +73,7 @@ function r = build()
   shearY = shearY(:)';
   shearZ = shearZ(:)';
 
-  [shearZ_c shearY_c] = ndgrid(shearZ_chat, ss.sheary_chat);
+  [shearZ_c shearY_c] = ndgrid(shearZ_chat, ss.shearY_chat);
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
 
@@ -265,8 +265,8 @@ function r = build()
   %  -              RHEOLOGY           -
 
   % Driving strain rate (1/s)
-  ss.e12p_plate = 1e-14*ones(length(ss.sheary_chat)*length(shearZ_chat),1);
-  ss.e13p_plate =      zeros(length(ss.sheary_chat)*length(shearZ_chat),1);
+  ss.e12p_plate = 1e-14*ones(length(ss.shearY_chat)*length(shearZ_chat),1);
+  ss.e13p_plate =      zeros(length(ss.shearY_chat)*length(shearZ_chat),1);
 
   % Confining pressure (MPa) and Temperature (K)
   k  = 3.138; % thermal conductivity (W/m/K)
@@ -282,35 +282,35 @@ function r = build()
 
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
-  ss.Adif = 1e6*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
-  ss.Adis = 90 *ones(length(shearZ_chat)*length(ss.sheary_chat),1);
+  ss.Adif = 1e6*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
+  ss.Adis = 90 *ones(length(shearZ_chat)*length(ss.shearY_chat),1);
 
   % Power-Law Exponent
-  ss.n = 3.5*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
+  ss.n = 3.5*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
 
   % Activation Energy Wet Oliving (J/mol)
-  ss.Qdif = 335e3*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
-  ss.Qdis = 480e3*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
+  ss.Qdif = 335e3*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
+  ss.Qdis = 480e3*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
 
   % Activation Volume (m^3/mol)
-  ss.Voldif = 4e-6*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
-  ss.Voldis = 11e-6*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
+  ss.Voldif = 4e-6*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
+  ss.Voldis = 11e-6*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
 
   % Grain size (m)
-  ss.d    = 1e-2*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
-  ss.pexp = 3*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
+  ss.d    = 1e-2*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
+  ss.pexp = 3*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
 
   % Water fugacity (H/10^6 Si)
-  ss.COH = 1000*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
-  ss.r   = 1.2*ones(length(shearZ_chat)*length(ss.sheary_chat),1);
+  ss.COH = 1000*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
+  ss.r   = 1.2*ones(length(shearZ_chat)*length(ss.shearY_chat),1);
 
   % Pressure (Pa)
-  ss.P = repmat(1e6*Pconf',length(ss.sheary_chat),1);
-  ss.P = reshape(ss.P,[length(ss.sheary_chat)*length(shearZ_chat),1]);
+  ss.P = repmat(1e6*Pconf',length(ss.shearY_chat),1);
+  ss.P = reshape(ss.P,[length(ss.shearY_chat)*length(shearZ_chat),1]);
 
   % Temperature (K)
-  Te0 = repmat(ss.Tprof',length(ss.sheary_chat),1);
-  Te0 = reshape(Te0,[length(ss.sheary_chat)*length(shearZ_chat),1]);
+  Te0 = repmat(ss.Tprof',length(ss.shearY_chat),1);
+  Te0 = reshape(Te0,[length(ss.shearY_chat)*length(shearZ_chat),1]);
 
   % Coefficients for dislocation and diffusion creep
   ss.Const_dis = ss.Adis.*exp(-(ss.Qdis+ss.P.*ss.Voldis)./(8.314.*Te0)).*ss.COH.^(ss.r);
@@ -339,7 +339,7 @@ function y = solve(r)
   r.ss.dgfS=4;
 
   % state vector init
-  Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.sheary_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
+  Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.shearY_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
 
   % Fault patches
   Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfF:2*r.ss.M*ss.dgfF)=zeros(size(r.ss.faultZ));
