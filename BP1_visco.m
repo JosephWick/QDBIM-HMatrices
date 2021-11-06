@@ -272,8 +272,8 @@ function r = build()
   Cp = 1171 ; % specific heat (J/kg/K)
   Rm = 3330 ; % mantle density (kg/m^3)
 
-  Pconf       = Rm*9.8*ss.x3c/1e6;  % Shear zones
-  Pconf_fault = Rm*9.8*(ss.y3f+dz); % Faults
+  Pconf       = Rm*9.8*shearZ_chat/1e6;  % Shear zones
+  Pconf_fault = Rm*9.8*(faultZ'+dz); % Faults
 
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
