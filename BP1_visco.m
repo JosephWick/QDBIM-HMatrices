@@ -26,9 +26,17 @@ function r = build()
 
   % ---       meshes      ---
 
+  probL = 200e3;
+  probW = 200e3;
+
   ss.lambdaZ = 40e3; % fault depth extent
   ss.M = 400; %number of fault cells
   ss.dz = ss.lambdaZ/ss.M;
+
+  ss.transition = 40e3;
+  ss.Ny = 51;
+  ss.Nz = 51;
+  ss.Nx = ss.Nz;
 
   % FAULT
   % fault patch edges (top left)
@@ -44,7 +52,39 @@ function r = build()
   faultZ_c = faultZ+(ss.dz/2);
 
   % SHEAR
-  % TODO
+  eps = 1e-12;
+  nc = (-ss.Nz/2:ss.Nz/2);
+  shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
+  shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
+  shearX = zeros(1,ss.Ny*ss.Nz);
+
+  % shear patch centers
+  shearX_c = shearX;
+  shearY_chat = zeros(1,ss.Ny);
+  shearZ_chat = zeros(1,ss.Nz);
+  for idx=(1:length(shearZhat)-1)
+    shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
+    shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
+  end
+
+  % grid and flatten
+  shearZhat(end)=[]; shearYhat(end)=[];
+  [shearZ shearY] = ndgrid(shearZhat, shearYhat);
+  shearY = shearY(:)';
+  shearZ = shearZ(:)';
+
+  [shearZ_c shearY_c] = ndgrid(shearZ_chat, shearY_chat);
+  shearZ_c = shearZ_c(:)';
+  shearY_c = shearY_c(:)';
+
+  % combo mesh
+  comboX = [faultX shearX];
+  comboY = [faultY shearY];
+  comboZ = [faultZ shearZ];
+
+  comboX_c = [faultX_c shearX_c];
+  comboY_c = [faultY_c shearY_c];
+  comboZ_c = [faultZ_c shearZ_c];
 
   % KERNELS
   % ---       kvf params        ---
@@ -70,9 +110,97 @@ function r = build()
   disp(cmd)
   r.s12 = c.write_hmat_filename;
 
-  % TODO: other kernels
+  % ---       shear1212 kernel for shear-shear interaction      ---
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1212';
+  c.write_hd_filename = './tmp/BP1v_ss-shear1212-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+
+  c.transition = transition;
+  c.Y = [shearX; shearY; shearZ];
+  c.X = [shearX_c; shearY_c; shearZ_c];
+
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1212 = c.write_hmat_filename;
+
+  % ---       shear 1213 kernel for shear-shear interaction     ---
+  c.greens_fn = 'shear1213';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1213';
+  c.write_hd_filename = './tmp/BP1v_ss-shear1213-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  % geometry is the same for all shear-shear kernels
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1213 = c.write_hmat_filename;
+
+  % ---       shear 1312 kernel for shear-shear interaction       ---
+  c.greens_fn = 'shear1312';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1312';
+  c.write_hd_filename = '/tmp/BP1v_ss-shear1312-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp/okada/bin/hmmvp_omp ' c.kvf];
+  disp(cmd)
+  r.ss1312 = c.write_hmat_filename;
+
+  % ---       shear 1313 kernel for shear-shear interaction       ---
+  c.greens_fn = 'shear1313';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1313';
+  c.write_hd_filename = './tmp/BP1v_ss-shear1313-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1313 = c.write_hmat_filename;
+
+  % ---       shear 1212 kernels for fault-shear interaction      ---
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
+  c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
+  c.kvf = [c.write_hmat_filename ] '.kvf'];
+
+  c.X = [comboX_c, comboY_c, comboZ_c];
+  c.Y = [comboX, comboY, comboZ];
+
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.fs1212 = c.write_hmat_filename;
+
+  % ---       shear1312 kernels for fault-shear interaction     ---
+  c.greens_fn = 'shear1312';
+  c.write_hmat_filename = './tmp/BP1v_fs-shear1312';
+  c.write_hd_filename = './tmp/BP1v_fs-shear1312-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvp_omp ' c.kvf];
+  disp(cmd)
+  r.fs1312 = c.write_hmat_filename;
+
+  % ---         s12 kernel for shear-fault interaction      ---
+  c.greens_fn = 'okadaS12';
+  c.write_hmat_filename = './tmp/BP1v_sf-s12';
+  c.write_hd_filename = './tmp/BP1v_sf-s12-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  cmd = ['    ../hmmvo-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.sf12 = c.write_hmat_filename;
+
+  % ---       s13 kernel for shear-fault interaction      ---
+  c.greens_fn = 'okadaS13';
+  c.write_hmat_filename = './tmp/BP1v_sf-s13';
+  c.write_hd_filename = './tmp/BP1v_sf-s13-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.sf13 = c.write_hmat_filename;
 
   % ---       fault properties      ---
+  %  -      FRICTIONAL PARAMETERS    -
 
   % density (kg/m^3)
   rho = 2670;
@@ -88,6 +216,7 @@ function r = build()
   ss.a=1e-2+Ramp((ss.fpTops-15e3)/3e3)*(0.025-0.01);
   ss.b=0.015*ones(size(ss.fpTops));
 
+  % TODO: is the the same as sigmab?
   % effective normal stress (MPa)
   ss.sigma=50.0*ones(size(ss.fpTops));
 
@@ -102,6 +231,10 @@ function r = build()
 
   % Radiation damping coefficient
   ss.eta = G./(2*Vs);
+
+  % fault strength
+  ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.V_plate./ss.Vo))+...
+    G*ss.V_plate./(2*ss.Vs);
 
   % Estimates of some key parameters
   VWp = find(ss.a < ss.b); % VW region
@@ -124,6 +257,56 @@ function r = build()
   fprintf('QS Cohesive zone = %.2f (m)\n',coh);
   fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
 
+  % ---         Visco properties      ---
+  %  -              RHEOLOGY           -
+
+  % Driving strain rate (1/s)
+  ss.e12p_plate = 1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
+  ss.e13p_plate =      zeros(length(ss.x2c)*length(ss.x3c),1);
+
+  % Rheological Parameters
+  % Reference Strain Rate (for stress in MPa)
+  ss.Adif = 1e6*ones(length(ss.x3c)*length(ss.x2c),1);
+  ss.Adis = 90 *ones(length(ss.x3c)*length(ss.x2c),1);
+
+  % Power-Law Exponent
+  ss.n = 3.5*ones(length(ss.x3c)*length(ss.x2c),1);
+
+  % Activation Energy Wet Oliving (J/mol)
+  ss.Qdif = 335e3*ones(length(ss.x3c)*length(ss.x2c),1);
+  ss.Qdis = 480e3*ones(length(ss.x3c)*length(ss.x2c),1);
+
+  % Activation Volume (m^3/mol)
+  ss.Voldif = 4e-6*ones(length(ss.x3c)*length(ss.x2c),1);
+  ss.Voldis = 11e-6*ones(length(ss.x3c)*length(ss.x2c),1);
+
+  % Grain size (m)
+  ss.d    = 1e-2*ones(length(ss.x3c)*length(ss.x2c),1);
+  ss.pexp = 3*ones(length(ss.x3c)*length(ss.x2c),1);
+
+  % Water fugacity (H/10^6 Si)
+  ss.COH = 1000*ones(length(ss.x3c)*length(ss.x2c),1);
+  ss.r   = 1.2*ones(length(ss.x3c)*length(ss.x2c),1);
+
+  % Pressure (Pa)
+  ss.P = repmat(1e6*Pconf',length(ss.x2c),1);
+  ss.P = reshape(ss.P,[length(ss.x2c)*length(ss.x3c),1]);
+
+  % Temperature (K)
+  Te0 = repmat(ss.Tprof',length(ss.x2c),1);
+  Te0 = reshape(Te0,[length(ss.x2c)*length(ss.x3c),1]);
+
+  % Coefficients for dislocation and diffusion creep
+  ss.Const_dis = ss.Adis.*exp(-(ss.Qdis+ss.P.*ss.Voldis)./(8.314.*Te0)).*ss.COH.^(ss.r);
+  ss.Const_diff = ss.Adif.*exp(-(ss.Qdif+ss.P.*ss.Voldif)./(8.314.*Te0)).* ...
+    ss.COH.^(ss.r).*ss.d.^(-ss.pexp);
+
+  % Strengh profile
+  ss.s120 = (ss.e12p_plate./ss.Const_dis).^(1./ss.n);
+  ss.s130 = zeros(size(s120));
+  ss.e120 = zeros(size(s120));
+  ss.e130 = zeros(size(s120));
+
   r.ss = ss;
 
 end
@@ -136,7 +319,22 @@ function y = solve(r)
   % yp = f(t,y)
   % Y = [slip; stress; state variable; log10(slip rate / ref slip rate)]
   % Degrees of Freedom
-  r.ss.dgf=4;
+  r.ss.dgfF=3;
+  r.ss.dgfS=4;
+
+  % state vector init
+  Y0=zeros(r.ss.M*ss.dgfF+length(r.ss.shearY_chat)*length(r.ss.shearZ_chat)*ss.dgfS,1);
+
+  % Fault patches
+  Y0(ss.M*ss.dgfF+1:ss.dgfF:2*ss.M*ss.dgfF)=zeros(size(ss.faultZ));
+  Y0(ss.M*ss.dgfF+2:ss.dgfF:2*ss.M*ss.dgfF)=ss.strength;
+  Y0(ss.M*ss.dgfF+3:ss.dgfF:2*ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
+
+  % Shear zones
+  Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
+  Y0(ss.M*ss.dgfF+2:ss.dgfS:end)=s130;
+  Y0(ss.M*ss.dgfF+3:ss.dgfS:end)=e120;
+  Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 
   % initial conditions (starts at steady state w zero slip)
   Y0=zeros(r.ss.M*r.ss.dgf,1);
@@ -148,7 +346,13 @@ function y = solve(r)
   Y0(4:r.ss.dgf:end)=log(r.ss.Vpl./r.ss.Vo);
 
   % load HM kernels
-  hm.s12 = hmmvp('init', r.s12, 4);
+  hm.s12    = hmmvp('init', r.s12,     4);
+  hm.ss1212 = hmmvp('init', r.ss1212, 32);
+  hm.ss1213 = hmmvp('init', r.ss1213, 32);
+  hm.ss1312 = hmmvp('init', r.ss1312, 32);
+  hm.ss1313 = hmmvp('init', r.ss1313, 32);
+  hm.sf12   = hmmvp('init', r.sf12,   32);
+  hm.sf13   = hmmvp('init', r.sf13,   32);
 
   % initialize the function handle with set constitutive parameters
   yp=@(t,y) DieterichRuinaRegAging_BP1v(t,y,r.ss, hm);
