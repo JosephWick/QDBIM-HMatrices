@@ -1,4 +1,4 @@
-function [yp] = DieterichRuinaRegAging_BP1v(~,Y,ss,hm)
+function [Yp] = DieterichRuinaRegAging_BP1v(~,Y,ss,hm)
 % This file describes the evolution of the ordinary
 % differential equation y' = f(t,y), where the state
 % vector y is
@@ -74,13 +74,13 @@ lM = (1:1:ss.M);
 th = Y(3:ss.dgfF:ss.M*ss.dgfF);
 
 % Slip rate
-V = ss.Vo.* exp(y(4:ss.dgf:end));
+V = ss.Vo.* exp(Y(4:ss.dgf:end));
 
 % Initialize Time Derivative
-yp=zeros(size(y));
+Yp=zeros(size(Y));
 
 % Slip
-yp(1:ss.dgf:end)=V;
+Yp(1:ss.dgf:end)=V;
 
 % Shear stress in zones of distributed deformation
 tau12 = Y(ss.M*ss.dgfF+1:ss.dgfS:end);
