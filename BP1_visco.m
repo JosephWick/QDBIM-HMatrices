@@ -318,9 +318,9 @@ function r = build()
 
   % Strengh profile
   ss.s120 = (ss.e12p_plate./ss.Const_dis).^(1./ss.n);
-  ss.s130 = zeros(size(s120));
-  ss.e120 = zeros(size(s120));
-  ss.e130 = zeros(size(s120));
+  ss.s130 = zeros(size(ss.s120));
+  ss.e120 = zeros(size(ss.s120));
+  ss.e130 = zeros(size(ss.s120));
 
   r.ss = ss;
 
