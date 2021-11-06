@@ -339,7 +339,7 @@ function y = solve(r)
   r.ss.dgfS=4;
 
   % state vector init
-  Y0=zeros(r.ss.M*ss.dgfF+length(r.shearY_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
+  Y0=zeros(r.ss.M*r.ss.dgfF+length(r.shearY_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
 
   % Fault patches
   Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfF:2*r.ss.M*ss.dgfF)=zeros(size(r.ss.faultZ));
