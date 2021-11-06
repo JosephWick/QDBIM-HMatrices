@@ -160,7 +160,7 @@ function r = build()
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
   c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
-  c.kvf = [c.write_hmat_filename ] '.kvf'];
+  c.kvf = [c.write_hmat_filename '.kvf'];
 
   c.X = [comboX_c, comboY_c, comboZ_c];
   c.Y = [comboX, comboY, comboZ];
