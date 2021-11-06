@@ -232,12 +232,12 @@ function r = build()
   % Radiation damping coefficient
   ss.eta = G./(2*Vs);
 
+  % static friction coefficient
+  ss.mu0 = 0.2*ones(size(fpTops));
+
   % fault strength
   ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.V_plate./ss.Vo))+...
     G*ss.V_plate./(2*ss.Vs);
-
-  % static friction coefficient
-  ss.mu0 = 0.2*ones(size(fpTops));
 
   % Estimates of some key parameters
   VWp = find(ss.a < ss.b); % VW region
