@@ -236,8 +236,8 @@ function r = build()
   ss.mu0 = 0.2*ones(size(ss.fpTops));
 
   % fault strength
-  ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.V_plate./ss.Vo))+...
-    G*ss.V_plate./(2*ss.Vs);
+  ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.b.Vpl./ss.Vo))+...
+    G*ss.b.Vpl./(2*ss.Vs);
 
   % Estimates of some key parameters
   VWp = find(ss.a < ss.b); % VW region
@@ -331,7 +331,7 @@ function y = solve(r)
   % Fault patches
   Y0(ss.M*ss.dgfF+1:ss.dgfF:2*ss.M*ss.dgfF)=zeros(size(ss.faultZ));
   Y0(ss.M*ss.dgfF+2:ss.dgfF:2*ss.M*ss.dgfF)=ss.strength;
-  Y0(ss.M*ss.dgfF+3:ss.dgfF:2*ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
+  Y0(ss.M*ss.dgfF+3:ss.dgfF:2*ss.M*ss.dgfF)=log(ss.Vo./ss.b.Vpl);
 
   % Shear zones
   Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
