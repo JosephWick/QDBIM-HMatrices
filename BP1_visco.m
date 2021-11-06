@@ -277,7 +277,7 @@ function r = build()
 
   Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
   Age_plate = 2e15; % seconds
-  r.ss.Tprof  = 300+1380*erf(r.ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
+  ss.Tprof  = 300+1380*erf(ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
 
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
