@@ -233,7 +233,7 @@ function r = build()
   ss.eta = G./(2*Vs);
 
   % static friction coefficient
-  ss.mu0 = 0.2*ones(size(fpTops));
+  ss.mu0 = 0.2*ones(size(ss.fpTops));
 
   % fault strength
   ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.V_plate./ss.Vo))+...
