@@ -162,8 +162,8 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
-  c.X = [comboX_c, comboY_c, comboZ_c];
-  c.Y = [comboX, comboY, comboZ];
+  c.X = [comboX_c; comboY_c; comboZ_c];
+  c.Y = [comboX; comboY; comboZ];
 
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
