@@ -61,6 +61,15 @@ function [yp] = DieterichRuinaRegAging_BP1v(~,y,ss,hm)
 % Note that d/dt log(V/Vo) = 1/V dV/dt, and is much more efficient to
 % integrate than dV/dt alone
 
+G = 30e3;
+
+% slices for kernels
+% greater than ss.M
+em = hmmvp('getm', hm.ss1212);
+gM = (ss.M+1:1:em);
+% less than or equal to ss.M
+lM = (1:1:ss.M);
+
 % State variable
 th=y(3:ss.dgf:end);
 
@@ -73,22 +82,48 @@ yp=zeros(size(y));
 % Slip
 yp(1:ss.dgf:end)=V;
 
-% State Variable
-dth = (ss.Vo.*exp(-th)-V)./ss.Drs;
-yp(3:ss.dgf:end)=dth;
+% Shear stress in zones of distributed deformation
+tau12 = Y(ss.M*ss.dgfF+1:ss.dgfS:end);
+tau13 = Y(ss.M*ss.dgfF+2:ss.dgfS:end);
+tau = sqrt(tau12.^2 + tau13.^2);
 
-% Slip Velocity
-func = hmmvp('mvp', hm.s12, (V-ss.Vpl));
-f1=2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
-f2=1./sqrt(1+f1.^2);
+% Dislocation strain rate
+Aeff = ss.Const_dis.* (tau).^(ss.n-1);
+e12p = tau12 .* Aeff;
+e13p = tau13 .* Aeff;
 
-yp(4:ss.dgf:end) = (func - ss.b.*ss.sigma.*dth.*f2)./ ...
-                    (ss.a.*ss.sigma.*f2 + ss.eta.*V);
+% ---       FAULT       ---
+% Shear stress rate on fault due to fault and shear zones
+vector = e12p-ss.e12p_plate;
+dummy = zeros(ss.M,1);
+X = [dummy; vector];
 
+t1 = hmmvp('mvp', hm.s12, V-ss.V_plate);
+t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
+t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
+Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1 + t2(1:ss.M) + t3(1:ss.M);
 
-% Evolution of shear stress
-yp(2:ss.dgf:end)=func - ss.eta.*V.*yp(4:ss.dgf:end);
+% Rate of state
+Yp(3:ss.dgfF:ss.M*ss.dgfF) = (ss.Vo.*exp(-th)-V)./ss.L;
 
+% ---       SHEAR         ---
+% Stress rate due to shear zones and fault slip velocity
+t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
+t2 = hmmvp('mvp', hm.ss1313, (e12p-ss.e12p_plate));
+vector = V-ss.V_plate;
+dummy = zeros(ss.Nx*ss.Nz,1);
+X = [vector; dummy];
+t3 = hmmvp('mvp', hm.sf12, X, gM, lM);
+Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3(ss.M+1:end);
+
+t1 = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate));
+t2 = hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate));
+t3 = hmmvp('mvp', hm.sf13, X, gM, lM);
+Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(ss.M+1:end);
+
+% Strain rate
+Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
+Yp(ss.M*ss.dgfF+4 : ss.dgfS : end) = e13p;
 
 
 end
