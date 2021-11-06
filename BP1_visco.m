@@ -236,8 +236,8 @@ function r = build()
   ss.mu0 = 0.2*ones(size(ss.fpTops));
 
   % fault strength
-  ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.b.Vpl./ss.Vo))+...
-    G*ss.b.Vpl./(2*ss.Vs);
+  ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.Vpl./ss.Vo))+...
+    G*ss.Vpl./(2*ss.Vs);
 
   % Estimates of some key parameters
   VWp = find(ss.a < ss.b); % VW region
