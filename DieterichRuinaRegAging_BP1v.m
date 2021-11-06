@@ -71,7 +71,7 @@ gM = (ss.M+1:1:em);
 lM = (1:1:ss.M);
 
 % State variable
-th=y(3:ss.dgf:end);
+th = Y(3:ss.dgfF:ss.M*ss.dgfF);
 
 % Slip rate
 V = ss.Vo.* exp(y(4:ss.dgf:end));
