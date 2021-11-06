@@ -347,10 +347,10 @@ function y = solve(r)
   Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfF:2*r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.Vpl);
 
   % Shear zones
-  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=s120;
-  Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfS:end)=s130;
-  Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)=e120;
-  Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=e130;
+  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=ss.s120;
+  Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfS:end)=ss.s130;
+  Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)=ss.e120;
+  Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=ss.e130;
 
   % initial conditions (starts at steady state w zero slip)
   Y0=zeros(r.ss.M*r.ss.dgf,1);
