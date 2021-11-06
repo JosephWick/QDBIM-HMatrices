@@ -74,7 +74,7 @@ lM = (1:1:ss.M);
 th = Y(3:ss.dgfF:ss.M*ss.dgfF);
 
 % Slip rate
-V = ss.Vo.* exp(Y(4:ss.dgf:end));
+V = ss.Vo.* exp(-Y(3:ss.dgf:end));
 
 % Initialize Time Derivative
 Yp=zeros(size(Y));
