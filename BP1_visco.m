@@ -267,6 +267,11 @@ function r = build()
   ss.e12p_plate = 1e-14*ones(length(shearY_chat)*length(shearZ_chat),1);
   ss.e13p_plate =      zeros(length(shearY_chat)*length(shearZ_chat),1);
 
+  % Confining pressure (MPa) and Temperature (K)
+  k  = 3.138; % thermal conductivity (W/m/K)
+  Cp = 1171 ; % specific heat (J/kg/K)
+  Rm = 3330 ; % mantle density (kg/m^3)
+
   Pconf       = Rm*9.8*ss.x3c/1e6;  % Shear zones
   Pconf_fault = Rm*9.8*(ss.y3f+dz); % Faults
 
