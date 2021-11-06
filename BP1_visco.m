@@ -339,18 +339,18 @@ function y = solve(r)
   r.ss.dgfS=4;
 
   % state vector init
-  Y0=zeros(r.ss.M*ss.dgfF+length(r.shearY_chat)*length(r.ss.shearZ_chat)*ss.dgfS,1);
+  Y0=zeros(r.ss.M*ss.dgfF+length(r.shearY_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
 
   % Fault patches
-  Y0(ss.M*ss.dgfF+1:ss.dgfF:2*ss.M*ss.dgfF)=zeros(size(ss.faultZ));
-  Y0(ss.M*ss.dgfF+2:ss.dgfF:2*ss.M*ss.dgfF)=ss.strength;
-  Y0(ss.M*ss.dgfF+3:ss.dgfF:2*ss.M*ss.dgfF)=log(ss.Vo./ss.b.Vpl);
+  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfF:2*r.ss.M*ss.dgfF)=zeros(size(r.ss.faultZ));
+  Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfF:2*r.ss.M*r.ss.dgfF)=r.ss.strength;
+  Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfF:2*r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.b.Vpl);
 
   % Shear zones
-  Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
-  Y0(ss.M*ss.dgfF+2:ss.dgfS:end)=s130;
-  Y0(ss.M*ss.dgfF+3:ss.dgfS:end)=e120;
-  Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
+  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=s120;
+  Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfS:end)=s130;
+  Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)=e120;
+  Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=e130;
 
   % initial conditions (starts at steady state w zero slip)
   Y0=zeros(r.ss.M*r.ss.dgf,1);
