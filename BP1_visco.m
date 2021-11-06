@@ -142,7 +142,7 @@ function r = build()
   c.write_hd_filename = '/tmp/BP1v_ss-shear1312-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
-  cmd = ['    ../hmmvp/okada/bin/hmmvp_omp ' c.kvf];
+  cmd = ['    ../hmmvp/okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.ss1312 = c.write_hmat_filename;
 
@@ -176,7 +176,7 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_fs-shear1312-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
-  cmd = ['    ../hmmvp-okada/bin/hmmvp_omp ' c.kvf];
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.fs1312 = c.write_hmat_filename;
 
