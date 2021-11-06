@@ -342,7 +342,7 @@ function y = solve(r)
   Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.shearY_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
 
   % Fault patches
-  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfF:2*r.ss.M*ss.dgfF)=zeros(size(r.ss.faultZ));
+  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfF:2*r.ss.M*ss.dgfF)=zeros(size(r.ss.fpTops));
   Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfF:2*r.ss.M*r.ss.dgfF)=r.ss.strength;
   Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfF:2*r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.b.Vpl);
 
