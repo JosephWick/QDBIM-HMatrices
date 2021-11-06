@@ -275,6 +275,10 @@ function r = build()
   Pconf       = Rm*9.8*shearZ_chat/1e6;  % Shear zones
   Pconf_fault = Rm*9.8*(faultZ'+ss.dz); % Faults
 
+  Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
+  Age_plate = 2e15; % seconds
+  r.ss.Tprof  = 300+1380*erf(r.ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
+
   % Rheological Parameters
   % Reference Strain Rate (for stress in MPa)
   ss.Adif = 1e6*ones(length(shearZ_chat)*length(shearY_chat),1);
