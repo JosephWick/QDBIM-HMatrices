@@ -54,7 +54,7 @@ function r = build()
   % SHEAR
   eps = 1e-12;
   nc = (-ss.Nz/2:ss.Nz/2);
-  shearZhat = transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*transition;
+  shearZhat = ss.transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*ss.transition;
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
   shearX = zeros(1,ss.Ny*ss.Nz);
 
@@ -116,7 +116,7 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_ss-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
-  c.transition = transition;
+  c.transition = ss.transition;
   c.Y = [shearX; shearY; shearZ];
   c.X = [shearX_c; shearY_c; shearZ_c];
 
