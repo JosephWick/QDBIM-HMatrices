@@ -367,7 +367,7 @@ function y = solve(r)
   hm.sf13   = hmmvp('init', r.sf13,   32);
 
   % initialize the function handle with set constitutive parameters
-  yp=@(t,y) DieterichRuinaRegAging_BP1v(t,y,r.ss, hm);
+  yp=@(t,y) odeBP1v(t,y,r.ss, hm);
 
   % ODE45 Settings
   % Initial step of 1e-5 seconds
