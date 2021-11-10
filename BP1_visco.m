@@ -343,11 +343,11 @@ function y = solve(r)
 
   % Fault patches
   % Fault patches
-  Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.fpTops));
+  Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(r.ss.fpTops));
   Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_W;
   Y0(3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.Vpl);
 
-  Y0(ss.M*ss.dgfF+1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.fpTops));
+  Y0(ss.M*ss.dgfF+1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(r.ss.fpTops));
   Y0(ss.M*ss.dgfF+2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_E;
   Y0(ss.M*ss.dgfF+3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
 
