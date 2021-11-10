@@ -90,3 +90,51 @@ ss.transition = 40e3;
 ss.Ny = 51;
 ss.Nz = 51;
 ss.Nx = ss.Nz;
+
+% FAULT
+% fault patch edges (top left)
+faultX = zeros(1,ss.M);
+faultY = zeros(1,ss.M);
+faultZ = linspace(0, ss.lambdaZ-ss.dz, ss.M);
+% tops of fault patches
+ss.fpTops = faultZ';
+
+% fault patch centers
+faultX_c = faultX;
+faultY_c = faultY;
+faultZ_c = faultZ+(ss.dz/2);
+
+% SHEAR
+eps = 1e-12;
+nc = (-ss.Nz/2:ss.Nz/2);
+shearZhat = ss.transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*ss.transition;
+shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
+shearX = zeros(1,ss.Ny*ss.Nz);
+
+% shear patch centers
+shearX_c = shearX;
+ss.shearY_chat = zeros(1,ss.Ny);
+ss.shearZ_chat = zeros(1,ss.Nz);
+for idx=(1:length(shearZhat)-1)
+  ss.shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
+  ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
+end
+
+% grid and flatten
+shearZhat(end)=[]; shearYhat(end)=[];
+[shearZ shearY] = ndgrid(shearZhat, shearYhat);
+shearY = shearY(:)';
+shearZ = shearZ(:)';
+
+[shearZ_c shearY_c] = ndgrid(ss.shearZ_chat, ss.shearY_chat);
+shearZ_c = shearZ_c(:)';
+shearY_c = shearY_c(:)';
+
+% combo mesh
+comboX = [faultX shearX];
+comboY = [faultY shearY];
+comboZ = [faultZ shearZ];
+
+comboX_c = [faultX_c shearX_c];
+comboY_c = [faultY_c shearY_c];
+comboZ_c = [faultZ_c shearZ_c];
