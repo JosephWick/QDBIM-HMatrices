@@ -80,7 +80,7 @@ V = ss.Vo.* exp(-Y(3:ss.dgfF:ss.M*ss.dgfF));
 Yp=zeros(size(Y));
 
 % Slip
-Yp(1:ss.dgf:end)=V;
+Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % Shear stress in zones of distributed deformation
 tau12 = Y(ss.M*ss.dgfF+1:ss.dgfS:end);
