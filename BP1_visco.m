@@ -343,13 +343,13 @@ function y = solve(r)
 
   % Fault patches
   % Fault patches
-  Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(r.ss.fpTops));
-  Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_W;
-  Y0(3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.Vpl);
+  Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.fpTops));
+  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength_W;
+  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.Vpl);
 
-  Y0(ss.M*ss.dgfF+1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(r.ss.fpTops));
-  Y0(ss.M*ss.dgfF+2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_E;
-  Y0(ss.M*ss.dgfF+3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
+  Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.fpTops));
+  Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength_E;
+  Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.V_plate);
 
   % Shear zones
   Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=r.ss.s120;
