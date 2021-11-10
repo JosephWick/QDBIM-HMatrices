@@ -381,6 +381,8 @@ function y = solve(r)
   toc
 
   % ---       Figures        ---
+  disp(size(r.ss.Vo))
+  disp(size(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
   y.V = r.ss.Vo.*exp(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'); % Slip rate (m/s)
   y.tau = Y(:,2:r.ss.dgf:end);            % Shear stress (MPa)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
