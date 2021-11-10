@@ -110,7 +110,7 @@ Yp(3:ss.dgfF:ss.M*ss.dgfF) = (ss.Vo.*exp(-th)-V)./ss.L;
 % Stress rate due to shear zones and fault slip velocity
 t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
 t2 = hmmvp('mvp', hm.ss1313, (e12p-ss.e12p_plate));
-vector = V-ss.V_plate;
+vector = V-ss.Vpl;
 dummy = zeros(ss.Nx*ss.Nz,1);
 X = [vector; dummy];
 t3 = hmmvp('mvp', hm.sf12, X, gM, lM);
