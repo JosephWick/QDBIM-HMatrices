@@ -78,6 +78,17 @@ uk13=@(D,L,W,x2,x3) 1/(2*pi)*( ...
     +2*(x3+D).*(atan((x2+L/2)./(x3+D))-atan((x2-L/2)./(x3+D))) ...
     );
 
+    % Stress kernels for fault slip
+s12h=@(x2,x3,y2,y3,Wf) G*( ...
+  -(x3-y3)./((x2-y2).^2+(x3-y3).^2)+(x3+y3)./((x2-y2).^2+(x3+y3).^2) ...
+  +(x3-y3-Wf)./((x2-y2).^2+(x3-y3-Wf).^2)-(x3+y3+Wf)./((x2-y2).^2+(x3+y3+Wf).^2) ...
+  )/2/pi;
+
+s13h=@(x2,x3,y2,y3,Wf) G*( ...
+  (x2-y2)./((x2-y2).^2+(x3-y3).^2)-(x2-y2)./((x2-y2).^2+(x3+y3).^2) ...
+  -(x2-y2)./((x2-y2).^2+(x3-y3-Wf).^2)+(x2-y2)./((x2-y2).^2+(x3+y3+Wf).^2) ...
+  )/2/pi;
+
 % Displacement kernels for fault slip
 u1h=@(x2,x3,y2,y3,W) ...
     (+atan((x3-y3)./(x2-y2))-atan((x3+y3)./(x2-y2)) ...
@@ -98,6 +109,8 @@ ss.Nz = 51;
 ss.Nx = ss.Nz;
 
 % FAULT
+% width of fault patches
+Wf = ones(ss.M,1)*ss.dz;
 % fault patch edges (top left)
 faultX = zeros(1,ss.M);
 faultY = zeros(1,ss.M);
@@ -149,12 +162,29 @@ disp('mesh created')
 
 % ---         Stress Kernels        ---
 
+ss.k12 = zeros(length(shearY_c),ss.M);
+ss.k13 = zeros(length(shearY_c),ss.M);
+
+ss.k12f= zeros(ss.M,ss.M);
+
 ss.k1212 = zeros(length(shearY_chat)*length(shearZ_chat));
 ss.k1213 = zeros(length(shearY_chat)*length(shearZ_chat));
 ss.k1312 = zeros(length(shearY_chat)*length(shearZ_chat));
 ss.k1313 = zeros(length(shearY_chat)*length(shearZ_chat));
 
+ss.k1212f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
+ss.k1312f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
+ss.k1213f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_C));
+ss.k1313f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
+
 disp('beginning kernels')
+
+% fields from faults
+for k=1:ss.M
+  ss.k12(:,k)=s12h(faultY_c(:), faultZ_c(:), 0, ss.fpTops(k), Wf(k));
+  ss.k13(:,k)=s13h(faultY_c(:), faultZ_c(:), 0, ss.fpTops(k), Wf(k));
+
+  ss.k12f(:,k)=s12h(faultY,ss.fpTops+ss.dz/2,faultY,ss.fpTops(k),Wf(k));
 
 % fields from shear zones
 for ky=1:length(shearY_chat)
@@ -167,6 +197,9 @@ for ky=1:length(shearY_chat)
       shearY_c'-shearYhat(ky)', shearZ_c');
     ss.k1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZ_c(kz)+transition, L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
+
+    ss.k1212f(:,(kz-1)*ss.Nx+kx)=s1212(shearZ_c(kz))
+
   end
 end
 

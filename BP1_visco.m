@@ -14,7 +14,7 @@ end
 function r = build()
   addpaths();
 
-  % 9 kernels:
+  % 11 kernels:
   % - 1 for fault-fault interaction (S12)
   % - 4 for shear-shear interaction (1212, 1213, 1312, 1313)
   % - 4 for fault-shear interaction (1212, 1213, 1312, 1313))

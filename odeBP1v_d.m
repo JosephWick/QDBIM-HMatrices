@@ -94,32 +94,20 @@ e13p = tau13 .* Aeff;
 
 % ---       FAULT       ---
 % Shear stress rate on fault due to fault and shear zones
-vector = e12p-ss.e12p_plate;
-dummy = zeros(ss.M,1);
-X = [dummy; vector];
-
-t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
-t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
-t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
-Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1 + t2(1:ss.M) + t3(1:ss.M);
+%TODO
+Yp(2:ss.dgfF:ss.M*ss.dgfF) = ss. + t2(1:ss.M) + t3(1:ss.M);
 
 % Rate of state
+%TODO
 Yp(3:ss.dgfF:ss.M*ss.dgfF) = (ss.Vo.*exp(-th)-V)./ss.L;
 
 % ---       SHEAR         ---
 % Stress rate due to shear zones and fault slip velocity
-t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
-t2 = hmmvp('mvp', hm.ss1313, (e12p-ss.e12p_plate));
-vector = V-ss.Vpl;
-dummy = zeros(ss.Nx*ss.Nz,1);
-X = [vector; dummy];
-t3 = hmmvp('mvp', hm.sf12, X, gM, lM);
-Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3(ss.M+1:end);
+Yp(ss.M*ss.dgfF+1:ss.dgfS:end) = ss.k1212*(e12p-ss.e12p_plate) + ...
+  ss.k1312*(e13p-ss.e13p_plate);
 
-t1 = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate));
-t2 = hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate));
-t3 = hmmvp('mvp', hm.sf13, X, gM, lM);
-Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3(ss.M+1:end);
+Yp(ss.M*ss.dgfF+2:ss.dgfS:end) = ss.k1213*(e12p-ss.e12p_plate) + ...
+  ss.k1313*(e13p-ss.e13p_plate);
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
