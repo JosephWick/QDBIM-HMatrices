@@ -74,13 +74,17 @@ lM = (1:1:ss.M);
 th = Y(3:ss.dgfF:ss.M*ss.dgfF);
 
 % Slip rate
-V = ss.Vo.* exp(-Y(3:ss.dgfF:ss.M*ss.dgfF));
+V = ss.Vo.* exp(-Y(4:ss.dgfF:ss.M*ss.dgfF));
 
 % Initialize Time Derivative
 Yp=zeros(size(Y));
 
 % Slip
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
+
+% state variable
+dth = (ss.Vo.*exp(-th)-V)./ss.Drs
+Yp(3:ss.dgf:ss.M*ss.dgfF)=dth;
 
 % Shear stress in zones of distributed deformation
 tau12 = Y(ss.M*ss.dgfF+1:ss.dgfS:end);
@@ -101,10 +105,15 @@ X = [dummy; vector];
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
 t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
-Yp(2:ss.dgfF:ss.M*ss.dgfF) = t1 + t2(1:ss.M) + t3(1:ss.M);
+F = t1 + t2(1:ss.M) + t3(1:ss.M);
+f1 = 2.ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
+f2 = 1./sqrt(1+f1.^2);
 
-% Rate of state
-Yp(3:ss.dgfF:ss.M*ss.dgfF) = (ss.Vo.*exp(-th)-V)./ss.L;
+Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
+                             (ss.a.*ss.sigma.*f2 + ss.eta.*V);
+
+% evolution of shear stress
+Yp(2:ss.dgfF:ss.M*ss.dgfF) = F - ss.eta.*V.*yp(4:ss.dgfF:ss.M*ss.dgfF);
 
 % ---       SHEAR         ---
 % Stress rate due to shear zones and fault slip velocity

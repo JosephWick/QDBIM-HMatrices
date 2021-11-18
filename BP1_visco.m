@@ -338,16 +338,19 @@ function y = solve(r)
   % yp = f(t,y)
   % Y = [slip; stress; state variable; log10(slip rate / ref slip rate)]
   % Degrees of Freedom
-  r.ss.dgfF=3;
+  r.ss.dgfF=4;
   r.ss.dgfS=4;
 
   % state vector init
   Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.shearY_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
 
   % Fault patches
-  Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.fpTops));
-  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength;
-  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.Vpl);
+  Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(r.ss.M,1);
+  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=max(ss.a).*ss.sigma.*asinh(ss.Vpl./ss.Vo/2.* ...
+    exp((ss.fo+ss.b.*log(ss.Vo./ss.Vpl))./max(ss.a))) + ss.eta.*ss.Vpl;
+  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=ss.a./ss.b.*log(2*ss.Vo./ss.Vpl.*sinh((Y0(2:ss.dgf:end)- ...
+    ss.eta.*ss.Vpl)./ss.a./ss.sigma))-ss.fo./ss.b;
+  Y0(4:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(ss.Vpl./ss.Vo);
 
   % Shear zones
   Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=r.ss.s120;
