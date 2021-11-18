@@ -348,8 +348,8 @@ function y = solve(r)
   Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(r.ss.M,1);
   Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=max(r.ss.a).*r.ss.sigma.*asinh(r.ss.Vpl./r.ss.Vo/2.* ...
     exp((r.ss.fo+r.ss.b.*log(r.ss.Vo./r.ss.Vpl))./max(r.ss.a))) + r.ss.eta.*r.ss.Vpl;
-  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgf:end)- ...
-    r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
+  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.* ...
+    sinh((Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)-r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
   Y0(4:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vpl./r.ss.Vo);
 
   % Shear zones
