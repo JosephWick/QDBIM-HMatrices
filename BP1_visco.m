@@ -383,6 +383,12 @@ function y = solve(r)
   disp('Done solving');
   toc
 
+  % instantaneous derivative
+  Yp=zeros(length(t)-1,size(Y,2));
+  for k=1:length(t)-1
+    Yp(k,:)=(Y(k+1,:)-Y(k,:))/(t(k+1)-t(k));
+  end
+
   % strain rate at center
   Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS* ...
      length(r.ss.x2c):end)'.^2 + Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)* ...
