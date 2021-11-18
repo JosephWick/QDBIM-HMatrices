@@ -346,11 +346,11 @@ function y = solve(r)
 
   % Fault patches
   Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(r.ss.M,1);
-  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=max(ss.a).*ss.sigma.*asinh(ss.Vpl./ss.Vo/2.* ...
-    exp((ss.fo+ss.b.*log(ss.Vo./ss.Vpl))./max(ss.a))) + ss.eta.*ss.Vpl;
-  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=ss.a./ss.b.*log(2*ss.Vo./ss.Vpl.*sinh((Y0(2:ss.dgf:end)- ...
-    ss.eta.*ss.Vpl)./ss.a./ss.sigma))-ss.fo./ss.b;
-  Y0(4:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(ss.Vpl./ss.Vo);
+  Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=max(r.ss.a).*r.ss.sigma.*asinh(r.ss.Vpl./r.ss.Vo/2.* ...
+    exp((r.ss.fo+r.ss.b.*log(r.ss.Vo./r.ss.Vpl))./max(r.ss.a))) + r.ss.eta.*r.ss.Vpl;
+  Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgf:end)- ...
+    r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
+  Y0(4:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vpl./r.ss.Vo);
 
   % Shear zones
   Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=r.ss.s120;
