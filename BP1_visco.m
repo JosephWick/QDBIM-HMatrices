@@ -379,9 +379,14 @@ function y = solve(r)
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45(yp,[0 500*3.15e7],Y0,options);
+  [t,Y]=ode45(yp,[0 10*3.15e7],Y0,options);
   disp('Done solving');
   toc
+
+  % strain rate at center
+  Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)*r.ss.dgfS+3:r.ss.dgfS* ...
+     length(r.ss.x2c):end)'.^2 + Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.x2c)/2)* ...
+     r.ss.dgfS+4:r.ss.dgfS*length(r.ss.x2c):end)'.^2);
 
   % ---       Figures        ---
   disp(size(r.ss.Vo))
@@ -400,6 +405,13 @@ function y = solve(r)
   xlabel('time steps')
   ylabel('fault mesh block')
   saveas(gcf, 'figures/BP1v_slip.png')
+
+  clf;
+  imagesc(log10(Ep)); colorbar;
+  title('Strain Rate of Center of Ductile Region')
+  xlabel('Time Steps')
+  ylabel('Block')
+  saveas(gcf, 'figures/BP1v_strainCenter.png')
 
 end
 
