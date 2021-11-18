@@ -379,7 +379,7 @@ function y = solve(r)
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45(yp,[0 10*3.15e7],Y0,options);
+  [t,Y]=ode45(yp,[0 100*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
@@ -395,8 +395,8 @@ function y = solve(r)
      r.ss.dgfS+4:r.ss.dgfS*length(r.ss.shearY_chat):end)'.^2);
 
   % ---       Figures        ---
-  disp(size(r.ss.Vo))
-  disp(size(Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
+  %disp(size(r.ss.Vo))
+  %disp(size(Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
   y.V = r.ss.Vo.*exp(-Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'); % Slip rate (m/s)
   y.tau = Y(:,2:r.ss.dgfF:r.ss.M*r.ss.dgfF);            % Shear stress (MPa)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
@@ -404,6 +404,11 @@ function y = solve(r)
   for ti = 1:length(t)
     y.Vmax(ti) = max(y.V(:,ti));
   end
+
+  clf;
+  plot(r.ss.a - r.ss.b);
+  title('A minus B')
+  saveas(gcf, 'figures/BP1v_aminusb.png')
 
   clf;
   imagesc(log10(y.V)); colorbar;
