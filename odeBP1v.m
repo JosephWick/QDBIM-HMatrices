@@ -83,8 +83,8 @@ Yp=zeros(size(Y));
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % state variable
-dth = (ss.Vo.*exp(-th)-V)./ss.Drs
-Yp(3:ss.dgf:ss.M*ss.dgfF)=dth;
+dth = (ss.Vo.*exp(-th)-V)./ss.Drs;
+Yp(3:ss.dgfF:ss.M*ss.dgfF)=dth;
 
 % Shear stress in zones of distributed deformation
 tau12 = Y(ss.M*ss.dgfF+1:ss.dgfS:end);
