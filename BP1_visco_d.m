@@ -344,7 +344,7 @@ ss.e130 = zeros(size(ss.s120));
 % characteristic weakening distance (m)
 ss.L = 0.012;
 
-ss.dgfF = 3;
+ss.dgfF = 4;
 ss.dgfS = 4;
 
 % state vector init
@@ -353,7 +353,9 @@ Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.shearY_chat)*length(r.ss.shearZ_chat)*r.ss
 % Fault patches
 Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.fpTops));
 Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength;
-Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.Vpl);
+Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)- ...
+  r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
+Y0(4:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.Vpl);
 
 % Shear zones
 Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=r.ss.s120;
