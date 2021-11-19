@@ -33,7 +33,7 @@ function r = build()
   ss.M = 400; %number of fault cells
   ss.dz = ss.lambdaZ/ss.M;
 
-  ss.transition = 40e3 + ss.dz;
+  ss.transition = 40e3;
   ss.Ny = 51;
   ss.Nz = 51;
   ss.Nx = ss.Nz;
@@ -394,6 +394,10 @@ function y = solve(r)
      length(r.ss.shearY_chat):end)'.^2 + Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.shearY_chat)/2)* ...
      r.ss.dgfS+4:r.ss.dgfS*length(r.ss.shearY_chat):end)'.^2);
 
+  % strain rate over whole ductile area
+  Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
+               Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
+
   % ---       Figures        ---
   %disp(size(r.ss.Vo))
   %disp(size(Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
@@ -423,6 +427,33 @@ function y = solve(r)
   xlabel('Time Steps')
   ylabel('Block')
   saveas(gcf, 'figures/BP1v_strainCenter.png')
+
+  % ---         Movies        ---
+  Smovie=true;
+  if Smovie
+    disp('begin shear movie')
+    clf;
+    fig = figure;
+    fname = 'figures/BP1v_strain.gif';
+    for idx = 1:size(Epall, 2)
+      oneE = Epall(:,idx);
+      oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
+      imagesc(oneEsq); colorbar;
+      title(idx)
+      drawnow
+      frame = getframe(fig);
+      im{idx} = frame2im(frame);
+
+      [A,map] = rgb2ind(im{idx},256);
+      if idx==1
+        imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+      else
+        imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+      end
+
+    end
+  disp('shear movie done')
+  end
 
 end
 
