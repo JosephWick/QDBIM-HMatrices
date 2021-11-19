@@ -34,8 +34,8 @@ function r = build()
   ss.dz = ss.lambdaZ/ss.M;
 
   ss.transition = 40e3;
-  ss.Ny = 51;
-  ss.Nz = 51;
+  ss.Ny = 50;
+  ss.Nz = 50;
   ss.Nx = ss.Nz;
 
   % FAULT
