@@ -33,9 +33,9 @@ function r = build()
   ss.M = 400; %number of fault cells
   ss.dz = ss.lambdaZ/ss.M;
 
-  ss.transition = 40e3;
-  ss.Ny = 50;
-  ss.Nz = 50;
+  ss.transition = 40e3+ss.dz;
+  ss.Ny = 51;
+  ss.Nz = 51;
   ss.Nx = ss.Nz;
 
   % FAULT
@@ -419,14 +419,14 @@ function y = solve(r)
   title('Slip Rate')
   xlabel('time steps')
   ylabel('fault mesh block')
-  saveas(gcf, 'figures/BP1v_slip.png')
+  saveas(gcf, 'figures/BP1v_slip_B.png')
 
   clf;
   imagesc(log10(Ep)); colorbar;
   title('Strain Rate of Center of Ductile Region')
   xlabel('Time Steps')
   ylabel('Block')
-  saveas(gcf, 'figures/BP1v_strainCenter.png')
+  saveas(gcf, 'figures/BP1v_strainCenter_B.png')
 
   % ---         Movies        ---
   Smovie=true;
@@ -434,7 +434,7 @@ function y = solve(r)
     disp('begin shear movie')
     clf;
     fig = figure;
-    fname = 'figures/BP1v_strain.gif';
+    fname = 'figures/BP1v_strain_B.gif';
     for idx = 1:size(Epall, 2)
       oneE = Epall(:,idx);
       oneEsq = reshape(oneE, [r.ss.Ny, r.ss.Nz]);
