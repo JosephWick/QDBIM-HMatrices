@@ -462,6 +462,7 @@ end
 % add paths to hmmvp
 function addpaths()
   addpath('../hmmvp-okada/matlab')
+  addpath('ODEsolving')
 end
 
 % boxcar function
