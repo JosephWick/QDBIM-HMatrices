@@ -399,8 +399,7 @@ function y = solve(r)
                Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
 
   % ---       Figures        ---
-  disp(size(Y))
-  disp(size(t))
+  disp(length(t))
   %disp(size(Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
   y.V = r.ss.Vo.*exp(-Y(:,3:r.ss.dgfF:length(t))'); % Slip rate (m/s)
   y.tau = Y(:,2:r.ss.dgfF:r.ss.M*r.ss.dgfF);            % Shear stress (MPa)
