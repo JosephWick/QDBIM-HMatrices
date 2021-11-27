@@ -401,7 +401,7 @@ function y = solve(r)
   % ---       Figures        ---
   disp(size(Y))
   %disp(size(Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
-  y.V = r.ss.Vo.*exp(-Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'); % Slip rate (m/s)
+  y.V = r.ss.Vo.*exp(-Y'(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)); % Slip rate (m/s)
   y.tau = Y(:,2:r.ss.dgfF:r.ss.M*r.ss.dgfF);            % Shear stress (MPa)
   y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
   y.Vcenter = y.V(floor(r.ss.M/2),:);          % Slip rate at center of VW region
