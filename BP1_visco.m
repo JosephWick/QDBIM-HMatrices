@@ -398,7 +398,7 @@ function y = solve(r)
   Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
                Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
 
-  Y=Y';
+  %Y=Y';
   % ---       Figures        ---
   %disp(size(Y))
   %disp(size(Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
