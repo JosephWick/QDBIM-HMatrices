@@ -398,7 +398,7 @@ function y = solve(r)
   Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
                Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
 
-  Y=Y';
+  Y=Y'; %necessary if using ode45_2
   % ---       Figures        ---
   %disp(size(r.ss.Vo
   disp(size(Y))
