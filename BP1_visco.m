@@ -400,7 +400,8 @@ function y = solve(r)
 
   %Y=Y';
   % ---       Figures        ---
-  %disp(size(r.ss.Vo))
+  %disp(size(r.ss.Vo
+  disp(size(Y))
   %disp(size(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
   y.V = r.ss.Vo.*exp(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'); % Slip rate (m/s)
   y.tau = Y(:,2:r.ss.dgfF:r.ss.M*r.ss.dgfF);            % Shear stress (MPa)
