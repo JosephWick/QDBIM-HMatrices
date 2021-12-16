@@ -110,6 +110,10 @@ F = t1; % disconnected version
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
 
+disp(size(t1))
+disp(size(t1 + t2(1:ss.M) + t3(1:ss.M)));
+arse;
+
 Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
                              (ss.a.*ss.sigma.*f2 + ss.eta.*V);
 
