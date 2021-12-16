@@ -432,7 +432,7 @@ function y = solve(r)
   saveas(gcf, 'figures/BP1v_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=false;
+  Smovie=true;
   if Smovie
     disp('begin shear movie')
     clf;
