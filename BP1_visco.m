@@ -383,6 +383,8 @@ function y = solve(r)
   disp('Done solving');
   toc
 
+  Y=Y'; %necessary if using ode45_2
+
   % instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
   for k=1:length(t)-1
@@ -398,7 +400,6 @@ function y = solve(r)
   Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
                Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
 
-  Y=Y'; %necessary if using ode45_2
   % ---       Figures        ---
   %disp(size(r.ss.Vo
   disp(size(Y))
