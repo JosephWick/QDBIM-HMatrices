@@ -158,6 +158,9 @@ disp('mesh created')
 ss.k12 = zeros(length(shearY_c(:)),ss.M);
 ss.k13 = zeros(length(shearY_c),ss.M);
 
+disp(size(k12))
+disp(size(k13))
+
 ss.k12f= zeros(ss.M,ss.M);
 
 ss.k1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
