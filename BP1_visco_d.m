@@ -185,6 +185,8 @@ for k=1:ss.M
   ss.k12f(:,k)=s12h(0,ss.fpTops+ss.dz/2,0,ss.fpTops(k),Wf(k));
 end
 
+% lengths
+L=shearY(2:end)-shearY(1:end-1);
 % fields from shear zones
 for ky=1:length(ss.shearY_chat)
   for kz=1:length(ss.shearZ_chat)
