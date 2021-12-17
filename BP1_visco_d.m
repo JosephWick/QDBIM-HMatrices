@@ -407,7 +407,7 @@ for ti = 1:length(t)
 end
 
 clf;
-plot(r.ss.a - r.ss.b);
+plot(ss.a - ss.b);
 title('A minus B')
 saveas(gcf, 'figures/BP1vD_aminusb.png')
 
