@@ -386,22 +386,22 @@ for k=1:length(t)-1
 end
 
 % strain rate at center
-Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.shearY_chat)/2)*r.ss.dgfS+3:r.ss.dgfS* ...
-   length(r.ss.shearY_chat):end)'.^2 + Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.shearY_chat)/2)* ...
-   r.ss.dgfS+4:r.ss.dgfS*length(r.ss.shearY_chat):end)'.^2);
+Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.shearY_chat)/2)*ss.dgfS+3:ss.dgfS* ...
+   length(ss.shearY_chat):end)'.^2 + Yp(:,ss.M*ss.dgfF+floor(length(ss.shearY_chat)/2)* ...
+   ss.dgfS+4:ss.dgfS*length(ss.shearY_chat):end)'.^2);
 
 % strain rate over whole ductile area
-Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
-             Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
+Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
+             Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
 
 % ---       Figures        ---
 %disp(size(r.ss.Vo
 disp(size(Y))
 %disp(size(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
-y.V = r.ss.Vo.*exp(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'); % Slip rate (m/s)
-y.tau = Y(:,2:r.ss.dgfF:r.ss.M*r.ss.dgfF);            % Shear stress (MPa)
+y.V = ss.Vo.*exp(Y(:,4:ss.dgfF:ss.M*ss.dgfF)'); % Slip rate (m/s)
+y.tau = Y(:,2:ss.dgfF:ss.M*ss.dgfF);            % Shear stress (MPa)
 y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
-y.Vcenter = y.V(floor(r.ss.M/2),:);          % Slip rate at center of VW region
+y.Vcenter = y.V(floor(ss.M/2),:);          % Slip rate at center of VW region
 for ti = 1:length(t)
   y.Vmax(ti) = max(y.V(:,ti));
 end
