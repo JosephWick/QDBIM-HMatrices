@@ -102,16 +102,16 @@ vector = e12p-ss.e12p_plate;
 dummy = zeros(ss.M,1);
 X = [dummy; vector];
 
-%t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
-%t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
-%t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
-%F = t1 + t2(1:ss.M) + t3(1:ss.M);
+t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
+t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
+t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
+F = t1 + t2(1:ss.M) + t3(1:ss.M);
 %F = t1; % disconnected version
-%f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
-%f2 = 1./sqrt(1+f1.^2);
+f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
+f2 = 1./sqrt(1+f1.^2);
 
-%Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
-%                             (ss.a.*ss.sigma.*f2 + ss.eta.*V);
+Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
+                             (ss.a.*ss.sigma.*f2 + ss.eta.*V);
 
 % evolution of shear stress
 %Yp(2:ss.dgfF:ss.M*ss.dgfF) = F - ss.eta.*V.*Yp(4:ss.dgfF:ss.M*ss.dgfF);
