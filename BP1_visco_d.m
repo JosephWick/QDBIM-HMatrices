@@ -179,7 +179,7 @@ disp(size(shearZ_c(:)))
 for k=1:ss.M
   % stress at center of shear zones
   ss.k12(:,k)=s12h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
-  ss.k13(:,k)=s13h(faultY_c(:), faultZ_c(:), 0, ss.fpTops(k), Wf(k));
+  ss.k13(:,k)=s13h(faultY_c(:), faultZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
 
   % stress at center of fault patches
   ss.k12f(:,k)=s12h(faultY,ss.fpTops+ss.dz/2,faultY,ss.fpTops(k),Wf(k));
