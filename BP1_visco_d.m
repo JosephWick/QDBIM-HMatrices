@@ -160,10 +160,10 @@ ss.k13 = zeros(length(shearY_c),ss.M);
 
 ss.k12f= zeros(ss.M,ss.M);
 
-ss.k1212 = zeros(length(shearY_chat)*length(shearZ_chat));
-ss.k1213 = zeros(length(shearY_chat)*length(shearZ_chat));
-ss.k1312 = zeros(length(shearY_chat)*length(shearZ_chat));
-ss.k1313 = zeros(length(shearY_chat)*length(shearZ_chat));
+ss.k1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.k1213 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.k1312 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.k1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
 
 ss.k1212f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 ss.k1312f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
