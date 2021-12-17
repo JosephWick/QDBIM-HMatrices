@@ -362,7 +362,7 @@ Y0(ss.M*ss.dgfF+3:ss.dgfS:end)=ss.e120;
 Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=ss.e130;
 
 % initialize the function handle with set constitutive parameters
-yp=@(t,y) odeBP1v(t,y,ss, hm);
+yp=@(t,y) odeBP1v(t,y,ss);
 
 % ODE45 Settings
 % Initial step of 1e-5 seconds
