@@ -178,6 +178,7 @@ for k=1:ss.M
   ss.k13(:,k)=s13h(faultY_c(:), faultZ_c(:), 0, ss.fpTops(k), Wf(k));
 
   ss.k12f(:,k)=s12h(faultY,ss.fpTops+ss.dz/2,faultY,ss.fpTops(k),Wf(k));
+end
 
 % fields from shear zones
 for ky=1:length(shearY_chat)
