@@ -174,7 +174,7 @@ disp('beginning kernels')
 
 % fields from faults
 for k=1:ss.M
-  ss.k12(:,k)=s12h(faultY_c(:), faultZ_c(:), 0, ss.fpTops(k), Wf(k));
+  ss.k12(1:ss.M,k)=s12h(faultY_c(:), faultZ_c(:), 0, ss.fpTops(k), Wf(k));
   ss.k13(:,k)=s13h(faultY_c(:), faultZ_c(:), 0, ss.fpTops(k), Wf(k));
 
   ss.k12f(:,k)=s12h(faultY,ss.fpTops+ss.dz/2,faultY,ss.fpTops(k),Wf(k));
