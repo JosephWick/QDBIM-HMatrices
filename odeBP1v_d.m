@@ -63,13 +63,6 @@ function [Yp] = odeBp1v(~,Y,ss)
 
 G = 30e3;
 
-% slices for kernels
-% greater than ss.M
-em = hmmvp('getm', hm.ss1212);
-gM = (ss.M+1:1:em);
-% less than or equal to ss.M
-lM = (1:1:ss.M);
-
 % State variable
 th = Y(3:ss.dgfF:ss.M*ss.dgfF);
 
