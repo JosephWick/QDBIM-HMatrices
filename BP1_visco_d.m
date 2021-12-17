@@ -155,7 +155,7 @@ disp('mesh created')
 
 % ---         Stress Kernels        ---
 
-ss.k12 = zeros(length(shearY_c),ss.M);
+ss.k12 = zeros(length(shearY_c(:)),ss.M);
 ss.k13 = zeros(length(shearY_c),ss.M);
 
 ss.k12f= zeros(ss.M,ss.M);
