@@ -158,9 +158,6 @@ disp('mesh created')
 ss.k12 = zeros(length(shearY_c(:)),ss.M);
 ss.k13 = zeros(length(shearY_c),ss.M);
 
-disp(size(ss.k12))
-disp(size(ss.k13))
-
 ss.k12f= zeros(ss.M,ss.M);
 
 ss.k1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
@@ -174,7 +171,6 @@ ss.k1213f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 ss.k1313f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 
 disp('beginning kernels')
-disp(size(shearZ_c(:)))
 % fields from faults
 for k=1:ss.M
   % stress at center of shear zones
