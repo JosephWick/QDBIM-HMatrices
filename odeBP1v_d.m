@@ -1,4 +1,4 @@
-function [Yp] = odeBp1v(~,Y,ss,)
+function [Yp] = odeBp1v(~,Y,ss)
 % This file describes the evolution of the ordinary
 % differential equation y' = f(t,y), where the state
 % vector y is
