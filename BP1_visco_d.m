@@ -346,23 +346,23 @@ ss.dgfF = 4;
 ss.dgfS = 4;
 
 % state vector init
-Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.shearY_chat)*length(r.ss.shearZ_chat)*r.ss.dgfS,1);
+Y0=zeros(ss.M*ss.dgfF+length(ss.shearY_chat)*length(ss.shearZ_chat)*ss.dgfS,1);
 
 % Fault patches
-Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.fpTops));
-Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength;
-Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgfF:r.ss.M*...
-    r.ss.dgfF)-r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
-Y0(4:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.Vpl);
+Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.fpTops));
+Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength;
+Y0(3:ss.dgfF:ss.M*ss.dgfF)=ss.a./ss.b.*log(2*ss.Vo./ss.Vpl.*sinh((Y0(2:ss.dgfF:ss.M*...
+    ss.dgfF)-ss.eta.*ss.Vpl)./ss.a./ss.sigma))-ss.fo./ss.b;
+Y0(4:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.Vpl);
 
 % Shear zones
-Y0(r.ss.M*r.ss.dgfF+1:r.ss.dgfS:end)=r.ss.s120;
-Y0(r.ss.M*r.ss.dgfF+2:r.ss.dgfS:end)=r.ss.s130;
-Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)=r.ss.e120;
-Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=r.ss.e130;
+Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=ss.s120;
+Y0(ss.M*ss.dgfF+2:ss.dgfS:end)=ss.s130;
+Y0(ss.M*ss.dgfF+3:ss.dgfS:end)=ss.e120;
+Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=ss.e130;
 
 % initialize the function handle with set constitutive parameters
-yp=@(t,y) odeBP1v(t,y,r.ss, hm);
+yp=@(t,y) odeBP1v(t,y,ss, hm);
 
 % ODE45 Settings
 % Initial step of 1e-5 seconds
