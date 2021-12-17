@@ -174,7 +174,7 @@ ss.k1213f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 ss.k1313f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 
 disp('beginning kernels')
-disp(size(shearY_c(:)))
+disp(size(shearZ_c(:)))
 % fields from faults
 for k=1:ss.M
   % stress at center of shear zones
