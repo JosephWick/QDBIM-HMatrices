@@ -200,7 +200,7 @@ for ky=1:length(ss.shearY_chat)
     ss.k1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
 
-    ss.k1212f(:,(kz-1)*ss.Nx+ky)=s1212(shearZ_c(kz))
+    ss.k1212f(:,(kz-1)*ss.Nx+ky)=s1212(shearZ_c(kz),L(ky),W(kz),0-shearY_c(ky),fpTops(:)+dz/2);
 
   end
 end
@@ -355,8 +355,8 @@ Y0=zeros(r.ss.M*r.ss.dgfF+length(r.ss.shearY_chat)*length(r.ss.shearZ_chat)*r.ss
 % Fault patches
 Y0(1:r.ss.dgfF:r.ss.M*r.ss.dgfF)=zeros(size(r.ss.fpTops));
 Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.strength;
-Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgfF:r.ss.M*r.ss.dgfF)- ...
-  r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
+Y0(3:r.ss.dgfF:r.ss.M*r.ss.dgfF)=r.ss.a./r.ss.b.*log(2*r.ss.Vo./r.ss.Vpl.*sinh((Y0(2:r.ss.dgfF:r.ss.M*...
+    r.ss.dgfF)-r.ss.eta.*r.ss.Vpl)./r.ss.a./r.ss.sigma))-r.ss.fo./r.ss.b;
 Y0(4:r.ss.dgfF:r.ss.M*r.ss.dgfF)=log(r.ss.Vo./r.ss.Vpl);
 
 % Shear zones
