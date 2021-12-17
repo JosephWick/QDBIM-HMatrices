@@ -11,7 +11,7 @@ boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
 HS=@(x) 0+x>=0;
 
 % ramp function
-Ramp=@(x) x.*BC(x-1/2)+HS(x-1);
+Ramp=@(x) x.*boxc(x-1/2)+HS(x-1);
 
 % Shear Stress kernels for distributed deformation
 s1312=@(D,L,W,x2,x3) G/(2*pi)*( ...
