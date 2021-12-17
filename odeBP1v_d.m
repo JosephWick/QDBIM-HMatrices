@@ -82,6 +82,10 @@ Yp=zeros(size(Y));
 % Slip
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
+% state variable
+dth = (ss.Vo.*exp(-th)-V)./ss.Drs;
+Yp(3:ss.dgfF:ss.M*ss.dgfF)=dth;
+
 % Shear stress in zones of distributed deformation
 tau12 = Y(ss.M*ss.dgfF+1:ss.dgfS:end);
 tau13 = Y(ss.M*ss.dgfF+2:ss.dgfS:end);
@@ -95,19 +99,28 @@ e13p = tau13 .* Aeff;
 % ---       FAULT       ---
 % Shear stress rate on fault due to fault and shear zones
 %TODO
-Yp(2:ss.dgfF:ss.M*ss.dgfF) = ss. + t2(1:ss.M) + t3(1:ss.M);
+t1 = ss.k12f * (V-ss.Vpl);
+t2 = ss.k1212f * (e12p-ss.e12p_plate);
+t3 = ss.k1312f * (e12p-ss.e12p_plate);
+F = t1 + t2 + t3;
 
-% Rate of state
-%TODO
-Yp(3:ss.dgfF:ss.M*ss.dgfF) = (ss.Vo.*exp(-th)-V)./ss.L;
+f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
+f2 = 1./sqrt(1+f1.^2);
+
+Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
+                             (ss.a.*ss.sigma.*f2 + ss.eta.*V);
 
 % ---       SHEAR         ---
 % Stress rate due to shear zones and fault slip velocity
-Yp(ss.M*ss.dgfF+1:ss.dgfS:end) = ss.k1212*(e12p-ss.e12p_plate) + ...
-  ss.k1312*(e13p-ss.e13p_plate);
+t1 = ss.k1212 * (e12p-ss.e12p_plate);
+t2 = ss.k1312 * (e13p-ss.e13p_plate);
+t3 = ss.k12 * (V-ss.Vpl);
+Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3;
 
-Yp(ss.M*ss.dgfF+2:ss.dgfS:end) = ss.k1213*(e12p-ss.e12p_plate) + ...
-  ss.k1313*(e13p-ss.e13p_plate);
+t1 = ss.k1213 * (e12p-ss.e13p_plate);
+t2 = ss.k1313 * (e13p-ss.e13p_plate);
+t3 = ss.k13 * (V-ss.Vpl);
+Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3;
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
