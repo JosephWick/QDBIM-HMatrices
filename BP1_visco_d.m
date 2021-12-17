@@ -186,7 +186,8 @@ for k=1:ss.M
 end
 
 % lengths
-L=shearY(2:end)-shearY(1:end-1);
+L=shearX(2:end)-shearX(1:end-1);
+W=shearZ(2:end)-shearZ(1:end-1);
 % fields from shear zones
 for ky=1:length(ss.shearY_chat)
   for kz=1:length(ss.shearZ_chat)
