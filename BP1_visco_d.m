@@ -379,9 +379,26 @@ toc
 Y=Y';
 
 % ---       Figures        ---
-disp(size(r.ss.Vo))
-disp(size(Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
-y.V = r.ss.Vo.*exp(-Y(:,3:r.ss.dgfF:r.ss.M*r.ss.dgfF)'); % Slip rate (m/s)
+% instantaneous derivative
+Yp=zeros(length(t)-1,size(Y,2));
+for k=1:length(t)-1
+  Yp(k,:)=(Y(k+1,:)-Y(k,:))/(t(k+1)-t(k));
+end
+
+% strain rate at center
+Ep=sqrt(Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.shearY_chat)/2)*r.ss.dgfS+3:r.ss.dgfS* ...
+   length(r.ss.shearY_chat):end)'.^2 + Yp(:,r.ss.M*r.ss.dgfF+floor(length(r.ss.shearY_chat)/2)* ...
+   r.ss.dgfS+4:r.ss.dgfS*length(r.ss.shearY_chat):end)'.^2);
+
+% strain rate over whole ductile area
+Epall = sqrt( Yp(:,r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)'.^2 +...
+             Yp(:,r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)'.^2);
+
+% ---       Figures        ---
+%disp(size(r.ss.Vo
+disp(size(Y))
+%disp(size(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'))
+y.V = r.ss.Vo.*exp(Y(:,4:r.ss.dgfF:r.ss.M*r.ss.dgfF)'); % Slip rate (m/s)
 y.tau = Y(:,2:r.ss.dgfF:r.ss.M*r.ss.dgfF);            % Shear stress (MPa)
 y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
 y.Vcenter = y.V(floor(r.ss.M/2),:);          % Slip rate at center of VW region
@@ -390,8 +407,20 @@ for ti = 1:length(t)
 end
 
 clf;
+plot(r.ss.a - r.ss.b);
+title('A minus B')
+saveas(gcf, 'figures/BP1vD_aminusb.png')
+
+clf;
 imagesc(log10(y.V)); colorbar;
 title('Slip Rate')
 xlabel('time steps')
 ylabel('fault mesh block')
-saveas(gcf, 'figures/BP1v_slip.png')
+saveas(gcf, 'figures/BP1vD_slip.png')
+
+clf;
+imagesc(log10(Ep)); colorbar;
+title('Strain Rate of Center of Ductile Region')
+xlabel('Time Steps')
+ylabel('Block')
+saveas(gcf, 'figures/BP1vD_strainCenter.png')
