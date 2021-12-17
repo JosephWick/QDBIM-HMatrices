@@ -167,7 +167,7 @@ ss.k1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
 
 ss.k1212f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 ss.k1312f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
-ss.k1213f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_C));
+ss.k1213f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 ss.k1313f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 
 disp('beginning kernels')
