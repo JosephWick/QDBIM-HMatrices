@@ -181,6 +181,9 @@ function r = build()
   r.fs1312 = c.write_hmat_filename;
 
   % ---         s12 kernel for shear-fault interaction      ---
+  c.X = [comboX; comboY; comboZ];
+  c.Y = [comboX_c; comboY_c; comboZ_c];
+
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
   c.write_hd_filename = './tmp/BP1v_sf-s12-hd';
