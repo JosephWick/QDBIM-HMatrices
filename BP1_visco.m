@@ -379,7 +379,7 @@ function y = solve(r)
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 100*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
@@ -432,7 +432,7 @@ function y = solve(r)
   saveas(gcf, 'figures/BP1v_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=true;
+  Smovie=false;
   if Smovie
     disp('begin shear movie')
     clf;
@@ -458,13 +458,13 @@ function y = solve(r)
   disp('shear movie done')
   end
 
-  Fmovie=true;
+  Fmovie=false;
   if Fmovie
     % velocity movie
     disp('begin fault movie')
     clf;
     fig = figure;
-    fname='figures/faultV.gif';
+    fname='figures/BP1v_slip.gif';
     for idx = 1:size(y.V,1)
       oneV = y.V(idx,:)';
       imagesc(oneV); colorbar;
