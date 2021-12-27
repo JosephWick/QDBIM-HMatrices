@@ -461,11 +461,12 @@ function y = solve(r)
   Fmovie=true;
   if Fmovie
     % velocity movie
+    disp('begin fault movie')
     clf;
     fig = figure;
     fname='figures/faultV.gif';
-    for idx = 1:size(V,1)
-      oneV = V(idx,:)';
+    for idx = 1:size(y.V,1)
+      oneV = y.V(idx,:)';
       imagesc(oneV); colorbar;
       title(idx)
       drawnow
