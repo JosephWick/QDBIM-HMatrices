@@ -93,7 +93,7 @@ function r = build()
   scatter(comboY, -1*comboZ, 0.25, 'red');
   scatter(-1*comboY, -1*comboZ, 0.25, 'red')
   hold off;
-  saveas(gcf, 'figures/VC_mesh.png');
+  saveas(gcf, 'figures/BP1v_mesh.png');
 
   % KERNELS
   % ---       kvf params        ---
