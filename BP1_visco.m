@@ -458,6 +458,30 @@ function y = solve(r)
   disp('shear movie done')
   end
 
+  Fmovie=true;
+  if Fmovie
+    % velocity movie
+    clf;
+    fig = figure;
+    fname='figures/faultV.gif';
+    for idx = 1:size(V,1)
+      oneV = V(idx,:)';
+      imagesc(oneV); colorbar;
+      title(idx)
+      drawnow
+      frame = getframe(fig);
+      im{idx} = frame2im(frame);
+
+      [A, map] = rgb2ind(im{idx}, 256);
+      if idx==1
+        imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+      else
+        imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+      end
+    end
+  disp('fault movie done')
+  end
+
 end
 
 % ---------------------------- Private ---------------------------
