@@ -86,6 +86,15 @@ function r = build()
   comboY_c = [faultY_c shearY_c];
   comboZ_c = [faultZ_c shearZ_c];
 
+  % plot mesh
+  clf;
+  scatter(comboY_c, -1*comboZ_c, 1);
+  hold on;
+  scatter(comboY, -1*comboZ, 0.25, 'red');
+  scatter(-1*comboY, -1*comboZ, 0.25, 'red')
+  hold off;
+  saveas(gcf, 'figures/VC_mesh.png');
+
   % KERNELS
   % ---       kvf params        ---
   c.command = 'compress';
