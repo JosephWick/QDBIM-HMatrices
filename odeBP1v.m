@@ -103,7 +103,8 @@ dummy = zeros(ss.M,1);
 X = [dummy; vector];
 
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
-t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
+%t2 = hmmvp('mvp', hm.fs1212, X, lM, gM);
+t2=0;
 t3 = hmmvp('mvp', hm.fs1312, X, lM, gM);
 F = t1 + t2(1:ss.M) + t3(1:ss.M);
 %F = t1; % disconnected version
