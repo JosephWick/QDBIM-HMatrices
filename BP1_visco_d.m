@@ -286,7 +286,7 @@ fprintf('\nGrid size = %.2f (m)\n', ss.dz);
 fprintf('VW zone = %.2f (km)\n', (ss.fpTops(VWp(end))-ss.fpTops(VWp(1)))/1e3);
 fprintf('Critical nucleation size = %.2f (m)\n',hstar);
 fprintf('QS Cohesive zone = %.2f (m)\n',coh);
-fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
+fprintf('Est. Recurrence time = %.2f (yr)\n\n', Ti/3.15e7);
 
 % ---         Visco properties      ---
 %  -              RHEOLOGY           -
