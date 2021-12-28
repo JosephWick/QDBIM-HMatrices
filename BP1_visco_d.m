@@ -204,6 +204,11 @@ for ky=1:length(ss.shearY_chat)
   end
 end
 
+% figure for ff12 kernel
+clf;
+imagesc(ss.ff12); colorbar;
+saveas(gcf, 'figures/BP1vD_ff12.png')
+
 disp('kernels created')
 
 % ---     Rheology      ---
