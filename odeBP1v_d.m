@@ -89,6 +89,9 @@ Aeff = ss.Const_dis.* (tau).^(ss.n-1);
 e12p = tau12 .* Aeff;
 e13p = tau13 .* Aeff;
 
+disp(size(ss.fs1212))
+disp(size(e12p-ss.e12p_plate))
+
 % ---       FAULT       ---
 % Shear stress rate on fault due to fault and shear zones
 t1 = ss.ff12 * (V-ss.Vpl);
