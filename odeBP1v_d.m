@@ -100,8 +100,12 @@ F = t1;% + t2 + t3;
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
 
+% slip velocity
 Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
                              (ss.a.*ss.sigma.*f2 + ss.eta.*V);
+
+% Evolution of shear stress 
+yp(2:ss.dgf:end)=func - ss.eta.*V.*yp(4:ss.dgf:end);
 
 % ---       SHEAR         ---
 % Stress rate due to shear zones and fault slip velocity
