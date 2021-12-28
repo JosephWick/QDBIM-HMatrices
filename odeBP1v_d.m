@@ -95,7 +95,7 @@ t1 = ss.ff12 * (V-ss.Vpl);
 %disp(size(e12p-ss.e12p_plate))
 %t2 = ss.k1212f * (e12p-ss.e12p_plate);
 %t3 = ss.k1312f * (e12p-ss.e12p_plate);
-F = t1;% + t2 + t3;
+F = 0;%t1;% + t2 + t3;
 
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
@@ -117,7 +117,7 @@ Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3;
 t1 = ss.k1213 * (e12p-ss.e13p_plate);
 t2 = ss.k1313 * (e13p-ss.e13p_plate);
 %t3 = ss.k13 * (V-ss.Vpl);
-Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = 0; %t1 + t2;% + t3;
+Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2;% + t3;
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
