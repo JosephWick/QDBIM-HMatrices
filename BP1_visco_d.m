@@ -202,8 +202,8 @@ for ky=1:length(ss.shearY_chat)
     ss.ss1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
 
-    ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ_c(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
-    % TODO: add ss.k1312f
+    ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
+    % TODO: add ss.fsk1312
 
   end
 end
