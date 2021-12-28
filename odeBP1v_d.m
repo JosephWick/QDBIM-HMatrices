@@ -93,8 +93,8 @@ e13p = tau13 .* Aeff;
 % Shear stress rate on fault due to fault and shear zones
 t1 = ss.ff12 * (V-ss.Vpl);
 %disp(size(e12p-ss.e12p_plate))
-%t2 = ss.k1212f * (e12p-ss.e12p_plate);
-%t3 = ss.k1312f * (e12p-ss.e12p_plate);
+%t2 = ss.fs1212 * (e12p-ss.e12p_plate);
+%t3 = ss.fs1312 * (e12p-ss.e12p_plate);
 F = 0;%t1;% + t2 + t3;
 
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
