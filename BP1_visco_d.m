@@ -172,8 +172,8 @@ ss.sf12 = zeros(length(shearY_c(:)),ss.M);
 ss.sf13 = zeros(length(shearY_c),ss.M);
 
 % on fault by shear
-ss.fs1212 = zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
-ss.fs1312 = zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
+ss.fs1212 = zeros(length(ss.fpTops), length(shearY_chat)*length(faultZ_chat));
+ss.fs1312 = zeros(length(ss.fpTops), length(shearY_chat)*length(faultZ_chat));
 
 disp('beginning kernels')
 % fields from faults
