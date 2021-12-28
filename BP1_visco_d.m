@@ -155,30 +155,32 @@ disp('mesh created')
 
 % ---         Stress Kernels        ---
 
-ss.k12 = zeros(length(shearY_c(:)),ss.M);
-ss.k13 = zeros(length(shearY_c),ss.M);
+% fault - fault
+ss.ff12= zeros(ss.M,ss.M);
 
-ss.k12f= zeros(ss.M,ss.M);
+% shear - shear
+ss.ss1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.ss1213 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.ss1312 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.ss1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
 
-ss.k1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
-ss.k1213 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
-ss.k1312 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
-ss.k1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+% on shear by fault
+ss.sf12 = zeros(length(shearY_c(:)),ss.M);
+ss.sf13 = zeros(length(shearY_c),ss.M);
 
-ss.k1212f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
-ss.k1312f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
-ss.k1213f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
-ss.k1313f= zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
+% on fault by shear
+ss.fs1212 = zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
+ss.fs1312 = zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 
 disp('beginning kernels')
 % fields from faults
 for k=1:ss.M
   % stress at center of shear zones
-  ss.k12(:,k)=s12h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
-  ss.k13(:,k)=s13h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
+  ss.sf12(:,k)=s12h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
+  ss.sf13(:,k)=s13h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
 
   % stress at center of fault patches
-  ss.k12f(:,k)=s12h(0,ss.fpTops+ss.dz/2,0,ss.fpTops(k),Wf(k));
+  ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
 end
 
 % lengths
@@ -187,16 +189,16 @@ W=shearZ(2:end)-shearZ(1:end-1);
 % fields from shear zones
 for ky=1:length(ss.shearY_chat)
   for kz=1:length(ss.shearZ_chat)
-    ss.k1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
+    ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
-    ss.k1213(:,(kz-1)*ss.Ny+ky) = s1213(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
+    ss.ss1213(:,(kz-1)*ss.Ny+ky) = s1213(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
-    ss.k1312(:,(kz-1)*ss.Ny+ky) = s1312(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
+    ss.ss1312(:,(kz-1)*ss.Ny+ky) = s1312(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
-    ss.k1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
+    ss.ss1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZ_c(kz)+ss.transition, L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
 
-    ss.k1212f(:,(kz-1)*ss.Ny+ky)=s1212(shearZ_c(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
+    ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ_c(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
     % TODO: add ss.k1312f
 
   end
