@@ -178,12 +178,13 @@ ss.fs1312 = zeros(length(ss.fpTops), length(shearY_c)*length(faultZ_c));
 disp('beginning kernels')
 % fields from faults
 for k=1:ss.M
+  % stress at center of fault patches
+  ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
+
   % stress at center of shear zones
   ss.sf12(:,k)=s12h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
   ss.sf13(:,k)=s13h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
 
-  % stress at center of fault patches
-  ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
 end
 
 % lengths
@@ -209,7 +210,7 @@ end
 
 % figure for ff12 kernel
 clf;
-imagesc(ss.ff12); colorbar;
+imagesc(log10(ss.ff12)); colorbar;
 saveas(gcf, 'figures/BP1vD_ff12.png')
 
 disp('kernels created')
