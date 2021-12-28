@@ -178,7 +178,7 @@ for k=1:ss.M
   ss.k13(:,k)=s13h(shearY_c(:), shearZ_c(:), zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
 
   % stress at center of fault patches
-  ss.k12f(:,k)=s12h(0,ss.fpTops+ss.dz/2,0,ss.fpTops(k),Wf(k));
+  ss.k12f(:,k)=s12h(faultX,ss.fpTops+ss.dz/2,faultX,ss.fpTops(k),Wf(k));
 end
 
 % lengths
