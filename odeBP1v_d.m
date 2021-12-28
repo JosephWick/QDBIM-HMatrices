@@ -105,7 +105,7 @@ Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
                              (ss.a.*ss.sigma.*f2 + ss.eta.*V);
 
 % Evolution of shear stress
-Yp(2:ss.dgf:ss.M*ss.dgfF)= F - ss.eta.*V.*Yp(4:ss.dgf:end);
+Yp(2:ss.dgfF:ss.M*ss.dgfF)= F - ss.eta.*V.*Yp(4:ss.dgfF:end);
 
 % ---       SHEAR         ---
 % Stress rate due to shear zones and fault slip velocity
