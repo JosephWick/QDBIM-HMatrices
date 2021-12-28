@@ -2,6 +2,9 @@
 % dense matrix version of BP1_visco
 % ---     Kernels & functions      ---
 
+addpath('../hmmvp-okada/matlab')
+addpath('ODEsolving')
+
 G = 30e3;
 
 % Boxcar function
