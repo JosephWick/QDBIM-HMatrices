@@ -67,7 +67,7 @@ G = 30e3;
 th = Y(3:ss.dgfF:ss.M*ss.dgfF);
 
 % Slip rate
-V = ss.Vo.* exp(-Y(4:ss.dgfF:ss.M*ss.dgfF));
+V = ss.Vo.* exp(Y(4:ss.dgfF:ss.M*ss.dgfF));
 
 % Initialize Time Derivative
 Yp=zeros(size(Y));
@@ -95,7 +95,7 @@ t1 = ss.ff12 * (V-ss.Vpl);
 %disp(size(e12p-ss.e12p_plate))
 %t2 = ss.fs1212 * (e12p-ss.e12p_plate);
 %t3 = ss.fs1312 * (e12p-ss.e12p_plate);
-F = 0;%t1;% + t2 + t3;
+F = t1;% + t2 + t3;
 
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
@@ -112,12 +112,12 @@ Yp(2:ss.dgfF:ss.M*ss.dgfF)= F - ss.eta.*V.*Yp(4:ss.dgfF:ss.M*ss.dgfF);
 t1 = ss.ss1212 * (e12p-ss.e12p_plate);
 t2 = ss.ss1312 * (e13p-ss.e13p_plate);
 %t3 = ss.sf12 * (V-ss.Vpl);
-Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3;
+Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = 0; %t1 + t2;% + t3;
 
 t1 = ss.ss1213 * (e12p-ss.e13p_plate);
 t2 = ss.ss1313 * (e13p-ss.e13p_plate);
 %t3 = ss.sf13 * (V-ss.Vpl);
-Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2;% + t3;
+Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = 0; %t1 + t2;% + t3;
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
