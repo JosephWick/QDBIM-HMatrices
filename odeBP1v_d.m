@@ -113,7 +113,7 @@ Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3;
 t1 = ss.k1213 * (e12p-ss.e13p_plate);
 t2 = ss.k1313 * (e13p-ss.e13p_plate);
 %t3 = ss.k13 * (V-ss.Vpl);
-Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2;% + t3;
+Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = 0; %t1 + t2;% + t3;
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
