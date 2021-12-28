@@ -95,7 +95,7 @@ e13p = tau13 .* Aeff;
 %disp(size(e12p-ss.e12p_plate))
 %t2 = ss.fs1212 * (e12p-ss.e12p_plate);
 %t3 = ss.fs1312 * (e12p-ss.e12p_plate);
-F = 0; %t1;% + t2 + t3;
+F = t1;% + t2 + t3;
 
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
