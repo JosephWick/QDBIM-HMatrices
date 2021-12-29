@@ -472,7 +472,7 @@ if Fmovie
   fig = figure;
   fname='figures/BP1vD_slip.gif';
   for idx = 1:size(Y,1)
-    oneV = y.V(:,idx)';
+    oneV = y.V(:,idx);
     imagesc(oneV); colorbar;
     title(idx)
     drawnow
