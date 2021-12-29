@@ -74,6 +74,7 @@ function time_MVP (r)
 end
 
 function test_a
+  addpaths();
 
   c.A = [zeros(10,1); zeros(10,1); zeros(10,1)];
 
