@@ -73,6 +73,20 @@ function time_MVP (r)
 
 end
 
+function test_a
+
+  c.A = [zeros(10,1); zeros(10,1); zeros(10,1)];
+
+  c.greens_fn = 'test';
+  c.write_hmat_filename = './tmp/testa';
+  c.write_hd_filename = './tmp/testa-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+
+end
+
 % ---------------------- Private but still relevant ---------------
 
 % setopts()
