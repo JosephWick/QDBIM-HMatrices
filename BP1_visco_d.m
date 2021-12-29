@@ -444,7 +444,7 @@ if Smovie
   clf;
   fig = figure;
   fname = 'figures/BP1vD_strain.gif';
-  for idx = 1:size(Y, 1)
+  for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
     imagesc(oneEsq); colorbar;
@@ -471,7 +471,7 @@ if Fmovie
   clf;
   fig = figure;
   fname='figures/BP1vD_slip.gif';
-  for idx = 1:size(y.V,1)
+  for idx = 1:size(Y,1)
     oneV = y.V(:,idx)';
     imagesc(oneV); colorbar;
     title(idx)
