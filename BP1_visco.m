@@ -102,7 +102,7 @@ function r = build()
   c.tol = 1e-8;
   c.G = 30e3;
   c.allow_overwrite = 1;
-  c.err_method = 'mrem-abs';
+  c.err_method = 'mrem-fro';
 
   % ---       s12 kernel for fault-fault interaction        ---
   c.greens_fn = 'okadaS12';
