@@ -166,18 +166,13 @@ function r = build()
   r.ss1313 = c.write_hmat_filename;
 
   % ---       shear 1212 kernels for fault-shear interaction      ---
+  c.X = [faultX_c; faultY_c; faultZ_c];
+  c.Y = [shearX; shearY; shearZ];
+
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
   c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
-
-  c.X = [faultX_c; faultY_c; faultZ_c];
-  c.Y = [shearX; shearY; shearZ];
-
-  disp(size(faultX))
-  disp(size(shearY))
-  disp(size(faultZ))
-
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
