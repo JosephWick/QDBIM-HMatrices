@@ -174,9 +174,9 @@ function r = build()
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearX; shearY; shearZ];
 
-  disp(size(shearX))
+  disp(size(faultX))
   disp(size(shearY))
-  disp(size(shearZ))
+  disp(size(faultZ))
 
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
