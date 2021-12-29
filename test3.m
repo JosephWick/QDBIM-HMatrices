@@ -73,7 +73,7 @@ function time_MVP (r)
 
 end
 
-function test_a
+function r = test_a()
   addpaths();
 
   c.A = [linspace(1,10,10); linspace(1,10,10); linspace(1,10,10)];
@@ -85,6 +85,18 @@ function test_a
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
+
+  r = c.write_hmat_filename;
+
+end
+
+function load_a(r)
+  addpaths();
+
+  hm = hmmvp('init', r, 4);
+
+  disp(hmmvp('getn', hm))
+  disp(hmmvp('getm', hm))
 
 end
 
