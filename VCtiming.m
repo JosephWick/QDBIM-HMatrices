@@ -89,7 +89,7 @@ function m = time(b)
   % hmmvp mvp
   disp('hmmvp:')
   tic
-  p = hmmvp('mvp', fs1212, X, (1:1:n/2), (1:1:n/2));
+  p = hmmvp('mvp', fs1212, X, (1:1:n), (1:1:n));
   toc
 
   % dense mvp
