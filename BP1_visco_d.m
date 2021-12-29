@@ -384,7 +384,7 @@ yp=@(t,y) odeBP1v_d(t,y,ss);
 disp('begin solving')
 tic
 options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-[t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
+[t,Y]=ode45_2(yp,[0 1*3.15e1],Y0,options);
 disp('Done solving');
 toc
 
@@ -438,12 +438,12 @@ ylabel('Block')
 saveas(gcf, 'figures/BP1vD_strainCenter.png')
 
 % ---         Movies        ---
-Smovie=true;
+Smovie=false;
 if Smovie
   disp('begin shear movie')
   clf;
   fig = figure;
-  fname = 'figures/BP1v_strain.gif';
+  fname = 'figures/BP1vD_strain.gif';
   for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
@@ -470,9 +470,9 @@ if Fmovie
   disp('begin fault movie')
   clf;
   fig = figure;
-  fname='figures/BP1v_slip.gif';
+  fname='figures/BP1vD_slip.gif';
   for idx = 1:size(y.V,1)
-    oneV = y.V(idx,:)';
+    oneV = y.V(:,idx)';
     imagesc(oneV); colorbar;
     title(idx)
     drawnow
