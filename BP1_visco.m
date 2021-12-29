@@ -171,8 +171,8 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
-  c.X = [comboX_c; comboY_c; comboZ_c];
-  c.Y = [comboX; comboY; comboZ];
+  c.X = [faultX_c; faultY_c; faultZ_c];
+  c.Y = [shearX; shearY; shearZ];
 
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -190,6 +190,9 @@ function r = build()
   r.fs1312 = c.write_hmat_filename;
 
   % ---         s12 kernel for shear-fault interaction      ---
+  c.X = [shearX_c; shearY_c; shearZ_c];
+  c.Y = [faultX; faultY; faultZ];
+
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
   c.write_hd_filename = './tmp/BP1v_sf-s12-hd';
