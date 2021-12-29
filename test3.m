@@ -73,10 +73,11 @@ function time_MVP (r)
 
 end
 
-function r = test_a()
+function r = test_nm()
   addpaths();
 
-  c.A = [linspace(1,10,10); linspace(1,10,10); linspace(1,10,10)];
+  c.X = [linspace(1,10,10); linspace(1,10,10); linspace(1,10,10)];
+  c.Y = [linspace(1,5,5);   linspcae(1,5,5);   linspace(1,5,5)];
 
   c.greens_fn = 'test';
   c.write_hmat_filename = './tmp/testa';
@@ -90,7 +91,7 @@ function r = test_a()
 
 end
 
-function load_a(r)
+function load_nm(r)
   addpaths();
 
   hm = hmmvp('init', r, 4);
