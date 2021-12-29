@@ -384,7 +384,7 @@ yp=@(t,y) odeBP1v_d(t,y,ss);
 disp('begin solving')
 tic
 options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-[t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+[t,Y]=ode45_2(yp,[0 100*3.15e7],Y0,options);
 disp('Done solving');
 toc
 
@@ -436,3 +436,55 @@ title('Strain Rate of Center of Ductile Region')
 xlabel('Time Steps')
 ylabel('Block')
 saveas(gcf, 'figures/BP1vD_strainCenter.png')
+
+% ---         Movies        ---
+Smovie=true;
+if Smovie
+  disp('begin shear movie')
+  clf;
+  fig = figure;
+  fname = 'figures/BP1v_strain.gif';
+  for idx = 1:size(Epall, 2)
+    oneE = Epall(:,idx);
+    oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
+    imagesc(oneEsq); colorbar;
+    title(idx)
+    drawnow
+    frame = getframe(fig);
+    im{idx} = frame2im(frame);
+
+    [A,map] = rgb2ind(im{idx},256);
+    if idx==1
+      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+    else
+      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+    end
+
+  end
+disp('shear movie done')
+end
+
+Fmovie=true;
+if Fmovie
+  % velocity movie
+  disp('begin fault movie')
+  clf;
+  fig = figure;
+  fname='figures/BP1v_slip.gif';
+  for idx = 1:size(y.V,1)
+    oneV = y.V(idx,:)';
+    imagesc(oneV); colorbar;
+    title(idx)
+    drawnow
+    frame = getframe(fig);
+    im{idx} = frame2im(frame);
+
+    [A, map] = rgb2ind(im{idx}, 256);
+    if idx==1
+      imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+    else
+      imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+    end
+  end
+disp('fault movie done')
+end
