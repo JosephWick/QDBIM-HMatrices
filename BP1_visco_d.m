@@ -444,7 +444,7 @@ if Smovie
   clf;
   fig = figure;
   fname = 'figures/BP1vD_strain.gif';
-  for idx = 1:size(Epall, 2)
+  for idx = 1:size(Y, 1)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
     imagesc(oneEsq); colorbar;
