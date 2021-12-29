@@ -100,6 +100,10 @@ e13p = tau13 .* Aeff;
 % Shear stress rate on fault due to fault and shear zones
 v = e12p-ss.e12p_plate;
 
+disp(size(v))
+disp(hmmvp('getn', hm.fs1212))
+disp(hmmvp('getm', hm.fs1212))
+
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
 t2 = hmmvp('mvp', hm.fs1212, v);
 t3 = hmmvp('mvp', hm.fs1312, v);
