@@ -82,6 +82,7 @@ function m = time(b)
 
   % make vector (boxcar slip)
   n = hmmvp('getn', fs1212);
+  disp(n)
   X = zeros(n,1);
   X(0.1*n:0.9*n) = 1.0;
 
