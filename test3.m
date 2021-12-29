@@ -84,6 +84,7 @@ function r = test_nm()
   c.write_hd_filename = './tmp/testa-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
   kvf('Write', c.kvf, c, 32);
+  c.allow_overwrite = 1;
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
 
