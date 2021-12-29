@@ -80,11 +80,11 @@ function r = test_nm()
   c.Y = [linspace(1,5,5);   linspace(1,5,5);   linspace(1,5,5)];
 
   c.greens_fn = 'test';
-  c.write_hmat_filename = './tmp/testa';
-  c.write_hd_filename = './tmp/testa-hd';
+  c.write_hmat_filename = './tmp/test_nm';
+  c.write_hd_filename = './tmp/test_nm-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
-  kvf('Write', c.kvf, c, 32);
   c.allow_overwrite = 1;
+  kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
 
