@@ -76,7 +76,7 @@ end
 function test_a
   addpaths();
 
-  c.A = [ones(1,10); zeros(1,10); ones(1,10)];
+  c.A = [linspace(1,10,10); linspace(1,10,10); linspace(1,10,10)];
 
   c.greens_fn = 'test';
   c.write_hmat_filename = './tmp/testa';
