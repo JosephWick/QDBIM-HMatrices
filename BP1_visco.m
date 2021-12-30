@@ -206,6 +206,7 @@ function r = build()
   c.write_hmat_filename = './tmp/BP1v_sf-s13';
   c.write_hd_filename = './tmp/BP1v_sf-s13-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
+  c.Bfro = 1;
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
