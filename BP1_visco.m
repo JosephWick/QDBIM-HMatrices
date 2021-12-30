@@ -166,8 +166,10 @@ function r = build()
   r.ss1313 = c.write_hmat_filename;
 
   % ---       shear 1212 kernels for fault-shear interaction      ---
-  c.X = [faultX_c; faultY_c; faultZ_c];
-  c.Y = [shearX; shearY; shearZ];
+  %c.X = [faultX_c; faultY_c; faultZ_c];
+  %c.Y = [shearX; shearY; shearZ];
+  c.X = [shearX_c; shearY_c; shearZ_c];
+  c.Y = [faultX; faultY; faultZ];
 
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
