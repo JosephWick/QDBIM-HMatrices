@@ -110,8 +110,6 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_ff-s12-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
-  c.Bfro = 1;
-
   c.Y = [faultX; faultY; faultZ];
   c.X = [faultX_c; faultY_c; faultZ_c];
 
@@ -212,6 +210,8 @@ function r = build()
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.sf13 = c.write_hmat_filename;
+
+  c.Bfro = 1;
 
   % ---       fault properties      ---
   %  -      FRICTIONAL PARAMETERS    -
