@@ -192,6 +192,8 @@ function r = build()
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.Y = [faultX; faultY; faultZ];
 
+  c.Bfro = 1;
+
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
   c.write_hd_filename = './tmp/BP1v_sf-s12-hd';
@@ -210,8 +212,6 @@ function r = build()
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
   r.sf13 = c.write_hmat_filename;
-
-  c.Bfro = 1;
 
   % ---       fault properties      ---
   %  -      FRICTIONAL PARAMETERS    -
