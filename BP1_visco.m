@@ -169,6 +169,8 @@ function r = build()
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearX; shearY; shearZ];
 
+  c.Bfro = 1;
+
   %
   % c.X = [shearX_c; shearY_c; shearZ_c];
   % c.Y = [faultX; faultY; faultZ];
