@@ -169,13 +169,13 @@ function r = build()
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearX; shearY; shearZ];
 
-  %c.Bfro = 5;
+  c.Bfro = 5;
 
   %
   % c.X = [shearX_c; shearY_c; shearZ_c];
   % c.Y = [faultX; faultY; faultZ];
 
-  c.greens_fn = 'test';
+  c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
   c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
