@@ -120,21 +120,21 @@ Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
 
 % ---       SHEAR         ---
 % Stress rate due to shear zones and fault slip velocity
-disp('a')
 t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
-disp('b')
 t2 = hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate));
-disp('c')
 v = V-ss.Vpl;
-disp('d')
-t3 = hmmvp('mvp', hm.sf12, v);
-disp('e')
-Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3;
+%t3 = hmmvp('mvp', hm.sf12, v);
+Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3;
 
+disp('a')
 t1 = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate));
+disp('b')
 t2 = hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate));
+disp('c')
 t3 = hmmvp('mvp', hm.sf13, v);
+disp('d')
 Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3;
+disp('e')
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
