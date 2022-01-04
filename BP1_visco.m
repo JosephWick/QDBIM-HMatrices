@@ -169,6 +169,8 @@ function r = build()
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearX; shearY; shearZ];
 
+  c.Bfro = 1e-10;
+
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
   c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
@@ -191,8 +193,6 @@ function r = build()
   % ---         s12 kernel for shear-fault interaction      ---
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.Y = [faultX; faultY; faultZ];
-
-  c.Bfro = 1;
 
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
