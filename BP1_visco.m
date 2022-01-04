@@ -392,7 +392,7 @@ function y = solve(r)
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 5001*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
