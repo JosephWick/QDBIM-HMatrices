@@ -175,7 +175,7 @@ function r = build()
   % c.X = [shearX_c; shearY_c; shearZ_c];
   % c.Y = [faultX; faultY; faultZ];
 
-  c.greens_fn = 'shear1212';
+  c.greens_fn = 'test';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
   c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
