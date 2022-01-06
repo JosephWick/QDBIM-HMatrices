@@ -51,6 +51,9 @@ function r = build()
   faultY_c = faultY;
   faultZ_c = faultZ+(ss.dz/2);
 
+  Lfault = zeros(ss.M,1);
+  Wfault = ss.dz*ones(ss.M,1);
+
   % SHEAR
   eps = 1e-12;
   nc = (-ss.Nz/2:ss.Nz/2);
@@ -58,13 +61,20 @@ function r = build()
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
   shearX = zeros(1,ss.Ny*ss.Nz);
 
-  % shear patch centers
+  % shear patch centers & sizes
   shearX_c = shearX;
   ss.shearY_chat = zeros(1,ss.Ny);
   ss.shearZ_chat = zeros(1,ss.Nz);
+
+  Lshear = zeros(ss.Ny*ss.Nz,1); % y hat size
+  Wshear = zeros(ss.Ny*ss.Nz,1); % z hat size
+
   for idx=(1:length(shearZhat)-1)
     ss.shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
     ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
+
+    Lshear(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
+    Wshear(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
   end
 
   % grid and flatten
@@ -112,6 +122,8 @@ function r = build()
 
   c.Y = [faultX; faultY; faultZ];
   c.X = [faultX_c; faultY_c; faultZ_c];
+  c.L = Lfault;
+  c.W = Wfault;
 
   kvf('Write', c.kvf, c, 4);
   disp('run these in a shell:')
@@ -128,6 +140,8 @@ function r = build()
   c.transition = ss.transition;
   c.Y = [shearX; shearY; shearZ];
   c.X = [shearX_c; shearY_c; shearZ_c];
+  c.L = Lshear;
+  c.W = Wshear;
 
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -168,6 +182,8 @@ function r = build()
   % ---       shear 1212 kernels for fault-shear interaction      ---
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearX; shearY; shearZ];
+  c.L = Lshear;
+  c.W = Wshear;
 
   c.Bfro = 1e-10;
 
@@ -193,6 +209,8 @@ function r = build()
   % ---         s12 kernel for shear-fault interaction      ---
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.Y = [faultX; faultY; faultZ];
+  c.L = Lfault;
+  c.W = Wfault;
 
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
