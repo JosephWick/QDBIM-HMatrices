@@ -51,8 +51,8 @@ function r = build()
   faultY_c = faultY;
   faultZ_c = faultZ+(ss.dz/2);
 
-  Lfault = zeros(ss.M,1);
-  Wfault = ss.dz*ones(ss.M,1);
+  Lfault_hat = zeros(ss.M,1);
+  Wfault_hat = ss.dz*ones(ss.M,1);
 
   % SHEAR
   eps = 1e-12;
@@ -66,15 +66,15 @@ function r = build()
   ss.shearY_chat = zeros(1,ss.Ny);
   ss.shearZ_chat = zeros(1,ss.Nz);
 
-  Lshear = zeros(1,ss.Ny*ss.Nz); % y hat size
-  Wshear = zeros(1,ss.Ny*ss.Nz); % z hat size
+  Lshear = zeros(1,ss.Ny); % y hat size
+  Wshear = zeros(1,ss.Nz); % z hat size
 
   for idx=(1:length(shearZhat)-1)
     ss.shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
     ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
 
-    Lshear(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
-    Wshear(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
+    Lshear_hat(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
+    Wshear_hat(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
   end
 
   % grid and flatten
@@ -86,6 +86,10 @@ function r = build()
   [shearZ_c shearY_c] = ndgrid(ss.shearZ_chat, ss.shearY_chat);
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
+
+  [Wshear Lshear] = ndgrid(Wshear_hat, Lshear_hat);
+  Wshear = Wshear(:)';
+  Lshear = Lshear(:)';
 
   % combo mesh
   comboX = [faultX shearX];
