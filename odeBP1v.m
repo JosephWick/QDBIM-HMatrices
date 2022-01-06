@@ -126,15 +126,10 @@ v = V-ss.Vpl;
 %t3 = hmmvp('mvp', hm.sf12, v);
 Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3;
 
-disp('a')
 t1 = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate));
-disp('b')
 t2 = hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate));
-disp('c')
 t3 = hmmvp('mvp', hm.sf13, v);
-disp('d')
 Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3;
-disp('e')
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
