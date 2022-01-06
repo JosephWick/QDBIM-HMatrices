@@ -203,7 +203,7 @@ for ky=1:length(ss.shearY_chat)
       shearY_c'-shearYhat(ky)', shearZ_c');
 
     ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
-    % TODO: add ss.fsk1312
+    ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZ(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
 
   end
 end
