@@ -51,8 +51,8 @@ function r = build()
   faultY_c = faultY;
   faultZ_c = faultZ+(ss.dz/2);
 
-  Lfault_hat = zeros(ss.M,1);
-  Wfault_hat = ss.dz*ones(ss.M,1);
+  Lfault = zeros(ss.M,1);
+  Wfault = ss.dz*ones(ss.M,1);
 
   % SHEAR
   eps = 1e-12;
