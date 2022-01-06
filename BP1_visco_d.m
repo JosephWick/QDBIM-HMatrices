@@ -430,7 +430,7 @@ ylabel('Block')
 saveas(gcf, 'figures/BP1vD_strainCenter.png')
 
 % ---         Movies        ---
-Smovie=false;
+Smovie=true;
 if Smovie
   disp('begin shear movie')
   clf;
@@ -456,7 +456,7 @@ if Smovie
 disp('shear movie done')
 end
 
-Fmovie=false;
+Fmovie=true;
 if Fmovie
   % velocity movie
   disp('begin fault movie')
