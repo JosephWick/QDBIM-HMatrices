@@ -106,7 +106,7 @@ disp(size(v))
 %disp('a')
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
 %disp('b')
-t2 = hmmvp('mvp', hm.fs1212, v);
+t2 = hmmvp('mvp', hm.fs1212, v');
 disp('c')
 t3 = hmmvp('mvp', hm.fs1312, v);
 disp('d')
