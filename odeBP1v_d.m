@@ -94,7 +94,7 @@ e13p = tau13 .* Aeff;
 t1 = ss.ff12 * (V-ss.Vpl);
 %disp(size(e12p-ss.e12p_plate))
 t2 = ss.fs1212 * (e12p-ss.e12p_plate);
-t3 = ss.fs1312 * (e12p-ss.e12p_plate);
+t3 = ss.fs1312 * (e13p-ss.e13p_plate);
 F = t1 + t2 + t3;
 
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
