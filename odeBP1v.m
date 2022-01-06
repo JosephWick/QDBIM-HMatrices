@@ -101,8 +101,8 @@ e13p = tau13 .* Aeff;
 v = e12p-ss.e12p_plate;
 
 disp(size(v))
-disp(hmmvp('getn', hm.fs1212))
-disp(hmmvp('getm', hm.fs1212))
+%disp(hmmvp('getn', hm.fs1212))
+%disp(hmmvp('getm', hm.fs1212))
 %disp('a')
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
 %disp('b')
