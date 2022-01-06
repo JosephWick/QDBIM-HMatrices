@@ -245,7 +245,6 @@ ss.fo=0.6*ones(size(ss.fpTops));
 ss.a=1e-2+Ramp((ss.fpTops-15e3)/3e3)*(0.025-0.01);
 ss.b=0.015*ones(size(ss.fpTops));
 
-% TODO: is the sigma the same as sigmab?
 % effective normal stress (MPa)
 ss.sigma=50.0*ones(size(ss.fpTops));
 
@@ -260,13 +259,6 @@ ss.Vo=1e-6*ones(size(ss.fpTops));
 
 % Radiation damping coefficient
 ss.eta = G./(2*Vs);
-
-% static friction coefficient
-ss.mu0 = 0.2*ones(size(ss.fpTops));
-
-% fault strength
-ss.strength = ss.sigma.*(ss.mu0+(ss.a-ss.b).*log(ss.Vpl./ss.Vo))+...
-  G*ss.Vpl./(2*Vs);
 
 % Estimates of some key parameters
 VWp = find(ss.a < ss.b); % VW region
