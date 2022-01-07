@@ -344,7 +344,7 @@ ss.e120 = zeros(size(ss.s120));
 ss.e130 = zeros(size(ss.s120));
 
 % characteristic weakening distance (m)
-ss.L = 0.012;
+ss.L = 0.008;
 
 ss.dgfF = 4;
 ss.dgfS = 4;
