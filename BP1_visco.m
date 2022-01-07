@@ -351,7 +351,7 @@ function r = build()
   ss.e130 = zeros(size(ss.s120));
 
   % characteristic weakening distance (m)
-  ss.L = 0.012;
+  ss.L = 0.008;
 
   r.ss = ss;
 
