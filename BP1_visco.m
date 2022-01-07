@@ -391,10 +391,10 @@ function y = solve(r)
   hm.ss1213 = hmmvp('init', r.ss1213, 32);
   hm.ss1312 = hmmvp('init', r.ss1312, 32);
   hm.ss1313 = hmmvp('init', r.ss1313, 32);
-  hm.fs1212 = hmmvp('init', r.fs1212, 32);
-  hm.fs1312 = hmmvp('init', r.fs1312, 32);
-  hm.sf12   = hmmvp('init', r.sf12,   32);
-  hm.sf13   = hmmvp('init', r.sf13,   32);
+  hm.fs1212 = hmmvp('init', r.fs1212,  4);
+  hm.fs1312 = hmmvp('init', r.fs1312,  4);
+  hm.sf12   = hmmvp('init', r.sf12,    4);
+  hm.sf13   = hmmvp('init', r.sf13,    4);
 
   % initialize the function handle with set constitutive parameters
   yp=@(t,y) odeBP1v(t,y,r.ss, hm);
