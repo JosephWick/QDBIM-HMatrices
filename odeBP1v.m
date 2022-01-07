@@ -106,9 +106,9 @@ v = e12p-ss.e12p_plate;
 
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
 t2 = hmmvp('mvp', hm.fs1212, v);
-t3 = hmmvp('mvp', hm.fs1312, v);
+%t3 = hmmvp('mvp', hm.fs1312, v);
 
-F = t1 + t2 + t3;
+F = t1 + t2;% + t3;
 
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
@@ -124,15 +124,15 @@ Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
 v = V-ss.Vpl;
 t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
 t2 = hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate));
-t3 = hmmvp('mvp', hm.sf12, v);
+%t3 = hmmvp('mvp', hm.sf12, v);
 
-Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3;
+Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2;% + t3;
 
 t1 = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate));
 t2 = hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate));
-t3 = hmmvp('mvp', hm.sf13, v);
+%t3 = hmmvp('mvp', hm.sf13, v);
 
-Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3;
+Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2;% + t3;
 
 % Strain rate
 Yp(ss.M*ss.dgfF+3 : ss.dgfS : end) = e12p;
