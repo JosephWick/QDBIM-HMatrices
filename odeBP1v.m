@@ -105,11 +105,11 @@ v = e12p-ss.e12p_plate;
 %disp(hmmvp('getm', hm.fs1212))
 
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
-t2 = hmmvp('mvp', hm.fs1212, v);
-t3 = hmmvp('mvp', hm.fs1312, v);
+%t2 = hmmvp('mvp', hm.fs1212, v);
+%t3 = hmmvp('mvp', hm.fs1312, v);
 
-F = t1 + t2 + t3;
-%F = t1; % disconnected version
+%F = t1 + t2 + t3;
+F = t1; % disconnected version
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
 
