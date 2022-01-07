@@ -385,6 +385,8 @@ function y = solve(r)
   Y0(r.ss.M*r.ss.dgfF+3:r.ss.dgfS:end)=r.ss.e120;
   Y0(r.ss.M*r.ss.dgfF+4:r.ss.dgfS:end)=r.ss.e130;
 
+  disp('Loading kernels')
+
   % load HM kernels
   hm.s12    = hmmvp('init', r.s12,     4);
   hm.ss1212 = hmmvp('init', r.ss1212, 32);
@@ -403,7 +405,7 @@ function y = solve(r)
   % Initial step of 1e-5 seconds
   % Relative tolerance of 3e-8
   % [0 3e10] = simulate 3e10 seconds, 3.15e7 seconds / year
-  disp('begin solving')
+  disp('Begin solving...')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
   [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
