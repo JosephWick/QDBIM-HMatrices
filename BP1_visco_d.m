@@ -92,16 +92,16 @@ u1h=@(x2,x3,y2,y3,W) ...
     )/2/pi;
 
 % ---       General params      ---
-probL = 200e3;
-probW = 200e3;
+probL = 300e3;
+probW = 300e3;
 
 ss.lambdaZ = 40e3; % fault depth extent
 ss.M = 400; %number of fault cells
 ss.dz = ss.lambdaZ/ss.M;
 
 ss.transition = 40e3;
-ss.Ny = 51;
-ss.Nz = 51;
+ss.Ny = 75;
+ss.Nz = 75;
 ss.Nx = ss.Nz;
 
 % FAULT
@@ -430,7 +430,7 @@ ylabel('Block')
 saveas(gcf, 'figures/BP1vD_strainCenter.png')
 
 % ---         Movies        ---
-Smovie=true;
+Smovie=false;
 if Smovie
   disp('begin shear movie')
   clf;
@@ -456,7 +456,7 @@ if Smovie
 disp('shear movie done')
 end
 
-Fmovie=true;
+Fmovie=false;
 if Fmovie
   % velocity movie
   disp('begin fault movie')
