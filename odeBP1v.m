@@ -100,18 +100,15 @@ e13p = tau13 .* Aeff;
 % Shear stress rate on fault due to fault and shear zones
 v = e12p-ss.e12p_plate;
 
-disp(size(v))
+%disp(size(v))
 %disp(hmmvp('getn', hm.fs1212))
 %disp(hmmvp('getm', hm.fs1212))
-disp('a')
+
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
-disp('b')
 t2 = hmmvp('mvp', hm.fs1212, v);
-disp('c')
 t3 = hmmvp('mvp', hm.fs1312, v);
-disp('d')
+
 F = t1 + t2 + t3;
-disp('e')
 %F = t1; % disconnected version
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
@@ -124,23 +121,17 @@ Yp(4:ss.dgfF:ss.M*ss.dgfF) = (F - ss.b.*ss.sigma.*dth.*f2)./...
 
 % ---       SHEAR         ---
 % Stress rate due to shear zones and fault slip velocity
-disp('f')
-t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
-disp('g')
-t2 = hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate));
-disp('h')
 v = V-ss.Vpl;
+t1 = hmmvp('mvp', hm.ss1212, (e12p-ss.e12p_plate));
+t2 = hmmvp('mvp', hm.ss1312, (e13p-ss.e13p_plate));
 t3 = hmmvp('mvp', hm.sf12, v);
-disp('i')
+
 Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3;
-disp('j')
 
 t1 = hmmvp('mvp', hm.ss1213, (e12p-ss.e12p_plate));
-disp('k')
 t2 = hmmvp('mvp', hm.ss1313, (e13p-ss.e13p_plate));
-disp('l')
 t3 = hmmvp('mvp', hm.sf13, v);
-disp('m')
+
 Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3;
 
 % Strain rate
