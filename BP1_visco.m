@@ -22,7 +22,12 @@ function r = build()
 
   % problem specifications
   % - fault goes 40 km deep
-  %  - shear TBD
+  % - shear 200km x 200 km starting at bottom of fault
+
+  % Coordinate convention
+  % - x hat is into/out of page   (x)
+  % - y hat is left/right         --->
+  % - z hat is up/down             V
 
   % ---       meshes      ---
 
