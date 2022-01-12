@@ -217,10 +217,10 @@ function out = run()
       ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ(kz),L(ky),W(kz),0-ss.shearY_chat(ky),ss.fpTops+ss.dz/2);
       ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZ(kz),L(ky),W(kz),0-ss.shearY_chat(ky),ss.fpTops+ss.dz/2);
 
-
-
     end
   end
+
+  out.ff12 = ss.ff12;
 
   % figure for ff12 kernel
   %clf;
@@ -390,7 +390,7 @@ function out = run()
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
