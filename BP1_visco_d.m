@@ -193,6 +193,7 @@ W=shearZ(2:end)-shearZ(1:end-1);
 % fields from shear zones
 for ky=1:length(ss.shearY_chat)
   for kz=1:length(ss.shearZ_chat)
+    % stress at center of shear zones
     ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ(kz), L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
     ss.ss1213(:,(kz-1)*ss.Ny+ky) = s1213(shearZ(kz), L(ky), W(kz), ...
@@ -202,8 +203,11 @@ for ky=1:length(ss.shearY_chat)
     ss.ss1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZ(kz), L(ky), W(kz), ...
       shearY_c'-shearYhat(ky)', shearZ_c');
 
-    ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
-    ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZ(kz),L(ky),W(kz),0-shearY_c(ky),ss.fpTops(:)+ss.dz/2);
+    % stress at center of fault patches
+    ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ(kz),L(ky),W(kz),0-shearY_chat(ky),ss.fpTops+ss.dz/2);
+    ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZ(kz),L(ky),W(kz),0-shearY_chat(ky),ss.fpTops+ss.dz/2);
+
+
 
   end
 end
