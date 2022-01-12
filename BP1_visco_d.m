@@ -182,7 +182,7 @@ for k=1:ss.M
   ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
 
   % stress at center of shear zones
-  ss.sf12(:,k)=s12h(shearY_c, shearZ_c, zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
+  ss.sf12(:,k)=s12h(shearY_c', shearZ_c', zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
   ss.sf13(:,k)=s13h(shearY_c, shearZ_c, zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
 
 end
