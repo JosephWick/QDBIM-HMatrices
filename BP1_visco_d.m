@@ -3,7 +3,7 @@
 
 function varargout = bp1vD (varargin)
 
-  [varargout]{1:nargout}] = feval(varargin{:});
+  [varargout{1:nargout}] = feval(varargin{:});
 
 end
 
