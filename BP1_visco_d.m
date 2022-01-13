@@ -221,6 +221,14 @@ function out = run()
   end
 
   out.ff12 = ss.ff12;
+  out.ss1212 = ss.ss1212;
+  out.ss1213 = ss.ss1213;
+  out.ss1312 = ss.ss1312;
+  out.ss1313 = ss.ss1313;
+  out.sf12 = ss.sf12;
+  out.sf13 = ss.sf13;
+  out.fs1212 = ss.fs1212;
+  out.fs1312 = ss.fs1312;
 
   % figure for ff12 kernel
   %clf;
