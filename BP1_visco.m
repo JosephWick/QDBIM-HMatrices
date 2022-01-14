@@ -136,6 +136,8 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_ss-shear1212-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
+  c.Bfro = 1e-10;
+
   c.transition = ss.transition;
   c.Y = [shearX; shearY; shearZ];
   c.X = [shearX_c; shearY_c; shearZ_c];
