@@ -165,7 +165,7 @@ function out = run()
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
 
-  [W L] = ndgrid(Wshear_hat, Lshear_hat);
+  [W L] = ndgrid(Ws_hat, Ls_hat);
   W = W(:)';
   L = L(:)';
 
