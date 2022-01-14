@@ -169,15 +169,6 @@ function out = run()
   W = W(:)';
   L = L(:)';
 
-  % combo mesh
-  comboX = [faultX shearX];
-  comboY = [faultY shearY];
-  comboZ = [faultZ shearZ];
-
-  comboX_c = [faultX_c shearX_c];
-  comboY_c = [faultY_c shearY_c];
-  comboZ_c = [faultZ_c shearZ_c];
-
   disp('mesh created')
 
   % ---         Stress Kernels        ---
