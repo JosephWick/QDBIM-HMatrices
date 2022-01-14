@@ -102,8 +102,8 @@ function out = run()
       )/2/pi;
 
   % ---       General params      ---
-  probL = 300e3;
-  probW = 300e3;
+  probL = 200e3;
+  probW = 200e3;
 
   ss.lambdaZ = 40e3; % fault depth extent
   ss.M = 400; %number of fault cells
