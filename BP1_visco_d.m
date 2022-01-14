@@ -115,8 +115,6 @@ function out = run()
   ss.Nx = ss.Nz;
 
   % FAULT
-  % width of fault patches
-  Wf = ones(ss.M,1)*ss.dz;
   % fault patch edges (top left)
   faultX = zeros(1,ss.M);
   faultY = zeros(1,ss.M);
@@ -129,6 +127,10 @@ function out = run()
   faultY_c = faultY;
   faultZ_c = faultZ+(ss.dz/2);
 
+  % width of fault patches
+  Lf = zeros(ss.M,1);
+  Wf = ones(ss.M,1)*ss.dz;
+
   % SHEAR
   eps = 1e-12;
   nc = (-ss.Nz/2:ss.Nz/2);
@@ -140,9 +142,17 @@ function out = run()
   shearX_c = shearX;
   ss.shearY_chat = zeros(1,ss.Ny);
   ss.shearZ_chat = zeros(1,ss.Nz);
+
+  % sizing
+  Ls_hat = zeros(1,ss.Ny);
+  Ws_hat = zeros(1,ss.Nz);
+
   for idx=(1:length(shearZhat)-1)
     ss.shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
     ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
+
+    Ls_hat(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
+    Ws_hat(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
   end
 
   % grid and flatten
@@ -154,6 +164,10 @@ function out = run()
   [shearZ_c shearY_c] = ndgrid(ss.shearZ_chat, ss.shearY_chat);
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
+
+  [W L] = ndgrid(Wshear_hat, Lshear_hat);
+  W = W(:)';
+  L = L(:)';
 
   % combo mesh
   comboX = [faultX shearX];
@@ -197,9 +211,6 @@ function out = run()
 
   end
 
-  % lengths
-  L=shearX(2:end)-shearX(1:end-1);
-  W=shearZ(2:end)-shearZ(1:end-1);
   % fields from shear zones
   for ky=1:length(ss.shearY_chat)
     for kz=1:length(ss.shearZ_chat)
