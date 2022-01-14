@@ -98,7 +98,6 @@ function r = build()
 
   % plot mesh
   clf;
-  scatter(comboY_c, -1*comboZ_c, 1);
   hold on;
   scatter(shearY, -1*shearZ, 0.25, 'red');
   scatter(faultY, -1*faultZ, 0.25, 'red')
