@@ -71,8 +71,8 @@ function r = build()
   ss.shearY_chat = zeros(1,ss.Ny);
   ss.shearZ_chat = zeros(1,ss.Nz);
 
-  Lshear = zeros(1,ss.Ny); % y hat size
-  Wshear = zeros(1,ss.Nz); % z hat size
+  Lshear_hat = zeros(1,ss.Ny); % y hat size
+  Wshear_hat = zeros(1,ss.Nz); % z hat size
 
   for idx=(1:length(shearZhat)-1)
     ss.shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
