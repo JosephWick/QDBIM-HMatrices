@@ -149,7 +149,7 @@ function r = build()
 
   % plot X
   clf
-  imagesc(X);
+  imagesc(c.X);
   saveas(gcf, 'figures/VCX.png')
 
   % ---       shear 1213 kernel for shear-shear interaction     ---
