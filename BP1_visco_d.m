@@ -232,7 +232,7 @@ function out = run()
     end
   end
 
-  disp(size(fs.ss1212))
+  disp(size(ss.fs1212))
 
   out.ff12 = ss.ff12;
   out.ss1212 = ss.ss1212;
