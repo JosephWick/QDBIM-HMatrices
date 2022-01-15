@@ -210,7 +210,7 @@ function out = run()
 
   end
 
-  disp(size(ss.ss1212))
+  disp(size(ss.fs1212))
 
   % fields from shear zones
   for ky=1:length(ss.shearY_chat)
@@ -232,7 +232,7 @@ function out = run()
     end
   end
 
-  disp(size(ss.ss1212))
+  disp(size(fs.ss1212))
 
   out.ff12 = ss.ff12;
   out.ss1212 = ss.ss1212;
