@@ -216,8 +216,8 @@ function out = run()
         shearY_c'-shearYhat(ky)', shearZ_c');
 
       % stress at center of fault patches
-      ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ(kz),L(ky),W(kz),0-shearY_hat(ky),ss.fpTops+ss.dz/2);
-      ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZ(kz),L(ky),W(kz),0-shearY_hat(ky),ss.fpTops+ss.dz/2);
+      ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZ(kz),L(ky),W(kz),0-shearYhat(ky),ss.fpTops+ss.dz/2);
+      ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZ(kz),L(ky),W(kz),0-shearYhat(ky),ss.fpTops+ss.dz/2);
 
     end
   end
