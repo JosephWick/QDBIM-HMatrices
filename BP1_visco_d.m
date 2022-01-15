@@ -169,6 +169,14 @@ function out = run()
   W = W(:)';
   L = L(:)';
 
+  % plot mesh
+  clf;
+  hold on;
+  scatter(shearY, -1*shearZ, 0.25, 'red');
+  scatter(faultY, -1*faultZ, 0.25, 'red')
+  hold off;
+  saveas(gcf, 'figures/BP1vD_mesh.png');
+
   disp('mesh created')
 
   % ---         Stress Kernels        ---
