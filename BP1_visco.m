@@ -147,6 +147,11 @@ function r = build()
   disp(cmd)
   r.ss1212 = c.write_hmat_filename;
 
+  % plot X
+  clf
+  imagesc(X);
+  saveas(gcf, 'figures/VCX.png')
+
   % ---       shear 1213 kernel for shear-shear interaction     ---
   c.greens_fn = 'shear1213';
   c.write_hmat_filename = './tmp/BP1v_ss-shear1213';
