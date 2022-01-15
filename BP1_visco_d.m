@@ -193,7 +193,7 @@ function out = run()
   % on shear by fault
   ss.sf12 = zeros(length(shearY_c(:)),ss.M);
   ss.sf13 = zeros(length(shearY_c),ss.M);
-
+  disp(size(ss.sf12))
   % on fault by shear
   ss.fs1212 = zeros(length(ss.fpTops), ss.Ny*ss.Nz);
   ss.fs1312 = zeros(length(ss.fpTops), ss.Ny*ss.Nz);
@@ -209,6 +209,7 @@ function out = run()
     ss.sf13(:,k)=s13h(shearY_c', shearZ_c', zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
 
   end
+  disp(size(ss.sf12))
 
   % fields from shear zones
   for ky=1:length(ss.shearY_chat)
