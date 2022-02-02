@@ -64,7 +64,7 @@ function r = build()
   nc = (-ss.Nz/2:ss.Nz/2);
   shearZhat = ss.transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*ss.transition;
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
-  shearXhat = zeros(ss.Ny,1);
+  shearXhat = zeros(1,ss.Ny);
 
   shearX = zeros(ss.Ny*ss.Nz,1);
 
@@ -146,8 +146,8 @@ function r = build()
   disp(size(shearZ_c))
 
   c.transition = ss.transition;
-  c.Y = [shearXhat; shearYhat'; shearZhat];
-  c.X = [shearX_c; shearY_c; shearZ_c];
+  c.Y = [shearXhat; shearYhat; shearZhat'];
+  c.X = [shearX_c'; shearY_c; shearZ_c];
   c.L = Lshear;
   c.W = Wshear;
 
