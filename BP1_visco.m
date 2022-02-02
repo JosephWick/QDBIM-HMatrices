@@ -140,7 +140,7 @@ function r = build()
   c.Nz = ss.Nz;
 
   c.transition = ss.transition;
-  c.Y = [shearX_hat; shearY_hat; shearZ_hat];
+  c.Y = [shearX; shearYhat; shearZhat];
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.L = Lshear;
   c.W = Wshear;
