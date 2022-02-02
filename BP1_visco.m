@@ -119,7 +119,7 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_ff-s12-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
-  c.Y = [faultX_hat; faultY_hat; faultZ_hat];
+  c.Y = [faultX; faultY; faultZ];
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.L = Lfault;
   c.W = Wfault;
@@ -140,7 +140,7 @@ function r = build()
   c.Nz = ss.Nz;
 
   c.transition = ss.transition;
-  c.Y = [shearX; shearY; shearZ];
+  c.Y = [shearX_hat; shearY_hat; shearZ_hat];
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.L = Lshear;
   c.W = Wshear;
