@@ -144,6 +144,9 @@ function r = build()
   c.transition = ss.transition;
   c.Y = [shearXhat; shearYhat; shearZhat'];
   c.X = [shearX_c; shearY_c; shearZ_c];
+
+  c.Z = [shearX, shearY, shearZ]; % for sizing purposes
+
   c.L = Lshear;
   c.W = Wshear;
 
