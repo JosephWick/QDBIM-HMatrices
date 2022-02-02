@@ -141,6 +141,10 @@ function r = build()
   c.Ny = ss.Ny;
   c.Nz = ss.Nz;
 
+  disp(size(shearX_c))
+  disp(size(shearY_c))
+  disp(size(shearZ_c))
+
   c.transition = ss.transition;
   c.Y = [shearXhat; shearYhat'; shearZhat];
   c.X = [shearX_c; shearY_c; shearZ_c];
