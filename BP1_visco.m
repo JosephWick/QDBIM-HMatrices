@@ -119,7 +119,7 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_ff-s12-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
-  c.Y = [faultX; faultY; faultZ];
+  c.Y = [faultX_hat; faultY_hat; faultZ_hat];
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.L = Lfault;
   c.W = Wfault;
