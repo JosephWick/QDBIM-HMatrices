@@ -145,6 +145,8 @@ function r = build()
   disp(size(shearYhat))
   disp(size(shearXhat))
 
+  disp(size(shearX_c))
+
   c.transition = ss.transition;
   c.Y = [shearXhat; shearYhat; shearZhat];
   c.X = [shearX_c; shearY_c; shearZ_c];
