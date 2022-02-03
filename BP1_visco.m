@@ -94,9 +94,12 @@ function r = build()
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
 
-  [Wshear Lshear] = ndgrid(Wshear_hat, Lshear_hat);
-  Wshear = Wshear(:)';
-  Lshear = Lshear(:)';
+  %[Wshear Lshear] = ndgrid(Wshear_hat, Lshear_hat);
+  %Wshear = Wshear(:)';
+  %Lshear = Lshear(:)';
+  Wshear = Wshear_hat;
+  Lshear = Lshear_hat;
+
 
   % plot mesh
   clf;
