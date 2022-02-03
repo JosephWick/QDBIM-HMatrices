@@ -166,7 +166,7 @@ function out = run()
   shearY_c = shearY_c(:)';
 
   W = Ws_hat;
-
+  L = Ls_hat;
 
   % plot mesh
   clf;
