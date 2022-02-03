@@ -215,12 +215,12 @@ function out = run()
   for ky=1:length(ss.shearY_chat)
     for kz=1:length(ss.shearZ_chat)
 
-      if (ky==10) & (kz==10)
-        disp((kz-1)*ss.Ny+ky)
-        disp(shearZ(kz))
-        disp(L(ky))
-        disp(W(kz))
-      end
+      %if (ky==10) & (kz==10)
+      %  disp((kz-1)*ss.Ny+ky)
+      %  disp(shearZ(kz))
+      %  disp(L(ky))
+      %  disp(W(kz))
+      %end
 
       % stress at center of shear zones
       ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ(kz), L(ky), W(kz), ...
@@ -419,7 +419,7 @@ function out = run()
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
@@ -473,7 +473,7 @@ function out = run()
   saveas(gcf, 'figures/BP1vD_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=false;
+  Smovie=true;
   if Smovie
     disp('begin shear movie')
     clf;
@@ -499,7 +499,7 @@ function out = run()
   disp('shear movie done')
   end
 
-  Fmovie=false;
+  Fmovie=true;
   if Fmovie
     % fault movie
     disp('begin fault movie')
