@@ -83,6 +83,8 @@ function r = build()
     Lshear_hat(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
     Wshear_hat(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
   end
+  Lshear_hat(end) = L(1);
+  Wshear_hat(end) = probW - shearZ_hat(end);
 
   % grid and flatten
   shearZhat(end)=[]; shearYhat(end)=[];
