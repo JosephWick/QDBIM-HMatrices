@@ -157,11 +157,11 @@ function out = run()
 
   % grid and flatten
   shearZhat(end)=[]; shearYhat(end)=[];
-  [shearZ shearY] = ndgrid(shearZhat, shearYhat);
+  [shearY shearZ] = ndgrid(shearYhat, shearZhat);
   shearY = shearY(:)';
   shearZ = shearZ(:)';
 
-  [shearZ_c shearY_c] = ndgrid(ss.shearZ_chat, ss.shearY_chat);
+  [shearY_c shearZ_c] = ndgrid(ss.shearY_chat, ss.shearZ_chat);
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
 
@@ -214,13 +214,6 @@ function out = run()
   % fields from shear zones
   for ky=1:length(ss.shearY_chat)
     for kz=1:length(ss.shearZ_chat)
-
-      %if (ky==10) & (kz==10)
-      %  disp((kz-1)*ss.Ny+ky)
-      %  disp(shearZ(kz))
-      %  disp(L(ky))
-      %  disp(W(kz))
-      %end
 
       % stress at center of shear zones
       ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZ(kz), L(ky), W(kz), ...
