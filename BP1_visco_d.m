@@ -169,7 +169,9 @@ function out = run()
   clf;
   hold on;
   scatter(shearY, -1*shearZ, 0.25, 'red');
-  scatter(faultY, -1*faultZ, 0.25, 'red')
+  scatter(faultY, -1*faultZ, 0.25, 'red');
+  scatter(shearY_c, -1*shearZ_c, 0.25, 'blue');
+  scatter(faultY_c, -1*faultZ_c, 0.25, 'blue');
   hold off;
   saveas(gcf, 'figures/BP1vD_mesh.png');
 
