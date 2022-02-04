@@ -144,15 +144,15 @@ function out = run()
   ss.shearZ_chat = zeros(1,ss.Nz);
 
   % sizing
-  Ls_hat = zeros(1,ss.Ny);
-  Ws_hat = zeros(1,ss.Nz);
+  L = zeros(1,ss.Ny);
+  W = zeros(1,ss.Nz);
 
   for idx=(1:length(shearZhat)-1)
     ss.shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
     ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
 
-    Ls_hat(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
-    Ws_hat(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
+    L(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
+    W(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
   end
 
   % grid and flatten
@@ -164,9 +164,6 @@ function out = run()
   [shearY_c shearZ_c] = ndgrid(ss.shearY_chat, ss.shearZ_chat);
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
-
-  W = Ws_hat;
-  L = Ls_hat;
 
   % plot mesh
   clf;
