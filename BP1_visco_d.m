@@ -155,7 +155,7 @@ function out = run()
     W(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
   end
   L(end) = L(1);
-  W(end) = probW - shearZhat(end);
+  W(end) = abs(shearZhat(end-1) - shearZhat(end));
 
   % grid and flatten
   shearZhat(end)=[]; shearYhat(end)=[];
