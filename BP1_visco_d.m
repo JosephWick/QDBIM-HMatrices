@@ -216,7 +216,7 @@ function out = run()
   for ky=1:length(ss.shearY_chat)
     for kz=1:length(ss.shearZ_chat)
 
-      if (ky == 1) & (kz == 27)
+      if (ky == 1) & (kz == 51)
         disp( (kz-1)*ss.Ny+ky )
         disp(L(ky))
         disp(W(kz))
