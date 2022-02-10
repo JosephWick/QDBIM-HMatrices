@@ -216,17 +216,6 @@ function out = run()
   for ky=1:length(ss.shearY_chat)
     for kz=1:length(ss.shearZ_chat)
 
-      if (ky == 27) & (kz == 1)
-        disp( (kz-1)*ss.Ny+ky )
-        disp(L(ky))
-        disp(W(kz))
-        disp(shearZhat(kz))
-        tmp = shearY_c'-shearYhat(ky)';
-        disp( tmp(42) )
-        disp( shearZ_c(42))
-        disp(ss.ss1212(42,(kz-1)*ss.Ny+ky))
-      end
-
       % stress at center of shear zones
       ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZhat(kz), L(ky), W(kz), ...
         shearY_c'-shearYhat(ky)', shearZ_c');
@@ -242,6 +231,17 @@ function out = run()
         0-shearYhat(ky)', ss.fpTops+ss.dz/2);
       ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZhat(kz), L(ky), W(kz), ...
         0-shearYhat(ky)', ss.fpTops+ss.dz/2);
+
+        if (ky == 27) & (kz == 1)
+          disp( (kz-1)*ss.Ny+ky )
+          disp(L(ky))
+          disp(W(kz))
+          disp(shearZhat(kz))
+          tmp = shearY_c'-shearYhat(ky)';
+          disp( tmp(42) )
+          disp( shearZ_c(42))
+          disp(ss.ss1212(42,(kz-1)*ss.Ny+ky))
+        end
 
     end
   end
