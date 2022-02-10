@@ -224,7 +224,7 @@ function out = run()
         tmp = shearY_c'-shearYhat(ky)';
         disp( tmp(42) )
         disp( shearZ_c(42))
-        disp(ss.ss1212(42,(kz-1)*ss.ny+ky))
+        disp(ss.ss1212(42,(kz-1)*ss.Ny+ky))
       end
 
       % stress at center of shear zones
