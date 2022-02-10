@@ -232,7 +232,7 @@ function out = run()
       ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZhat(kz), L(ky), W(kz), ...
         0-shearYhat(ky)', ss.fpTops+ss.dz/2);
 
-        if (ky == 1) & (kz == 51)
+        if (ky == 51) & (kz == 1)
           disp( (kz-1)*ss.Ny+ky )
           disp(L(ky))
           disp(W(kz))
