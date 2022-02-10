@@ -221,7 +221,8 @@ function out = run()
         disp(L(ky))
         disp(W(kz))
         disp(shearZhat(kz))
-        disp( (shearY_c'-shearYhat(ky)')(42) )
+        tmp = shearY_c'-shearYhat(ky)'
+        disp( tmp(42) )
         disp( shearZ_c'(42))
         disp(ss.ss1212(42,(kz-1)*ss.ny+ky))
       end
