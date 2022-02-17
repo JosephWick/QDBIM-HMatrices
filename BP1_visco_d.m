@@ -232,16 +232,16 @@ function out = run()
       ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZhat(kz), L(ky), W(kz), ...
         0-shearYhat(ky)', ss.fpTops+ss.dz/2);
 
-        if (ky == 51) & (kz == 51)
-          disp( (kz-1)*ss.Ny+ky )
-          disp(L(ky))
-          disp(W(kz))
-          disp(shearZhat(kz))
-          tmp = shearY_c'-shearYhat(ky)';
-          disp( tmp(42) )
-          disp( shearZ_c(42))
-          disp(ss.ss1212(42,(kz-1)*ss.Ny+ky))
-        end
+        %if (ky == 51) & (kz == 51)
+        %  disp( (kz-1)*ss.Ny+ky )
+        %  disp(L(ky))
+        %  disp(W(kz))
+        %  disp(shearZhat(kz))
+        %  tmp = shearY_c'-shearYhat(ky)';
+        %  disp( tmp(42) )
+        %  disp( shearZ_c(42))
+        %  disp(ss.ss1212(42,(kz-1)*ss.Ny+ky))
+        %end
 
     end
   end
