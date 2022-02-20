@@ -206,8 +206,8 @@ function out = run()
     ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
 
     % stress at center of shear zones
-    ss.sf12(:,k)=s12h(shearY_c', shearZ_c', zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
-    ss.sf13(:,k)=s13h(shearY_c', shearZ_c', zeros(ss.Ny*ss.Nz,1), ss.fpTops(k), Wf(k));
+    ss.sf12(:,k)=s12h(shearY_c', shearZ_c', zeros(ss.M,1), ss.fpTops(k), Wf(k));
+    ss.sf13(:,k)=s13h(shearY_c', shearZ_c', zeros(ss.M,1), ss.fpTops(k), Wf(k));
 
   end
 
@@ -427,7 +427,7 @@ function out = run()
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
