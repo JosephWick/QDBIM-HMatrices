@@ -104,10 +104,10 @@ e13p = tau13 .* Aeff;
 %disp(hmmvp('getm', hm.fs1212))
 
 t1 = hmmvp('mvp', hm.s12, V-ss.Vpl);
-%t2 = hmmvp('mvp', hm.fs1212, e12p - ss.e12p_plate);
+t2 = hmmvp('mvp', hm.fs1212, e12p - ss.e12p_plate);
 %t3 = hmmvp('mvp', hm.fs1312, e13p - ss.e13p_plate);
 
-F = t1;% + t2 + t3;
+F = t1 + t2;% + t3;
 
 f1 = 2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2 = 1./sqrt(1+f1.^2);
