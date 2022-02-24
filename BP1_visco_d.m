@@ -453,8 +453,8 @@ function out = run()
      ss.dgfS+4:ss.dgfS*length(ss.shearY_chat):end)'.^2);
 
   % strain rate over whole ductile area
-  Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
-               Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
+  %Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
+  %             Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
 
   Epall = Y(:,ss.M*ss.dgfF+1:ss.dgfS:end)';
 
