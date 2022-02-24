@@ -394,6 +394,13 @@ function out = run()
   ss.e120 = zeros(size(ss.s120));
   ss.e130 = zeros(size(ss.s120));
 
+  % artificial strain test
+  % size(ss.e120) -> (Nx x Ny) x 1
+  ast=true;
+  if ast
+    ss.e120(1300) = 5e-13;
+  end
+
   % characteristic weakening distance (m)
   ss.L = 0.008;
 
