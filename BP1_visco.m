@@ -375,6 +375,9 @@ function r = build()
   ss.e120 = zeros(size(ss.s120));
   ss.e130 = zeros(size(ss.s120));
 
+  % artificial strain test
+  disp(size(ss.e120))
+
   % characteristic weakening distance (m)
   ss.L = 0.008;
 
