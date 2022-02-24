@@ -377,7 +377,7 @@ function r = build()
 
   % artificial strain test
   % size(ss.e120) -> (Nx x Ny) x 1
-  ast=true;
+  ast=false;
   if ast
     ss.e120(1300) = 5e-13;
   end
