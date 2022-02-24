@@ -379,7 +379,7 @@ function r = build()
   % size(ss.e120) -> (Nx x Ny) x 1
   ast=true;
   if ast
-    e120(1300) = 10;
+    ss.e120(1300) = 10;
   end
 
   % characteristic weakening distance (m)
