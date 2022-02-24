@@ -398,7 +398,7 @@ function out = run()
   % size(ss.e120) -> (Nx x Ny) x 1
   ast=true;
   if ast
-    ss.s120(1300) = ss.s120(1300)+5;
+    ss.e120(1300) = ss.e120(1300)+1e-13;
   end
 
   % characteristic weakening distance (m)
@@ -455,6 +455,8 @@ function out = run()
   % strain rate over whole ductile area
   Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
                Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
+
+  Epall = Y(:,ss.M*ss.dgfF+1:ss.dgfS:end)';
 
   % ---       Figures        ---
   %disp(size(r.ss.Vo
