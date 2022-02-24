@@ -193,6 +193,19 @@ function r = build()
   disp(cmd)
   r.ss1313 = c.write_hmat_filename;
 
+  % ---       euclidean distance kernel for sanity check          ---
+  edk = true;
+  if edk
+    c.greens_fn = 'test';
+    c.write_hmat_filename = './tmp/BP1v_test';
+    c.write_hd_filename = './tmp/BP1v_test-hd';
+    c.kvf = [c.write_hmat_filename '.kvf'];
+    kvf('Write', c.kvf, c, 32);
+    cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp  ' c.kvf];
+    disp(cmd)
+    r.hmtest = c.write_hmat_filename;
+  end
+
   % ---       shear 1212 kernels for fault-shear interaction      ---
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearXhat; shearYhat; shearZhat'];
