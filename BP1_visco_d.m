@@ -401,14 +401,11 @@ function out = run()
     ss.e120(1300) = ss.e120(1300)+1e-13;
   end
 
-  % characteristic weakening distance (m)
-  ss.L = 0.008;
-
   ss.dgfF = 4;
   ss.dgfS = 4;
 
   % state vector init
-  Y0=zeros(ss.M*ss.dgfF+length(ss.shearY_chat)*length(ss.shearZ_chat)*ss.dgfS,1);
+  Y0=zeros(ss.M*ss.dgfF + ss.Ny*ss.Nz*ss.dgfS,1);
 
   % Fault patches
   Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(ss.M,1);
@@ -434,11 +431,11 @@ function out = run()
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 100*3.15e7],Y0,options);
+  [t,Y]=ode45(yp,[0 100*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
-  Y=Y'; %necessary for ode45_2
+  %Y=Y'; %necessary for ode45_2
 
   % ---       Figures        ---
   % instantaneous derivative
