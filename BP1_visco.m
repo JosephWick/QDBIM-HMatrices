@@ -144,7 +144,7 @@ function r = build()
   c.Nz = ss.Nz;
 
   c.transition = ss.transition;
-  c.Y = [shearXhat; shearYhat; shearZhat'];
+  c.Y = [shearXhat; shearY_chat; shearZhat'];
   c.X = [shearX_c; shearY_c; shearZ_c];
 
   c.Z = [shearX; shearY; shearZ]; % for sizing purposes only
@@ -208,7 +208,7 @@ function r = build()
 
   % ---       shear 1212 kernels for fault-shear interaction      ---
   c.X = [faultX_c; faultY_c; faultZ_c];
-  c.Y = [shearXhat; shearYhat; shearZhat'];
+  c.Y = [shearXhat; shearY_chat; shearZhat'];
   c.Z = [shearX; shearY; shearZ]; % hm sizing purposes only
 
   c.L = Lshear;
