@@ -109,7 +109,7 @@ function out = run()
   ss.M = 400; %number of fault cells
   ss.dz = ss.lambdaZ/ss.M;
 
-  ss.transition = 45e3;
+  ss.transition = 35e3;
   ss.Ny = 51;
   ss.Nz = 51;
   ss.Nx = ss.Nz;
