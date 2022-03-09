@@ -175,6 +175,7 @@ function out = run()
 
   % center of shear zone (x2)
   %ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
+  nc = (-ss.Nz/2:ss.Nz/2);
   ss.x2c = tan(nc*pi/(2.5*max(nc)))*32e3;
 
 
