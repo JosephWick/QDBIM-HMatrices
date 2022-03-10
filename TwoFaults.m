@@ -479,6 +479,10 @@ function out = run()
   Ep=sqrt(Yp(:,2*ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS*length(ss.x2c):end)'.^2 +...
           Yp(:,2*ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS*length(ss.x2c):end)'.^2);
 
+  % strain rate over whole ductile area
+  Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
+               Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
+
   % Velocity
   V_W=Yp(:,1:ss.dgfF:ss.M*ss.dgfF);
   V_E=Yp(:,ss.M*ss.dgfF+1:ss.dgfF:2*ss.M*ss.dgfF);
@@ -491,106 +495,37 @@ function out = run()
       VEmax(ts)=max(V_E(ts,:));
   end
 
-  %%
-  % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-  %                    Function of Time                   %
-  % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-  figure(1);clf;set(gcf,'name','Time Evolution')
-  f1=subplot(5,1,1);cla;
-  pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V_W')), shading flat
-  set(gca,'YDir','reverse');
-
-  h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V_W))) max(max(log10(V_W)))]);
-  colormap(f1,parula);
-  title(h,'Slip Rate West (m/s)')
-  xlabel('Time (yr)')
-  ylabel('Depth (km)');
-
-  f2=subplot(5,1,2);cla;
-  pcolor(t(1:end-1)/3.15e7,ss.y3f/1e3,log10(V_E')), shading flat
-  set(gca,'YDir','reverse');
-
-  h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V_W))) max(max(log10(V_W)))]);
-  colormap(f2,parula);
-  title(h,'Slip Rate East (m/s)')
-  xlabel('Time (yr)')
-  ylabel('Depth (km)');
-
-  f3=subplot(5,1,3);cla;
-  pcolor(t(1:end-1)/3.15e7,ss.x3c/1e3,log10(Ep)), shading flat
-  set(gca,'YDir','reverse');
-
-  caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
-  h1=colorbar('Location','NorthOutside');
-  colormap(f3,hot);
-  title(h1,'Strain Rate (1/s)')
-  xlabel('Time (Yr)')
-  ylabel('Depth (km)');
-
-  subplot(5,1,4);cla;
-  plot(t(1:end-1)/3.15e7,log10(VWmax),t(1:end-1)/3.15e7,log10(VEmax))
-  xlabel('Time (Yr)')
-  ylabel('Velocity (m/s) log10')
-  title('Maximum slip rates on faults')
-
-  subplot(5,1,5);cla;
-  plot(t(1:end-1)/3.15e7,log10(V_W(:,floor((topW+bottomW)/2))),...
-       t(1:end-1)/3.15e7,log10(V_E(:,floor((topE+bottomE)/2))))
-  xlabel('Time (Yr)')
-  ylabel('Velocity (m/s) log10')
-  title('Time series at center of seismogenic zones')
-
-  % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-  %                Function of Time Steps                 %
-  % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-  f1=figure(2);clf;set(gcf,'name','Time Step Evolution')
-
-  subplot(5,1,1);cla;
-  pcolor(1:length(t)-1,ss.y3f/1e3,log10(V_W')), shading flat
-  set(gca,'YDir','reverse');
-
-  h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V_W))) max(max(log10(V_W)))]);
-  colormap(f1,parula);
-  title(h,'Slip Rate West (m/s)')
+  clf;
+  imagesc(log10(Ep)); colorbar;
+  title('Strain Rate of Center of Ductile Region')
   xlabel('Time Steps')
-  ylabel('Depth (km)');
+  ylabel('Block')
+  saveas(gcf, 'figures/2F_strainCenter.png')
 
-  f2=subplot(5,1,2);cla;
-  pcolor(1:length(t)-1,ss.y3f/1e3,log10(V_E')), shading flat
-  set(gca,'YDir','reverse');
+  Smovie=true;
+  if Smovie
+    disp('begin shear movie')
+    clf;
+    fig = figure;
+    fname = 'figures/2F_strain.gif';
+    for idx = 1:size(Epall, 2)
+      oneE = Epall(:,idx);
+      oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
+      imagesc(oneEsq); colorbar;
+      title(idx)
+      drawnow
+      frame = getframe(fig);
+      im{idx} = frame2im(frame);
 
-  h=colorbar('Location','NorthOutside');
-  caxis([min(min(log10(V_W))) max(max(log10(V_W)))]);
-  colormap(f2,parula);
-  title(h,'Slip Rate East (m/s)')
-  xlabel('Time Steps')
-  ylabel('Depth (km)');
+      [A,map] = rgb2ind(im{idx},256);
+      if idx==1
+        imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+      else
+        imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+      end
 
-  f3=subplot(5,1,3);cla;
-  pcolor(1:length(t)-1,ss.x3c/1e3,log10(Ep)), shading flat
-  set(gca,'YDir','reverse');
-
-  caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
-  h1=colorbar('Location','NorthOutside');
-  colormap(f3,hot);
-  title(h1,'Strain Rate (1/s)')
-  xlabel('Time Steps')
-  ylabel('Depth (km)');
-
-  subplot(5,1,4);cla;
-  plot(1:length(t)-1,log10(VWmax),1:length(t)-1,log10(VEmax))
-  xlabel('Time Steps')
-  ylabel('Velocity (m/s) log10')
-  title('Maximum slip rates on faults')
-
-  subplot(5,1,5);cla;
-  plot(1:length(t)-1,log10(V_W(:,floor((topW+bottomW)/2))),...
-       1:length(t)-1,log10(V_E(:,floor((topE+bottomE)/2))))
-  xlabel('Time Steps')
-  ylabel('Velocity (m/s) log10')
-  title('Time series at center of seismogenic zones')
+    end
+  disp('shear movie done')
+  end
 
 end
