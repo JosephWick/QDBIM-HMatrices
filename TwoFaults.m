@@ -515,7 +515,6 @@ function out = run()
   pcolor(t(1:end-1)/3.15e7,ss.x3c/1e3,log10(Ep)), shading flat
   set(gca,'YDir','reverse');
 
-  disp(size(Ep))
   caxis([log10(min(min(Ep))) log10(max(max(Ep)))]);
   h1=colorbar('Location','NorthOutside');
   colormap(f3,hot);
