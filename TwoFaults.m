@@ -403,6 +403,13 @@ function out = run()
   e120 = zeros(size(s120));
   e130 = zeros(size(s120));
 
+  % artificial strain test
+  % size(ss.e120) -> (Nx x Ny) x 1
+  ast=true;
+  if ast
+    ss.e120(1300) = ss.e120(1300)+1e-13;
+  end
+
   % Fault Strength
   ss.strength_E = ss.sigmab.*(ss.mu0+(ss.aE-ss.bE).*log(ss.V_plate./ss.Vo))+G*ss.V_plate./(2*ss.Vs);
   ss.strength_W = ss.sigmab.*(ss.mu0+(ss.aW-ss.bW).*log(ss.V_plate./ss.Vo))+G*ss.V_plate./(2*ss.Vs);
