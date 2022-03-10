@@ -214,6 +214,7 @@ function out = run()
   %disp(size(ss.fs1212))
 
   % fields from shear zones
+  % fills entire columns at a time. ie all strain from a given source
   for ky=1:length(ss.shearY_chat)
     for kz=1:length(ss.shearZ_chat)
 
