@@ -510,7 +510,6 @@ function out = run()
     fname = 'figures/2F_strain.gif';
     for idx = 1:size(Epall, 2)
       oneE = Epall(:,idx);
-      disp(size(oneE))
       oneEsq = reshape(oneE, [ss.Nx, ss.Nz]);
       imagesc(oneEsq); colorbar;
       title(idx)
