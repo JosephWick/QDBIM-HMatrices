@@ -460,7 +460,7 @@ function out = run()
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 10*3.15e7],Y0,options);
+  [t,Y]=ode45(yp,[0 100*3.15e7],Y0,options);
   toc
   %%
   % Compute the instantaneous derivative
@@ -510,7 +510,7 @@ function out = run()
     fname = 'figures/2F_strain.gif';
     for idx = 1:size(Epall, 2)
       oneE = Epall(:,idx);
-      oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
+      oneEsq = reshape(oneE, [ss.Nx, ss.Nz]);
       imagesc(oneEsq); colorbar;
       title(idx)
       drawnow
