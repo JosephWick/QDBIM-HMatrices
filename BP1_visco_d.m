@@ -227,7 +227,7 @@ function out = run()
   % adapt naming convention
   shearZhat = ss.polesz;
   shearY_c = xx2c;
-  ss.shearY_chat = ss.x2c;
+  ss.shearY_chat = ss.x2c(:);
   shearZ_c = xx3c;
 
 
