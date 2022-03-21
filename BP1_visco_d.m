@@ -225,7 +225,7 @@ function out = run()
   xx2c=repmat(ss.x2c,1,length(ss.x3c));              % center
 
   % adapt naming convention
-  shearZhat = polesz;
+  shearZhat = ss.polesz;
   shearY_c = xx2c;
   ss.shearY_chat = ss.x2c;
   shearZ_c = xx3c;
