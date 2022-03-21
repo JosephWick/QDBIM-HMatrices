@@ -167,13 +167,14 @@ function out = run()
   xx3c=repmat(ss.x3c',ss.Nx,1);              % centers
 
   % edges along x2
-  %ss.polesxc=(2*y2_W/1e3:(2*y2_E-2*y2_W)/(26e3):2*y2_E/1e3)'*1e3;
-  %edges= floor(ss.Nx-length(ss.polesxc)+1)/2;
-  %ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition);
-  %ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition;
-  %ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
-  nc = (-ss.Nz/2:ss.Nz/2);
-  ss.polesx = tan(nc*pi/(2.5*max(nc)))*32e3;
+  ss.polesxc=(2*y2_W/1e3:(2*y2_E-2*y2_W)/(26e3):2*y2_E/1e3)'*1e3;
+  edges= floor(ss.Nx-length(ss.polesxc)+1)/2;
+  ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition);
+  ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition;
+  ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
+  % inserting bp1v y hat mesh
+  %nc = (-ss.Nz/2:ss.Nz/2);
+  %ss.polesx = tan(nc*pi/(2.5*max(nc)))*32e3;
 
   % center of shear zone (x2)
   ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
