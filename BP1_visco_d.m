@@ -8,7 +8,7 @@ function varargout = bp1vD (varargin)
 end
 
 % ----------------------------------- Public ---------------------------------
-function out = run()
+function b = build()
 
   % ---     Kernels & functions      ---
 
@@ -318,15 +318,15 @@ function out = run()
 
   %disp(size(ss.fs1212))
 
-  out.ff12 = ss.ff12;
-  out.ss1212 = ss.ss1212;
-  out.ss1213 = ss.ss1213;
-  out.ss1312 = ss.ss1312;
-  out.ss1313 = ss.ss1313;
-  out.sf12 = ss.sf12;
-  out.sf13 = ss.sf13;
-  out.fs1212 = ss.fs1212;
-  out.fs1312 = ss.fs1312;
+  b.ff12 = ss.ff12;
+  b.ss1212 = ss.ss1212;
+  b.ss1213 = ss.ss1213;
+  b.ss1312 = ss.ss1312;
+  b.ss1313 = ss.ss1313;
+  b.sf12 = ss.sf12;
+  b.sf13 = ss.sf13;
+  b.fs1212 = ss.fs1212;
+  b.fs1312 = ss.fs1312;
 
   % figure for ff12 kernel
   %clf;
@@ -334,6 +334,10 @@ function out = run()
   %saveas(gcf, 'figures/BP1vD_ff12.png')
 
   disp('kernels created')
+
+end
+
+function out = run(b)
 
   % ---     Rheology      ---
   % Confining pressure (MPa) and Temperature (K)
