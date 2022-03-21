@@ -227,8 +227,10 @@ function out = run()
   % adapt naming convention
   shearZhat = ss.polesz;
   shearY_c = xx2c;
-  ss.shearY_chat = ss.x2c(:);
   shearZ_c = xx3c;
+  ss.shearY_chat = ss.x2c;
+  ss.shearZ_chat = ss.x3c;
+
 
 
   % TWOFAULTS MESH END
@@ -269,11 +271,11 @@ function out = run()
   % fields from faults
   for k=1:ss.M
     % stress at center of fault patches
-    ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
+    %ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
 
     % stress at center of shear zones
-    ss.sf12(:,k)=s12h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
-    ss.sf13(:,k)=s13h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
+    %ss.sf12(:,k)=s12h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
+    %ss.sf13(:,k)=s13h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
 
   end
 
