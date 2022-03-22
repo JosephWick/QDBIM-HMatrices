@@ -493,6 +493,8 @@ function out = run()
   Epall = sqrt( Yp(:,2*ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
                Yp(:,2*ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
 
+  Epall = Y(:,ss.M*ss.dgfF+1:ss.dgfS:end)' - ss.s120;
+
   % Velocity
   V_W=Yp(:,1:ss.dgfF:ss.M*ss.dgfF);
   V_E=Yp(:,ss.M*ss.dgfF+1:ss.dgfF:2*ss.M*ss.dgfF);
@@ -512,7 +514,7 @@ function out = run()
   ylabel('Block')
   saveas(gcf, 'figures/2F_strainCenter.png')
 
-  Smovie=false;
+  Smovie=true;
   if Smovie
     disp('begin shear movie')
     clf;
