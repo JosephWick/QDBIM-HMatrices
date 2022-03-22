@@ -515,7 +515,7 @@ function out = run()
   disp('shear movie done')
   end
 
-  Fmovie=false;
+  Fmovie=true;
   if Fmovie
     % fault movie
     disp('begin fault movie')
