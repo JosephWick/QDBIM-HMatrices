@@ -173,8 +173,8 @@ function out = run()
   ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition;
   ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
   % inserting bp1v y hat mesh
-  %nc = (-ss.Nz/2:ss.Nz/2);
-  %ss.polesx = tan(nc*pi/(2.5*max(nc)))*32e3;
+  nc = (-ss.Nz/2:ss.Nz/2);
+  ss.polesx = tan(nc*pi/(2.5*max(nc)))*32e3;
 
   % center of shear zone (x2)
   ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;

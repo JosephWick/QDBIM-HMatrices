@@ -8,7 +8,7 @@ function varargout = bp1vD (varargin)
 end
 
 % ----------------------------------- Public ---------------------------------
-function b = build()
+function out = run()
 
   % ---     Kernels & functions      ---
 
@@ -168,83 +168,15 @@ function b = build()
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
 
-  % TWOFAULTS MESH BEGIN
-
-  y2_W=-25e3;
-  y3=0e3;
-
-  % East Fault (m)
-  y2_E=25e3;
-
-  % Brittle-Ductile Tranisition Depth (m)
-  Transition=35e3;
-
-  % Number of patches
-  ss.M=120;
-
-  dz=Transition/ss.M;
-  fpoles=y3+(0:ss.M)'*dz;
-  % Tops of fault patches
-  ss.y3f=fpoles(1:end-1);
-  % Width of fault patches
-  Wf=ones(ss.M,1)*dz;
-  %%
-  % Shear Zone Mesh
-  ss.Nx=50;
-  ss.Nz=50;
-  eps=1e-12;
-
-  % Shear zone Grid
-  % edges along x3
-  ss.polesz=Transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*Transition;
-
-  % center of shear zone (x3)
-  ss.x3c=(ss.polesz(2:end)+ss.polesz(1:end-1))/2;
-
-  % shear zone width
-  W=ss.polesz(2:end)-ss.polesz(1:end-1);
-
-  xx3t=repmat(ss.polesz(1:end-1)',ss.Nx,1);  % tops
-  xx3b=repmat(ss.polesz(2:end)',  ss.Nx,1);  % bottoms
-  xx3c=repmat(ss.x3c',ss.Nx,1);              % centers
-
-  % edges along x2
-  ss.polesxc=(2*y2_W/1e3:(2*y2_E-2*y2_W)/(26e3):2*y2_E/1e3)'*1e3;
-  edges= floor(ss.Nx-length(ss.polesxc)+1)/2;
-  ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition);
-  ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition;
-  ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
-
-  % center of shear zone (x2)
-  ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
-
-  % shear zone length
-  L=ss.polesx(2:end)-ss.polesx(1:end-1);
-  xx2l=repmat(ss.polesx(1:end-1),1,length(ss.x3c));  % left edge
-  xx2r=repmat(ss.polesx(2:end),  1,length(ss.x3c));  % right edge
-  xx2c=repmat(ss.x2c,1,length(ss.x3c));              % center
-
-  % adapt naming convention
-  shearZhat = ss.polesz;
-  shearY_c = xx2c(:)';
-  shearZ_c = xx3c(:)';
-  ss.shearY_chat = ss.x2c';
-  ss.shearZ_chat = ss.x3c';
-
-
-
-  % TWOFAULTS MESH END
-
-
   % plot mesh
   clf;
-  %hold on;
-  %scatter(shearY, -1*shearZ, 0.25, 'red');
-  %scatter(faultY, -1*faultZ, 0.25, 'red');
-  %scatter(shearY_c, -1*shearZ_c, 0.25, 'blue');
-  %scatter(faultY_c, -1*faultZ_c, 0.25, 'blue');
-  %hold off;
-  %saveas(gcf, 'figures/BP1vD_mesh.png');
+  hold on;
+  scatter(shearY, -1*shearZ, 0.25, 'red');
+  scatter(faultY, -1*faultZ, 0.25, 'red');
+  scatter(shearY_c, -1*shearZ_c, 0.25, 'blue');
+  scatter(faultY_c, -1*faultZ_c, 0.25, 'blue');
+  hold off;
+  saveas(gcf, 'figures/BP1vD_mesh.png');
 
   disp('mesh created')
 
@@ -271,11 +203,11 @@ function b = build()
   % fields from faults
   for k=1:ss.M
     % stress at center of fault patches
-    %ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
+    ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
 
     % stress at center of shear zones
-    %ss.sf12(:,k)=s12h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
-    %ss.sf13(:,k)=s13h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
+    ss.sf12(:,k)=s12h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
+    ss.sf13(:,k)=s13h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
 
   end
 
@@ -318,15 +250,15 @@ function b = build()
 
   %disp(size(ss.fs1212))
 
-  b.ff12 = ss.ff12;
-  b.ss1212 = ss.ss1212;
-  b.ss1213 = ss.ss1213;
-  b.ss1312 = ss.ss1312;
-  b.ss1313 = ss.ss1313;
-  b.sf12 = ss.sf12;
-  b.sf13 = ss.sf13;
-  b.fs1212 = ss.fs1212;
-  b.fs1312 = ss.fs1312;
+  out.ff12 = ss.ff12;
+  out.ss1212 = ss.ss1212;
+  out.ss1213 = ss.ss1213;
+  out.ss1312 = ss.ss1312;
+  out.ss1313 = ss.ss1313;
+  out.sf12 = ss.sf12;
+  out.sf13 = ss.sf13;
+  out.fs1212 = ss.fs1212;
+  out.fs1312 = ss.fs1312;
 
   % figure for ff12 kernel
   %clf;
@@ -335,9 +267,6 @@ function b = build()
 
   disp('kernels created')
 
-end
-
-function out = run(b)
 
   % ---     Rheology      ---
   % Confining pressure (MPa) and Temperature (K)
