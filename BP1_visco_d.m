@@ -489,7 +489,7 @@ function out = run()
   saveas(gcf, 'figures/BP1vD_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=false;
+  Smovie=true;
   if Smovie
     disp('begin shear movie')
     clf;
@@ -515,7 +515,7 @@ function out = run()
   disp('shear movie done')
   end
 
-  Fmovie=true;
+  Fmovie=false;
   if Fmovie
     % fault movie
     disp('begin fault movie')
