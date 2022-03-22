@@ -400,6 +400,7 @@ function out = run()
   % size(ss.e120) -> (Nx x Ny) x 1
   ast=true;
   if ast
+    idx = 1000
     ss.e120(1300) = ss.e120(1300)+1e-13;
   end
 
