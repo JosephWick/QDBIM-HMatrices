@@ -223,6 +223,10 @@ function out = run()
 
   ss.ku1W=zeros(length(x2GPS),ss.M);
   ss.ku1E=zeros(length(x2GPS),ss.M);
+
+  disp('mesh created')
+  disp('building kernels...')
+
   % Fields from Faults
   for k=1:ss.M
       % we evaluate the stress at the center of the shear zones
@@ -293,6 +297,8 @@ function out = run()
   out.ss1312 = ss.k1312;
   out.ss1213 = ss.k1213;
   out.ss1313 = ss.k1313;
+
+  disp('kernels done')
 
   %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
   %                                                      %
@@ -457,11 +463,13 @@ function out = run()
 
   % initialize the function handle with
   % set constitutive parameters
+  disp('begin solving...')
   yp=@(t,y) ode2Faults(t,y,ss);
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
   [t,Y]=ode45(yp,[0 100*3.15e7],Y0,options);
+  disp('done')
   toc
   %%
   % Compute the instantaneous derivative
