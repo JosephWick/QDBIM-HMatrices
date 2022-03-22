@@ -415,7 +415,8 @@ function out = run()
   % size(ss.e120) -> (Nx x Ny) x 1
   ast=true;
   if ast
-    e120(1300) = e120(1300)+1e-13;
+    idx = 1000
+    e120(idx) = e120(idx)+1e-13;
   end
 
   % Fault Strength
