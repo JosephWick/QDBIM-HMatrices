@@ -413,7 +413,7 @@ function out = run()
 
   % artificial strain test
   % size(ss.e120) -> (Nx x Ny) x 1
-  ast=true;
+  ast=false;
   if ast
     idx = 1000;
     e120(idx) = e120(idx)+1e-13;
