@@ -516,14 +516,14 @@ function out = run()
   saveas(gcf, 'figures/2F_strainCenter.png')
 
   clf;
-  imagesc(log10(y.V_W)); colorbar;
+  imagesc(log10(V_W)); colorbar;
   title('Slip Rate')
   xlabel('time steps')
   ylabel('fault mesh block')
   saveas(gcf, 'figures/2f_slipW.png')
 
   clf;
-  imagesc(log10(y.V_E)); colorbar;
+  imagesc(log10(V_E)); colorbar;
   title('Slip Rate')
   xlabel('time steps')
   ylabel('fault mesh block')
