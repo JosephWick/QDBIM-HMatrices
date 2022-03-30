@@ -515,6 +515,20 @@ function out = run()
   ylabel('Block')
   saveas(gcf, 'figures/2F_strainCenter.png')
 
+  clf;
+  imagesc(log10(y.V_W)); colorbar;
+  title('Slip Rate')
+  xlabel('time steps')
+  ylabel('fault mesh block')
+  saveas(gcf, 'figures/2f_slipW.png')
+
+  clf;
+  imagesc(log10(y.V_E)); colorbar;
+  title('Slip Rate')
+  xlabel('time steps')
+  ylabel('fault mesh block')
+  saveas(gcf, 'figures/2f_slipE.png')
+
   Smovie=true;
   if Smovie
     disp('begin shear movie')
