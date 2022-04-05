@@ -275,7 +275,7 @@ function out = run()
 
     % stress at center of shear zones
     ss.sf12(:,k)=s12h(shearY_c(:), shearZ_c', y2_W, ss.fpTops(k), Wf(k));
-    ss.sf13(:,k)=s13h(shearY_c, shearZ_c', y2_W, ss.fpTops(k), Wf(k));
+    ss.sf13(:,k)=s13h(shearY_c(:), shearZ_c', y2_W, ss.fpTops(k), Wf(k));
 
   end
 
