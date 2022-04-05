@@ -441,7 +441,7 @@ function out = run()
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 100*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
@@ -498,7 +498,7 @@ function out = run()
   saveas(gcf, 'figures/BP1vD_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=true;
+  Smovie=false;
   if Smovie
     disp('begin shear movie')
     clf;
