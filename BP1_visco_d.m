@@ -263,7 +263,6 @@ function out = run()
 
   out.p.shearYc = shearY_c';
   out.p.shearZc = shearZ_c';
-  out.p.yloc = y2_W;
   out.p.fpTops = ss.fpTops;
   out.p.w = Wf;
 
