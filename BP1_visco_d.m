@@ -191,7 +191,7 @@ function out = run()
   Wf=ones(ss.M,1)*dz;
   %%
   % Shear Zone Mesh
-  ss.Nx=50;
+  ss.Nx=51;
   ss.Nz=50;
   eps=1e-12;
 
@@ -565,7 +565,7 @@ function out = run()
   saveas(gcf, 'figures/BP1vD_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=false;
+  Smovie=true;
   if Smovie
     disp('begin shear movie')
     clf;
