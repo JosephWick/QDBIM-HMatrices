@@ -266,7 +266,7 @@ function out = run()
   ss.fs1212 = zeros(length(ss.fpTops), ss.Ny*ss.Nz);
   ss.fs1312 = zeros(length(ss.fpTops), ss.Ny*ss.Nz);
 
-  % TODO: edit y2_W back to zero 
+  % TODO: edit y2_W back to zero
   disp('beginning kernels')
   % fields from faults
   for k=1:ss.M
@@ -502,7 +502,7 @@ function out = run()
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5);
-  [t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
