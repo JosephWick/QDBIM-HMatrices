@@ -298,7 +298,7 @@ function out = run()
   out.ss1312 = ss.k1312;
   out.ss1213 = ss.k1213;
   out.ss1313 = ss.k1313;
-  out.k12W = ss.sf12;
+  out.sf12 = ss.k12W;
 
   disp('kernels done')
 
