@@ -186,6 +186,7 @@ function out = run()
   fpoles=y3+(0:ss.M)'*dz;
   % Tops of fault patches
   ss.y3f=fpoles(1:end-1);
+  ss.fpTops = ss.y3f; % adapt for my naming scheme
   % Width of fault patches
   Wf=ones(ss.M,1)*dz;
   %%
@@ -232,7 +233,6 @@ function out = run()
   ss.shearZ_chat = ss.x3c';
 
 
-
   % TWOFAULTS MESH END
 
   % plot mesh
@@ -266,15 +266,16 @@ function out = run()
   ss.fs1212 = zeros(length(ss.fpTops), ss.Ny*ss.Nz);
   ss.fs1312 = zeros(length(ss.fpTops), ss.Ny*ss.Nz);
 
+  % TODO: edit y2_W back to zero 
   disp('beginning kernels')
   % fields from faults
   for k=1:ss.M
     % stress at center of fault patches
-    ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, 0, ss.fpTops(k), Wf(k));
+    ss.ff12(:,k)=s12h(0, ss.fpTops+ss.dz/2, y2_W, ss.fpTops(k), Wf(k));
 
     % stress at center of shear zones
-    ss.sf12(:,k)=s12h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
-    ss.sf13(:,k)=s13h(shearY_c', shearZ_c', 0, ss.fpTops(k), Wf(k));
+    ss.sf12(:,k)=s12h(shearY_c', shearZ_c', y2_W, ss.fpTops(k), Wf(k));
+    ss.sf13(:,k)=s13h(shearY_c', shearZ_c', y2_W, ss.fpTops(k), Wf(k));
 
   end
 
