@@ -530,7 +530,7 @@ function out = run()
   ylabel('fault mesh block')
   saveas(gcf, 'figures/2f_slipE.png')
 
-  Smovie=true;
+  Smovie=false;
   if Smovie
     disp('begin shear movie')
     clf;
