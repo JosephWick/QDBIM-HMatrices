@@ -300,6 +300,12 @@ function out = run()
   out.ss1313 = ss.k1313;
   out.sf12 = ss.k12W;
 
+  out.p.shearYc = xx2c(:);
+  out.p.shearZc = xx3c(:);
+  out.p.yloc = y2_W;
+  out.p.fpTops = ss.y3f;
+  out.p.w = Wf;
+
   disp('kernels done')
 
   %% % % % % % % % % % % % % % % % % % % % % % % % % % % %

@@ -328,6 +328,12 @@ function out = run()
   out.fs1212 = ss.fs1212;
   out.fs1312 = ss.fs1312;
 
+  out.p.shearYc = shearY_c';
+  out.p.shearZc = shearZ_c';
+  out.p.yloc = y2_W;
+  out.p.fpTops = ss.fpTops;
+  out.p.w = Wf;
+
   % figure for ff12 kernel
   %clf;
   %imagesc(log10(ss.ff12)); colorbar;
