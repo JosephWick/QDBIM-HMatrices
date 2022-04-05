@@ -147,14 +147,15 @@ function out = run()
   L = zeros(1,ss.Ny);
   W = zeros(1,ss.Nz);
 
-  % in principal should be 2 loops, one for Z and one for Y
   for idx=(1:length(shearZhat)-1)
     ss.shearZ_chat(idx) = shearZhat(idx) + abs(shearZhat(idx+1) - shearZhat(idx))/2;
-    ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
-
-    L(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
     W(idx) = abs(shearZhat(idx) - shearZhat(idx+1));
   end
+  for idx=(1:length(shearYhat)-1)
+    ss.shearY_chat(idx) = shearYhat(idx) + abs(shearYhat(idx+1) - shearYhat(idx))/2;
+    L(idx) = abs(shearYhat(idx) - shearYhat(idx+1));
+  end
+
   L(end) = L(1);
   W(end) = abs(shearZhat(end-1) - shearZhat(end));
 
