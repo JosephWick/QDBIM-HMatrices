@@ -192,7 +192,7 @@ function out = run()
   ss.ss1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
 
   % on shear by fault
-  ss.sf12 = zeros(length(shearY_c(:)),ss.M);
+  ss.sf12 = zeros(length(shearY_c),ss.M);
   ss.sf13 = zeros(length(shearY_c),ss.M);
 
   % on fault by shear
@@ -506,7 +506,7 @@ function out = run()
     for idx = 1:size(Epall, 2)
       oneE = Epall(:,idx);
       oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
-      imagesc(oneEsq); colorbar;
+      imagesc(oneEsq'); colorbar;
       title(idx)
       drawnow
       frame = getframe(fig);
