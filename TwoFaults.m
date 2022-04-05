@@ -138,7 +138,7 @@ function out = run()
   Transition=35e3;
 
   % Number of patches
-  ss.M=120;
+  ss.M=400;
 
   dz=Transition/ss.M;
   fpoles=y3+(0:ss.M)'*dz;
