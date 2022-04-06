@@ -107,7 +107,7 @@ function out = run()
 
   ss.lambdaZ = 40e3; % fault depth extent
   ss.M = 400; %number of fault cells
-  ss.dz = ss.lambdaZ/ss.M;
+  ss.dz = ss.lambdaZ/ss.M; dz = ss.dz;
 
   ss.transition = 35e3;
   ss.Ny = 50;
@@ -298,9 +298,9 @@ function out = run()
 
       % stress at center of fault patches
       ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZhat(kz), L(ky), W(kz), ...
-        y2_W-ss.shearY_chat(ky)', ss.fpTops+ss.dz/2);
+        y2_W-ss.shearY_chat(ky)', ss.fpTops+dz/2);
       ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZhat(kz), L(ky), W(kz), ...
-        y2_W-ss.shearY_chat(ky)', ss.fpTops+ss.dz/2);
+        y2_W-ss.shearY_chat(ky)', ss.fpTops+dz/2);
 
         %if (ky == 51) & (kz == 51)
         %  disp( (kz-1)*ss.Ny+ky )
