@@ -110,8 +110,8 @@ function out = run()
   ss.dz = ss.lambdaZ/ss.M;
 
   ss.transition = 35e3;
-  ss.Ny = 60;
-  ss.Nz = 50;
+  ss.Ny = 50;
+  ss.Nz = 60;
   ss.Nx = ss.Nz;
 
   % FAULT
