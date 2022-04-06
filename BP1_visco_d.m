@@ -298,9 +298,9 @@ function out = run()
 
       % stress at center of fault patches
       ss.fs1212(:,(kz-1)*ss.Ny+ky)=s1212(shearZhat(kz), L(ky), W(kz), ...
-        0-ss.shearY_chat(ky)', ss.fpTops+ss.dz/2);
+        y2_W-ss.shearY_chat(ky)', ss.fpTops+ss.dz/2);
       ss.fs1312(:,(kz-1)*ss.Ny+ky)=s1312(shearZhat(kz), L(ky), W(kz), ...
-        0-ss.shearY_chat(ky)', ss.fpTops+ss.dz/2);
+        y2_W-ss.shearY_chat(ky)', ss.fpTops+ss.dz/2);
 
         %if (ky == 51) & (kz == 51)
         %  disp( (kz-1)*ss.Ny+ky )
