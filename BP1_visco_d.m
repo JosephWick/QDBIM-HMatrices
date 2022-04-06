@@ -333,6 +333,13 @@ function out = run()
   out.p.fpTops = ss.fpTops;
   out.p.w = Wf;
 
+  out.p.shearZhat = shearZhat;
+  out.p.L = L;
+  out.p.W = W;
+  out.p.shearY_chat = ss.shearY_chat;
+  out.p.fpTops = ss.fpTops;
+  out.p.dz = ss.dz;
+
   % figure for ff12 kernel
   %clf;
   %imagesc(log10(ss.ff12)); colorbar;

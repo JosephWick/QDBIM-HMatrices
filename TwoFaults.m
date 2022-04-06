@@ -307,6 +307,13 @@ function out = run()
   out.p.fpTops = ss.y3f;
   out.p.w = Wf;
 
+  out.p.shearZhat = ss.polesz;
+  out.p.L = L;
+  out.p.W = W;
+  out.p.shearY_chat = ss.x2c;
+  out.p.fpTops = ss.y3f;
+  out.p.dz = dz;
+
   disp('kernels done')
 
   %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
