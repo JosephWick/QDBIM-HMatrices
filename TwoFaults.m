@@ -299,10 +299,11 @@ function out = run()
   out.ss1213 = ss.k1213;
   out.ss1313 = ss.k1313;
   out.sf12 = ss.k12W;
+  out.fs1212 = ss.k1212fW;
+  out.fs1312 = ss.k1312fW;
 
   out.p.shearYc = xx2c(:);
   out.p.shearZc = xx3c(:);
-  out.p.yloc = y2_W;
   out.p.fpTops = ss.y3f;
   out.p.w = Wf;
 

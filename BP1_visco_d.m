@@ -169,6 +169,73 @@ function out = run()
   shearZ_c = shearZ_c(:)';
   shearY_c = shearY_c(:)';
 
+  % TWOFAULTS MESH BEGIN
+
+  y2_W=-25e3;
+  y3=0e3;
+
+  % East Fault (m)
+  y2_E=25e3;
+
+  % Brittle-Ductile Tranisition Depth (m)
+  Transition=35e3;
+
+  % Number of patches
+  ss.M=400;
+
+  dz=Transition/ss.M;
+  fpoles=y3+(0:ss.M)'*dz;
+  % Tops of fault patches
+  ss.y3f=fpoles(1:end-1);
+  ss.fpTops = ss.y3f; % adapt for my naming scheme
+  % Width of fault patches
+  Wf=ones(ss.M,1)*dz;
+  %%
+  % Shear Zone Mesh
+  ss.Nx=50;
+  ss.Nz=50;
+  eps=1e-12;
+
+  % Shear zone Grid
+  % edges along x3
+  ss.polesz=Transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*Transition;
+
+  % center of shear zone (x3)
+  ss.x3c=(ss.polesz(2:end)+ss.polesz(1:end-1))/2;
+
+  % shear zone width
+  W=ss.polesz(2:end)-ss.polesz(1:end-1);
+
+  xx3t=repmat(ss.polesz(1:end-1)',ss.Nx,1);  % tops
+  xx3b=repmat(ss.polesz(2:end)',  ss.Nx,1);  % bottoms
+  xx3c=repmat(ss.x3c',ss.Nx,1);              % centers
+
+  % edges along x2
+  ss.polesxc=(2*y2_W/1e3:(2*y2_E-2*y2_W)/(26e3):2*y2_E/1e3)'*1e3;
+  edges= floor(ss.Nx-length(ss.polesxc)+1)/2;
+  ss.polesxl=flipud(min(ss.polesxc)-tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition);
+  ss.polesxr=max(ss.polesxc)+tan((0:edges)'*pi/(2.2*(edges)+eps))*Transition;
+  ss.polesx=[ss.polesxl(1:end-1);ss.polesxc;ss.polesxr(2:end)];
+
+  % center of shear zone (x2)
+  ss.x2c=(ss.polesx(2:end)+ss.polesx(1:end-1))/2;
+
+  % shear zone length
+  L=ss.polesx(2:end)-ss.polesx(1:end-1);
+  xx2l=repmat(ss.polesx(1:end-1),1,length(ss.x3c));  % left edge
+  xx2r=repmat(ss.polesx(2:end),  1,length(ss.x3c));  % right edge
+  xx2c=repmat(ss.x2c,1,length(ss.x3c));              % center
+
+  % adapt naming convention
+  shearZhat = ss.polesz;
+  shearY_c = xx2c(:);
+  shearZ_c = xx3c(:)';
+  ss.shearY_chat = ss.x2c';
+  ss.shearZ_chat = ss.x3c';
+
+
+  % TWOFAULTS MESH END
+
   % plot mesh
   clf;
   hold on;
@@ -440,7 +507,7 @@ function out = run()
   disp('begin solving')
   tic
   options=odeset('Refine',1,'RelTol',1e-8,'InitialStep',1e-5,'MaxStep',3e6);
-  [t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
   disp('Done solving');
   toc
 
