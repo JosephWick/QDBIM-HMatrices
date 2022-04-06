@@ -355,7 +355,7 @@ function out = run()
   Rm = 3330 ; % mantle density (kg/m^3)
 
   Pconf       = Rm*9.8*ss.shearZ_chat/1e6;  % Shear zones
-  Pconf_fault = Rm*9.8; % Faults
+  Pconf_fault = Rm*9.8*(ss.fpTops+dz); % Faults
 
   Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
   Age_plate = 2e15; % seconds
