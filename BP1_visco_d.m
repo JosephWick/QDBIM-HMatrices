@@ -464,7 +464,7 @@ function out = run()
                Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
 
   % stress
-  Epall = Y(:,ss.M*ss.dgfF+1:ss.dgfS:end)' - ss.s120;
+  %Epall = Y(:,ss.M*ss.dgfF+1:ss.dgfS:end)' - ss.s120;
 
   % ---       Figures        ---
   %disp(size(r.ss.Vo
