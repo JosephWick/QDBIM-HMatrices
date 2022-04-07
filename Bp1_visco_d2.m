@@ -81,6 +81,8 @@ s13h=@(x2,x3,y2,y3,Wf) G*( ...
 %              Viscoelastic Shear Zones
 %
 
+disp('begin mesh...')
+
 % Fault Meshes
 probL = 200e3;
 probW = 200e3;
@@ -155,6 +157,9 @@ ss.x2c = ss.shearY_chat;
 ss.x3c = ss.shearZ_chat;
 ss.polesz = shearZhat;
 
+disp('mesh done.')
+disp('beginning kernels...')
+
 %%
 % Stress kernels from fault
 ss.k12W=zeros(length(xx2c(:)),ss.M);
@@ -169,7 +174,7 @@ for k=1:ss.M
     ss.k13W(:,k)=s13h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
 
     % we evaluate the stress at the center of the fault patches
-    ss.KWW(:,k)=s12h(y2_W, ss.y3f+dz/2, yf, ss.y3f(k), Wf(k));
+    ss.KWW(:,k)=s12h(yf, ss.y3f+dz/2, yf, ss.y3f(k), Wf(k));
 end
 
 % Stress kernels from shear zones
@@ -196,6 +201,8 @@ for kx=1:length(ss.x2c)
 
     end
 end
+
+disp('kernels done.')
 
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                      %
@@ -348,10 +355,12 @@ Y0(2*ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 % initialize the function handle with
 % set constitutive parameters
 yp=@(t,y) odeBP1v_d(t,y,ss);
+disp('begin solving...')
 tic
 % Solve the system
 options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
 [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
+disp('done solving.')
 toc
 %%
 % Compute the instantaneous derivative
