@@ -160,43 +160,45 @@ disp('mesh done.')
 disp('beginning kernels...')
 
 %%
-% Stress kernels from fault
-ss.k12W=zeros(length(xx2c(:)),ss.M);
-ss.k13W=zeros(length(xx2c(:)),ss.M);
+% Stress kernels on fault from fault
+ss.ff12 = zeros(ss.M,ss.M);
 
-ss.KWW=zeros(ss.M,ss.M);
+% stress kernels on shear by fault
+ss.fs12 = zeros(length(xx2c(:)),ss.M);
+ss.fs13 = zeros(length(xx2c(:)),ss.M);
 
 % Fields from Faults
 for k=1:ss.M
-    % we evaluate the stress at the center of the shear zones
-    ss.k12W(:,k)=s12h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
-    ss.k13W(:,k)=s13h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
-
     % we evaluate the stress at the center of the fault patches
-    ss.KWW(:,k)=s12h(yf, ss.y3f+dz/2, yf, ss.y3f(k), Wf(k));
+    ss.ff12(:,k) = s12h(yf, ss.y3f+dz/2, yf, ss.y3f(k), Wf(k));
+
+    % we evaluate the stress at the center of the shear zones
+    ss.sf12(:,k) = s12h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
+    ss.sf13(:,k) = s13h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
 end
 
-% Stress kernels from shear zones
-ss.k1312=zeros(length(ss.x2c)*length(ss.x3c));
-ss.k1313=zeros(length(ss.x2c)*length(ss.x3c));
-ss.k1212=zeros(length(ss.x2c)*length(ss.x3c));
-ss.k1213=zeros(length(ss.x2c)*length(ss.x3c));
+% Stress kernels on shear zones from shear
+ss.ss1312 = zeros(length(ss.x2c)*length(ss.x3c));
+ss.ss1313 = zeros(length(ss.x2c)*length(ss.x3c));
+ss.ss1212 = zeros(length(ss.x2c)*length(ss.x3c));
+ss.ss1213 = zeros(length(ss.x2c)*length(ss.x3c));
 
-ss.k1212fW=zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
-ss.k1312fW=zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
+% stress kernels on fault from shear
+ss.fs1212 = zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
+ss.fs1312 = zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
 
 % Fields from Shear zones
 for ky=1:length(ss.x2c)
     for kz=1:length(ss.x3c)
         % we evaluate the stress at the center of the shear zones
-        ss.k1212(:,(kz-1)*ss.Ny+ky)=s1212(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.k1312(:,(kz-1)*ss.Ny+ky)=s1312(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.k1213(:,(kz-1)*ss.Ny+ky)=s1213(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.k1313(:,(kz-1)*ss.Ny+ky)=s1313(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1213(:,(kz-1)*ss.Ny+ky) = s1213(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1313(:,(kz-1)*ss.Ny+ky) = s1313(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
 
         % we evaluate stress at the center of the fault patches
-        ss.k1212fW(:,(kz-1)*ss.Ny+ky)=s1212(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
-        ss.k1312fW(:,(kz-1)*ss.Ny+ky)=s1312(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
+        ss.fs1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
+        ss.fs1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
 
     end
 end
