@@ -79,6 +79,9 @@ Yp(3:ss.dgfF:ss.M*ss.dgfF)=(ss.Vo.*exp(-th_W)-V_W)./ss.L;
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                     Shear Zones                     %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+disp(size(ss.k1212))
+disp(size(e12p-ss.e12p_plate))
 % Stress rate due to shear zones and fault slip velocity
 Yp(2*ss.M*ss.dgfF+1 : ss.dgfS : end) = ss.k1212*(e12p-ss.e12p_plate) + ss.k1312*(e13p-ss.e13p_plate) + ...
                                        ss.k12W *(V_W-ss.V_plate);
