@@ -356,12 +356,12 @@ Y0=zeros(ss.M*ss.dgfF+length(ss.x2c)*length(ss.x3c)*ss.dgfS,1);
 
 % Fault patches
 % state vector is (slip; tau; log(theeta Vo / D_rs); log(V / Vo) )
-Y0(1:ss.dgf:end)=zeros(M,1);
-Y0(2:ss.dgf:end)=max(ss.a).*ss.sigma.*asinh(ss.Vpl./ss.Vo/2.* ...
+Y0(1:ss.dgfF:ss.M*ss.dgfF) = zeros(ss.M,1);
+Y0(2:ss.dgfF:ss.M*ss.dgfF) = max(ss.a).*ss.sigma.*asinh(ss.Vpl./ss.Vo/2.* ...
   exp((ss.fo+ss.b.*log(ss.Vo./ss.Vpl))./max(ss.a))) + ss.eta.*ss.Vpl;
-Y0(3:ss.dgf:end)=ss.a./ss.b.*log(2*ss.Vo./ss.Vpl.*sinh((Y0(2:ss.dgf:end)- ...
+Y0(3:ss.dgfF:ss.M*ss.dgfF) = ss.a./ss.b.*log(2*ss.Vo./ss.Vpl.*sinh((Y0(2:ss.dgf:end)- ...
   ss.eta.*ss.Vpl)./ss.a./ss.sigma))-ss.fo./ss.b;
-Y0(4:ss.dgf:end)=log(ss.Vpl./ss.Vo);
+Y0(4:ss.dgfF:ss.M*ss.dgfF) = log(ss.Vpl./ss.Vo);
 
 % Shear zones
 Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
