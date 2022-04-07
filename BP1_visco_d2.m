@@ -385,7 +385,7 @@ Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
 y.V = Yp(:,1:ss.dgfF:ss.M*ss.dgfF); % Slip rate (m/s)
 y.tau = Y(:,2:ss.dgfF:ss.M*ss.dgfF);            % Shear stress (MPa)
 y.Vmax = zeros(length(t),1);          % Maximum slip rate (m/s)
-y.Vcenter = y.V(floor(ss.M/2),:);          % Slip rate at center of VW region
+%y.Vcenter = y.V(floor(ss.M/2),:);          % Slip rate at center of VW region
 for ti = 1:length(t)
   y.Vmax(ti) = max(y.V(:,ti));
 end
