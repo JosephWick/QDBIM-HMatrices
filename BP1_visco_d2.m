@@ -91,7 +91,7 @@ ss.lambdaZ = 40e3; % fault depth extent
 ss.M = 400; %number of fault cells
 dz = ss.lambdaZ/ss.M;
 
-Tranisition = 35e3;
+Transition = 35e3;
 ss.Ny = 50;
 ss.Nz = 60;
 
