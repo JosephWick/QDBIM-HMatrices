@@ -204,6 +204,50 @@ disp('kernels done.')
 %                                                      %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
 
+% - QDBIM style
+% reference friction coefficient
+ss.fo=0.6*ones(size(y3f));
+
+% Dieterich-Ruina R+S frictional parameters (velocity-weakening friction)
+ss.a=1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+ss.b=0.015*ones(size(y3f));
+
+% effective normal stress (MPa)
+ss.sigma=50.0*ones(size(y3f));
+
+% characteristic weakening distance (m)
+ss.Drs=8e-3*ones(size(y3f));
+
+% plate rate (m/s)
+ss.Vpl=1e-9*ones(size(y3f));
+
+% reference slip rate (m/s)
+ss.Vo=1e-6*ones(size(y3f));
+
+% Radiation damping coefficient
+ss.eta = G./(2*Vs);
+
+% Estimates of some key parameters
+VWp = find(ss.a < ss.b); % VW region
+% Critical nucleation size ( h* = pi/2 G b D_rs / (b-a)^2 / sigma )
+hstar=min(pi/2*G*ss.Drs(VWp).*ss.b(VWp)./(ss.b(VWp)-ss.a(VWp)).^2./ss.sigma(VWp));
+
+% Quasi-static cohesive zone ( coh0 = 9/32 G D_rs /(b*sigma) )
+% Note that for this QD simulation the cohesive zone will not change,
+% which would not be the case for a fully dynamic simulation
+coh = min(9/32*pi*G*ss.Drs(VWp)./ss.b(VWp)./ss.sigma(VWp));
+
+% Estimate of recurrence time ( T ~ 5(b-a)*sigma / G * R/Vpl )
+Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(y3(VWp(end))-y3(VWp(1)))./(G*mean(ss.Vpl(VWp)));
+
+% Print information about discretization
+fprintf('Grid size = %.2f (m)\n', dz);
+fprintf('VW zone = %.2f (km)\n', (y3(VWp(end))-y3(VWp(1)))/1e3);
+fprintf('Critical nucleation size = %.2f (m)\n',hstar);
+fprintf('QS Cohesive zone = %.2f (m)\n',coh);
+fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
+
+% - OLD/2F
 % Confining pressure (MPa) and Temperature (K)
 k  = 3.138; % thermal conductivity (W/m/K)
 Cp = 1171 ; % specific heat (J/kg/K)
@@ -218,36 +262,19 @@ ss.Tprof  = 300+1380*erf(ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
 
 % default friction properties (velocity-weakening friction)
 % effective confining pressure (MPa)
+%TODO: is needed?; QDBIM style has ss.sigma
 ss.sigmab = 1000;
 
-% frictional parameters
-ss.aW = 1e-3*ones(size(ss.y3f));
-ss.bW = ss.aW+2.1e-4*ones(size(ss.y3f));
-
-ss.aE = 1e-3*ones(size(ss.y3f));
-ss.bE = ss.aE+2.1e-4*ones(size(ss.y3f));
-
 % static friction coefficient
+% TODO: is needed? QDBIM style has a 'reference friction coefficient'
 ss.mu0 = 0.2*ones(size(ss.y3f));
 
 % characteristic weakening distance (m)
+% TODO: is needed?; QDBIM style has Drs
 ss.L = 0.012*ones(size(ss.y3f));
-
-% plate velocity (m/s)
-ss.V_plate = 1e-9*ones(size(ss.y3f));
-
-% reference slip rate (m/s)
-ss.Vo = 1e-6*ones(size(ss.y3f));
 
 % shear wave speed (m/s)
 ss.Vs = 3e3*ones(size(ss.y3f));
-
-% Velocity-strengthening at edges
-% fault: 5-15km velocity-weakening
-topW    = floor(5e3/(Transition/ss.M));
-bottomW = ceil(15e3/(Transition/ss.M));
-ss.bW(1:topW)      = ss.aW(1:topW)-2.1e-4*ones(topW,1);
-ss.bW(bottomW:end) = ss.aW(bottomW:end)-2.1e-4*ones(length(ss.aW(bottomW:end)),1);
 
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                      %
@@ -315,9 +342,13 @@ ss.dgfS=4;
 Y0=zeros(ss.M*ss.dgfF+length(ss.x2c)*length(ss.x3c)*ss.dgfS,1);
 
 % Fault patches
-Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.y3f));
-Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_W;
-Y0(3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
+% state vector is (slip; tau; log(theeta Vo / D_rs); log(V / Vo) )
+Y0(1:ss.dgf:end)=zeros(M,1);
+Y0(2:ss.dgf:end)=max(ss.a).*ss.sigma.*asinh(ss.Vpl./ss.Vo/2.* ...
+  exp((ss.fo+ss.b.*log(ss.Vo./ss.Vpl))./max(ss.a))) + ss.eta.*ss.Vpl;
+Y0(3:ss.dgf:end)=ss.a./ss.b.*log(2*ss.Vo./ss.Vpl.*sinh((Y0(2:ss.dgf:end)- ...
+  ss.eta.*ss.Vpl)./ss.a./ss.sigma))-ss.fo./ss.b;
+Y0(4:ss.dgf:end)=log(ss.Vpl./ss.Vo);
 
 % Shear zones
 Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;

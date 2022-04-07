@@ -42,13 +42,8 @@ G=30e3; % MPa
 % Shear stress on faults
 tauF_W = Y(2:ss.dgfF:ss.M*ss.dgfF);
 
-% State variables
-th_W   = Y(3:ss.dgfF:ss.M*ss.dgfF);
-
-% Slip velocities
-V_W = (2.*ss.Vs.*ss.aW.*ss.sigmab./G).*...
-     Lambert_W(G*ss.Vo./(2*ss.Vs.*ss.aW.*ss.sigmab).*...
-     exp((tauF_W-ss.mu0.*ss.sigmab-ss.sigmab.*ss.bW.*th_W)./(ss.sigmab.*ss.aW)));
+% Slip rate
+V = ss.Vo.* exp(y(4:ss.dgfF:ss.M*ss.dgfF));
 
 % Shear stress in zones of distributed deformation
 tau12=Y(ss.M*ss.dgfF+1:ss.dgfS:end);
@@ -64,19 +59,29 @@ e13p = tau13 .* Aeff;
 Yp=zeros(size(Y));
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-%                     West Fault                      %
+%                     Fault                           %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-% Slip velocity
-Yp(1:ss.dgfF:ss.M*ss.dgfF)=V_W;
+% Slip
+Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
+
+% State variable
+dth = (ss.Vo.*exp(-th)-V)./ss.Drs;
+yp(3:ss.dgfF:ss.M*ss.dgfF)=dth;
 
 % Shear stress rate on fault due to fault and shear zones
-t1 = ss.ff12 * (V_W-ss.V_plate);
+t1 = ss.ff12 * (V-ss.V_plate);
 t2 = ss.fs1212 * (e12p-ss.e12p_plate);
 t3 = ss.fs1312 * (e13p-ss.e13p_plate);
-Yp(2:ss.dgfF:ss.M*ss.dgfF)=t1 + t2 + t3;
+func = t1 + t2 + t3;
 
-% Rate of state
-Yp(3:ss.dgfF:ss.M*ss.dgfF)=(ss.Vo.*exp(-th_W)-V_W)./ss.L;
+f1=2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
+f2=1./sqrt(1+f1.^2);
+% slip velocity
+yp(4:ss.dgfF:ss.M*ss.dgfF) = (func - ss.b.*ss.sigma.*dth.*f2)./ ...
+                    (ss.a.*ss.sigma.*f2 + ss.eta.*V);
+
+% Evolution of shear stress
+yp(2:ss.dgfF:ss.M*ss.dgfF) = func - ss.eta.*V.*yp(4:ss.dgfF:ss.M*ss.dgfF);
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                     Shear Zones                     %
@@ -84,12 +89,12 @@ Yp(3:ss.dgfF:ss.M*ss.dgfF)=(ss.Vo.*exp(-th_W)-V_W)./ss.L;
 % Stress rate due to shear zones and fault slip velocity
 t1 = ss.ss1212 * (e12p-ss.e12p_plate);
 t2 = ss.ss1312 * (e13p-ss.e13p_plate);
-t3 = ss.sf12 * (V_W-ss.V_plate);
+t3 = ss.sf12 * (V-ss.V_plate);
 Yp(ss.M*ss.dgfF+1 : ss.dgfS : end) = t1 + t2 + t3;
 
 t1 = ss.ss1213 * (e12p-ss.e12p_plate);
 t2 = ss.ss1313 * (e13p-ss.e13p_plate);
-t3 = ss.sf13 * (V_W-ss.V_plate);
+t3 = ss.sf13 * (V-ss.V_plate);
 Yp(ss.M*ss.dgfF+2 : ss.dgfS : end) = t1 + t2 + t3;
 
 % Strain rate
