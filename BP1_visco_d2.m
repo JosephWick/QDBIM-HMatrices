@@ -276,19 +276,6 @@ Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
 Age_plate = 2e15; % seconds
 ss.Tprof  = 300+1380*erf(ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
 
-% default friction properties (velocity-weakening friction)
-% effective confining pressure (MPa)
-%TODO: is needed?; QDBIM style has ss.sigma
-ss.sigmab = 1000;
-
-% static friction coefficient
-% TODO: is needed? QDBIM style has a 'reference friction coefficient'
-ss.mu0 = 0.2*ones(size(ss.y3f));
-
-% characteristic weakening distance (m)
-% TODO: is needed?; QDBIM style has Drs
-ss.L = 0.012*ones(size(ss.y3f));
-
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                      %
 %                   R H E O L O G Y                    %
@@ -425,7 +412,7 @@ ylabel('Block')
 saveas(gcf, 'figures/BP1vD2_strainCenter.png')
 
 % ---         Movies        ---
-Smovie=false;
+Smovie=true;
 if Smovie
   disp('begin shear movie')
   clf;
