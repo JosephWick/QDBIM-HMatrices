@@ -347,10 +347,10 @@ Y0(ss.M*ss.dgfF+2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_E;
 Y0(ss.M*ss.dgfF+3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
 
 % Shear zones
-Y0(2*ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
-Y0(2*ss.M*ss.dgfF+2:ss.dgfS:end)=s130;
-Y0(2*ss.M*ss.dgfF+3:ss.dgfS:end)=e120;
-Y0(2*ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
+Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
+Y0(ss.M*ss.dgfF+2:ss.dgfS:end)=s130;
+Y0(ss.M*ss.dgfF+3:ss.dgfS:end)=e120;
+Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 
 % initialize the function handle with
 % set constitutive parameters
