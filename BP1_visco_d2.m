@@ -358,13 +358,14 @@ options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
 disp('done solving.')
 toc
 %%
+
+Y = Y';
+
 % Compute the instantaneous derivative
 Yp=zeros(length(t)-1,size(Y,2));
 for k=1:length(t)-1
     Yp(k,:)=(Y(k+1,:)-Y(k,:))/(t(k+1)-t(k));
 end
-
-Y = Y';
 
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                      %
