@@ -318,18 +318,6 @@ e130 = zeros(size(s120));
 ss.strength_W = ss.sigmab.*(ss.mu0+(ss.a-ss.b).*log(ss.V_plate./ss.Vo))+ ...
   G*ss.V_plate./(2*ss.Vs);
 
-% Plot strength profiles
-figure(1);clf;
-subplot(2,1,1);
-plot(ss.fpTops/1e3,ss.strength_E,ss.fpTops/1e3,ss.strength_W)
-xlabel('Depth (km)')
-ylabel('Strength (MPa)');
-subplot(2,1,2);
-plot(ss.shearZ_chat/1e3,log10(s120(1:length(ss.shearY_chat):end)))
-xlim([ss.shearZ_chat(1)/1e3,ss.shearZ_chat(end)/1e3]);
-xlabel('Depth (km)')
-ylabel('Strength (MPa) log10');
-
 
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                       %
