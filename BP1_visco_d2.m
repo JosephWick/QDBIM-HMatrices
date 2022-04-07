@@ -393,6 +393,14 @@ xlabel('time steps')
 ylabel('fault mesh block')
 saveas(gcf, 'figures/BP1vD2_slip.png')
 
+% strain rate at center of ductile region
+clf;
+imagesc(log10(Ep)); colorbar;
+title('Strain Rate of Center of Ductile Region')
+xlabel('Time Steps')
+ylabel('Block')
+saveas(gcf, 'figures/BP1vD_strainCenter.png')
+
 % ---         Movies        ---
 Smovie=false;
 if Smovie
