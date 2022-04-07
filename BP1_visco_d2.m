@@ -257,11 +257,11 @@ Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(ss.y3f(VWp(end))- ...
   ss.y3f(VWp(1)))./(G*mean(ss.Vpl(VWp)));
 
 % Print information about discretization
-fprintf('Grid size = %.2f (m)\n', dz);
+fprintf('\nGrid size = %.2f (m)\n', dz);
 fprintf('VW zone = %.2f (km)\n', (ss.y3f(VWp(end))-ss.y3f(VWp(1)))/1e3);
 fprintf('Critical nucleation size = %.2f (m)\n',hstar);
 fprintf('QS Cohesive zone = %.2f (m)\n',coh);
-fprintf('Est. Recurrence time = %.2f (yr)\n', Ti/3.15e7);
+fprintf('Est. Recurrence time = %.2f (yr)\n\n', Ti/3.15e7);
 
 % - OLD/2F
 % Confining pressure (MPa) and Temperature (K)
