@@ -18,7 +18,7 @@ clear all;
 %                                                       %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-% these are QDBIM style defns 
+% these are QDBIM style defns
 % shear wave speed (m/s)
 Vs = 3464;
 % density (kg/m^3)
@@ -253,7 +253,8 @@ hstar=min(pi/2*G*ss.Drs(VWp).*ss.b(VWp)./(ss.b(VWp)-ss.a(VWp)).^2./ss.sigma(VWp)
 coh = min(9/32*pi*G*ss.Drs(VWp)./ss.b(VWp)./ss.sigma(VWp));
 
 % Estimate of recurrence time ( T ~ 5(b-a)*sigma / G * R/Vpl )
-Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(y3(VWp(end))-y3(VWp(1)))./(G*mean(ss.Vpl(VWp)));
+Ti = 5*mean((ss.b(VWp)-ss.a(VWp)).*ss.sigma(VWp)).*0.5.*(ss.y3f(VWp(end))- ...
+  ss.y3f(VWp(1)))./(G*mean(ss.Vpl(VWp)));
 
 % Print information about discretization
 fprintf('Grid size = %.2f (m)\n', dz);
