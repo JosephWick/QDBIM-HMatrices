@@ -157,6 +157,9 @@ ss.x2c = ss.shearY_chat;
 ss.x3c = ss.shearZ_chat;
 ss.polesz = shearZhat;
 
+disp(size(ss.shearY_chat))
+disp(size(ss.shearZ_chat))
+
 disp('mesh done.')
 disp('beginning kernels...')
 
