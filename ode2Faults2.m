@@ -43,7 +43,7 @@ G=30e3; % MPa
 tauF_W = Y(2:ss.dgfF:ss.M*ss.dgfF);
 
 % Slip rate
-V = ss.Vo.* exp(y(4:ss.dgfF:ss.M*ss.dgfF));
+V = ss.Vo.* exp(Y(4:ss.dgfF:ss.M*ss.dgfF));
 
 % Shear stress in zones of distributed deformation
 tau12=Y(ss.M*ss.dgfF+1:ss.dgfS:end);
@@ -66,7 +66,7 @@ Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % State variable
 dth = (ss.Vo.*exp(-th)-V)./ss.Drs;
-yp(3:ss.dgfF:ss.M*ss.dgfF)=dth;
+Yp(3:ss.dgfF:ss.M*ss.dgfF)=dth;
 
 % Shear stress rate on fault due to fault and shear zones
 t1 = ss.ff12 * (V-ss.V_plate);
@@ -77,11 +77,11 @@ func = t1 + t2 + t3;
 f1=2*ss.Vo./V.*exp(-(ss.fo+ss.b.*th)./ss.a);
 f2=1./sqrt(1+f1.^2);
 % slip velocity
-yp(4:ss.dgfF:ss.M*ss.dgfF) = (func - ss.b.*ss.sigma.*dth.*f2)./ ...
+Yp(4:ss.dgfF:ss.M*ss.dgfF) = (func - ss.b.*ss.sigma.*dth.*f2)./ ...
                     (ss.a.*ss.sigma.*f2 + ss.eta.*V);
 
 % Evolution of shear stress
-yp(2:ss.dgfF:ss.M*ss.dgfF) = func - ss.eta.*V.*yp(4:ss.dgfF:ss.M*ss.dgfF);
+Yp(2:ss.dgfF:ss.M*ss.dgfF) = func - ss.eta.*V.*Yp(4:ss.dgfF:ss.M*ss.dgfF);
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                     Shear Zones                     %
