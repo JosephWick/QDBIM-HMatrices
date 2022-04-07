@@ -67,18 +67,12 @@ s13h=@(x2,x3,y2,y3,Wf) G*( ...
 %                        M E S H                       %
 %                                                      %
 % % % % % % % % % % % % % % % % % % % % % % % % % % %  %
-
-%            -25 km       0       25 km
-% _______________________________________________ 0 km    --------> x2
-%               |                   |                    |
-%               |                   |                    |
-%               |      Brittle      |                    |
-%               |                   |                    V
-%               |                   |                    x3
-%          West | fault        East | fault
-% ----------------------------------------------- 35 km
 %
-%              Viscoelastic Shear Zones
+% Naming convention:
+%   - '_c' suffixed terms refer to the center of patches
+%   - 'hat' suffixed terms refer to a 1D vector that represents a direction
+%         of a 2D or 3D mesh
+%
 %
 
 disp('begin mesh...')
@@ -100,9 +94,7 @@ ss.Nz = 60;
 yf = 0;
 faultX = zeros(1,ss.M);
 faultY = zeros(1,ss.M);
-faultZ = linspace(0, ss.lambdaZ-ss.dz, ss.M);
-% tops of fault patches
-ss.fpTops = faultZ';
+faultZ = linspace(0, ss.lambdaZ-ss.dz, ss.M); faultZ = faultZ';
 
 % fault patch centers
 faultX_c = faultX;
@@ -114,6 +106,7 @@ Lf = zeros(ss.M,1);
 Wf = ones(ss.M,1)*ss.dz;
 
 % SHEAR
+% *hat terms are 1xN
 eps = 1e-12;
 nc = (-ss.Ny/2:ss.Ny/2);
 shearZhat = ss.transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*ss.transition;
@@ -141,15 +134,15 @@ end
 L(end) = L(1);
 W(end) = abs(shearZhat(end-1) - shearZhat(end));
 
-% grid and flatten
+% grid
+% non-hat terms are NxN
 shearZhat(end)=[]; shearYhat(end)=[];
 [shearY shearZ] = ndgrid(shearYhat, shearZhat);
 
 [shearY_c shearZ_c] = ndgrid(ss.shearY_chat, ss.shearZ_chat);
 
 % convert between naming conventions
-% fault:
-ss.y3f = ss.fpTops;
+ss.y3f = faultZ;
 xx2c = shearY_c;
 xx3c = shearZ_c;
 ss.x2c = ss.shearY_chat;
