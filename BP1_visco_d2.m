@@ -18,8 +18,13 @@ clear all;
 %                                                       %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-% rigidity (MPa)
-G=30e3;
+% these are QDBIM style defns 
+% shear wave speed (m/s)
+Vs = 3464;
+% density (kg/m^3)
+rho = 2670;
+% shear modulus (MPa)
+G = rho*Vs^2/1e6;
 
 % Boxcar function
 boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
@@ -214,6 +219,7 @@ disp('kernels done.')
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
 
 % - QDBIM style
+
 % reference friction coefficient
 ss.fo=0.6*ones(size(ss.y3f));
 
@@ -281,9 +287,6 @@ ss.mu0 = 0.2*ones(size(ss.y3f));
 % characteristic weakening distance (m)
 % TODO: is needed?; QDBIM style has Drs
 ss.L = 0.012*ones(size(ss.y3f));
-
-% shear wave speed (m/s)
-ss.Vs = 3e3*ones(size(ss.y3f));
 
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                      %
