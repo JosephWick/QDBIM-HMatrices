@@ -350,7 +350,7 @@ Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 
 % initialize the function handle with
 % set constitutive parameters
-yp=@(t,y) odeBP1v_d(t,y,ss);
+yp=@(t,y) ode2Faults(t,y,ss);
 disp('begin solving...')
 tic
 % Solve the system
