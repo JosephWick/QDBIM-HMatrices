@@ -485,7 +485,7 @@ function out = run()
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45(yp,[0 1*3.15e7],Y0,options);
+  [t,Y]=ode45(yp,[0 500*3.15e7],Y0,options);
   disp('done')
   toc
   %%
@@ -544,7 +544,7 @@ function out = run()
   ylabel('fault mesh block')
   saveas(gcf, 'figures/2f_slipE.png')
 
-  Smovie=false;
+  Smovie=true;
   if Smovie
     disp('begin shear movie')
     clf;
