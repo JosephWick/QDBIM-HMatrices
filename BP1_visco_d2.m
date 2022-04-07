@@ -89,9 +89,9 @@ probW = 200e3;
 
 ss.lambdaZ = 40e3; % fault depth extent
 ss.M = 400; %number of fault cells
-ss.dz = ss.lambdaZ/ss.M; dz = ss.dz;
+dz = ss.lambdaZ/ss.M;
 
-ss.transition = 35e3; Transition = ss.transition;
+Tranisition = 35e3;
 ss.Ny = 50;
 ss.Nz = 60;
 
@@ -100,23 +100,23 @@ ss.Nz = 60;
 yf = 0;
 faultX = zeros(1,ss.M);
 faultY = zeros(1,ss.M);
-faultZ = linspace(0, ss.lambdaZ-ss.dz, ss.M);
+faultZ = linspace(0, ss.lambdaZ-dz, ss.M);
 % tops of fault patches
 ss.fpTops = faultZ';
 
 % fault patch centers
 faultX_c = faultX;
 faultY_c = faultY;
-faultZ_c = faultZ+(ss.dz/2);
+faultZ_c = faultZ+(dz/2);
 
 % width of fault patches
 Lf = zeros(ss.M,1);
-Wf = ones(ss.M,1)*ss.dz;
+Wf = ones(ss.M,1)*dz;
 
 % SHEAR
 eps = 1e-12;
 nc = (-ss.Ny/2:ss.Ny/2);
-shearZhat = ss.transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*ss.transition;
+shearZhat = Transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*Transition;
 shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
 shearX = zeros(1,ss.Ny*ss.Nz);
 
@@ -148,55 +148,63 @@ shearZhat(end)=[]; shearYhat(end)=[];
 [shearY_c shearZ_c] = ndgrid(ss.shearY_chat, ss.shearZ_chat);
 
 % convert between naming conventions
-% fault:
-ss.y3f = ss.fpTops;
-xx2c = shearY_c;
-xx3c = shearZ_c;
-ss.x2c = ss.shearY_chat;
-ss.x3c = ss.shearZ_chat;
-ss.polesz = shearZhat;
+%ss.fpTops = ss.fpTops;
+%xx2c = shearY_c;
+%xx3c = shearZ_c;
+%ss.x2c = ss.shearY_chat;
+%ss.x3c = ss.shearZ_chat;
+%ss.polesz = shearZhat;
 
 disp('mesh done.')
 disp('beginning kernels...')
 
 %%
-% Stress kernels from fault
-ss.k12W=zeros(length(xx2c(:)),ss.M);
-ss.k13W=zeros(length(xx2c(:)),ss.M);
 
-ss.KWW=zeros(ss.M,ss.M);
+% stress on fault by fault
+ss.ff12=zeros(ss.M,ss.M);
+
+% Stress kernels on shear zones from fault
+ss.sf12 = zeros(length(shearY_c(:)),ss.M);
+ss.sf12 = zeros(length(shearY_c(:)),ss.M);
 
 % Fields from Faults
 for k=1:ss.M
-    % we evaluate the stress at the center of the shear zones
-    ss.k12W(:,k)=s12h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
-    ss.k13W(:,k)=s13h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
-
     % we evaluate the stress at the center of the fault patches
-    ss.KWW(:,k)=s12h(yf, ss.y3f+dz/2, yf, ss.y3f(k), Wf(k));
+    ss.ff12(:,k)=s12h(yf, ss.fpTops+dz/2, yf, ss.fpTops(k), Wf(k));
+
+    % we evaluate the stress at the center of the shear zones
+    ss.sf12(:,k) = s12h(shearY_c(:), shearZ_c(:), yf, ss.fpTops(k), Wf(k));
+    ss.sf13(:,k) = s13h(shearY_c(:), shearZ_c(:), yf, ss.fpTops(k), Wf(k));
 end
 
-% Stress kernels from shear zones
-ss.k1312=zeros(length(ss.x2c)*length(ss.x3c));
-ss.k1313=zeros(length(ss.x2c)*length(ss.x3c));
-ss.k1212=zeros(length(ss.x2c)*length(ss.x3c));
-ss.k1213=zeros(length(ss.x2c)*length(ss.x3c));
+% Stress kernels on shear zones from shear zones
+ss.ss1312 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.ss1313 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.ss1212 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.ss1213 = zeros(length(ss.shearY_chat)*length(ss.shearZ_chat));
 
-ss.k1212fW=zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
-ss.k1312fW=zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
+% stress kernels on fault from shear zones
+ss.fs1212 = zeros(length(ss.fpTops), length(ss.shearY_chat)*length(ss.shearZ_chat));
+ss.fs1312 = zeros(length(ss.fpTops), length(ss.shearY_chat)*length(ss.shearZ_chat));
 
 % Fields from Shear zones
-for ky=1:length(ss.x2c)
-    for kz=1:length(ss.x3c)
+for ky=1:length(ss.shearY_chat)
+    for kz=1:length(ss.shearZ_chat)
         % we evaluate the stress at the center of the shear zones
-        ss.k1212(:,(kz-1)*ss.Ny+ky)=s1212(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.k1312(:,(kz-1)*ss.Ny+ky)=s1312(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.k1213(:,(kz-1)*ss.Ny+ky)=s1213(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.k1313(:,(kz-1)*ss.Ny+ky)=s1313(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.k1212(:,(kz-1)*ss.Ny+ky) = s1212(shearZhat(kz), L(ky), W(kz), ...
+          shearY_c(:)-ss.shearY_chat(ky), shearZ_c(:));
+        ss.k1312(:,(kz-1)*ss.Ny+ky) = s1312(shearZhat(kz), L(ky), W(kz), ...
+          shearY_c(:)-ss.shearY_chat(ky), shearZ_c(:));
+        ss.k1213(:,(kz-1)*ss.Ny+ky) = s1213(shearZhat(kz), L(ky), W(kz), ...
+          shearY_c(:)-ss.shearY_chat(ky),shearZ_c(:));
+        ss.k1313(:,(kz-1)*ss.Ny+ky) = s1313(shearZhat(kz), L(ky), W(kz), ...
+          shearY_c(:)-ss.shearY_chat(ky),shearZ_c(:));
 
         % we evaluate stress at the center of the fault patches
-        ss.k1212fW(:,(kz-1)*ss.Ny+ky)=s1212(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
-        ss.k1312fW(:,(kz-1)*ss.Ny+ky)=s1312(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
+        ss.k1212fW(:,(kz-1)*ss.Ny+ky) = s1212(shearZhat(kz), L(ky), W(kz), ...
+          yf-ss.shearY_chat(ky), ss.fpTops(:)+dz/2);
+        ss.k1312fW(:,(kz-1)*ss.Ny+ky) = s1312(shearZhat(kz), L(ky), W(kz), ...
+          yf-ss.shearY_chat(ky), ss.fpTops(:)+dz/2);
 
     end
 end
@@ -214,45 +222,42 @@ k  = 3.138; % thermal conductivity (W/m/K)
 Cp = 1171 ; % specific heat (J/kg/K)
 Rm = 3330 ; % mantle density (kg/m^3)
 
-Pconf       = Rm*9.8*ss.x3c/1e6;  % Shear zones
-Pconf_fault = Rm*9.8*(ss.y3f+dz); % Faults
+Pconf       = Rm*9.8*ss.shearZ_chat/1e6;  % Shear zones
+Pconf_fault = Rm*9.8*(ss.fpTops+dz); % Faults
 
 Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
 Age_plate = 2e15; % seconds
-ss.Tprof  = 300+1380*erf(ss.x3c/(sqrt(4* Kappa * Age_plate)));  % Kelvin
+ss.Tprof  = 300+1380*erf(ss.shearZ_chat/(sqrt(4* Kappa * Age_plate)));  % Kelvin
 
 % default friction properties (velocity-weakening friction)
 % effective confining pressure (MPa)
 ss.sigmab = 1000;
 
 % frictional parameters
-ss.aW = 1e-3*ones(size(ss.y3f));
-ss.bW = ss.aW+2.1e-4*ones(size(ss.y3f));
-
-ss.aE = 1e-3*ones(size(ss.y3f));
-ss.bE = ss.aE+2.1e-4*ones(size(ss.y3f));
+ss.a = 1e-3*ones(size(ss.fpTops));
+ss.b = ss.a+2.1e-4*ones(size(ss.fpTops));
 
 % static friction coefficient
-ss.mu0 = 0.2*ones(size(ss.y3f));
+ss.mu0 = 0.2*ones(size(ss.fpTops));
 
 % characteristic weakening distance (m)
-ss.L = 0.012*ones(size(ss.y3f));
+ss.L = 0.012*ones(size(ss.fpTops));
 
 % plate velocity (m/s)
-ss.V_plate = 1e-9*ones(size(ss.y3f));
+ss.V_plate = 1e-9*ones(size(ss.fpTops));
 
 % reference slip rate (m/s)
-ss.Vo = 1e-6*ones(size(ss.y3f));
+ss.Vo = 1e-6*ones(size(ss.fpTops));
 
 % shear wave speed (m/s)
-ss.Vs = 3e3*ones(size(ss.y3f));
+ss.Vs = 3e3*ones(size(ss.fpTops));
 
 % Velocity-strengthening at edges
 % fault: 5-15km velocity-weakening
-topW    = floor(5e3/(Transition/ss.M));
-bottomW = ceil(15e3/(Transition/ss.M));
-ss.bW(1:topW)      = ss.aW(1:topW)-2.1e-4*ones(topW,1);
-ss.bW(bottomW:end) = ss.aW(bottomW:end)-2.1e-4*ones(length(ss.aW(bottomW:end)),1);
+top    = floor(5e3/(Transition/ss.M));
+bottom = ceil(15e3/(Transition/ss.M));
+ss.b(1:top)      = ss.a(1:top)-2.1e-4*ones(top,1);
+ss.b(bottom:end) = ss.a(bottom:end)-2.1e-4*ones(length(ss.a(bottom:end)),1);
 
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                      %
@@ -262,44 +267,46 @@ ss.bW(bottomW:end) = ss.aW(bottomW:end)-2.1e-4*ones(length(ss.aW(bottomW:end)),1
 % Values taken for wet olivine - Hirth, G. and D. Kohlstedt (2003)
 
 % Driving strain rate (1/s)
-ss.e12p_plate = 1e-14*ones(length(ss.x2c)*length(ss.x3c),1);
-ss.e13p_plate =      zeros(length(ss.x2c)*length(ss.x3c),1);
+ss.e12p_plate = 1e-14*ones(length(ss.shearY_chat)*length(ss.shearZ_chat),1);
+ss.e13p_plate =      zeros(length(ss.shearY_chat)*length(ss.shearZ_chat),1);
 
 % Rheological Parameters
 % Reference Strain Rate (for stress in MPa)
-ss.Adif = 1e6*ones(length(ss.x3c)*length(ss.x2c),1);
-ss.Adis = 90 *ones(length(ss.x3c)*length(ss.x2c),1);
+ss.Adif = 1e6*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
+ss.Adis = 90 *ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
 
 % Power-Law Exponent
-ss.n = 3.5*ones(length(ss.x3c)*length(ss.x2c),1);
+ss.n = 3.5*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
 
 % Activation Energy Wet Oliving (J/mol)
-ss.Qdif = 335e3*ones(length(ss.x3c)*length(ss.x2c),1);
-ss.Qdis = 480e3*ones(length(ss.x3c)*length(ss.x2c),1);
+ss.Qdif = 335e3*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
+ss.Qdis = 480e3*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
 
 % Activation Volume (m^3/mol)
-ss.Voldif = 4e-6*ones(length(ss.x3c)*length(ss.x2c),1);
-ss.Voldis = 11e-6*ones(length(ss.x3c)*length(ss.x2c),1);
+ss.Voldif = 4e-6*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
+ss.Voldis = 11e-6*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
 
 % Grain size (m)
-ss.d    = 1e-2*ones(length(ss.x3c)*length(ss.x2c),1);
-ss.pexp = 3*ones(length(ss.x3c)*length(ss.x2c),1);
+ss.d    = 1e-2*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
+ss.pexp = 3*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
 
 % Water fugacity (H/10^6 Si)
-ss.COH = 1000*ones(length(ss.x3c)*length(ss.x2c),1);
-ss.r   = 1.2*ones(length(ss.x3c)*length(ss.x2c),1);
+ss.COH = 1000*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
+ss.r   = 1.2*ones(length(ss.shearZ_chat)*length(ss.shearY_chat),1);
 
 % Pressure (Pa)
-ss.P = repmat(1e6*Pconf',length(ss.x2c),1);
-ss.P = reshape(ss.P,[length(ss.x2c)*length(ss.x3c),1]);
+ss.P = repmat(1e6*Pconf',length(ss.shearY_chat),1);
+ss.P = reshape(ss.P,[length(ss.shearY_chat)*length(ss.shearZ_chat),1]);
 
 % Temperature (K)
-Te0 = repmat(ss.Tprof',length(ss.x2c),1);
-Te0 = reshape(Te0,[length(ss.x2c)*length(ss.x3c),1]);
+Te0 = repmat(ss.Tprof',length(ss.shearY_chat),1);
+Te0 = reshape(Te0,[length(ss.shearY_chat)*length(ss.shearZ_chat),1]);
 
 % Coefficients for dislocation and diffusion creep
-ss.Const_dis = ss.Adis.*exp(-(ss.Qdis+ss.P.*ss.Voldis)./(8.314.*Te0)).*ss.COH.^(ss.r);
-ss.Const_diff = ss.Adif.*exp(-(ss.Qdif+ss.P.*ss.Voldif)./(8.314.*Te0)).*ss.COH.^(ss.r).*ss.d.^(-ss.pexp);
+ss.Const_dis = ss.Adis.*exp(-(ss.Qdis+ss.P.*ss.Voldis)./(8.314.*Te0)) ...
+  .*ss.COH.^(ss.r);
+ss.Const_diff = ss.Adif.*exp(-(ss.Qdif+ss.P.*ss.Voldif)./(8.314.*Te0)) ...
+  .*ss.COH.^(ss.r).*ss.d.^(-ss.pexp);
 
 % Strengh profile
 s120 = (ss.e12p_plate./ss.Const_dis).^(1./ss.n);
@@ -308,18 +315,18 @@ e120 = zeros(size(s120));
 e130 = zeros(size(s120));
 
 % Fault Strength
-ss.strength_E = ss.sigmab.*(ss.mu0+(ss.aE-ss.bE).*log(ss.V_plate./ss.Vo))+G*ss.V_plate./(2*ss.Vs);
-ss.strength_W = ss.sigmab.*(ss.mu0+(ss.aW-ss.bW).*log(ss.V_plate./ss.Vo))+G*ss.V_plate./(2*ss.Vs);
+ss.strength_W = ss.sigmab.*(ss.mu0+(ss.a-ss.b).*log(ss.V_plate./ss.Vo))+ ...
+  G*ss.V_plate./(2*ss.Vs);
 
 % Plot strength profiles
 figure(1);clf;
 subplot(2,1,1);
-plot(ss.y3f/1e3,ss.strength_E,ss.y3f/1e3,ss.strength_W)
+plot(ss.fpTops/1e3,ss.strength_E,ss.fpTops/1e3,ss.strength_W)
 xlabel('Depth (km)')
 ylabel('Strength (MPa)');
 subplot(2,1,2);
-plot(ss.x3c/1e3,log10(s120(1:length(ss.x2c):end)))
-xlim([ss.x3c(1)/1e3,ss.x3c(end)/1e3]);
+plot(ss.shearZ_chat/1e3,log10(s120(1:length(ss.shearY_chat):end)))
+xlim([ss.shearZ_chat(1)/1e3,ss.shearZ_chat(end)/1e3]);
 xlabel('Depth (km)')
 ylabel('Strength (MPa) log10');
 
@@ -334,10 +341,10 @@ ylabel('Strength (MPa) log10');
 ss.dgfF=3;
 ss.dgfS=4;
 %% Initialize State Vector
-Y0=zeros(ss.M*ss.dgfF+length(ss.x2c)*length(ss.x3c)*ss.dgfS,1);
+Y0=zeros(ss.M*ss.dgfF+length(ss.shearY_chat)*length(ss.shearZ_chat)*ss.dgfS,1);
 
 % Fault patches
-Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.y3f));
+Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.fpTops));
 Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_W;
 Y0(3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
 
@@ -354,7 +361,7 @@ disp('begin solving...')
 tic
 % Solve the system
 options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-[t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+[t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
 disp('done solving.')
 toc
 %%
@@ -374,8 +381,10 @@ end
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
 
 % Strain rate at center
-Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS*length(ss.x2c):end)'.^2 +...
-        Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS*length(ss.x2c):end)'.^2);
+Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.shearY_chat)/2)* ...
+          ss.dgfS+3:ss.dgfS*length(ss.shearY_chat):end)'.^2 +...
+        Yp(:,ss.M*ss.dgfF+floor(length(ss.shearY_chat)/2)* ...
+          ss.dgfS+4:ss.dgfS*length(ss.shearY_chat):end)'.^2);
 
 % strain rate over whole ductile area
 Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
