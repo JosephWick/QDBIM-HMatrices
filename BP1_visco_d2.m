@@ -302,23 +302,6 @@ s130 = zeros(size(s120));
 e120 = zeros(size(s120));
 e130 = zeros(size(s120));
 
-% Fault Strength
-ss.strength_E = ss.sigmab.*(ss.mu0+(ss.aE-ss.bE).*log(ss.V_plate./ss.Vo))+G*ss.V_plate./(2*ss.Vs);
-ss.strength_W = ss.sigmab.*(ss.mu0+(ss.aW-ss.bW).*log(ss.V_plate./ss.Vo))+G*ss.V_plate./(2*ss.Vs);
-
-% Plot strength profiles
-figure(1);clf;
-subplot(2,1,1);
-plot(ss.y3f/1e3,ss.strength_E,ss.y3f/1e3,ss.strength_W)
-xlabel('Depth (km)')
-ylabel('Strength (MPa)');
-subplot(2,1,2);
-plot(ss.x3c/1e3,log10(s120(1:length(ss.x2c):end)))
-xlim([ss.x3c(1)/1e3,ss.x3c(end)/1e3]);
-xlabel('Depth (km)')
-ylabel('Strength (MPa) log10');
-
-
 %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                       %
 %         N U M E R I C A L   S O L U T I O N           %
@@ -326,7 +309,7 @@ ylabel('Strength (MPa) log10');
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 % state parameters
-ss.dgfF=3;
+ss.dgfF=4;
 ss.dgfS=4;
 %% Initialize State Vector
 Y0=zeros(ss.M*ss.dgfF+length(ss.x2c)*length(ss.x3c)*ss.dgfS,1);
