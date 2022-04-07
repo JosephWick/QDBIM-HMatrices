@@ -69,6 +69,8 @@ Yp=zeros(size(Y));
 % Slip velocity
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V_W;
 
+disp(size(ss.k1212fW))
+disp(size(e12p-ss.e12p_plate))
 % Shear stress rate on fault due to fault and shear zones
 Yp(2:ss.dgfF:ss.M*ss.dgfF)=ss.KWW    *(V_W-ss.V_plate)  +...
                           ss.k1212fW*(e12p-ss.e12p_plate) + ss.k1312fW*(e13p-ss.e13p_plate);
