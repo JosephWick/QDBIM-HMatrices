@@ -342,10 +342,6 @@ Y0(1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.y3f));
 Y0(2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_W;
 Y0(3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
 
-Y0(ss.M*ss.dgfF+1:ss.dgfF:ss.M*ss.dgfF)=zeros(size(ss.y3f));
-Y0(ss.M*ss.dgfF+2:ss.dgfF:ss.M*ss.dgfF)=ss.strength_E;
-Y0(ss.M*ss.dgfF+3:ss.dgfF:ss.M*ss.dgfF)=log(ss.Vo./ss.V_plate);
-
 % Shear zones
 Y0(ss.M*ss.dgfF+1:ss.dgfS:end)=s120;
 Y0(ss.M*ss.dgfF+2:ss.dgfS:end)=s130;
