@@ -209,7 +209,7 @@ disp('kernels done.')
 ss.fo=0.6*ones(size(ss.y3f));
 
 % Dieterich-Ruina R+S frictional parameters (velocity-weakening friction)
-ss.a=1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
+ss.a=1e-2+Ramp((ss.y3f-15e3)/3e3)*(0.025-0.01);
 ss.b=0.015*ones(size(ss.y3f));
 
 % effective normal stress (MPa)
