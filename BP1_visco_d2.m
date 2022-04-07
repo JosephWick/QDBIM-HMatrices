@@ -94,7 +94,6 @@ ss.dz = ss.lambdaZ/ss.M; dz = ss.dz;
 ss.transition = 35e3; Transition = ss.transition;
 ss.Ny = 50;
 ss.Nz = 60;
-ss.Nx = ss.Nz;
 
 % FAULT
 % fault patch edges (top left)
@@ -190,17 +189,17 @@ ss.k1212fW=zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
 ss.k1312fW=zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
 
 % Fields from Shear zones
-for kx=1:length(ss.x2c)
+for ky=1:length(ss.x2c)
     for kz=1:length(ss.x3c)
         % we evaluate the stress at the center of the shear zones
-        ss.k1212(:,(kz-1)*ss.Nx+kx)=s1212(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
-        ss.k1312(:,(kz-1)*ss.Nx+kx)=s1312(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
-        ss.k1213(:,(kz-1)*ss.Nx+kx)=s1213(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
-        ss.k1313(:,(kz-1)*ss.Nx+kx)=s1313(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
+        ss.k1212(:,(kz-1)*ss.Ny+ky)=s1212(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
+        ss.k1312(:,(kz-1)*ss.Ny+ky)=s1312(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
+        ss.k1213(:,(kz-1)*ss.Ny+ky)=s1213(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
+        ss.k1313(:,(kz-1)*ss.Ny+ky)=s1313(ss.polesz(kz),L(kx),W(kz),xx2c(:)-ss.x2c(kx),xx3c(:));
 
         % we evaluate stress at the center of the fault patches
-        ss.k1212fW(:,(kz-1)*ss.Nx+kx)=s1212(ss.polesz(kz),L(kx),W(kz),yf-ss.x2c(kx),ss.y3f(:)+dz/2);
-        ss.k1312fW(:,(kz-1)*ss.Nx+kx)=s1312(ss.polesz(kz),L(kx),W(kz),yf-ss.x2c(kx),ss.y3f(:)+dz/2);
+        ss.k1212fW(:,(kz-1)*ss.Ny+ky)=s1212(ss.polesz(kz),L(kx),W(kz),yf-ss.x2c(kx),ss.y3f(:)+dz/2);
+        ss.k1312fW(:,(kz-1)*ss.Ny+ky)=s1312(ss.polesz(kz),L(kx),W(kz),yf-ss.x2c(kx),ss.y3f(:)+dz/2);
 
     end
 end
