@@ -206,23 +206,23 @@ disp('kernels done.')
 
 % - QDBIM style
 % reference friction coefficient
-ss.fo=0.6*ones(size(y3f));
+ss.fo=0.6*ones(size(ss.y3f));
 
 % Dieterich-Ruina R+S frictional parameters (velocity-weakening friction)
 ss.a=1e-2+Ramp((y3-15e3)/3e3)*(0.025-0.01);
-ss.b=0.015*ones(size(y3f));
+ss.b=0.015*ones(size(ss.y3f));
 
 % effective normal stress (MPa)
-ss.sigma=50.0*ones(size(y3f));
+ss.sigma=50.0*ones(size(ss.y3f));
 
 % characteristic weakening distance (m)
-ss.Drs=8e-3*ones(size(y3f));
+ss.Drs=8e-3*ones(size(ss.y3f));
 
 % plate rate (m/s)
-ss.Vpl=1e-9*ones(size(y3f));
+ss.Vpl=1e-9*ones(size(ss.y3f));
 
 % reference slip rate (m/s)
-ss.Vo=1e-6*ones(size(y3f));
+ss.Vo=1e-6*ones(size(ss.y3f));
 
 % Radiation damping coefficient
 ss.eta = G./(2*Vs);
