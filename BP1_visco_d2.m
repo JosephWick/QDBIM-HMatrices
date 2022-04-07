@@ -354,7 +354,7 @@ disp('begin solving...')
 tic
 % Solve the system
 options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-[t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
+[t,Y]=ode45_2(yp,[0 100*3.15e7],Y0,options);
 disp('done solving.')
 toc
 %%
@@ -396,15 +396,15 @@ imagesc(log10(y.V)); colorbar;
 title('Slip Rate')
 xlabel('time steps')
 ylabel('fault mesh block')
-saveas(gcf, 'figures/BP1vD_slip.png')
+saveas(gcf, 'figures/BP1vD2_slip.png')
 
 % ---         Movies        ---
-Smovie=true;
+Smovie=false;
 if Smovie
   disp('begin shear movie')
   clf;
   fig = figure;
-  fname = 'figures/BP1vD_strain.gif';
+  fname = 'figures/BP1vD2_strain.gif';
   for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
