@@ -350,7 +350,7 @@ Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 
 % initialize the function handle with
 % set constitutive parameters
-yp=@(t,y) ode2Faults(t,y,ss);
+yp=@(t,y) ode2Faults2(t,y,ss);
 disp('begin solving...')
 tic
 % Solve the system
@@ -374,8 +374,8 @@ Y = Y';
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
 
 % Strain rate at center
-Ep=sqrt(Yp(:,2*ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS*length(ss.x2c):end)'.^2 +...
-        Yp(:,2*ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS*length(ss.x2c):end)'.^2);
+Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS*length(ss.x2c):end)'.^2 +...
+        Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS*length(ss.x2c):end)'.^2);
 
 % strain rate over whole ductile area
 Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
