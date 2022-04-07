@@ -24,6 +24,15 @@ G=30e3;
 % Boxcar function
 boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
 
+% boxcar function
+BC=@(x) (x+0.5>=0)-(x-0.5>=0);
+
+% Heaviside function
+HS=@(x) 0+x>=0;
+
+% ramp function
+Ramp=@(x) x.*BC(x-1/2)+HS(x-1);
+
 % Shear Stress kernels for distributed deformation
 s1312=@(D,L,W,x2,x3) G/(2*pi)*( ...
     log((x2-L/2).^2+(x3-D-W).^2) - log((x2+L/2).^2+(x3-D-W).^2) ...
