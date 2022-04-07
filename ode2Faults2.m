@@ -65,6 +65,7 @@ Yp=zeros(size(Y));
 Yp(1:ss.dgfF:ss.M*ss.dgfF)=V;
 
 % State variable
+th=Y(3:ss.dgfF:ss.M*ss.dgfF);
 dth = (ss.Vo.*exp(-th)-V)./ss.Drs;
 Yp(3:ss.dgfF:ss.M*ss.dgfF)=dth;
 
