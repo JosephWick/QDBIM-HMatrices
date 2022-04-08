@@ -18,14 +18,13 @@ clear all;
 %                                                       %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-% these are QDBIM style defns
+% these are QDBIM style defns (except G)
 % shear wave speed (m/s)
 Vs = 3464;
 % density (kg/m^3)
 rho = 2670;
 % shear modulus (MPa)
-G = rho*Vs^2/1e6;
-
+G = 3e30;
 % Boxcar function
 boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
 
