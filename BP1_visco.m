@@ -123,7 +123,7 @@ function r = build()
   c.write_hd_filename = './tmp/BP1v_ff-s12-hd';
   c.kvf = [c.write_hmat_filename '.kvf'];
 
-  c.Y = [faultX; faultY; faultZ];
+  c.Y = [faultX; faultY; faultZ'];
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.L = Lfault;
   c.W = Wfault;
@@ -237,7 +237,7 @@ function r = build()
 
   % ---         s12 kernel for shear-fault interaction      ---
   c.X = [shearX_c; shearY_c; shearZ_c];
-  c.Y = [faultX; faultY; faultZ];
+  c.Y = [faultX; faultY; faultZ'];
   c.L = Lfault;
   c.W = Wfault;
 
