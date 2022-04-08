@@ -57,7 +57,7 @@ function r = build()
   % fault patch centers
   faultX_c = faultX;
   faultY_c = faultY;
-  faultZ_c = faultZ+(ss.dz/2);
+  faultZ_c = faultZ'+(ss.dz/2);
 
   % width of fault patches
   Lf = zeros(ss.M,1);
