@@ -154,14 +154,17 @@ function r = build()
       end
   end
 
-disp('kernels done.')
+  disp('kernels done.')
+
+  r.ss = ss;
 
 end
 
 % run simulation
 function out = run(b)
-
   addpaths();
+
+  ss = b.ss;
 
   %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
   %                                                      %
