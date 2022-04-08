@@ -125,7 +125,7 @@ function r = build()
   c.kvf = [c.write_hmat_filename '.kvf'];
 
   c.Y = [faultX; faultY; faultZ'];
-  c.X = [faultX_c; fault_c; faultZ_c];
+  c.X = [faultX_c; faultY_c; faultZ_c];
   c.L = Lfault;
   c.W = Wfault;
 
