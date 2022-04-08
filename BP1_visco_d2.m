@@ -320,8 +320,10 @@ Te0 = repmat(ss.Tprof',length(ss.x2c),1);
 Te0 = reshape(Te0,[length(ss.x2c)*length(ss.x3c),1]);
 
 % Coefficients for dislocation and diffusion creep
-ss.Const_dis = ss.Adis.*exp(-(ss.Qdis+ss.P.*ss.Voldis)./(8.314.*Te0)).*ss.COH.^(ss.r);
-ss.Const_diff = ss.Adif.*exp(-(ss.Qdif+ss.P.*ss.Voldif)./(8.314.*Te0)).*ss.COH.^(ss.r).*ss.d.^(-ss.pexp);
+ss.Const_dis = ss.Adis.*exp(-(ss.Qdis+ss.P.*ss.Voldis)./(8.314.*Te0)).* ...
+  ss.COH.^(ss.r);
+ss.Const_diff = ss.Adif.*exp(-(ss.Qdif+ss.P.*ss.Voldif)./(8.314.*Te0)).* ...
+  ss.COH.^(ss.r).*ss.d.^(-ss.pexp);
 
 % Strengh profile
 s120 = (ss.e12p_plate./ss.Const_dis).^(1./ss.n);
