@@ -44,8 +44,8 @@ function r = build()
   ss.dz = ss.lambdaZ/ss.M; dz = ss.dz;
 
   ss.transition = 35e3; Transition = ss.transition;
-  ss.Ny = 50;
-  ss.Nz = 60;
+  ss.Ny = 51;
+  ss.Nz = 51;
 
   % FAULT
   % fault patch edges (top left)
@@ -70,6 +70,7 @@ function r = build()
   shearZhat = ss.transition+tan((0:ss.Nz)'*pi/(2.2*(ss.Nz+eps)))*ss.transition;
   shearYhat = tan(nc*pi/(2.5*max(nc)))*32e3;
   shearX = zeros(1,ss.Ny*ss.Nz);
+  shearXhat = zeros(size(shearYhat));
 
   % shear patch centers
   shearX_c = shearX;
