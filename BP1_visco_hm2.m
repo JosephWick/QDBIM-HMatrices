@@ -126,8 +126,8 @@ function r = build()
 
   c.Y = [faultX; faultY; faultZ'];
   c.X = [faultX_c; faultY_c; faultZ_c];
-  c.L = Lfault;
-  c.W = Wfault;
+  c.L = Lf;
+  c.W = Wf;
 
   kvf('Write', c.kvf, c, 4);
   disp('run these in a shell:')
@@ -221,8 +221,8 @@ function r = build()
   % ---         s12 kernel for shear-fault interaction      ---
   c.X = [shearX_c; shearY_c; shearZ_c];
   c.Y = [faultX; faultY; faultZ'];
-  c.L = Lfault;
-  c.W = Wfault;
+  c.L = Lf;
+  c.W = Wf;
 
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
