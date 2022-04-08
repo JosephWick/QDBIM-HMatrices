@@ -110,49 +110,138 @@ function r = build()
   disp('mesh done.')
   disp('beginning kernels...')
 
-  %%
-  % Stress kernels on fault from fault
-  ss.ff12 = zeros(ss.M,ss.M);
+  % KERNELS
+  % ---       General KVF PARAMETERS      ---
+  c.command = 'compress';
+  c.lambdaZ = ss.lambdaZ;
+  c.tol = 1e-8;
+  c.G = 3e30;
+  c.allow_overwrite = 1;
+  c.err_method = 'mrem-fro';
 
-  % stress kernels on shear by fault
-  ss.fs12 = zeros(length(xx2c(:)),ss.M);
-  ss.fs13 = zeros(length(xx2c(:)),ss.M);
+  % ---       s12 kernel stress on fault, by fault      ---
+  c.greens_fn = 'okadaS12';
+  c.write_hmat_filename = './tmp/BP1v_ff-s12';
+  c.kvf = [c.write_hmat_filename '.kvf'];
 
-  % Fields from Faults
-  for k=1:ss.M
-      % we evaluate the stress at the center of the fault patches
-      ss.ff12(:,k) = s12h(yf, ss.y3f+dz/2, yf, ss.y3f(k), Wf(k));
+  c.Y = [faultX; faultY; faultZ];
+  c.X = [faultX_c; fault_c; faultZ_c];
+  c.L = Lfault;
+  c.W = Wfault;
 
-      % we evaluate the stress at the center of the shear zones
-      ss.sf12(:,k) = s12h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
-      ss.sf13(:,k) = s13h(xx2c(:), xx3c(:), yf, ss.y3f(k), Wf(k));
-  end
+  kvf('Write', c.kvf, c, 4);
+  disp('run these in a shell:')
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.s12 = c.write_hmat_filename;
 
-  % Stress kernels on shear zones from shear
-  ss.ss1312 = zeros(length(ss.x2c)*length(ss.x3c));
-  ss.ss1313 = zeros(length(ss.x2c)*length(ss.x3c));
-  ss.ss1212 = zeros(length(ss.x2c)*length(ss.x3c));
-  ss.ss1213 = zeros(length(ss.x2c)*length(ss.x3c));
+  % ---       shear1212 kernel for shear-shear interaction      ---
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1212';
+  c.write_hd_filename = './tmp/BP1v_ss-shear1212-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
 
-  % stress kernels on fault from shear
-  ss.fs1212 = zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
-  ss.fs1312 = zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
+  c.Ny = ss.Ny;
+  c.Nz = ss.Nz;
 
-  % Fields from Shear zones
-  for ky=1:length(ss.x2c)
-      for kz=1:length(ss.x3c)
-          % we evaluate the stress at the center of the shear zones
-          ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-          ss.ss1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-          ss.ss1213(:,(kz-1)*ss.Ny+ky) = s1213(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-          ss.ss1313(:,(kz-1)*ss.Ny+ky) = s1313(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
+  c.transition = ss.transition;
+  c.Y = [shearXhat; ss.shearY_chat; shearZhat'];
+  c.X = [shearX_c; shearY_c; shearZ_c];
 
-          % we evaluate stress at the center of the fault patches
-          ss.fs1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
-          ss.fs1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
+  c.Z = [shearX; shearY; shearZ]; % for sizing purposes only
 
-      end
-  end
+  c.L = Lshear;
+  c.W = Wshear;
+
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1212 = c.write_hmat_filename;
+
+  % ---       shear 1213 kernel for shear-shear interaction     ---
+  c.greens_fn = 'shear1213';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1213';
+  c.write_hd_filename = './tmp/BP1v_ss-shear1213-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  % geometry is the same for all shear-shear kernels
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1213 = c.write_hmat_filename;
+
+  % ---       shear 1312 kernel for shear-shear interaction       ---
+  c.greens_fn = 'shear1312';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1312';
+  c.write_hd_filename = '/tmp/BP1v_ss-shear1312-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1312 = c.write_hmat_filename;
+
+  % ---       shear 1313 kernel for shear-shear interaction       ---
+  c.greens_fn = 'shear1313';
+  c.write_hmat_filename = './tmp/BP1v_ss-shear1313';
+  c.write_hd_filename = './tmp/BP1v_ss-shear1313-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.ss1313 = c.write_hmat_filename;
+
+  % ---       shear 1212 kernels for fault-shear interaction      ---
+  c.X = [faultX_c; faultY_c; faultZ_c];
+  c.Y = [shearXhat; ss.shearY_chat; shearZhat'];
+  c.Z = [shearX; shearY; shearZ]; % hm sizing purposes only
+
+  c.L = Lshear;
+  c.W = Wshear;
+
+  c.Bfro = 1e-10;
+
+  c.greens_fn = 'shear1212';
+  c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
+  c.write_hd_filename = './tmp/BP1v_fs-shear1212-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.fs1212 = c.write_hmat_filename;
+
+  % ---       shear1312 kernels for fault-shear interaction     ---
+  c.greens_fn = 'shear1312';
+  c.write_hmat_filename = './tmp/BP1v_fs-shear1312';
+  c.write_hd_filename = './tmp/BP1v_fs-shear1312-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.fs1312 = c.write_hmat_filename;
+
+  % ---         s12 kernel for shear-fault interaction      ---
+  c.X = [shearX_c; shearY_c; shearZ_c];
+  c.Y = [faultX; faultY; faultZ];
+  c.L = Lfault;
+  c.W = Wfault;
+
+  c.greens_fn = 'okadaS12';
+  c.write_hmat_filename = './tmp/BP1v_sf-s12';
+  c.write_hd_filename = './tmp/BP1v_sf-s12-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.sf12 = c.write_hmat_filename;
+
+  % ---       s13 kernel for shear-fault interaction      ---
+  c.greens_fn = 'okadaS13';
+  c.write_hmat_filename = './tmp/BP1v_sf-s13';
+  c.write_hd_filename = './tmp/BP1v_sf-s13-hd';
+  c.kvf = [c.write_hmat_filename '.kvf'];
+  kvf('Write', c.kvf, c, 32);
+  cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
+  disp(cmd)
+  r.sf13 = c.write_hmat_filename;
 
   disp('kernels done.')
 
