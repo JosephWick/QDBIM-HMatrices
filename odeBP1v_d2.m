@@ -1,4 +1,4 @@
-function [Yp]= ode2Faults2(~,Y,ss)
+function [Yp]= odeBP1v_d2(~,Y,ss)
 % function OdefunViscoelastic describes the evolution of the ordinary
 % differential equation y' = f(t,y), where the state vector y is
 %
