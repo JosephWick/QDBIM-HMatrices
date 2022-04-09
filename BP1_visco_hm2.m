@@ -133,9 +133,6 @@ function r = build()
   c.L = Lf';
   c.W = Wf';
 
-  disp(size(c.X))
-  disp(size(c.Y))
-
   kvf('Write', c.kvf, c, 4);
   disp('run these in a shell:')
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
