@@ -150,6 +150,7 @@ function r = build()
   c.transition = ss.transition;
   c.Y = [shearXhat; ss.shearY_chat; shearZhat];
   c.X = [shearX_c(:); shearY_c(:); shearZ_c(:)]; c.X = c.X';
+  disp(size(X))
 
   c.Z = [shearX; shearY; shearZ]; % for sizing purposes only
 
