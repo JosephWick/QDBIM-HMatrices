@@ -139,7 +139,7 @@ function r = build()
   disp('run these in a shell:')
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
   disp(cmd)
-  r.s12 = c.write_hmat_filename;
+  r.ff12 = c.write_hmat_filename;
 
   % ---       shear1212 kernel for shear-shear interaction      ---
   c.greens_fn = 'shear1212';
@@ -407,14 +407,25 @@ function out = run(b)
   Y0(ss.M*ss.dgfF+3:ss.dgfS:end)=e120;
   Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 
+  % load kernels using hmmvp
+  hm.sf12 = hmmvp('init', b.ff12, 4);
+  hm.ss1212 = hmmvp('init', b.ss1212, 32);
+  hm.ss1312 = hmmvp('init', b.ss1312, 32);
+  hm.ss1213 = hmmvp('init', b.ss1213, 32);
+  hm.ss1313 = hmmvp('init', b.ss1313, 32);
+  hm.fs1212 = hmmvp('init', b.fs1212, 32);
+  hm.fs1312 = hmmvp('init', b.fs1312, 32);
+  hm.sf12 = hmmvp('init', b.fs12, 16);
+  hm.sf13 = hmmvp('init', b.fs13, 16);
+
   % initialize the function handle with
   % set constitutive parameters
-  yp=@(t,y) ode2Faults2(t,y,ss);
+  yp=@(t,y) odeBP1v_hm2(t,y,ss);
   disp('begin solving...')
   tic
   % Solve the system
   options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-  [t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+  [t,Y]=ode45_2(yp,[0 1*3.15e7],Y0,options);
   disp('done solving.')
   toc
   %%
@@ -463,7 +474,7 @@ function out = run(b)
   saveas(gcf, 'figures/BP1vD2_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=true;
+  Smovie=false;
   if Smovie
     disp('begin shear movie')
     clf;
