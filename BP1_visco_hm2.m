@@ -151,8 +151,7 @@ function r = build()
   c.Y = [shearXhat'; ss.shearY_chat'; shearZhat'];
   c.X = [shearX_c(:)'; shearY_c(:)'; shearZ_c(:)'];
 
-  c.Z = [shearX'; shearY'; shearZ']; % for sizing purposes only
-  disp(size(c.Z))
+  c.Z = [shearX(:)'; shearY(:)'; shearZ(:)']; % for sizing purposes only
 
   c.L = L;
   c.W = W;
