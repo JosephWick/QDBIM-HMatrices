@@ -201,7 +201,7 @@ function r = build()
   c.L = L;
   c.W = W;
 
-  c.Bfro = 1e-10;
+  %c.Bfro = 1e-10;
 
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
