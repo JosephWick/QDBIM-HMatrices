@@ -133,6 +133,10 @@ function r = build()
   c.L = Lf';
   c.W = Wf';
 
+  clf;
+  imagesc(c.X); colorbar();
+  saveas(gcf, 'figures/X.png')
+
   kvf('Write', c.kvf, c, 4);
   disp('run these in a shell:')
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -200,8 +204,6 @@ function r = build()
 
   c.L = L;
   c.W = W;
-
-  %c.Bfro = 1e-10;
 
   c.greens_fn = 'shear1212';
   c.write_hmat_filename = './tmp/BP1v_fs-shear1212';
