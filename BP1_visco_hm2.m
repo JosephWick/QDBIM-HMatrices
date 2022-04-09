@@ -95,7 +95,7 @@ function r = build()
 
   % grid
   % non-hat terms are NxN
-  shearZhat(end)=[]; shearYhat(end)=[];
+  shearZhat(end)=[]; shearYhat(end)=[]; shearXhat(end)=[];
   [shearY shearZ] = ndgrid(shearYhat, shearZhat);
 
   [shearY_c shearZ_c] = ndgrid(ss.shearY_chat, ss.shearZ_chat);
@@ -146,7 +146,7 @@ function r = build()
   c.Nz = ss.Nz;
 
   c.transition = ss.transition;
-  c.Y = [shearXhat; ss.shearY_chat; shearZhat'];
+  c.Y = [shearXhat; ss.shearY_chat'; shearZhat];
   c.X = [shearX_c; shearY_c; shearZ_c];
 
   c.Z = [shearX; shearY; shearZ]; % for sizing purposes only
