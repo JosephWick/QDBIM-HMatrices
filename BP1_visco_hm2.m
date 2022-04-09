@@ -261,7 +261,15 @@ function out = run(b)
   addpaths();
 
   ss = b.ss;
-  G = ss.G;
+
+  % these are QDBIM style defns
+  % shear wave speed (m/s)
+  Vs = 3464;
+  % density (kg/m^3)
+  rho = 2670;
+  % shear modulus (MPa)
+  %G = rho*Vs^2/1e6;
+  G = 30e3; ss.G = G;
 
   %% % % % % % % % % % % % % % % % % % % % % % % % % % % %
   %                                                      %
