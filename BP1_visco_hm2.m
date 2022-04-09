@@ -152,6 +152,7 @@ function r = build()
   c.X = [shearX_c(:)'; shearY_c(:)'; shearZ_c(:)'];
 
   c.Z = [shearX'; shearY'; shearZ']; % for sizing purposes only
+  disp(size(c.Z))
 
   c.L = L;
   c.W = W;
