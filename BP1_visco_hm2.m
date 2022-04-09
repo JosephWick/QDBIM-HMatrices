@@ -150,9 +150,8 @@ function r = build()
   c.transition = ss.transition;
   c.Y = [shearXhat'; ss.shearY_chat'; shearZhat'];
   c.X = [shearX_c(:)'; shearY_c(:)'; shearZ_c(:)'];
-  disp(size(c.X))
 
-  c.Z = [shearX; shearY; shearZ]; % for sizing purposes only
+  c.Z = [shearX'; shearY'; shearZ']; % for sizing purposes only
 
   c.L = L;
   c.W = W;
