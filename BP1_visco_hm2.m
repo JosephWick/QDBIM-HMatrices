@@ -119,7 +119,7 @@ function r = build()
   c.command = 'compress';
   c.lambdaZ = ss.lambdaZ;
   c.tol = 1e-8;
-  c.G = 3e30;
+  c.G = 30e3;
   c.allow_overwrite = 1;
   c.err_method = 'mrem-fro';
 
