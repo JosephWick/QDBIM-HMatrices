@@ -196,6 +196,9 @@ function r = build()
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearXhat'; ss.shearY_chat'; shearZhat'];
   c.Z = [shearX'; shearY'; shearZ']; % hm sizing purposes only
+  disp(size(c.X))
+  disp(size(c.Y))
+  disp(size(c.Z))
 
   c.L = L;
   c.W = W;
