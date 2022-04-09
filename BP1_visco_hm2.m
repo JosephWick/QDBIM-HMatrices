@@ -222,7 +222,7 @@ function r = build()
   r.fs1312 = c.write_hmat_filename;
 
   % ---         s12 kernel for shear-fault interaction      ---
-  c.X = [shearX_c; shearY_c; shearZ_c];
+  c.X = [shearX_c(:)'; shearY_c(:)'; shearZ_c(:)'];
   c.Y = [faultX; faultY; faultZ'];
   c.L = Lf;
   c.W = Wf;
