@@ -423,10 +423,10 @@ function out = run(b)
   hm.ss1312 = hmmvp('init', b.ss1312, 32);
   hm.ss1213 = hmmvp('init', b.ss1213, 32);
   hm.ss1313 = hmmvp('init', b.ss1313, 32);
-  hm.fs1212 = hmmvp('init', b.fs1212, 32);
-  hm.fs1312 = hmmvp('init', b.fs1312, 32);
-  hm.sf12 = hmmvp('init', b.sf12, 16);
-  hm.sf13 = hmmvp('init', b.sf13, 16);
+  hm.fs1212 = hmmvp('init', b.fs1212, 4);
+  hm.fs1312 = hmmvp('init', b.fs1312, 4);
+  hm.sf12 = hmmvp('init', b.sf12, 4);
+  hm.sf13 = hmmvp('init', b.sf13, 4);
 
   % initialize the function handle with
   % set constitutive parameters
