@@ -195,7 +195,7 @@ function r = build()
   % ---       shear 1212 kernels for fault-shear interaction      ---
   c.X = [faultX_c; faultY_c; faultZ_c];
   c.Y = [shearXhat'; ss.shearY_chat'; shearZhat'];
-  c.Z = [shearX'; shearY'; shearZ']; % hm sizing purposes only
+  c.Z = [shearX(:)'; shearY(:)'; shearZ(:)']; % hm sizing purposes only
   disp(size(c.X))
   disp(size(c.Y))
   disp(size(c.Z))
