@@ -227,8 +227,8 @@ function r = build()
   % ---         s12 kernel for shear-fault interaction      ---
   c.X = [shearX_c(:)'; shearY_c(:)'; shearZ_c(:)'];
   c.Y = [faultX; faultY; faultZ'];
-  c.L = Lf;
-  c.W = Wf;
+  c.L = Lf';
+  c.W = Wf';
 
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
