@@ -76,7 +76,7 @@ function r = build()
   ss.shearY_chat = zeros(ss.Ny,1);
   ss.shearZ_chat = zeros(ss.Nz,1);
 
-  % sizing
+  % sizes of shear patches
   L = zeros(1,ss.Ny);
   W = zeros(1,ss.Nz);
 
@@ -153,8 +153,8 @@ function r = build()
 
   c.Z = [shearX; shearY; shearZ]; % for sizing purposes only
 
-  c.L = Lshear;
-  c.W = Wshear;
+  c.L = L;
+  c.W = W;
 
   kvf('Write', c.kvf, c, 32);
   cmd = ['    ../hmmvp-okada/bin/hmmvpbuild_omp ' c.kvf];
@@ -197,8 +197,8 @@ function r = build()
   c.Y = [shearXhat; ss.shearY_chat; shearZhat'];
   c.Z = [shearX; shearY; shearZ]; % hm sizing purposes only
 
-  c.L = Lshear;
-  c.W = Wshear;
+  c.L = L;
+  c.W = W;
 
   c.Bfro = 1e-10;
 
