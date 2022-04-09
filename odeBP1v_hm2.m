@@ -1,4 +1,4 @@
-function [Yp]= ode2Faults2(~,Y,ss)
+function [Yp]= odeBP1v_hm2(~,Y,ss,hm)
 % function OdefunViscoelastic describes the evolution of the ordinary
 % differential equation y' = f(t,y), where the state vector y is
 %
@@ -70,7 +70,7 @@ dth = (ss.Vo.*exp(-th)-V)./ss.Drs;
 Yp(3:ss.dgfF:ss.M*ss.dgfF)=dth;
 
 % Shear stress rate on fault due to fault and shear zones
-t1 = ss.ff12 * (V-ss.Vpl);
+t1 =  hmmvp('mvp, ') %ss.ff12 * (V-ss.Vpl);
 t2 = ss.fs1212 * (e12p-ss.e12p_plate);
 t3 = ss.fs1312 * (e13p-ss.e13p_plate);
 func = t1 + t2 + t3;
