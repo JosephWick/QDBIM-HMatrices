@@ -73,7 +73,7 @@ function r = build()
   shearXhat = zeros(size(shearZhat));
 
   % shear patch centers
-  shearX_c = shearX;
+  shearX_c = zeros(ss.Ny,ss.Nz);
   ss.shearY_chat = zeros(ss.Ny,1);
   ss.shearZ_chat = zeros(ss.Nz,1);
 
