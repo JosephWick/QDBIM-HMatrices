@@ -418,15 +418,15 @@ function out = run(b)
   Y0(ss.M*ss.dgfF+4:ss.dgfS:end)=e130;
 
   % load kernels using hmmvp
-  hm.sf12 = hmmvp('init', b.ff12, 4);
+  hm.ff12 = hmmvp('init', b.ff12, 4);
   hm.ss1212 = hmmvp('init', b.ss1212, 32);
   hm.ss1312 = hmmvp('init', b.ss1312, 32);
   hm.ss1213 = hmmvp('init', b.ss1213, 32);
   hm.ss1313 = hmmvp('init', b.ss1313, 32);
   hm.fs1212 = hmmvp('init', b.fs1212, 32);
   hm.fs1312 = hmmvp('init', b.fs1312, 32);
-  hm.sf12 = hmmvp('init', b.fs12, 16);
-  hm.sf13 = hmmvp('init', b.fs13, 16);
+  hm.sf12 = hmmvp('init', b.sf12, 16);
+  hm.sf13 = hmmvp('init', b.sf13, 16);
 
   % initialize the function handle with
   % set constitutive parameters
