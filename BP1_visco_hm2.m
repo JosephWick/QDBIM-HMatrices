@@ -316,7 +316,7 @@ function out = run(b)
     ss.y3f(VWp(1)))./(G*mean(ss.Vpl(VWp)));
 
   % Print information about discretization
-  fprintf('\nGrid size = %.2f (m)\n', dz);
+  fprintf('\nGrid size = %.2f (m)\n', ss.dz);
   fprintf('VW zone = %.2f (km)\n', (ss.y3f(VWp(end))-ss.y3f(VWp(1)))/1e3);
   fprintf('Critical nucleation size = %.2f (m)\n',hstar);
   fprintf('QS Cohesive zone = %.2f (m)\n',coh);
@@ -329,7 +329,7 @@ function out = run(b)
   Rm = 3330 ; % mantle density (kg/m^3)
 
   Pconf       = Rm*9.8*ss.x3c/1e6;  % Shear zones
-  Pconf_fault = Rm*9.8*(ss.y3f+dz); % Faults
+  Pconf_fault = Rm*9.8*(ss.y3f+ss.dz); % Faults
 
   Kappa     = k / (Rm * Cp); % Thermal diffusivity (m^2/s)
   Age_plate = 2e15; % seconds
