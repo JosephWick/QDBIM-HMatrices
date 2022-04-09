@@ -129,8 +129,8 @@ function r = build()
 
   c.Y = [faultX; faultY; faultZ'];
   c.X = [faultX_c; faultY_c; faultZ_c];
-  c.L = Lf;
-  c.W = Wf;
+  c.L = Lf';
+  c.W = Wf';
 
   disp(size(c.X))
   disp(size(c.Y))
@@ -229,9 +229,6 @@ function r = build()
   c.Y = [faultX; faultY; faultZ'];
   c.L = Lf;
   c.W = Wf;
-
-  disp(size(c.X))
-  disp(size(c.Y))
 
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
