@@ -100,7 +100,7 @@ function r = build()
   [shearY_c shearZ_c] = ndgrid(ss.shearY_chat, ss.shearZ_chat);
 
   shearX = zeros(size(shearY));
-  shearX_c=zeros(size(shearY_c;
+  shearX_c=zeros(size(shearY_c));
 
   % convert between naming conventions
   ss.y3f = faultZ;
