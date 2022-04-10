@@ -98,9 +98,9 @@ ss.lambdaZ = 40e3; % fault depth extent
 ss.M = 400; %number of fault cells
 ss.dz = ss.lambdaZ/ss.M; dz = ss.dz;
 
-ss.transition = 35e3; Transition = ss.transition;
-ss.Ny = 50;
-ss.Nz = 60;
+ss.transition = 40e3; Transition = ss.transition;
+ss.Ny = 51;
+ss.Nz = 51;
 
 % FAULT
 % fault patch edges (top left)

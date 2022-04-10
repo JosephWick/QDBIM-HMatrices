@@ -44,7 +44,7 @@ function r = build()
   ss.M = 400; %number of fault cells
   ss.dz = ss.lambdaZ/ss.M; dz = ss.dz;
 
-  ss.transition = 35e3; Transition = ss.transition;
+  ss.transition = 40e3; Transition = ss.transition;
   ss.Ny = 51;
   ss.Nz = 51;
 
