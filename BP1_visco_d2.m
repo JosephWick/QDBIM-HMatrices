@@ -24,7 +24,7 @@ Vs = 3464;
 % density (kg/m^3)
 rho = 2670;
 % shear modulus (MPa)
-G = 3e30;
+G = 30e3;
 % Boxcar function
 boxc=@(x) (x+0.5>=0)-(x-0.5>=0);
 
