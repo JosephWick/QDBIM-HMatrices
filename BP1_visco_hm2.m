@@ -230,6 +230,8 @@ function r = build()
   c.L = Lf';
   c.W = Wf';
 
+  c.Bfro = 1e-8;
+
   c.greens_fn = 'okadaS12';
   c.write_hmat_filename = './tmp/BP1v_sf-s12';
   c.write_hd_filename = './tmp/BP1v_sf-s12-hd';
