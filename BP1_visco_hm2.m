@@ -494,7 +494,7 @@ function out = run(b)
     for idx = 1:size(Epall, 2)
       oneE = Epall(:,idx);
       oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
-      imagesc(oneEsq'); colorbar;
+      imagesc(oneEsq'); colormap(hot); colorbar;
       title(idx)
       drawnow
       frame = getframe(fig);
@@ -509,6 +509,31 @@ function out = run(b)
 
     end
   disp('shear movie done')
+  end
+
+  Fmovie=true;
+  if Fmovie
+    % velocity movie
+    disp('begin fault movie')
+    clf;
+    fig = figure;
+    fname='figures/BP1vHM2_slip.gif';
+    for idx = 1:size(y.V,1)
+      oneV = y.V(idx,:)';
+      imagesc(oneV); colorbar;
+      title(idx)
+      drawnow
+      frame = getframe(fig);
+      im{idx} = frame2im(frame);
+
+      [A, map] = rgb2ind(im{idx}, 256);
+      if idx==1
+        imwrite(A,map,fname,'gif','LoopCount',Inf,'DelayTime',0.1);
+      else
+        imwrite(A,map,fname,'gif','WriteMode','append','DelayTime',0.1);
+      end
+    end
+  disp('fault movie done')
   end
 
   out.hm = hm;
