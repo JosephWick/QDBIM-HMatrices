@@ -458,15 +458,19 @@ function out = run(b)
   % Strain rate at center
   Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS*length(ss.x2c):end)'.^2 +...
           Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS*length(ss.x2c):end)'.^2);
+  mat2np(Ep, 'pickles/BP1vHM2_strainCenter.pkl', 'float64')
+
 
   % strain rate over whole ductile area
   Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
                Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
+  mat2np(Epall, 'pickles/BP1vHM2_strainAll.pkl', 'float64')
 
   % Velocity
   y.V = Yp(:,1:ss.dgfF:ss.M*ss.dgfF); % Slip rate (m/s)
   y.V = y.V';
   y.tau = Y(:,2:ss.dgfF:ss.M*ss.dgfF);            % Shear stress (MPa)
+  mat2np(y.V, 'pickles/BP1vHM2_V.pkl', 'float64')
 
   % fault slip figure
   clf;
@@ -485,7 +489,7 @@ function out = run(b)
   saveas(gcf, 'figures/BP1vHM2_strainCenter.png')
 
   % ---         Movies        ---
-  Smovie=true;
+  Smovie=false;
   if Smovie
     disp('begin shear movie')
     clf;
@@ -511,7 +515,7 @@ function out = run(b)
   disp('shear movie done')
   end
 
-  Fmovie=true;
+  Fmovie=false;
   if Fmovie
     % velocity movie
     disp('begin fault movie')
