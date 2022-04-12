@@ -524,7 +524,7 @@ function out = run(b)
     fname='figures/BP1vHM2_slip.gif';
     for idx = 1:size(y.V,1)
       oneV = y.V(idx,:)';
-      imagesc(oneV); colorbar;
+      imagesc(oneV); colorbar; caxis([1e-15 5e-14]);
       title(idx)
       drawnow
       frame = getframe(fig);

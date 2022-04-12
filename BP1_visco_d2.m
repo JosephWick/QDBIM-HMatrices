@@ -425,7 +425,7 @@ if Smovie
   for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
-    imagesc(oneEsq'); colorbar;
+    imagesc(oneEsq'); colorbar; caxis([1e-15 5e-14]);
     title(idx)
     drawnow
     frame = getframe(fig);
