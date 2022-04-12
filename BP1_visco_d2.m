@@ -197,14 +197,20 @@ ss.fs1312 = zeros(length(ss.y3f),length(ss.x2c)*length(ss.x3c));
 for ky=1:length(ss.x2c)
     for kz=1:length(ss.x3c)
         % we evaluate the stress at the center of the shear zones
-        ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.ss1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.ss1213(:,(kz-1)*ss.Ny+ky) = s1213(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
-        ss.ss1313(:,(kz-1)*ss.Ny+ky) = s1313(ss.polesz(kz),L(ky),W(kz),xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz), ...
+          xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz), ...
+          xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1213(:,(kz-1)*ss.Ny+ky) = s1213(ss.polesz(kz),L(ky),W(kz), ...
+          xx2c(:)-ss.x2c(ky),xx3c(:));
+        ss.ss1313(:,(kz-1)*ss.Ny+ky) = s1313(ss.polesz(kz),L(ky),W(kz), ...
+          xx2c(:)-ss.x2c(ky),xx3c(:));
 
         % we evaluate stress at the center of the fault patches
-        ss.fs1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
-        ss.fs1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz),yf-ss.x2c(ky),ss.y3f(:)+dz/2);
+        ss.fs1212(:,(kz-1)*ss.Ny+ky) = s1212(ss.polesz(kz),L(ky),W(kz), ...
+          yf-ss.x2c(ky),ss.y3f(:)+dz/2);
+        ss.fs1312(:,(kz-1)*ss.Ny+ky) = s1312(ss.polesz(kz),L(ky),W(kz), ...
+          yf-ss.x2c(ky),ss.y3f(:)+dz/2);
 
     end
 end
@@ -384,20 +390,22 @@ end
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
 
 % Strain rate at center
-Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS*length(ss.x2c):end)'.^2 +...
-        Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS*length(ss.x2c):end)'.^2);
-mat2np(Ep, 'pickles/BP1vD2_strainCenter.pkl', 'float64')
+Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS* ...
+          length(ss.x2c):end)'.^2 +...
+        Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+4:ss.dgfS* ...
+          length(ss.x2c):end)'.^2);
+mat2np(Ep, 'pickles/BP1vD2_strainCenter.pkl', 'float64');
 
 % strain rate over whole ductile area
 Epall = sqrt( Yp(:,ss.M*ss.dgfF+3:ss.dgfS:end)'.^2 +...
              Yp(:,ss.M*ss.dgfF+4:ss.dgfS:end)'.^2);
-mat2np(Epall, 'pickles/BP1vD2_strainAll.pkl', 'float64')
+mat2np(Epall, 'pickles/BP1vD2_strainAll.pkl', 'float64');
 
 % Velocity
 y.V = Yp(:,1:ss.dgfF:ss.M*ss.dgfF); % Slip rate (m/s)
 y.V = y.V';
 y.tau = Y(:,2:ss.dgfF:ss.M*ss.dgfF);            % Shear stress (MPa)
-mat2np(y.V, 'pickles/BP1vD2_V.pkl', 'float64')
+mat2np(y.V, 'pickles/BP1vD2_V.pkl', 'float64');
 
 % fault slip figure
 clf;
