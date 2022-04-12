@@ -18,6 +18,8 @@ clear all;
 %                                                       %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
+addpath('ODEsolving')
+
 % these are QDBIM style defns (except G)
 % shear wave speed (m/s)
 Vs = 3464;
