@@ -439,7 +439,7 @@ if Smovie
   for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
-    imagesc(oneEsq'); colormap(hot); colorbar; caxis([1e-15 5e-14]);
+    imagesc(oneEsq'); colormap(hot); colorbar; %caxis([1e-15 5e-14]);
     %set(gca, 'ColorScale', 'log');
     title(idx)
     drawnow
