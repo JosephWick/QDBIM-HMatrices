@@ -393,7 +393,7 @@ end
 
 % save entire Y vector
 disp(size(Y))
-tmp = mat2np(Y, 'pickles/BP1vHM2_Y.pkl', 'float64');
+mat2np(Y, 'pickles/BP1vHM2_Y.pkl', 'float64');
 
 % Strain rate at center
 Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS* ...
