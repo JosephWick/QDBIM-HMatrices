@@ -404,7 +404,7 @@ function out = run(b)
   Y0=zeros(ss.M*ss.dgfF+length(ss.x2c)*length(ss.x3c)*ss.dgfS,1);
 
   % Fault patches
-  % state vector is (slip; tau; log(theeta Vo / D_rs); log(V / Vo) )
+  % state vector is (slip; tau; log(theta Vo / D_rs); log(V / Vo) )
   Y0(1:ss.dgfF:ss.M*ss.dgfF) = zeros(ss.M,1);
   Y0(2:ss.dgfF:ss.M*ss.dgfF) = max(ss.a).*ss.sigma.*asinh(ss.Vpl./ss.Vo/2.* ...
     exp((ss.fo+ss.b.*log(ss.Vo./ss.Vpl))./max(ss.a))) + ss.eta.*ss.Vpl;
@@ -441,7 +441,7 @@ function out = run(b)
   toc
   %%
 
-  Y = Y';
+  Y = Y'; % Y has slip and shear stress
 
   % Compute the instantaneous derivative
   Yp=zeros(length(t)-1,size(Y,2));
@@ -454,6 +454,9 @@ function out = run(b)
   %                    F I G U R E S                     %
   %                                                      %
   % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
+
+  % save entire Y vector
+  tmp = mat2np(Y, 'pickles/BP1vHM2_Y.pkl', 'float64');
 
   % Strain rate at center
   Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS* ...
@@ -500,7 +503,7 @@ function out = run(b)
     for idx = 1:size(Epall, 2)
       oneE = Epall(:,idx);
       oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
-      imagesc(oneEsq'); colormap(hot); colorbar;
+      imagesc(oneEsq'); colormap(hot); colorbar; caxis([])
       title(idx)
       drawnow
       frame = getframe(fig);

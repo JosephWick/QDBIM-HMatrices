@@ -372,7 +372,7 @@ disp('begin solving...')
 tic
 % Solve the system
 options=odeset('Refine',1,'RelTol',3e-7,'InitialStep',1e-3,'MaxStep',3e6);
-[t,Y]=ode45_2(yp,[0 500*3.15e7],Y0,options);
+[t,Y]=ode45_2(yp,[0 10*3.15e7],Y0,options);
 disp('done solving.')
 toc
 %%
@@ -390,6 +390,9 @@ end
 %                    F I G U R E S                     %
 %                                                      %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
+
+% save entire Y vector
+tmp = mat2np(Y, 'pickles/BP1vHM2_Y.pkl', 'float64');
 
 % Strain rate at center
 Ep=sqrt(Yp(:,ss.M*ss.dgfF+floor(length(ss.x2c)/2)*ss.dgfS+3:ss.dgfS* ...
@@ -435,7 +438,8 @@ if Smovie
   for idx = 1:size(Epall, 2)
     oneE = Epall(:,idx);
     oneEsq = reshape(oneE, [ss.Ny, ss.Nz]);
-    imagesc(oneEsq'); colorbar; caxis([1e-15 5e-14]);
+    imagesc(oneEsq'); colormap(hot); colorbar; caxis([1e-15 5e-14]);
+    set(gca, ColorScale, 'log');
     title(idx)
     drawnow
     frame = getframe(fig);
